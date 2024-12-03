@@ -1,4 +1,4 @@
-# KimPuro's Next.js team project Boilerplate
+# Team NextLevel Next.js Boilerplate
 
 이 템플릿 레포지토리는 Next.js를 사용한 팀 프로젝트를 위한 보일러플레이트입니다.  
 Next.js, React 및 Tailwind CSS를 사용하여 프로젝트를 시작할 수 있습니다.  
