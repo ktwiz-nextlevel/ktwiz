@@ -230,7 +230,7 @@ export function WithFullWidthFlyoutMenu() {
               alt="로고"
               src={
                 isOpened
-                  ? '/images/img-logo-black.png'
+                  ? '/images/img-logo-black.svg'
                   : '/images/img-logo-white.svg'
               }
               className="block h-8 w-[80px]"
@@ -321,7 +321,7 @@ export function WithFullWidthFlyoutMenu() {
               <span className="sr-only">Your Company</span>
               <img
                 alt="로고"
-                src="/images/img-logo-black.png"
+                src="/images/img-logo-black.svg"
                 className="h-8 w-auto"
               />
             </Link>
