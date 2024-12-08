@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import {
   Dialog,
   DialogPanel,
@@ -42,6 +42,18 @@ export function WithFullWidthFlyoutMenu() {
     // console.log('동작')
     setIsOpend(false)
   }
+  const getPaddingByIdx = useCallback((idx: number) => {
+    const classes: Record<number, string> = {
+      2: 'left-8',
+      3: 'left-9',
+      4: 'left-11',
+      5: 'left-12',
+      6: 'left-6',
+      7: 'left-12',
+      8: 'left-12',
+    }
+    return classes[idx] || 'left-3'
+  }, [])
   // console.log('isOpened', isOpened)
   return (
     <header
@@ -105,19 +117,6 @@ export function WithFullWidthFlyoutMenu() {
               >
                 <div className="relative mx-auto flex max-w-7xl justify-center gap-x-4 px-6 py-10 lg:px-8 xl:gap-x-4">
                   {LNB_LIST?.map((menu, idx) => {
-                    function getPaddingByIdx(idx: number) {
-                      const classes: Record<number, string> = {
-                        2: 'left-8',
-                        3: 'left-9',
-                        4: 'left-11',
-                        5: 'left-12',
-                        6: 'left-6',
-                        7: 'left-12',
-                        8: 'left-12',
-                      }
-                      return classes[idx] || 'left-3'
-                    }
-
                     return (
                       <div
                         key={idx + 'lnb'}
