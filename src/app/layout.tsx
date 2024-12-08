@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import '../styles/globals.css'
 import '../styles/main.css'
 
-import WithFullWidthFlyoutMenu from '@/components/tailwind-ui/headers/with-full-width-flyout-menu'
+import { WithFullWidthFlyoutMenu } from '@/components/tailwind-ui/'
 
 export const metadata: Metadata = {
   title: "kimpuro's next.js template",

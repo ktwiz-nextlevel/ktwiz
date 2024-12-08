@@ -196,7 +196,7 @@ const LNB_LIST: LnbDataArray = MENU_DATA.map((menu) =>
   !menu.lnb ? null : menu.lnb,
 )
 
-export default function WithFullWidthFlyoutMenu() {
+export function WithFullWidthFlyoutMenu() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isOpened, setIsOpend] = useState(false)
   function handleMouseOver() {
