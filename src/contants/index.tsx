@@ -1,4 +1,4 @@
-import { MenuData, LnbDataArray } from '@/types/header.interface'
+import { MenuData, LnbDataArray, BannerData } from '@/types'
 
 export const MENU_DATA: MenuData[] = [
   {
@@ -151,8 +151,87 @@ export const MENU_DATA: MenuData[] = [
       },
     ],
   },
+  {
+    gnb: '팬',
+    href: '/fan',
+    lnb: [
+      {
+        name: '게시판',
+        href: '/fan/board',
+      },
+    ],
+  },
+  {
+    gnb: '챗봇',
+    href: '/chatbot',
+    lnb: null,
+  },
 ]
 // [[{},{}],null]
 export const LNB_LIST: LnbDataArray = MENU_DATA.map((menu) =>
   !menu.lnb ? null : menu.lnb,
 )
+
+export const KTWIZ_BANNER_DATA: BannerData = {
+  '/about': {
+    title: 'kt wiz는?',
+    description: "한국 프로야구의 '10번째' 심장 kt wiz를 소개합니다!",
+    tabs: ['구단 소개', '구단 연혁'],
+  },
+  '/bi/symbol': {
+    title: '구단 BI',
+    description: 'kt wiz를 대표하는 상징들을 소개합니다.',
+    tabs: ['심볼마크', '워드마크', '엠블럼', '마스코트', '유니폼'],
+  },
+  '/policy/regular': {
+    title: '회원 정책',
+    description: 'kt wiz 회원만의 특별한 할인 해택을 만나 보세요.',
+    tabs: ['일반회원', '기부 프로그램'],
+  },
+  '/sponsor': {
+    title: '스폰서',
+    description: 'kt wiz와 함께하는 스폰서를 소개합니다',
+    tabs: null,
+  },
+  '/wallpaper': {
+    title: '월페이퍼',
+    description: 'kt wiz 팬들을 위한 월페이퍼 다운로드 서비스',
+    tabs: null,
+  },
+}
+
+export const WIZ_PARK_BANNER_DATA: BannerData = {
+  '/intro': {
+    title: 'Suwon kt wiz park',
+    description: 'suwon kt wiz park를 소개합니다!',
+    tabs: ['구단 소개', '구장 안내도'],
+  },
+  '/parking': {
+    title: '주차예약',
+    description: '사전 주차 예약을 안내드립니다.',
+    tabs: ['주차 예약 안내'],
+  },
+  '/location': {
+    title: '찾아오기',
+    description: '오시는 길을 상세하게 알려드립니다.',
+    tabs: null,
+  },
+  '/iksan': {
+    title: '익산야구장',
+    description: "kt wiz의 둥지 '익산야구장'을 소개합니다.",
+    tabs: null,
+  },
+}
+
+export const GAME_BANNER_DATA: BannerData = {
+  '/regular/schedule': {
+    title: '정규 리그',
+    description: 'kt wiz의 경기 일정을 알려 드립니다.',
+    tabs: ['경기 일정', '박스스코어', '순위기록', '관전포인트'],
+  },
+  '/futures/schedule': {
+    title: '퓨처스 리그',
+    description: 'kt wiz의 퓨처스리그 경기 일정을 알려 드립니다.',
+    tabs: ['경기 일정', '박스스코어', '순위기록'],
+  },
+}

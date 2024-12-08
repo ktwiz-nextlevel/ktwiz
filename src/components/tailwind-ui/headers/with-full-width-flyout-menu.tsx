@@ -28,173 +28,8 @@ import {
 } from '@heroicons/react/20/solid'
 import { ClientPageRoot } from 'next/dist/client/components/client-page'
 import Link from 'next/link'
-interface LnbData {
-  name: string
-  href: string
-}
-interface MenuData {
-  gnb: string
-  href: string
-  lnb: LnbData[] | null
-}
 
-type LnbDataArray = (LnbData[] | null)[]
-
-const MENU_DATA: MenuData[] = [
-  {
-    gnb: 'Kt wiz',
-    href: '/ktwiz',
-    lnb: [
-      {
-        name: 'kt wiz는?',
-        href: '/ktwiz/about',
-      },
-      {
-        name: '구단 BI',
-        href: '/ktwiz/bi/symbol',
-      },
-      {
-        name: '회원 정책',
-        href: '/ktwiz/policy/regular',
-      },
-      {
-        name: '스폰서',
-        href: '/ktwiz/sponsor',
-      },
-      {
-        name: '월페이퍼',
-        href: '/ktwiz/wallpaper',
-      },
-    ],
-  },
-  {
-    gnb: 'wiz park',
-    href: '/wizpark',
-    lnb: [
-      {
-        name: '수원 kt wiz park',
-        href: '/wizpark/intro',
-      },
-      {
-        name: '주차 예약',
-        href: '/wizpark/parking',
-      },
-      {
-        name: '찾아오기',
-        href: '/wizpark/location',
-      },
-      {
-        name: '익산야구장',
-        href: '/wizpark/iksan',
-      },
-    ],
-  },
-  {
-    gnb: 'Game',
-    href: '/game',
-    lnb: [
-      {
-        name: '정규리그',
-        href: '/game/regular/schedule',
-      },
-      {
-        name: '퓨쳐스리그',
-        href: '/game/futures/schedule',
-      },
-    ],
-  },
-  {
-    gnb: 'Player',
-    href: '/player',
-    lnb: [
-      {
-        name: '코칭스텝',
-        href: '/player/coach',
-      },
-      {
-        name: '투수',
-        href: '/player/pitcher',
-      },
-      {
-        name: '타자',
-        href: '/player/catcher',
-      },
-      {
-        name: '응원단',
-        href: '/player/cheer',
-      },
-      {
-        name: '응원가',
-        href: '/player/song',
-      },
-      {
-        name: '응원가 저작권',
-        href: '/player/song-copyright',
-      },
-    ],
-  },
-  {
-    gnb: 'Media',
-    href: '/media',
-    lnb: [
-      {
-        name: 'wiz 뉴스',
-        href: '/media/wiznews',
-      },
-      {
-        name: 'wiz 스토리',
-        href: '/media/wizstory',
-      },
-      {
-        name: '시구자 정보',
-        href: '/media/firstpitch',
-      },
-      {
-        name: 'wiz 포토',
-        href: '/media/photos',
-      },
-      {
-        name: '하이라이트',
-        href: '/media/highlight',
-      },
-      {
-        name: 'Live 영상모음',
-        href: '/media/live/pts',
-      },
-    ],
-  },
-  {
-    gnb: 'Shop',
-    href: '/shop',
-    lnb: null,
-  },
-  {
-    gnb: '스폰서',
-    href: 'https://b2b.ktwiz.co.kr/',
-    lnb: null,
-  },
-  {
-    gnb: '티켓구매',
-    href: '/ticket',
-    lnb: [
-      {
-        name: '티켓 예매',
-        href: '/ticket/reservation',
-      },
-      {
-        name: '단체관람',
-        href: '/ticket/group',
-      },
-      {
-        name: '입장 및 좌석 정보',
-        href: '/ticket/seatmap',
-      },
-    ],
-  },
-]
-const LNB_LIST: LnbDataArray = MENU_DATA.map((menu) =>
-  !menu.lnb ? null : menu.lnb,
-)
+import { MENU_DATA, LNB_LIST } from '@/contants'
 
 export function WithFullWidthFlyoutMenu() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -267,11 +102,11 @@ export function WithFullWidthFlyoutMenu() {
                 className={`absolute inset-x-0 top-0 -z-10 bg-white pt-14 shadow-lg ring-1 ring-gray-900/5 transition data-[closed]:-translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in ${isOpened ? 'data-[enter]:duration-200 data-[enter]:ease-out' : 'data-[leave]:ease-in'} `}
                 transition
               >
-                <div className="mx-auto flex max-w-7xl justify-center gap-x-5 px-6 py-10 lg:px-8 xl:gap-x-5">
+                <div className="relative mx-auto flex max-w-7xl justify-center gap-x-4 px-6 py-10 lg:px-8 xl:gap-x-4">
                   {LNB_LIST?.map((menu, idx) => (
                     <div
                       key={idx + 'lnb'}
-                      className={`group relative ${idx === 2 ? 'left-6' : idx === 3 ? 'left-6' : idx === 4 ? 'left-6' : idx === 7 ? 'left-4' : 'left-2'} w-[70px] text-sm/6`}
+                      className={`group relative ${idx === 2 ? 'left-8' : idx === 3 ? 'left-9' : idx === 4 ? 'left-11' : idx === 5 ? 'left-12' : idx === 6 ? 'left-6' : idx === 7 ? 'left-12' : idx === 8 ? 'left-12' : 'left-3'} w-[70px] text-sm/6`}
                     >
                       {menu?.map((lnb, idx) => (
                         <Link
