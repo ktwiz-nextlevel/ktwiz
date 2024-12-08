@@ -235,3 +235,11 @@ export const GAME_BANNER_DATA: BannerData = {
     tabs: ['경기 일정', '박스스코어', '순위기록'],
   },
 }
+
+// PLAYER_BANNER_DATA
+
+//MEDIA_BANNER_DATA
+
+//TICKET_BANNER_DATA
+
+//TICKET_BANNER_DATA

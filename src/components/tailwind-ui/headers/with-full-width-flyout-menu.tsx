@@ -28,7 +28,7 @@ import {
 } from '@heroicons/react/20/solid'
 import { ClientPageRoot } from 'next/dist/client/components/client-page'
 import Link from 'next/link'
-
+import { twJoin } from 'tailwind-merge'
 import { MENU_DATA, LNB_LIST } from '@/contants'
 
 export function WithFullWidthFlyoutMenu() {
@@ -90,6 +90,7 @@ export function WithFullWidthFlyoutMenu() {
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
           <Popover className="lg:flex lg:gap-x-4">
             {MENU_DATA.map((menu, idx) => (
+              // GNB
               <PopoverButton
                 key={menu.gnb + idx}
                 className="box-border flex items-center gap-x-1 border-none bg-[--black-color-100] text-sm/4 font-semibold text-white outline-none transition duration-300 ease-in-out hover:text-gray-900 focus:outline-none active:outline-none active:ring-0 group-hover:border-white group-hover:bg-white group-hover:text-gray-900"
@@ -103,22 +104,37 @@ export function WithFullWidthFlyoutMenu() {
                 transition
               >
                 <div className="relative mx-auto flex max-w-7xl justify-center gap-x-4 px-6 py-10 lg:px-8 xl:gap-x-4">
-                  {LNB_LIST?.map((menu, idx) => (
-                    <div
-                      key={idx + 'lnb'}
-                      className={`group relative ${idx === 2 ? 'left-8' : idx === 3 ? 'left-9' : idx === 4 ? 'left-11' : idx === 5 ? 'left-12' : idx === 6 ? 'left-6' : idx === 7 ? 'left-12' : idx === 8 ? 'left-12' : 'left-3'} w-[70px] text-sm/6`}
-                    >
-                      {menu?.map((lnb, idx) => (
-                        <Link
-                          key={lnb.name + idx}
-                          href={lnb.href}
-                          className="mb-3 block text-xs font-normal text-gray-900 hover:font-bold hover:text-black"
-                        >
-                          {lnb.name}
-                        </Link>
-                      ))}
-                    </div>
-                  ))}
+                  {LNB_LIST?.map((menu, idx) => {
+                    function getPaddingByIdx(idx: number) {
+                      const classes: Record<number, string> = {
+                        2: 'left-8',
+                        3: 'left-9',
+                        4: 'left-11',
+                        5: 'left-12',
+                        6: 'left-6',
+                        7: 'left-12',
+                        8: 'left-12',
+                      }
+                      return classes[idx] || 'left-3'
+                    }
+
+                    return (
+                      <div
+                        key={idx + 'lnb'}
+                        className={`group relative ${getPaddingByIdx(idx)} w-[70px] text-sm/6`}
+                      >
+                        {menu?.map((lnb, idx) => (
+                          <Link
+                            key={lnb.name + idx}
+                            href={lnb.href}
+                            className="mb-3 block text-xs font-normal text-gray-900 hover:font-bold hover:text-black"
+                          >
+                            {lnb.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )
+                  })}
                 </div>
               </PopoverPanel>
             )}
