@@ -216,7 +216,7 @@ export function WithFullWidthFlyoutMenu() {
             <span className="sr-only">Your Company</span>
             <img
               alt="로고"
-              src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
+              src="@/public/images/img-logo-white.svg"
               className="h-8 w-auto"
             />
           </Link>
