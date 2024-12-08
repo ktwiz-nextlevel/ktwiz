@@ -47,23 +47,23 @@ const MENU_DATA: MenuData[] = [
     lnb: [
       {
         name: 'kt wiz는?',
-        href: '/about',
+        href: '/ktwiz/about',
       },
       {
         name: '구단 BI',
-        href: '/bi/symbol',
+        href: '/ktwiz/bi/symbol',
       },
       {
         name: '회원 정책',
-        href: '/policy/regular',
+        href: '/ktwiz/policy/regular',
       },
       {
         name: '스폰서',
-        href: '/sponsor',
+        href: '/ktwiz/sponsor',
       },
       {
         name: '월페이퍼',
-        href: '/wallpaper',
+        href: '/ktwiz/wallpaper',
       },
     ],
   },
@@ -73,19 +73,19 @@ const MENU_DATA: MenuData[] = [
     lnb: [
       {
         name: '수원 kt wiz park',
-        href: '/intro',
+        href: '/wizpark/intro',
       },
       {
         name: '주차 예약',
-        href: '/parking',
+        href: '/wizpark/parking',
       },
       {
         name: '찾아오기',
-        href: '/location',
+        href: '/wizpark/location',
       },
       {
         name: '익산야구장',
-        href: '/iksan',
+        href: '/wizpark/iksan',
       },
     ],
   },
@@ -95,11 +95,11 @@ const MENU_DATA: MenuData[] = [
     lnb: [
       {
         name: '정규리그',
-        href: '/regular/schedule',
+        href: '/game/regular/schedule',
       },
       {
         name: '퓨쳐스리그',
-        href: '/futures/schedule',
+        href: '/game/futures/schedule',
       },
     ],
   },
@@ -109,27 +109,27 @@ const MENU_DATA: MenuData[] = [
     lnb: [
       {
         name: '코칭스텝',
-        href: '/coach',
+        href: '/player/coach',
       },
       {
         name: '투수',
-        href: '/pitcher',
+        href: '/player/pitcher',
       },
       {
         name: '타자',
-        href: '/catcher',
+        href: '/player/catcher',
       },
       {
         name: '응원단',
-        href: '/cheer',
+        href: '/player/cheer',
       },
       {
         name: '응원가',
-        href: '/song',
+        href: '/player/song',
       },
       {
         name: '응원가 저작권',
-        href: '/song-copyright',
+        href: '/player/song-copyright',
       },
     ],
   },
@@ -139,27 +139,27 @@ const MENU_DATA: MenuData[] = [
     lnb: [
       {
         name: 'wiz 뉴스',
-        href: '/wiznews',
+        href: '/media/wiznews',
       },
       {
         name: 'wiz 스토리',
-        href: '/wizstory',
+        href: '/media/wizstory',
       },
       {
         name: '시구자 정보',
-        href: '/firstpitch',
+        href: '/media/firstpitch',
       },
       {
         name: 'wiz 포토',
-        href: '/photos',
+        href: '/media/photos',
       },
       {
         name: '하이라이트',
-        href: '/highlight',
+        href: '/media/highlight',
       },
       {
         name: 'Live 영상모음',
-        href: '/live/pts',
+        href: '/media/live/pts',
       },
     ],
   },
@@ -179,15 +179,15 @@ const MENU_DATA: MenuData[] = [
     lnb: [
       {
         name: '티켓 예매',
-        href: '/reservation',
+        href: '/ticket/reservation',
       },
       {
         name: '단체관람',
-        href: '/group',
+        href: '/ticket/group',
       },
       {
         name: '입장 및 좌석 정보',
-        href: '/seatmap',
+        href: '/ticket/seatmap',
       },
     ],
   },
@@ -195,48 +195,15 @@ const MENU_DATA: MenuData[] = [
 const LNB_LIST: LnbDataArray = MENU_DATA.map((menu) =>
   !menu.lnb ? null : menu.lnb,
 )
-console.log(LNB_LIST)
-
-const products = [
-  {
-    name: 'Analytics',
-    description: 'Get a better understanding where your traffic is coming from',
-    href: '#',
-    icon: ChartPieIcon,
-  },
-  {
-    name: 'Engagement',
-    description: 'Speak directly to your customers with our engagement tool',
-    href: '#',
-    icon: CursorArrowRaysIcon,
-  },
-  {
-    name: 'Security',
-    description: 'Your customers’ data will be safe and secure',
-    href: '#',
-    icon: FingerPrintIcon,
-  },
-  {
-    name: 'Integrations',
-    description: 'Your customers’ data will be safe and secure',
-    href: '#',
-    icon: SquaresPlusIcon,
-  },
-]
-const callsToAction = [
-  { name: 'Watch demo', href: '#', icon: PlayCircleIcon },
-  { name: 'Contact sales', href: '#', icon: PhoneIcon },
-  { name: 'View all products', href: '#', icon: RectangleGroupIcon },
-]
 
 export default function WithFullWidthFlyoutMenu() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isOpened, setIsOpend] = useState(false)
   function handleMouseOver() {
-    console.log('동작')
+    // console.log('동작')
     setIsOpend(true)
   }
-  console.log('isOpened', isOpened)
+  // console.log('isOpened', isOpened)
   return (
     <header className="relative isolate z-10 w-full bg-white">
       <nav
@@ -245,20 +212,21 @@ export default function WithFullWidthFlyoutMenu() {
       >
         {/* lg-로고 */}
         <div className="flex lg:flex-1">
-          <a href="#" className="-m-1.5 p-1.5">
+          <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
             <img
               alt="로고"
               src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
               className="h-8 w-auto"
             />
-          </a>
+          </Link>
         </div>
+        {/* 오른쪽 햄버거 버튼 */}
         <div className="flex lg:hidden">
           <button
             type="button"
             onClick={() => setMobileMenuOpen(true)}
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
+            className="focus -m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 hover:border-red-500 focus:outline-red-500"
           >
             <span className="sr-only">Open main menu</span>
             <Bars3Icon aria-hidden="true" className="size-6" />
@@ -270,7 +238,7 @@ export default function WithFullWidthFlyoutMenu() {
             {MENU_DATA.map((menu, idx) => (
               <PopoverButton
                 key={menu.gnb + idx}
-                className="box-border flex items-center gap-x-1 bg-white text-sm/4 font-semibold text-gray-900 outline-none hover:border-white active:outline-none active:ring-0"
+                className="box-border flex items-center gap-x-1 border-none bg-white text-sm/4 font-semibold text-gray-900 outline-none hover:border-white active:outline-none active:ring-0"
               >
                 {menu.gnb}
               </PopoverButton>
@@ -284,7 +252,7 @@ export default function WithFullWidthFlyoutMenu() {
                   {LNB_LIST?.map((menu, idx) => (
                     <div
                       key={idx + 'lnb'}
-                      className="group relative left-2 w-[70px] text-sm/6 hover:bg-gray-50 lg:w-[70px]"
+                      className={`group relative ${idx > 1 ? (idx === 7 ? 'left-0' : 'left-6') : 'left-4'} w-[70px] text-sm/6 hover:bg-gray-50 lg:w-[70px]`}
                     >
                       {menu?.map((lnb, idx) => (
                         <Link
@@ -298,34 +266,25 @@ export default function WithFullWidthFlyoutMenu() {
                     </div>
                   ))}
                 </div>
-                <div className="bg-gray-50">
-                  <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                    {/* <div className="grid grid-cols-3 divide-x divide-gray-900/5 border-x border-gray-900/5">
-                      {callsToAction.map((item) => (
-                        <a
-                          key={item.name}
-                          href={item.href}
-                          className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100"
-                        >
-                          <item.icon
-                            aria-hidden="true"
-                            className="size-5 flex-none text-gray-400"
-                          />
-                          {item.name}
-                        </a>
-                      ))}
-                    </div> */}
-                  </div>
-                </div>
               </PopoverPanel>
             )}
           </Popover>
         </PopoverGroup>
-        {/* login */}
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="#" className="text-sm/6 font-semibold text-gray-900">
-            Log in <span aria-hidden="true">&rarr;</span>
-          </a>
+        {/* login & signup*/}
+        <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end">
+          <Link
+            href="/login"
+            className="text-sm/6 font-semibold text-gray-900 hover:text-red-500"
+          >
+            로그인
+          </Link>
+          <span aria-hidden="true"> &nbsp; | &nbsp;</span>
+          <Link
+            href="/signup"
+            className="text-sm/6 font-semibold text-gray-900 hover:text-red-500"
+          >
+            회원가입
+          </Link>
         </div>
       </nav>
       <Dialog
@@ -336,18 +295,20 @@ export default function WithFullWidthFlyoutMenu() {
         <div className="fixed inset-0 z-10" />
         <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            <a href="#" className="-m-1.5 p-1.5">
+            {/* 로고 */}
+            <Link href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <img
                 alt=""
                 src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
                 className="h-8 w-auto"
               />
-            </a>
+            </Link>
+            {/* x 버튼 */}
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
-              className="-m-2.5 rounded-md p-2.5 text-gray-700"
+              className="-m-2.5 rounded-md p-2.5 text-gray-700 hover:border-red-500 active:outline-red-400"
             >
               <span className="sr-only">Close menu</span>
               <XMarkIcon aria-hidden="true" className="size-6" />
@@ -359,7 +320,7 @@ export default function WithFullWidthFlyoutMenu() {
               <div className="space-y-2 py-6">
                 {MENU_DATA.map((menu, idx) => (
                   <Disclosure as="div" className="-mx-3" key={menu.gnb + idx}>
-                    <DisclosureButton className="group flex w-full items-center justify-between rounded-lg bg-white py-2 pl-3 pr-3.5 text-base/7 font-semibold text-gray-900">
+                    <DisclosureButton className="group flex w-full items-center justify-between rounded-lg bg-white py-2 pl-3 pr-3.5 text-base/7 font-semibold text-gray-900 hover:border-red-300 focus:outline-red-500 active:outline-red-400">
                       {menu.gnb}
                       <ChevronDownIcon
                         aria-hidden="true"
@@ -367,12 +328,12 @@ export default function WithFullWidthFlyoutMenu() {
                       />
                     </DisclosureButton>
                     <DisclosurePanel className="mt-2 space-y-2">
-                      {[...products, ...callsToAction].map((item) => (
+                      {menu.lnb?.map((item) => (
                         <DisclosureButton
                           key={item.name}
                           as="a"
                           href={item.href}
-                          className="block rounded-lg py-2 pl-6 pr-3 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50"
+                          className="block rounded-lg py-2 pl-6 pr-3 text-sm/7 font-semibold text-gray-900 hover:bg-gray-50 hover:text-red-500"
                         >
                           {item.name}
                         </DisclosureButton>
@@ -382,12 +343,18 @@ export default function WithFullWidthFlyoutMenu() {
                 ))}
               </div>
               <div className="py-6">
-                <a
-                  href="#"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                <Link
+                  href="/login"
+                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 hover:text-red-400"
                 >
-                  Log in
-                </a>
+                  로그인
+                </Link>
+                <Link
+                  href="/singup"
+                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 hover:text-red-400"
+                >
+                  회원가입
+                </Link>
               </div>
             </div>
           </div>
