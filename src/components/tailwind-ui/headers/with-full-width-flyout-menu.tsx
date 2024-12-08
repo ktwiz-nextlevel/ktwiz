@@ -203,9 +203,17 @@ export function WithFullWidthFlyoutMenu() {
     // console.log('동작')
     setIsOpend(true)
   }
+  function handleMouseOut() {
+    // console.log('동작')
+    setIsOpend(false)
+  }
   // console.log('isOpened', isOpened)
   return (
-    <header className="relative isolate z-10 w-full bg-white">
+    <header
+      className="group relative isolate z-10 w-full bg-[--black-color-100] transition duration-300 ease-in-out hover:bg-white"
+      onMouseOver={handleMouseOver}
+      onMouseOut={handleMouseOut}
+    >
       <nav
         aria-label="Global"
         className="items-between mx-auto flex justify-between p-6 lg:px-8"
@@ -214,10 +222,18 @@ export function WithFullWidthFlyoutMenu() {
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
+            {/* <div
+              style={{ backgroundImage: "url('/images/img-logo-white.svg')" }}
+              className="h-8 w-[100px] bg-contain bg-center bg-no-repeat duration-300 group-hover:bg-[url('/images/img-logo-black.png')]"
+            /> */}
             <img
               alt="로고"
-              src="@/public/images/img-logo-white.svg"
-              className="h-8 w-auto"
+              src={
+                isOpened
+                  ? '/images/img-logo-black.png'
+                  : '/images/img-logo-white.svg'
+              }
+              className="block h-8 w-[80px]"
             />
           </Link>
         </div>
@@ -226,19 +242,22 @@ export function WithFullWidthFlyoutMenu() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(true)}
-            className="focus -m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 hover:border-[--main-red-color] focus:outline-[--main-red-color]"
+            className="focus -m-2.5 inline-flex items-center justify-center rounded-md bg-black p-2.5 text-gray-700 hover:border-[--main-red-color] focus:outline-[--main-red-color] group-hover:bg-white"
           >
             <span className="sr-only">Open main menu</span>
-            <Bars3Icon aria-hidden="true" className="size-6" />
+            <Bars3Icon
+              aria-hidden="true"
+              className="size-6 text-white group-hover:text-gray-800"
+            />
           </button>
         </div>
         {/* lg-GNB */}
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
-          <Popover className="lg:flex lg:gap-x-4" onMouseOver={handleMouseOver}>
+          <Popover className="lg:flex lg:gap-x-4">
             {MENU_DATA.map((menu, idx) => (
               <PopoverButton
                 key={menu.gnb + idx}
-                className="box-border flex items-center gap-x-1 border-none bg-white text-sm/4 font-semibold text-gray-900 outline-none hover:border-white focus:outline-none active:outline-none active:ring-0"
+                className="box-border flex items-center gap-x-1 border-none bg-[--black-color-100] text-sm/4 font-semibold text-white outline-none transition duration-300 ease-in-out hover:text-gray-900 focus:outline-none active:outline-none active:ring-0 group-hover:border-white group-hover:bg-white group-hover:text-gray-900"
               >
                 {menu.gnb}
               </PopoverButton>
@@ -274,14 +293,16 @@ export function WithFullWidthFlyoutMenu() {
         <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end">
           <Link
             href="/login"
-            className="text-sm/6 font-semibold text-gray-900 hover:text-[--main-red-color]"
+            className="text-sm/6 font-semibold text-[--gray-color-100] transition duration-300 ease-in-out hover:text-[--main-red-color] group-hover:text-gray-900"
           >
             로그인
           </Link>
-          <span aria-hidden="true"> &nbsp; | &nbsp;</span>
+          <span aria-hidden="true" className="text-[--gray-color-100]">
+            &nbsp; | &nbsp;
+          </span>
           <Link
             href="/signup"
-            className="text-sm/6 font-semibold text-gray-900 hover:text-[--main-red-color]"
+            className="text-sm/6 font-semibold text-[--gray-color-100] transition duration-300 ease-in-out hover:text-[--main-red-color] group-hover:text-gray-900"
           >
             회원가입
           </Link>
@@ -299,8 +320,8 @@ export function WithFullWidthFlyoutMenu() {
             <Link href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
               <img
-                alt=""
-                src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
+                alt="로고"
+                src="/images/img-logo-black.png"
                 className="h-8 w-auto"
               />
             </Link>
