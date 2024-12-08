@@ -208,7 +208,7 @@ export function WithFullWidthFlyoutMenu() {
     <header className="relative isolate z-10 w-full bg-white">
       <nav
         aria-label="Global"
-        className="items-between mx-auto flex max-w-7xl justify-between p-6 lg:px-8"
+        className="items-between mx-auto flex justify-between p-6 lg:px-8"
       >
         {/* lg-로고 */}
         <div className="flex lg:flex-1">
@@ -226,7 +226,7 @@ export function WithFullWidthFlyoutMenu() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(true)}
-            className="focus -m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 hover:border-red-500 focus:outline-red-500"
+            className="focus -m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700 hover:border-[--main-red-color] focus:outline-[--main-red-color]"
           >
             <span className="sr-only">Open main menu</span>
             <Bars3Icon aria-hidden="true" className="size-6" />
@@ -234,11 +234,11 @@ export function WithFullWidthFlyoutMenu() {
         </div>
         {/* lg-GNB */}
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
-          <Popover className="lg:flex lg:gap-x-1" onMouseOver={handleMouseOver}>
+          <Popover className="lg:flex lg:gap-x-4" onMouseOver={handleMouseOver}>
             {MENU_DATA.map((menu, idx) => (
               <PopoverButton
                 key={menu.gnb + idx}
-                className="box-border flex items-center gap-x-1 border-none bg-white text-sm/4 font-semibold text-gray-900 outline-none hover:border-white active:outline-none active:ring-0"
+                className="box-border flex items-center gap-x-1 border-none bg-white text-sm/4 font-semibold text-gray-900 outline-none hover:border-white focus:outline-none active:outline-none active:ring-0"
               >
                 {menu.gnb}
               </PopoverButton>
@@ -248,11 +248,11 @@ export function WithFullWidthFlyoutMenu() {
                 className={`absolute inset-x-0 top-0 -z-10 bg-white pt-14 shadow-lg ring-1 ring-gray-900/5 transition data-[closed]:-translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in ${isOpened ? 'data-[enter]:duration-200 data-[enter]:ease-out' : 'data-[leave]:ease-in'} `}
                 transition
               >
-                <div className="mx-auto flex max-w-7xl justify-center gap-x-3 px-6 py-10 lg:px-8 xl:gap-x-3">
+                <div className="mx-auto flex max-w-7xl justify-center gap-x-5 px-6 py-10 lg:px-8 xl:gap-x-5">
                   {LNB_LIST?.map((menu, idx) => (
                     <div
                       key={idx + 'lnb'}
-                      className={`group relative ${idx > 1 ? (idx === 7 ? 'left-0' : 'left-6') : 'left-4'} w-[70px] text-sm/6 hover:bg-gray-50 lg:w-[70px]`}
+                      className={`group relative ${idx === 2 ? 'left-6' : idx === 3 ? 'left-6' : idx === 4 ? 'left-6' : idx === 7 ? 'left-4' : 'left-2'} w-[70px] text-sm/6`}
                     >
                       {menu?.map((lnb, idx) => (
                         <Link
@@ -274,14 +274,14 @@ export function WithFullWidthFlyoutMenu() {
         <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end">
           <Link
             href="/login"
-            className="text-sm/6 font-semibold text-gray-900 hover:text-red-500"
+            className="text-sm/6 font-semibold text-gray-900 hover:text-[--main-red-color]"
           >
             로그인
           </Link>
           <span aria-hidden="true"> &nbsp; | &nbsp;</span>
           <Link
             href="/signup"
-            className="text-sm/6 font-semibold text-gray-900 hover:text-red-500"
+            className="text-sm/6 font-semibold text-gray-900 hover:text-[--main-red-color]"
           >
             회원가입
           </Link>
@@ -308,7 +308,7 @@ export function WithFullWidthFlyoutMenu() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(false)}
-              className="-m-2.5 rounded-md p-2.5 text-gray-700 hover:border-red-500 active:outline-red-400"
+              className="-m-2.5 rounded-md p-2.5 text-gray-700 hover:border-[--main-red-color] active:outline-[--main-red-color]"
             >
               <span className="sr-only">Close menu</span>
               <XMarkIcon aria-hidden="true" className="size-6" />
@@ -320,7 +320,7 @@ export function WithFullWidthFlyoutMenu() {
               <div className="space-y-2 py-6">
                 {MENU_DATA.map((menu, idx) => (
                   <Disclosure as="div" className="-mx-3" key={menu.gnb + idx}>
-                    <DisclosureButton className="group flex w-full items-center justify-between rounded-lg bg-white py-2 pl-3 pr-3.5 text-base/7 font-semibold text-gray-900 hover:border-red-300 focus:outline-red-500 active:outline-red-400">
+                    <DisclosureButton className="group flex w-full items-center justify-between rounded-lg bg-white py-2 pl-3 pr-3.5 text-base/7 font-semibold text-gray-900 hover:border-red-300 focus:outline-[--main-red-color] active:outline-[--main-red-color]">
                       {menu.gnb}
                       <ChevronDownIcon
                         aria-hidden="true"
@@ -345,13 +345,13 @@ export function WithFullWidthFlyoutMenu() {
               <div className="py-6">
                 <Link
                   href="/login"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 hover:text-red-400"
+                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 hover:text-[--main-red-color]"
                 >
                   로그인
                 </Link>
                 <Link
                   href="/singup"
-                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 hover:text-red-400"
+                  className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 hover:text-[--main-red-color]"
                 >
                   회원가입
                 </Link>
