@@ -9,8 +9,6 @@ export default function Layout({
     <>
       <Banner />
       <div className="page border border-gray-500">{children}</div>
-
-      {/* <div className="h-4 w-full bg-black"></div> */}
     </>
   )
 }

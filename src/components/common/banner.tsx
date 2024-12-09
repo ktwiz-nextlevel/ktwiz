@@ -25,6 +25,13 @@ function findMatchingData(pathname: string) {
   }
   // 추가작성
 }
+// const bannerDatebyPath = {
+//   '/ktwiz': KTWIZ_BANNER_DATA,
+//   '/wizpark': WIZ_PARK_BANNER_DATA,
+//   '/game': GAME_BANNER_DATA,
+//   '/media': {},
+//   '/fan': {},
+// }
 function getSecondSegment(path: string) {
   const parts = path.split('/')
   return parts.length === 3 ? '' : `/${parts[2]}` // 앞에 '/'를 붙여서 반환
