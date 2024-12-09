@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 const navigation = {
   wizpark: [
     { name: '구장 소개', href: '/wizpark/intro' },
@@ -159,12 +161,12 @@ export default function KTWizFooter() {
                 <ul role="list" className="mt-6 space-y-4">
                   {navigation.media.map((item) => (
                     <li key={item.name}>
-                      <a
+                      <Link
                         href={item.href}
                         className="text-sm/6 text-gray-600 hover:text-gray-900"
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
