@@ -1,7 +1,7 @@
 import React from 'react'
 
 function KiwizPage() {
-  return <div>KiwizPage</div>
+  return <div>구단소개</div>
 }
 
 export default KiwizPage
