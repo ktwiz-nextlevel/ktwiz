@@ -63,7 +63,7 @@ export function WithFullWidthFlyoutMenu() {
     >
       <nav
         aria-label="Global"
-        className="items-between mx-auto flex justify-between p-6 lg:px-8"
+        className="items-between mx-auto flex justify-between p-4 lg:px-8"
       >
         {/* lg-로고 */}
         <div className="flex lg:flex-1">

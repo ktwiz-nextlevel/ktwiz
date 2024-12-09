@@ -172,21 +172,35 @@ export const LNB_LIST: LnbDataArray = MENU_DATA.map((menu) =>
   !menu.lnb ? null : menu.lnb,
 )
 
+//   [(1, 2)].map((item) => item)
+
 export const KTWIZ_BANNER_DATA: BannerData = {
-  '/about': {
+  '': {
     title: 'kt wiz는?',
     description: "한국 프로야구의 '10번째' 심장 kt wiz를 소개합니다!",
-    tabs: ['구단 소개', '구단 연혁'],
+    tabs: [
+      { title: '구단 소개', href: '/ktwiz/about' },
+      { title: '구단 연혁', href: '/ktwiz/history' },
+    ],
   },
-  '/bi/symbol': {
+  '/bi': {
     title: '구단 BI',
     description: 'kt wiz를 대표하는 상징들을 소개합니다.',
-    tabs: ['심볼마크', '워드마크', '엠블럼', '마스코트', '유니폼'],
+    tabs: [
+      { title: '심볼마크', href: '/ktwiz/bi/symbol' },
+      { title: '워드마크', href: '/ktwiz/bi/wordmark' },
+      { title: '엠블럼', href: '/ktwiz/bi/emblem' },
+      { title: '마스코트', href: '/ktwiz/bi/mascot' },
+      { title: '유니폼', href: '/ktwiz/bi/uniform' },
+    ],
   },
-  '/policy/regular': {
+  '/policy': {
     title: '회원 정책',
     description: 'kt wiz 회원만의 특별한 할인 해택을 만나 보세요.',
-    tabs: ['일반회원', '기부 프로그램'],
+    tabs: [
+      { title: '일반회원', href: '/ktwiz/policy/regular' },
+      { title: '기부 프로그램', href: '/ktwiz/policy/donation' },
+    ],
   },
   '/sponsor': {
     title: '스폰서',
@@ -201,15 +215,18 @@ export const KTWIZ_BANNER_DATA: BannerData = {
 }
 
 export const WIZ_PARK_BANNER_DATA: BannerData = {
-  '/intro': {
+  '': {
     title: 'Suwon kt wiz park',
     description: 'suwon kt wiz park를 소개합니다!',
-    tabs: ['구단 소개', '구장 안내도'],
+    tabs: [
+      { title: '구단 소개', href: '/wizpark/intro' },
+      { title: '구장 안내도', href: '/wizpark/guide' },
+    ],
   },
   '/parking': {
     title: '주차예약',
     description: '사전 주차 예약을 안내드립니다.',
-    tabs: ['주차 예약 안내'],
+    tabs: [{ title: '주차 예약 안내', href: null }],
   },
   '/location': {
     title: '찾아오기',
@@ -224,15 +241,23 @@ export const WIZ_PARK_BANNER_DATA: BannerData = {
 }
 
 export const GAME_BANNER_DATA: BannerData = {
-  '/regular/schedule': {
+  '/regular': {
     title: '정규 리그',
     description: 'kt wiz의 경기 일정을 알려 드립니다.',
-    tabs: ['경기 일정', '박스스코어', '순위기록', '관전포인트'],
+    tabs: [
+      { title: '경기 일정', href: '/game/regular/schedule' },
+      { title: '박스스코어', href: '/game/regular/boxscore' },
+      { title: '순위기록', href: '/game/regular/ranking/team' },
+    ],
   },
-  '/futures/schedule': {
+  '/futures': {
     title: '퓨처스 리그',
     description: 'kt wiz의 퓨처스리그 경기 일정을 알려 드립니다.',
-    tabs: ['경기 일정', '박스스코어', '순위기록'],
+    tabs: [
+      { title: '경기 일정', href: '/game/futures/schedule' },
+      { title: '박스스코어', href: '/game/futures/boxscore' },
+      { title: '순위기록', href: '/game/futures/ranking/team' },
+    ],
   },
 }
 
