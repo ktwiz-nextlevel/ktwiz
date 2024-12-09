@@ -1,26 +1,29 @@
 const navigation = {
-  solutions: [
-    { name: 'Marketing', href: '#' },
-    { name: 'Analytics', href: '#' },
-    { name: 'Automation', href: '#' },
-    { name: 'Commerce', href: '#' },
-    { name: 'Insights', href: '#' },
+  wizpark: [
+    { name: '구장 소개', href: '/wizpark/intro' },
+    { name: '주차예약', href: '/wizpark/parking' },
+    { name: '찾아오기', href: '/wizpark/location' },
+    { name: '익산야구장', href: '/wizpark/iksan' },
   ],
-  support: [
-    { name: 'Submit ticket', href: '#' },
-    { name: 'Documentation', href: '#' },
-    { name: 'Guides', href: '#' },
+  game: [
+    { name: '정규리그', href: '/game/regular/schedule' },
+    { name: '퓨처스 리그', href: '/game/futures/schedule' },
   ],
-  company: [
-    { name: 'About', href: '#' },
-    { name: 'Blog', href: '#' },
-    { name: 'Jobs', href: '#' },
-    { name: 'Press', href: '#' },
+  player: [
+    { name: '코칭스텝', href: '/player/coach' },
+    { name: '투수', href: '/player/pitcher' },
+    { name: '타자', href: '/player/catcher' },
+    { name: '응원단', href: '/player/cheer' },
+    { name: '응원가', href: '/player/song' },
+    { name: '응원가 저작권', href: '/player/song-copyright' },
   ],
-  legal: [
-    { name: 'Terms of service', href: '#' },
-    { name: 'Privacy policy', href: '#' },
-    { name: 'License', href: '#' },
+  media: [
+    { name: 'wiz 뉴스', href: '/media/wiznews' },
+    { name: 'wiz 스토리', href: '/media/wizstory' },
+    { name: '시구자 정보', href: '/media/firstpitch' },
+    { name: 'wiz 포토', href: '/media/photos/1' },
+    { name: '하이라이트', href: '/media/highlight' },
+    { name: 'Live 영상 모음', href: '/media/live/pts' },
   ],
   social: [
     {
@@ -87,9 +90,10 @@ const navigation = {
   ],
 }
 
-export default function TailwindFooter() {
+export default function KTWizFooter() {
   return (
-    <footer className="w-full bg-white">
+    //  부모 요소가  relative 라면 제일 하단에 고정된다.
+    <footer className="absolute w-full bg-white">
       <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <img
@@ -101,10 +105,10 @@ export default function TailwindFooter() {
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
                 <h3 className="text-sm/6 font-semibold text-gray-900">
-                  Solutions
+                  wiz park
                 </h3>
                 <ul role="list" className="mt-6 space-y-4">
-                  {navigation.solutions.map((item) => (
+                  {navigation.wizpark.map((item) => (
                     <li key={item.name}>
                       <a
                         href={item.href}
@@ -117,11 +121,9 @@ export default function TailwindFooter() {
                 </ul>
               </div>
               <div className="mt-10 md:mt-0">
-                <h3 className="text-sm/6 font-semibold text-gray-900">
-                  Support
-                </h3>
+                <h3 className="text-sm/6 font-semibold text-gray-900">Game</h3>
                 <ul role="list" className="mt-6 space-y-4">
-                  {navigation.support.map((item) => (
+                  {navigation.game.map((item) => (
                     <li key={item.name}>
                       <a
                         href={item.href}
@@ -137,10 +139,10 @@ export default function TailwindFooter() {
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
                 <h3 className="text-sm/6 font-semibold text-gray-900">
-                  Company
+                  Player
                 </h3>
                 <ul role="list" className="mt-6 space-y-4">
-                  {navigation.company.map((item) => (
+                  {navigation.player.map((item) => (
                     <li key={item.name}>
                       <a
                         href={item.href}
@@ -153,9 +155,9 @@ export default function TailwindFooter() {
                 </ul>
               </div>
               <div className="mt-10 md:mt-0">
-                <h3 className="text-sm/6 font-semibold text-gray-900">Legal</h3>
+                <h3 className="text-sm/6 font-semibold text-gray-900">Media</h3>
                 <ul role="list" className="mt-6 space-y-4">
-                  {navigation.legal.map((item) => (
+                  {navigation.media.map((item) => (
                     <li key={item.name}>
                       <a
                         href={item.href}
