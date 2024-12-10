@@ -2,7 +2,7 @@ import { Banner } from '@/components/common/banner'
 import TabMenu from '@/components/common/tab-menu'
 import { GAME_BANNER_DATA } from '@/contants/index'
 
-function SchedulePage({ params }: { params: { id: string } }) {
+function SchedulePage({ params }: { params: { route: string } }) {
   return (
     <div>
       <Banner {...GAME_BANNER_DATA['/regular']}>
