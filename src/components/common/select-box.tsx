@@ -17,8 +17,10 @@ type OptionType = {
 }
 
 /**
- * SelectBox 컴포넌트 입니다.
- * 사용 방법은 같이 있는 SelectBoxExample 컴포넌트를 참고해주세요.
+ * SelectBox 컴포넌트는 option 배열을 받아서 option을 선택할 수 있는 컴포넌트입니다.
+ * option은 id와 name을 가진 객체 배열이어야 합니다.
+ * onChange 콜백 함수를 통해 선택된 option에 대한 정보를 받을 수 있습니다.
+ * 자세한 사용 방법은 같이 있는 SelectBoxExample 컴포넌트를 참고해주세요.
  * @param option - id와 name을 가진 객체 배열
  * @param onChange - 선택된 option을 인자로 받는 콜백 함수
  */

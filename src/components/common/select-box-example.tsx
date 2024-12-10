@@ -9,11 +9,11 @@ const options = [
 ]
 
 export default function SelectBoxExample() {
-  const [selectedOption, setSelectedOption] = useState(options[0]) // 선택된 값을 저장할 상태
+  const [selectedOption, setSelectedOption] = useState(options[0])
 
   const handleOptionChange = (option) => {
-    setSelectedOption(option) // 선택된 값을 업데이트
-    console.log('현재 선택된 값:', option) // 선택된 값을 콘솔에 출력
+    setSelectedOption(option)
+    console.log('현재 선택된 값:', option)
   }
 
   return (
