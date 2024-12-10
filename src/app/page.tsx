@@ -1,10 +1,10 @@
-import Image from "next/image";
+import Image from 'next/image'
 
 export default function Page() {
   return (
     <>
-      <div className="w-dvw h-dvh flex flex-col justify-center items-center">
-        <div className="w-40 h-40 animate-spin">
+      <div className="flex h-dvh w-dvw flex-col items-center justify-center">
+        <div className="h-40 w-40 animate-spin">
           <a href="https://github.com/kimpuro" target="_blank">
             <Image
               src="/images/mr-egg-sushi-trans.png"
@@ -20,5 +20,5 @@ export default function Page() {
         <h1 className="mb-2">Tailwind CSS</h1>
       </div>
     </>
-  );
+  )
 }
