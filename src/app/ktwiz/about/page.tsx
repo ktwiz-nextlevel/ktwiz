@@ -4,7 +4,7 @@ import { KTWIZ_BANNER_DATA } from '@/contants/index'
 
 function KtwizAboutPage() {
   return (
-    <div>
+    <div className="w-full">
       <Banner {...KTWIZ_BANNER_DATA['']}>
         <TabMenu tabs={KTWIZ_BANNER_DATA[''].tabs} />
       </Banner>

@@ -4,7 +4,7 @@ import { MEDIA_BANNER_DATA } from '@/contants/index'
 
 function Page() {
   return (
-    <div>
+    <div className="w-full">
       <Banner {...MEDIA_BANNER_DATA['/firstpitch']}>
         {/* <TabMenu tabs={MEDIA_BANNER_DATA['/firstpitch'].tabs} /> */}
         <div></div>

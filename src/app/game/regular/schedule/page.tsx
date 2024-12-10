@@ -4,7 +4,7 @@ import { GAME_BANNER_DATA } from '@/contants/index'
 
 function SchedulePage({ params }: { params: { route: string } }) {
   return (
-    <div>
+    <div className="w-full">
       <Banner {...GAME_BANNER_DATA['/regular']}>
         <TabMenu tabs={GAME_BANNER_DATA['/regular'].tabs} />
       </Banner>

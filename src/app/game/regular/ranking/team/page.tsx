@@ -4,7 +4,7 @@ import { GAME_BANNER_DATA } from '@/contants/index'
 
 function RankingPage() {
   return (
-    <div>
+    <div className="w-full">
       <Banner {...GAME_BANNER_DATA['/regular']}>
         <TabMenu tabs={GAME_BANNER_DATA['/regular'].tabs} />
       </Banner>
