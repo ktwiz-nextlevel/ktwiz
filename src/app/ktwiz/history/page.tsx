@@ -8,6 +8,7 @@ function HistoryPage() {
       <Banner {...KTWIZ_BANNER_DATA['']}>
         <TabMenu tabs={KTWIZ_BANNER_DATA[''].tabs} />
       </Banner>
+      {/* dfdf */}
       <div className="page">HistoryPage</div>
     </div>
   )
