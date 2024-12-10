@@ -3,7 +3,6 @@ import '../styles/globals.css'
 import '../styles/main.css'
 
 import { WithFullWidthFlyoutMenu as Header } from '@/components/tailwind-ui/'
-import { Banner } from '@/components/common/banner'
 
 export const metadata: Metadata = {
   title: "kimpuro's next.js template",
@@ -23,7 +22,6 @@ export default function RootLayout({
       <body className="flex h-full w-dvw flex-col">
         <Header />
         {children}
-        {/* <div className="h-4 w-full bg-black"></div> */}
       </body>
     </html>
   )

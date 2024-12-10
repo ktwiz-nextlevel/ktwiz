@@ -1,6 +1,7 @@
 export interface TabsType {
   title: string
   href: string | null
+  path?: string
 }
 export interface BannerInterface {
   title: string

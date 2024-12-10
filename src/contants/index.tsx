@@ -179,27 +179,31 @@ export const KTWIZ_BANNER_DATA: BannerData = {
     title: 'kt wiz는?',
     description: "한국 프로야구의 '10번째' 심장 kt wiz를 소개합니다!",
     tabs: [
-      { title: '구단 소개', href: '/ktwiz/about' },
-      { title: '구단 연혁', href: '/ktwiz/history' },
+      { title: '구단 소개', href: '/ktwiz/about', path: 'about' },
+      { title: '구단 연혁', href: '/ktwiz/history', path: 'history' },
     ],
   },
   '/bi': {
     title: '구단 BI',
     description: 'kt wiz를 대표하는 상징들을 소개합니다.',
     tabs: [
-      { title: '심볼마크', href: '/ktwiz/bi/symbol' },
-      { title: '워드마크', href: '/ktwiz/bi/wordmark' },
-      { title: '엠블럼', href: '/ktwiz/bi/emblem' },
-      { title: '마스코트', href: '/ktwiz/bi/mascot' },
-      { title: '유니폼', href: '/ktwiz/bi/uniform' },
+      { title: '심볼마크', href: '/ktwiz/bi/symbol', path: 'symbol' },
+      { title: '워드마크', href: '/ktwiz/bi/wordmark', path: 'wordmark' },
+      { title: '엠블럼', href: '/ktwiz/bi/emblem', path: 'emblem' },
+      { title: '마스코트', href: '/ktwiz/bi/mascot', path: 'mascot' },
+      { title: '유니폼', href: '/ktwiz/bi/uniform', path: 'uniform' },
     ],
   },
   '/policy': {
     title: '회원 정책',
     description: 'kt wiz 회원만의 특별한 할인 해택을 만나 보세요.',
     tabs: [
-      { title: '일반회원', href: '/ktwiz/policy/regular' },
-      { title: '기부 프로그램', href: '/ktwiz/policy/donation' },
+      { title: '일반회원', href: '/ktwiz/policy/regular', path: 'regular' },
+      {
+        title: '기부 프로그램',
+        href: '/ktwiz/policy/donation',
+        path: 'donation',
+      },
     ],
   },
   '/sponsor': {
@@ -219,8 +223,8 @@ export const WIZ_PARK_BANNER_DATA: BannerData = {
     title: 'Suwon kt wiz park',
     description: 'suwon kt wiz park를 소개합니다!',
     tabs: [
-      { title: '구단 소개', href: '/wizpark/intro' },
-      { title: '구장 안내도', href: '/wizpark/guide' },
+      { title: '구단 소개', href: '/wizpark/intro', path: 'intro' },
+      { title: '구장 안내도', href: '/wizpark/guide', path: 'guide' },
     ],
   },
   '/parking': {
@@ -245,18 +249,26 @@ export const GAME_BANNER_DATA: BannerData = {
     title: '정규 리그',
     description: 'kt wiz의 경기 일정을 알려 드립니다.',
     tabs: [
-      { title: '경기 일정', href: '/game/regular/schedule' },
-      { title: '박스스코어', href: '/game/regular/boxscore' },
-      { title: '순위기록', href: '/game/regular/ranking/team' },
+      { title: '경기 일정', href: '/game/regular/schedule', path: 'schedule' },
+      { title: '박스스코어', href: '/game/regular/boxscore', path: 'boxscore' },
+      {
+        title: '순위기록',
+        href: '/game/regular/ranking/team',
+        path: 'ranking/team',
+      },
     ],
   },
   '/futures': {
     title: '퓨처스 리그',
     description: 'kt wiz의 퓨처스리그 경기 일정을 알려 드립니다.',
     tabs: [
-      { title: '경기 일정', href: '/game/futures/schedule' },
-      { title: '박스스코어', href: '/game/futures/boxscore' },
-      { title: '순위기록', href: '/game/futures/ranking/team' },
+      { title: '경기 일정', href: '/game/futures/schedule', path: 'schedule' },
+      { title: '박스스코어', href: '/game/futures/boxscore', path: 'boxscore' },
+      {
+        title: '순위기록',
+        href: '/game/futures/ranking/team',
+        path: 'ranking/team',
+      },
     ],
   },
 }
