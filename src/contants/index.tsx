@@ -273,10 +273,116 @@ export const GAME_BANNER_DATA: BannerData = {
   },
 }
 
-// PLAYER_BANNER_DATA
+export const PLAYER_BANNER_DATA: BannerData = {
+  '/coach': {
+    title: '코칭스텝',
+    description: 'KT Wiz의 코칭스텝 정보를 제공합니다.',
+    tabs: [{ title: '코칭스텝 목록', href: '/player/coach', path: 'coach' }],
+  },
+  '/pitcher': {
+    title: '투수',
+    description: 'KT Wiz의 투수 선수 정보를 제공합니다.',
+    tabs: [{ title: '투수 목록', href: '/player/pitcher', path: 'pitcher' }],
+  },
+  '/catcher': {
+    title: '타자',
+    description: 'KT Wiz의 타자 선수 정보를 제공합니다.',
+    tabs: [{ title: '타자 목록', href: '/player/catcher', path: 'catcher' }],
+  },
+  '/cheer': {
+    title: '응원단',
+    description: 'KT Wiz의 응원단 정보를 제공합니다.',
+    tabs: [{ title: '응원단 목록', href: '/player/cheer', path: 'cheer' }],
+  },
+  '/song': {
+    title: '응원가',
+    description: 'KT Wiz의 응원가 정보를 제공합니다.',
+    tabs: [{ title: '응원가 목록', href: '/player/song', path: 'song' }],
+  },
+  '/song-copyright': {
+    title: '응원가 저작권',
+    description: 'KT Wiz 응원가의 저작권 정보를 제공합니다.',
+    tabs: [
+      {
+        title: '응원가 저작권',
+        href: '/player/song-copyright',
+        path: 'song-copyright',
+      },
+    ],
+  },
+}
 
 //MEDIA_BANNER_DATA
+export const MEDIA_BANNER_DATA: BannerData = {
+  '/wiznews': {
+    title: 'Wiz 뉴스',
+    description: 'KT Wiz의 최신 뉴스 정보를 제공합니다.',
+    tabs: [
+      { title: 'Wiz소식', href: '/media/wiznews', path: 'wiznews' },
+      { title: 'Wiz보도자료', href: '/media/wizpress', path: 'wizpress' },
+    ],
+  },
+  '/wizstory': {
+    title: 'Wiz 스토리',
+    description: 'KT Wiz팬이 전하는 생생한 스토리를 만나보세요.',
+    tabs: null,
+  },
+  '/firstpitch': {
+    title: '시구자 정보',
+    description: '경기의 또다른 하이라이트 시구자 정보를 안내해 드립니다.',
+    tabs: null,
+  },
+  '/photos': {
+    title: 'Wiz 포토',
+    description: 'KT Wiz의 생생한 역사적 순간을 담았습니다.',
+    tabs: [
+      { title: '경기', href: '/media/photos/1', path: 'photos/1' },
+      { title: '훈련', href: '/media/photos/2', path: 'photos/2' },
+      { title: '행사', href: '/media/photos/3', path: 'photos/3' },
+    ],
+  },
+  '/highlight': {
+    title: '하이라이트',
+    description: '생생한 경기 하이라이트를 담았습니다.',
+    tabs: null,
+  },
+  '/live/pts': {
+    title: 'Live 영상모음',
+    description: 'KT Wiz의 라이브 영상 모음을 제공합니다.',
+    tabs: [
+      { title: '피칭분석', href: '/media/live/pts', path: 'live/pts' },
+      { title: '모션트래킹', href: '/media/live/fts', path: 'live/fts' },
+    ],
+  },
+}
 
 //TICKET_BANNER_DATA
+// export const TICKET_BANNER_DATA: BannerData = {
+//   '/reservation': {
+//     title: '티켓 예매',
+//     description: 'KT Wiz의 티켓 예매 정보를 제공합니다.',
+//     tabs: [
+//       { title: '티켓 예매', href: '/ticket/reservation', path: 'reservation' },
+//     ],
+//   },
+//   '/group': {
+//     title: '단체관람',
+//     description: 'KT Wiz의 단체관람 정보를 제공합니다.',
+//     tabs: [{ title: '단체관람', href: '/ticket/group', path: 'group' }],
+//   },
+//   '/seatmap': {
+//     title: '입장 및 좌석 정보',
+//     description: 'KT Wiz의 입장 및 좌석 정보를 제공합니다.',
+//     tabs: [
+//       { title: '입장 및 좌석 정보', href: '/ticket/seatmap', path: 'seatmap' },
+//     ],
+//   },
+// }
 
-//TICKET_BANNER_DATA
+export const FAN_BANNER_DATA: BannerData = {
+  '/': {
+    title: '게시판',
+    description: 'KT Wiz의 게시판입니다.',
+    tabs: [],
+  },
+}

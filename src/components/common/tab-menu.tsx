@@ -12,7 +12,7 @@ export default function TabMenu({
   // currentPath?: string
 }) {
   const pathname = usePathname()
-  console.log('params', pathname)
+  // console.log('params', pathname)
 
   return (
     <div className="flex gap-1">
