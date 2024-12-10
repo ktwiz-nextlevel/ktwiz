@@ -3,6 +3,7 @@ import TabMenu from '@/components/common/tab-menu'
 import { GAME_BANNER_DATA } from '@/contants/index'
 
 function BoxscorePage({ params }: { params: { id: string } }) {
+  console.log(params)
   return (
     <div className="w-full">
       <Banner {...GAME_BANNER_DATA['/regular']}>
