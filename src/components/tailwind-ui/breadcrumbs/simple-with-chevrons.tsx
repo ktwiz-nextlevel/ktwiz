@@ -2,7 +2,7 @@ import { ChevronRightIcon, HomeIcon } from '@heroicons/react/20/solid'
 
 interface Page {
   name: string // 페이지 이름
-  current: boolean // 빨간색으로 표시할 현재 페이지 에는 ture / 아니라면 false
+  current?: boolean // 빨간색으로 표시할 현재 페이지 에는 ture
 }
 
 interface BreadcrumbProps {
@@ -10,7 +10,7 @@ interface BreadcrumbProps {
 }
 
 /**공통 Breadcrumbs 컴포넌트 */
-export default function SimpleWithChevrons({ pages }: BreadcrumbProps) {
+export default function Breadcrumbs({ pages }: BreadcrumbProps) {
   return (
     <nav aria-label="Breadcrumb" className="flex">
       <ol role="list" className="flex items-center space-x-4">

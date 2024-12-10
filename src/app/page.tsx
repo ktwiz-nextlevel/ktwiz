@@ -1,6 +1,13 @@
+import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 import Image from 'next/image'
 
 export default function Page() {
+  const pages = [
+    { name: 'Home' },
+    { name: 'About' },
+    { name: 'Contact', current: true },
+  ]
+
   return (
     <>
       <div className="flex h-dvh w-dvw flex-col items-center justify-center">
@@ -18,6 +25,7 @@ export default function Page() {
         <h1 className="mb-2">Next.js 14.2.18</h1>
         <h1 className="mb-2">React 18</h1>
         <h1 className="mb-2">Tailwind CSS</h1>
+        <Breadcrumbs pages={pages} />
       </div>
     </>
   )
