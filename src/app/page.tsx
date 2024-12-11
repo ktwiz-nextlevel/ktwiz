@@ -3,9 +3,7 @@ import { FUTURES_LEAGUE_RANKING_BATTER } from '@/constants/page'
 import Image from 'next/image'
 
 export default function Page() {
-  const pages = [{ name: 'Home' }, { name: 'About' }, { name: 'Contact' }]
-
-  console.log(FUTURES_LEAGUE_RANKING_BATTER)
+  const pages = ['1', '2', '3']
 
   return (
     <>

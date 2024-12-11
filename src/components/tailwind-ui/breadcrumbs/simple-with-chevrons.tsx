@@ -1,26 +1,29 @@
+'use client'
+
 import { ChevronRightIcon, HomeIcon } from '@heroicons/react/20/solid'
 
-interface Page {
-  name: string // 페이지 이름
-}
-
 interface BreadcrumbProps {
-  pages: Page[]
+  pages: string[]
 }
 
-/** 공통 Breadcrumbs 컴포넌트 */
+/**
+ * 공통 Breadcrumbs 컴포넌트
+ * 사용 방법
+ * 사용하실 페이지에서
+ * const pages = ['Home', 'About', 'Contact']
+ * 이런식으로 배열을 만들어 Breadcrumbs 컴포넌트에 props로 넘겨줍니다.
+ * 제일 마지막 문자는 빨간색으로 표시됩니다.
+ */
 export default function Breadcrumbs({ pages }: BreadcrumbProps) {
   return (
     <nav aria-label="Breadcrumb" className="flex">
       <ol role="list" className="flex items-center space-x-4">
         <li>
-          <div>
-            <HomeIcon aria-hidden="true" className="size-5 shrink-0" />
-            <span className="sr-only">Home</span>
-          </div>
+          <HomeIcon aria-hidden="true" className="size-5 shrink-0" />
+          <span className="sr-only">Home</span>
         </li>
         {pages.map((page, index) => (
-          <li key={page.name}>
+          <li key={page}>
             <div className="flex items-center">
               {index > 0 && (
                 <ChevronRightIcon
@@ -35,7 +38,7 @@ export default function Breadcrumbs({ pages }: BreadcrumbProps) {
                     : 'text-gray-500 hover:text-gray-700'
                 }`}
               >
-                {page.name}
+                {page}
               </p>
             </div>
           </li>
