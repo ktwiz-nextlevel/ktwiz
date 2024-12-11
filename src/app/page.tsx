@@ -1,12 +1,11 @@
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
+import { FUTURES_LEAGUE_RANKING_BATTER } from '@/constants/page'
 import Image from 'next/image'
 
 export default function Page() {
-  const pages = [
-    { name: 'Home' },
-    { name: 'About' },
-    { name: 'Contact', current: true },
-  ]
+  const pages = [{ name: 'Home' }, { name: 'About' }, { name: 'Contact' }]
+
+  console.log(FUTURES_LEAGUE_RANKING_BATTER)
 
   return (
     <>
