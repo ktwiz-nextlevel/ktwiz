@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 
 export default function TabMenu({
   tabs,
-  // currentPath,
+  // currentPath,   const [activeTab,setActiveTab  ]=  useState({name:"kt ",ref});
 }: {
   tabs?: TabsType[] | null
   // currentPath?: string
