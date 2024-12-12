@@ -12,16 +12,17 @@ import { ChevronUpDownIcon } from '@heroicons/react/16/solid'
 import { CheckIcon } from '@heroicons/react/20/solid'
 
 type OptionType = {
-  id: number
   name: string
+  displayString: string
 }
 
 /**
  * SelectBox 컴포넌트는 option 배열을 받아서 option을 선택할 수 있는 컴포넌트입니다.
- * option은 id와 name을 가진 객체 배열이어야 합니다.
+ * option은 name과 displayString 가진 객체 배열이어야 합니다.
  * onChange 콜백 함수를 통해 선택된 option에 대한 정보를 받을 수 있습니다.
+ * 0번 인덱스를 가진 객체는 초기 선택 값으로 설정됩니다.
  * 자세한 사용 방법은 같이 있는 SelectBoxExample 컴포넌트를 참고해주세요.
- * @param option - id와 name을 가진 객체 배열
+ * @param option - name과 displayString을 가진 객체 배열
  * @param onChange - 선택된 option을 인자로 받는 콜백 함수
  */
 
@@ -31,7 +32,7 @@ export default function SelectBox({
   onChange,
 }: {
   option: OptionType[]
-  onChange?: (selected: OptionType) => void
+  onChange: (selected: OptionType) => void
 }) {
   const [selected, setSelected] = useState(option[0])
 
@@ -62,7 +63,7 @@ export default function SelectBox({
         >
           {option.map((options) => (
             <ListboxOption
-              key={options.id}
+              key={options.displayString}
               value={options}
               className="group relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900 data-[focus]:bg-indigo-600 data-[focus]:text-white data-[focus]:outline-none"
             >

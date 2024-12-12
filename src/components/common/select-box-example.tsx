@@ -3,9 +3,9 @@ import { useState } from 'react'
 import SelectBox from '@/components/common/select-box'
 
 const options = [
-  { id: 1, name: 'Option 1' },
-  { id: 2, name: 'Option 2' },
-  { id: 3, name: 'Option 3' },
+  { name: 'default', displayString: 'default string' },
+  { name: 'option 1', displayString: 'Option 1' },
+  { name: 'option 2', displayString: 'Option 2' },
 ]
 
 export default function SelectBoxExample() {
