@@ -17,7 +17,9 @@ export default function InputWithDelBtn({
 }: InputProps) {
   // 빈 값으로 변경
   const handleDelete = () => {
-    onChange({ target: { value: '' } } as React.ChangeEvent<HTMLInputElement>)
+    onChange({
+      target: { name, value: '' },
+    } as React.ChangeEvent<HTMLInputElement>)
   }
 
   return (
@@ -31,7 +33,10 @@ export default function InputWithDelBtn({
       />
       {value !== '' && (
         <button
-          onClick={handleDelete}
+          onClick={(e) => {
+            e.stopPropagation() // 이벤트 전파 방지
+            handleDelete()
+          }}
           className="absolute right-0 top-1/2 -translate-y-1/2 p-0"
         >
           <svg width="1em" height="1em" fill="none" viewBox="0 0 16 16">
