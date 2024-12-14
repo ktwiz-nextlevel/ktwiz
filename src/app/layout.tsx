@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import '../styles/globals.css'
 import '../styles/main.css'
 
-import { WithFullWidthFlyoutMenu } from '@/components/tailwind-ui/'
+import { WithFullWidthFlyoutMenu as Header } from '@/components/tailwind-ui/'
 
 export const metadata: Metadata = {
   title: "kimpuro's next.js template",
@@ -20,9 +20,8 @@ export default function RootLayout({
   return (
     <html lang="ko" className="">
       <body className="flex h-full w-dvw flex-col">
-        <WithFullWidthFlyoutMenu />
+        <Header />
         {children}
-        {/* <div className="h-4 w-full bg-black"></div> */}
       </body>
     </html>
   )
