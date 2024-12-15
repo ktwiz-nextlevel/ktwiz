@@ -35,11 +35,9 @@ export function WithFullWidthFlyoutMenu() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isOpened, setIsOpend] = useState(false)
   function handleMouseOver() {
-    // console.log('동작')
     setIsOpend(true)
   }
   function handleMouseOut() {
-    // console.log('동작')
     setIsOpend(false)
   }
   const getPaddingByIdx = useCallback((idx: number) => {
@@ -54,7 +52,7 @@ export function WithFullWidthFlyoutMenu() {
     }
     return classes[idx] || 'left-3'
   }, [])
-  // console.log('isOpened', isOpened)
+
   return (
     <header
       className="group relative isolate z-10 w-full bg-[--black-color-100] transition duration-300 ease-in-out hover:bg-white"
@@ -69,10 +67,7 @@ export function WithFullWidthFlyoutMenu() {
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="sr-only">Your Company</span>
-            {/* <div
-              style={{ backgroundImage: "url('/images/img-logo-white.svg')" }}
-              className="h-8 w-[100px] bg-contain bg-center bg-no-repeat duration-300 group-hover:bg-[url('/images/img-logo-black.png')]"
-            /> */}
+
             <img
               alt="로고"
               src={

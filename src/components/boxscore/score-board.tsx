@@ -49,11 +49,12 @@ function getGameStatus({ gameDate, cancelFlag, endFlag }: GameData) {
 async function BoxscoreBoardHeader() {
   const res = await fetch(
     'http://54.180.229.183/api/game/boxscore?gameDate=20241008&gmkey=33331008LGKT0',
-  ) //20241008/33331008LGKT0
+  )
   const data = await res.json()
 
   const { current, prev, next }: ScheduleType = data.data.schedule
-
+  const gameDate = `${current.gyear}년 ${current.gmonth}월 ${current.gday}일`
+  const gameInfo = `${current.gmonth}.${current.gday} ${current.gtime} | ${current.stadium}`
   return (
     <div className="flex w-full flex-col items-center">
       <Label
@@ -63,14 +64,12 @@ async function BoxscoreBoardHeader() {
           endFlag: current.cancelFlag,
         })}
       />
-      <h1 className="mt-2 text-xl text-gray-500">
-        {`${current.gyear}년 ${current.gmonth}월 ${current.gday}일`}
-      </h1>
-      <p className="mt-0 text-xs text-gray-400">{`${current.gmonth}.${current.gday} ${current.gtime} | ${current.stadium}`}</p>
+      <h1 className="mt-2 text-xl text-gray-500">{gameDate}</h1>
+      <p className="mt-0 text-xs text-gray-400">{gameInfo}</p>
       <div className="mt-2 flex justify-center gap-5">
         {/* 왼쪽 구단 */}
         <div className="flex w-[150px] items-center justify-end gap-1">
-          <div className="flex flex-col justify-end">
+          <div className="hidden justify-end md:flex md:flex-col">
             <span className="align-top text-base text-gray-400">
               {current.visit}
             </span>
@@ -99,7 +98,7 @@ async function BoxscoreBoardHeader() {
         {/* 오른쪽 구단 */}
         <div className="flex w-[150px] items-center justify-start gap-1">
           <img src={current.homeLogo} alt="homeLogo" className="w-16" />
-          <div className="flex flex-col justify-start">
+          <div className="hidden justify-start md:flex md:flex-col">
             <div className="flex gap-1">
               <HomeLabel />
               <span className="text-base text-gray-400">{current.home}</span>
