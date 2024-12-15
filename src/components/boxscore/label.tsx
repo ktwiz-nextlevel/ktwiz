@@ -1,25 +1,25 @@
+import { twMerge } from 'tailwind-merge'
+import { GameStatus } from '@/types'
 export function Label({
-  status = 'prev',
+  status = { status: 'before', title: '경기 전' },
 }: {
-  status?: 'prev' | 'current' | 'next'
+  status?: GameStatus
 }) {
-  if (status === 'prev') {
-    return (
-      <span className="rounded-xl bg-gray-200 px-3 py-1 text-xs text-gray-500">
-        경기전
-      </span>
-    )
+  const statusStyles: Record<GameStatus['status'], string> = {
+    before: 'bg-gray-200 text-gray-500',
+    progress: 'bg-[--main-red-color] text-white',
+    done: 'bg-gray-400 text-white',
+    cancel: 'bg-gray-400 text-white',
   }
-  if (status === 'current') {
-    return (
-      <span className="rounded-xl bg-[--main-red-color] px-3 py-1 text-xs text-white">
-        경기중
-      </span>
-    )
-  }
+
   return (
-    <span className="rounded-xl bg-gray-400 px-3 py-1 text-xs text-white">
-      경기종료
+    <span
+      className={twMerge(
+        'rounded-xl px-3 py-1 text-xs',
+        statusStyles[status.status],
+      )}
+    >
+      {status.title}
     </span>
   )
 }

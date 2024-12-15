@@ -27,3 +27,21 @@ export interface ScheduleType {
   prev: GameSchedule
   next: GameSchedule
 }
+
+export interface GameStatusInterface {
+  BEFORE: GameStatus
+  PROGRESS: GameStatus
+  DONE: GameStatus
+  CANCEL: GameStatus
+}
+export interface GameStatus {
+  status: GameStatusName
+  title: '경기 전' | '경기 중' | '경기 종료' | '경기 취소'
+}
+
+export type GameStatusName = 'before' | 'progress' | 'done' | 'cancel'
+export interface GameData {
+  gameDate: string | Date
+  cancelFlag: '0' | '1'
+  endFlag: '0' | '1'
+}
