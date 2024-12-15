@@ -21,3 +21,9 @@ export interface GameSchedule {
   visitLogo: string // 원정팀 로고 URL
   vscore: number // 원정팀 점수
 }
+
+export interface ScheduleType {
+  current: GameSchedule
+  prev: GameSchedule
+  next: GameSchedule
+}
