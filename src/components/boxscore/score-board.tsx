@@ -1,49 +1,23 @@
-import { GameData, GameStatusInterface, ScheduleType } from '@/types'
+import { ScheduleType } from '@/types'
 import { Label } from './label'
 import { WinLossStats } from './win-loss-status'
 import { HomeLabel } from './home-label'
-import { GAME_STATUS } from '@/contants/game'
 
 export function ScoreBoard() {
   return (
     <div className="mt-5 overflow-hidden rounded-md border border-gray-200 bg-[--red-color-300]">
       <ul role="list" className="divide-y divide-gray-200">
-        <li className="px-6 py-4">
+        <BoardHeader>
           <BoxscoreBoardHeader />
-        </li>
+        </BoardHeader>
         <li className="px-6 py-4">{/* Your content */}</li>
         <li className="px-6 py-4">{/* Your content */}</li>
       </ul>
     </div>
   )
 }
-
-function checkFlag(flag: '0' | '1') {
-  return flag === '1'
-}
-const formatDate = (dateString: string) => {
-  if (dateString.length !== 8) {
-    new Error('Invalid dateString format not YYYYMMDD')
-  }
-  return dateString.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3')
-}
-
-function getGameStatus({ gameDate, cancelFlag, endFlag }: GameData) {
-  if (checkFlag(cancelFlag)) {
-    return GAME_STATUS.CANCEL
-  }
-  const currentDate = new Date()
-  gameDate = new Date(formatDate(gameDate as string))
-
-  if (currentDate < gameDate) {
-    return GAME_STATUS.BEFORE
-  }
-  if (currentDate === gameDate) {
-    return checkFlag(endFlag) ? GAME_STATUS.DONE : GAME_STATUS.PROGRESS
-  }
-  if (currentDate > gameDate) {
-    return GAME_STATUS.DONE
-  }
+function BoardHeader({ children }: { children: React.ReactNode }) {
+  return <li className="px-6 py-4">{children}</li>
 }
 
 async function BoxscoreBoardHeader() {
@@ -57,13 +31,7 @@ async function BoxscoreBoardHeader() {
   const gameInfo = `${current.gmonth}.${current.gday} ${current.gtime} | ${current.stadium}`
   return (
     <div className="flex w-full flex-col items-center">
-      <Label
-        status={getGameStatus({
-          gameDate: current.gameDate.toString(),
-          cancelFlag: current.cancelFlag,
-          endFlag: current.cancelFlag,
-        })}
-      />
+      <Label data={current} />
       <h1 className="mt-2 text-xl text-gray-500">{gameDate}</h1>
       <p className="mt-0 text-xs text-gray-400">{gameInfo}</p>
       <div className="mt-2 flex justify-center gap-5">
