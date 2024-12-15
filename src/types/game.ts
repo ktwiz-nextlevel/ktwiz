@@ -45,3 +45,27 @@ export interface GameData {
   cancelFlag: '0' | '1'
   endFlag: '0' | '1'
 }
+
+export type Scoreboard = {
+  ballfour: string // 볼넷 수
+  bhome: number // 홈팀 여부 (1: 홈팀, 0: 원정팀)
+  bhomeName: string // 팀 이름
+  error: string // 실책 수
+  gameDate: number // 경기 날짜 (YYYYMMDD 형식)
+  hit: string // 안타 수
+  run: string // 득점
+  score1: string // 1회 점수
+  score2: string // 2회 점수
+  score3: string // 3회 점수
+  score4: string // 4회 점수
+  score5: string // 5회 점수
+  score6: string // 6회 점수
+  score7: string // 7회 점수
+  score8: string // 8회 점수
+  score9: string // 9회 점수
+  score10: string // 연장 10회 점수
+  score11: string // 연장 11회 점수
+  score12: string // 연장 12회 점수
+}
+
+export type ScoreboardList = Scoreboard[]
