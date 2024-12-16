@@ -1,5 +1,6 @@
 import Image from 'next/image'
-export default function PlayerDetail() {
+export default function PlayerDetail({ playerId }) {
+  console.log('playerId: ', playerId)
   return (
     <div className="mx-auto flex max-w-7xl flex-col md:flex-row">
       <div className="flex w-full flex-col items-center space-y-4">
