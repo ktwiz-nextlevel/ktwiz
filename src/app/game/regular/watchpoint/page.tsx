@@ -18,30 +18,18 @@ async function BoxscorePage() {
   ]
   return (
     <div className="w-full">
-      <WabBanner />
+      <Banner {...GAME_BANNER_DATA['/regular']}>
+        <TabMenu tabs={GAME_BANNER_DATA['/regular'].tabs} />
+      </Banner>
       <div className="page">
-        <BreadCrumb />
+        <div className="mt-[50px] flex w-full justify-end">
+          <Breadcrumbs pages={['HOME', '정규리그', '박스스코어']} />
+        </div>
         <ScoreBoard />
-        <TabNavigation tabs={TABS} activeTab={TABS[0]} />
-        <KeyRecords />
+        <TabNavigation tabs={TABS} activeTab={TABS[1]} />
       </div>
     </div>
   )
 }
 
 export default BoxscorePage
-
-function BreadCrumb() {
-  return (
-    <div className="mt-[50px] flex w-full justify-end">
-      <Breadcrumbs pages={['HOME', '정규리그', '박스스코어']} />
-    </div>
-  )
-}
-function WabBanner() {
-  return (
-    <Banner {...GAME_BANNER_DATA['/regular']}>
-      <TabMenu tabs={GAME_BANNER_DATA['/regular'].tabs} />
-    </Banner>
-  )
-}

@@ -4,12 +4,12 @@ import { WinLossStats } from './win-loss-status'
 import { HomeLabel } from './home-label'
 
 export async function ScoreBoard() {
-  const res = await fetch(
-    'http://54.180.229.183/api/game/boxscore?gameDate=20241008&gmkey=33331008LGKT0',
-  )
-  const data = await res.json()
-  const { current }: ScheduleType = data.data.schedule
-  const scoreboard: ScoreboardList = data.data.scoreboard
+  // const res = await fetch(
+  //   'http://54.180.229.183/api/game/boxscore?gameDate=20241008&gmkey=33331008LGKT0',
+  // )
+  // const data = await res.json()
+  // const { current }: ScheduleType = data.data.schedule
+  // const scoreboard: ScoreboardList = data.data.scoreboard
   // const visitBoard: Scoreboard = scoreboard.filter((score) => score.bhome === 0)
   // const homeBoard: Scoreboard = scoreboard.filter((score) => score.bhome === 1)
   const vivitBoard: Scoreboard = {
@@ -35,19 +35,26 @@ export async function ScoreBoard() {
   }
 
   return (
+    <BoardWrapper>
+      <BoxscoreBoardHeader />
+      <BoardTH />
+      <BoardTBody>
+        <table>
+          <tbody>
+            <BoardTR data={vivitBoard} />
+            {/* homeBoard 삽입 */}
+            <BoardTR data={vivitBoard} />
+          </tbody>
+        </table>
+      </BoardTBody>
+    </BoardWrapper>
+  )
+}
+function BoardWrapper({ children }: { children: React.ReactNode }) {
+  return (
     <div className="mt-5 overflow-hidden rounded-md border border-gray-200 bg-[--red-color-300]">
       <ul role="list" className="divide-y divide-gray-200">
-        <BoxscoreBoardHeader />
-        <BoardTH />
-        <BoardTBody>
-          <table>
-            <tbody>
-              <BoardTR data={vivitBoard} />
-              {/* homeBoard 삽입 */}
-              <BoardTR data={vivitBoard} />
-            </tbody>
-          </table>
-        </BoardTBody>
+        {children}
       </ul>
     </div>
   )
@@ -61,13 +68,13 @@ function BoardTH() {
   const GAME_INFO = ['R', 'H', 'E', 'B']
   return (
     <li className="flex justify-center px-6 py-4 text-gray-400">
-      <span className="inline-block w-[60px] border border-red-400 text-center hover:text-gray-800">
+      <span className="inline-block w-[60px] border border-gray-400 text-center hover:text-gray-800">
         {TEAM_NAME}
       </span>
       {Array.from({ length: INING_NUMBER }, (_, index) => (
         <span
           key={index + 'ining-number'}
-          className="inline-block border border-red-400 px-2 hover:text-gray-800"
+          className="inline-block border border-gray-400 px-2 hover:text-gray-800"
         >
           {index + 1}
         </span>
@@ -75,7 +82,7 @@ function BoardTH() {
       {GAME_INFO.map((info, idx) => (
         <span
           key={info + 'game-info' + idx}
-          className={`${idx === 0 ? 'inline-block border border-red-400 pl-5 pr-2 hover:text-gray-800' : 'inline-block border border-red-400 px-2 hover:text-gray-800'}`}
+          className={`${idx === 0 ? 'inline-block border border-gray-400 pl-5 pr-2 hover:text-gray-800' : 'inline-block border border-gray-400 px-2 hover:text-gray-800'}`}
         >
           {info}
         </span>
@@ -107,14 +114,14 @@ function BoardTR({ data }: { data: Scoreboard }) {
   ]
   return (
     <tr className="">
-      <td className="px-5">{data.bhomeName}</td>
+      <td className="px-5 text-gray-400">{data.bhomeName}</td>
       {SCORE_KEY.map((key, index) => (
-        <td key={key + data[key]} className="px-2">
+        <td key={key + data[key]} className="px-2 text-gray-400">
           {data[key]}
         </td>
       ))}
       {ADDITIONAL_KEY.map((key) => (
-        <td key={key + data[key]} className="px-2">
+        <td key={key + data[key]} className="px-2 text-gray-400">
           {data[key]}
         </td>
       ))}
