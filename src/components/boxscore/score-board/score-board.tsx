@@ -13,13 +13,13 @@ export async function ScoreBoard() {
   // const visitBoard: Scoreboard = scoreboard.filter((score) => score.bhome === 0)
   // const homeBoard: Scoreboard = scoreboard.filter((score) => score.bhome === 1)
   const vivitBoard: Scoreboard = {
-    ballfour: 'ballfour4',
+    ballfour: '4',
     bhome: 0, // 홈팀 여부 (1: 홈팀, 0: 원정팀)
     bhomeName: 'NC', // 팀 이름
-    error: 'error3', // 실책 수
+    error: '3', // 실책 수
     gameDate: 20240102, // 경기 날짜 (YYYYMMDD 형식)
-    hit: 'hit1', // 안타 수
-    run: 'run8', // 득점
+    hit: '1', // 안타 수
+    run: '8', // 득점
     score1: '1', // 1회 점수
     score2: '2', // 2회 점수
     score3: '3', // 3회 점수
@@ -61,16 +61,21 @@ function BoardTH() {
   const GAME_INFO = ['R', 'H', 'E', 'B']
   return (
     <li className="flex justify-center px-6 py-4 text-gray-400">
-      <span className="px-5 hover:text-gray-800">{TEAM_NAME}</span>
+      <span className="inline-block w-[60px] border border-red-400 text-center hover:text-gray-800">
+        {TEAM_NAME}
+      </span>
       {Array.from({ length: INING_NUMBER }, (_, index) => (
-        <span key={index + 'ining-number'} className="px-2 hover:text-gray-800">
+        <span
+          key={index + 'ining-number'}
+          className="inline-block border border-red-400 px-2 hover:text-gray-800"
+        >
           {index + 1}
         </span>
       ))}
       {GAME_INFO.map((info, idx) => (
         <span
           key={info + 'game-info' + idx}
-          className={`${idx === 0 ? 'pl-5 pr-2 hover:text-gray-800' : 'px-2 hover:text-gray-800'}`}
+          className={`${idx === 0 ? 'inline-block border border-red-400 pl-5 pr-2 hover:text-gray-800' : 'inline-block border border-red-400 px-2 hover:text-gray-800'}`}
         >
           {info}
         </span>
