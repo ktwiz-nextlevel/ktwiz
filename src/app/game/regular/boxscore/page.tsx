@@ -2,6 +2,7 @@ import KeyRecords from '@/components/boxscore/key-records/key-records'
 import { ScoreBoard } from '@/components/boxscore/score-board/score-board'
 import { TabNavigation } from '@/components/boxscore/score-board/tab-navigation'
 import { Banner } from '@/components/common/banner'
+
 import TabMenu from '@/components/common/tab-menu2'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 
