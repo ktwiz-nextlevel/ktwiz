@@ -1,5 +1,5 @@
-import PlayerCardList from '@/components/player/PlayerCardList'
-import PlayerDetail from '@/components/player/PlayerDetail'
+import PlayerCardList from '@/components/player/player-card-list'
+import PlayerDetail from '@/components/player/player-detail'
 
 export default function Pitcher() {
   return (
