@@ -1,6 +1,6 @@
 import PlayerCardList from '@/components/player/player-card-list'
 import PlayerDetail from '@/components/player/player-detail'
-import PlayerChartData from '@/components/player/PlayerChartData'
+import PlayerChart from '@/components/player/player-chart'
 
 export default function Pitcher() {
   return (
@@ -16,7 +16,7 @@ export default function Pitcher() {
       </div>
 
       <div className="w-full p-2">
-        <PlayerChartData />
+        <PlayerChart />
       </div>
     </div>
   )
