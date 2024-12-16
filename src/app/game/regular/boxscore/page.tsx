@@ -1,7 +1,7 @@
-import { Banner } from '@/components/common/banner'
-import TabMenu from '@/components/common/tab-menu'
-import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 import { ScoreBoard } from '@/components/boxscore/score-board/score-board'
+import { Banner } from '@/components/common/banner'
+import TabMenu from '@/components/common/tab-menu2'
+import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 
 import { GAME_BANNER_DATA } from '@/contants/index'
 

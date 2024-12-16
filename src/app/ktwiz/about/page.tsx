@@ -1,5 +1,5 @@
 import { Banner } from '@/components/common/banner'
-import TabMenu from '@/components/common/tab-menu'
+import TabMenu from '@/components/common/tab-menu2'
 import { KTWIZ_BANNER_DATA } from '@/contants/index'
 
 function KtwizAboutPage() {
