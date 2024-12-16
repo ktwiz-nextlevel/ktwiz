@@ -63,9 +63,9 @@ export type Scoreboard = {
   score7: string // 7회 점수
   score8: string // 8회 점수
   score9: string // 9회 점수
-  score10: string // 연장 10회 점수
-  score11: string // 연장 11회 점수
-  score12: string // 연장 12회 점수
+  score10?: string // 연장 10회 점수
+  score11?: string // 연장 11회 점수
+  score12?: string // 연장 12회 점수
 }
 
 export type ScoreboardList = Scoreboard[]

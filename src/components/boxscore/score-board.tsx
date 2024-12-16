@@ -33,20 +33,7 @@ export async function ScoreBoard() {
     score11: '11', // 연장 11회 점수
     score12: '12', // 연장 12회 점수
   }
-  // const vivitBoardScore = vivitBoard
-  const SCORE_KEY = [
-    'score1',
-    'score2',
-    'score3',
-    'score4',
-    'score5',
-    'score6',
-    'score7',
-    'score8',
-    'score9',
-  ]
 
-  const ADDITIONAL_KEY = ['run', 'hit', 'error', 'ballfour']
   return (
     <div className="mt-5 overflow-hidden rounded-md border border-gray-200 bg-[--red-color-300]">
       <ul role="list" className="divide-y divide-gray-200">
@@ -55,32 +42,9 @@ export async function ScoreBoard() {
         <BoardTBody>
           <table>
             <tbody>
-              <tr>
-                <td className="px-5">{vivitBoard.bhomeName}</td>
-                {SCORE_KEY.map((key, index) => (
-                  <td key={key} className="px-2">
-                    {vivitBoard[key]}
-                  </td>
-                ))}
-                {ADDITIONAL_KEY.map((key) => (
-                  <td key={key} className="px-2">
-                    {vivitBoard[key]}
-                  </td>
-                ))}
-              </tr>
-              <tr>
-                <td className="px-5">{vivitBoard.bhomeName}</td>
-                {SCORE_KEY.map((key, index) => (
-                  <td key={key} className="px-2">
-                    {vivitBoard[key]}
-                  </td>
-                ))}
-                {ADDITIONAL_KEY.map((key) => (
-                  <td key={key} className="px-2">
-                    {vivitBoard[key]}
-                  </td>
-                ))}
-              </tr>
+              <BoardTR data={vivitBoard} />
+              {/* homeBoard 삽입 */}
+              <BoardTR data={vivitBoard} />
             </tbody>
           </table>
         </BoardTBody>
@@ -116,6 +80,41 @@ function BoardTH() {
 }
 function BoardTBody({ children }: { children: React.ReactNode }) {
   return <li className="flex justify-center px-6 py-4">{children}</li>
+}
+function BoardTR({ data }: { data: Scoreboard }) {
+  const SCORE_KEY: (keyof Scoreboard)[] = [
+    'score1',
+    'score2',
+    'score3',
+    'score4',
+    'score5',
+    'score6',
+    'score7',
+    'score8',
+    'score9',
+  ]
+
+  const ADDITIONAL_KEY: (keyof Scoreboard)[] = [
+    'run',
+    'hit',
+    'error',
+    'ballfour',
+  ]
+  return (
+    <tr className="">
+      <td className="px-5">{data.bhomeName}</td>
+      {SCORE_KEY.map((key, index) => (
+        <td key={key + data[key]} className="px-2">
+          {data[key]}
+        </td>
+      ))}
+      {ADDITIONAL_KEY.map((key) => (
+        <td key={key + data[key]} className="px-2">
+          {data[key]}
+        </td>
+      ))}
+    </tr>
+  )
 }
 async function BoxscoreBoardHeader() {
   const res = await fetch(

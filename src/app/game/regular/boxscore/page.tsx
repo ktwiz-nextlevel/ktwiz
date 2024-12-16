@@ -17,9 +17,13 @@ async function BoxscorePage({ params }: { params: { id: string } }) {
         </div>
 
         <ScoreBoard />
+        <KeyRecords />
       </div>
     </div>
   )
 }
 
 export default BoxscorePage
+function KeyRecords() {
+  return <></>
+}
