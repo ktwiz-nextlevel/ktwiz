@@ -20,7 +20,7 @@ export default function Pitcher() {
         </div>
       </div>
 
-      <div className="w-full rounded-lg p-4 shadow-md">
+      <div className="mb-6 w-full rounded-lg p-4 shadow-md">
         <PlayerChart />
       </div>
     </div>

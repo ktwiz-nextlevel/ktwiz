@@ -8,22 +8,29 @@ export default function PlayerCardList({ onCardClick }) {
     { id: 3, name: '이미지 3' },
     { id: 4, name: '이미지 4' },
     { id: 5, name: '이미지 5' },
+    { id: 6, name: '이미지 6' },
+    { id: 7, name: '이미지 7' },
+    { id: 8, name: '이미지 8' },
+    { id: 9, name: '이미지 9' },
   ]
 
   return (
-    <div className="h-96 overflow-y-auto border p-2">
+    <div className="h-[32rem] overflow-y-auto p-2">
       <div className="flex flex-col gap-4">
         {cards.map(({ id, name }) => (
           <div
             key={id}
-            className="flex h-full items-center justify-center bg-gray-200"
-            onClick={() => onCardClick(id)} // 부모 컴포넌트의 핸들러 호출
+            className="group relative flex h-60 w-full cursor-pointer items-center justify-center rounded-lg bg-gray-200 transition-all duration-300 hover:bg-gray-300 hover:shadow-md active:scale-95"
+            onClick={() => onCardClick(id)}
           >
             <img
               src="/images/player-test-img.jpg"
               alt={name}
-              className="h-full w-full object-cover"
+              className="h-full w-full rounded-lg object-cover"
             />
+            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+              {name}
+            </div>
           </div>
         ))}
       </div>

@@ -6,6 +6,7 @@ import {
   PolarAngleAxis,
   PolarRadiusAxis,
   ResponsiveContainer,
+  Tooltip,
 } from 'recharts'
 
 export default function ChartRadar({ data }) {
@@ -30,6 +31,7 @@ export default function ChartRadar({ data }) {
           fillOpacity={0.6}
         />
         <Legend />
+        <Tooltip />
       </RadarChart>
     </ResponsiveContainer>
   )
