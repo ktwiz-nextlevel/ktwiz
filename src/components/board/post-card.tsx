@@ -1,117 +1,48 @@
 'use client'
+import { PostListItem } from '@/types'
 import { useRouter } from 'next/navigation'
+interface PostCardProps {
+  posts: PostListItem[] | null
+}
 
-const posts = [
-  {
-    id: 1,
-    title: 'kt wiz 홈페이지 오픈',
-    createdAt: '2024-12-15',
-    viewCount: 100,
-    author: 'kt wiz',
-  },
-  {
-    id: 2,
-    title: 'kt wiz 홈페이지 오픈',
-    createdAt: '2024-12-15',
-    viewCount: 100,
-    author: 'kt wiz',
-  },
-  {
-    id: 3,
-    title: 'kt wiz 홈페이지 오픈',
-    createdAt: '2024-12-15',
-    viewCount: 100,
-    author: 'kt wiz',
-  },
-  {
-    id: 4,
-    title: 'kt wiz 홈페이지 오픈',
-    createdAt: '2024-12-15',
-    viewCount: 100,
-    author: 'kt wiz',
-  },
-  {
-    id: 5,
-    title: 'kt wiz 홈페이지 오픈',
-    createdAt: '2024-12-15',
-    viewCount: 100,
-    author: 'kt wiz',
-  },
-  {
-    id: 6,
-    title: 'kt wiz 홈페이지 오픈',
-    createdAt: '2024-12-15',
-    viewCount: 100,
-    author: 'kt wiz',
-  },
-  {
-    id: 7,
-    title: 'kt wiz 홈페이지 오픈',
-    createdAt: '2024-12-15',
-    viewCount: 100,
-    author: 'kt wiz',
-  },
-  {
-    id: 8,
-    title: 'kt wiz 홈페이지 오픈',
-    createdAt: '2024-12-15',
-    viewCount: 100,
-    author: 'kt wiz',
-  },
-  {
-    id: 9,
-    title: 'kt wiz 홈페이지 오픈',
-    createdAt: '2024-12-15',
-    viewCount: 100,
-    author: 'kt wiz',
-  },
-  {
-    id: 10,
-    title: 'kt wiz 홈페이지 오픈',
-    createdAt: '2024-12-15',
-    viewCount: 100,
-    author: 'kt wiz',
-  },
-]
-
-export default function PostCard() {
+export default function PostCard({ posts }: PostCardProps) {
   const router = useRouter()
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8">
+    <div className="min-h-[580px] px-4 sm:px-6 lg:px-8">
       <div className="mt-8 flow-root">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle">
-            <table className="min-w-full divide-y divide-gray-300">
+            <table className="min-w-full table-fixed divide-y divide-gray-300">
               <thead>
                 <tr>
                   <th
                     scope="col"
-                    className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                    className="w-1/12 py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
                   >
                     NO
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
+                    className="w-5/12 px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
                   >
                     제목
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
+                    className="w-2/12 px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
                   >
                     작성자
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
+                    className="w-2/12 px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
                   >
                     작성일
                   </th>
                   <th
                     scope="col"
-                    className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
+                    className="w-2/12 px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
                   >
                     조회수
                   </th>
