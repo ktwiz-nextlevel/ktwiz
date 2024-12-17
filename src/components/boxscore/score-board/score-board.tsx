@@ -68,13 +68,13 @@ function BoardTH() {
   const GAME_INFO = ['R', 'H', 'E', 'B']
   return (
     <li className="flex justify-center px-6 py-4 text-gray-400">
-      <span className="inline-block w-[60px] border border-gray-400 text-center hover:text-gray-800">
+      <span className="inline-block w-[60px] text-center hover:text-gray-800">
         {TEAM_NAME}
       </span>
       {Array.from({ length: INING_NUMBER }, (_, index) => (
         <span
           key={index + 'ining-number'}
-          className="inline-block border border-gray-400 px-2 hover:text-gray-800"
+          className="inline-block px-2 hover:text-gray-800"
         >
           {index + 1}
         </span>
@@ -82,7 +82,7 @@ function BoardTH() {
       {GAME_INFO.map((info, idx) => (
         <span
           key={info + 'game-info' + idx}
-          className={`${idx === 0 ? 'inline-block border border-gray-400 pl-5 pr-2 hover:text-gray-800' : 'inline-block border border-gray-400 px-2 hover:text-gray-800'}`}
+          className={`${idx === 0 ? 'inline-block pl-5 pr-2 hover:text-gray-800' : 'inline-block px-2 hover:text-gray-800'}`}
         >
           {info}
         </span>
