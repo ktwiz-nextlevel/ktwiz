@@ -8,6 +8,7 @@ interface Message {
   userId: string
   nickname: string
   content: string
+  createdAt: string
 }
 const supabase = createClient()
 
@@ -34,6 +35,13 @@ export default function LiveTalk({
           userId: msg.user_id,
           nickname: msg.nickname,
           content: msg.content,
+          createdAt: new Date(msg.created_at).toLocaleDateString('ko-KR', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+          }),
         }))
         setMessages(clientMessages)
       }
@@ -95,9 +103,12 @@ export default function LiveTalk({
   const messagesList = messages.map((msgObj) => (
     <div key={msgObj.id} className="flex w-full">
       <div className="flex w-full flex-col text-sm">
-        <div className="w-full space-y-3 break-words rounded-xl bg-gray-100 px-4 pb-3 pt-2 text-gray-800 shadow-sm">
-          <div className="mb-1 text-xs font-semibold text-gray-600">
-            {msgObj.nickname}
+        <div className="w-full space-y-3 break-words rounded-xl bg-gray-100 px-4 pb-4 pt-2 text-gray-800 shadow-sm">
+          <div className="mb-1 flex items-center justify-between">
+            <div className="text-xs font-semibold text-gray-600">
+              {msgObj.nickname}
+            </div>
+            <div className="text-xs text-gray-400">{msgObj.createdAt}</div>
           </div>
           <div className="whitespace-pre-wrap">{msgObj.content}</div>{' '}
           {/**줄바꿈 표시*/}
@@ -107,7 +118,7 @@ export default function LiveTalk({
   ))
 
   return (
-    <div className="mt-[50px] flex h-[630px] w-[400px] flex-col rounded-xl border bg-white p-2">
+    <div className="mt-[30px] flex h-[600px] w-[350px] flex-col rounded-xl border bg-white p-2">
       <div className="p-4 pb-1 font-extrabold">응원 오픈톡</div>
       <div className="flex items-center justify-end px-2">
         <span className="text-xs">자동 업데이트</span>
