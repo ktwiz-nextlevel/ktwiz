@@ -1,4 +1,5 @@
 import BoardSearchBar from '@/components/board/board-search-bar'
+import LiveTalk from '@/components/board/live-talk'
 import { CreatePost } from '@/components/board/post-buttons'
 import PostCard from '@/components/board/post-card'
 import { Banner } from '@/components/common/banner'
@@ -24,24 +25,31 @@ export default async function FanBoardPage({
     fetchPostsPages(query),
     fetchFilteredPost(query, currentPage, type),
   ])
+  const userData = {
+    id: '12345',
+    nickname: 'test',
+  }
 
   return (
     <div className="h-full w-full">
       <Banner {...FAN_BANNER_DATA['/']}>
         <TabMenu tabs={FAN_BANNER_DATA['/'].tabs} />
       </Banner>
-      <div className="flex w-full justify-center space-x-20 px-4">
-        <div className="h-full w-[1100px]">
+      <div className="flex w-full justify-center space-x-12 px-4 pb-16">
+        <div className="w-[1100px]">
           <div className="mt-[50px] flex w-full justify-between">
             <BoardSearchBar />
             <Breadcrumbs pages={['HOME', 'FAN', '팬 소통공간']} />
           </div>
           <PostCard posts={postData} />
-          {totalPages && <Pagination totalPages={totalPages} />}
-          <div className="flex justify-end py-4">
+          <div className="mt-4 flex items-center justify-between">
+            <div className="mx-auto flex justify-center">
+              {totalPages && <Pagination totalPages={totalPages} />}
+            </div>
             <CreatePost />
           </div>
         </div>
+        <LiveTalk userData={userData} />
       </div>
     </div>
   )
