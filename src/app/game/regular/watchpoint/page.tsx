@@ -1,4 +1,4 @@
-import KeyRecords from '@/components/boxscore/key-records/key-records'
+import KeyRecords from '@/app/game/regular/boxscore/[[...id]]/key-records'
 import { ScoreBoard } from '@/app/game/regular/boxscore/[[...id]]/score-board'
 import { TabNavigation } from '@/components/boxscore/score-board/tab-navigation'
 

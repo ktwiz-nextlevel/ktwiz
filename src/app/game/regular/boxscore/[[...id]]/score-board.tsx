@@ -48,7 +48,6 @@ export async function ScoreBoard({
   return (
     <Board>
       <BoxscoreBoardHeader />
-      {/* <BoardTH /> */}
       <Board.li>
         <BoardTH />
       </Board.li>
@@ -93,9 +92,7 @@ function BoardTH() {
     </div>
   )
 }
-function BoardTBody({ children }: { children: React.ReactNode }) {
-  return <li className="flex justify-center px-6 py-4">{children}</li>
-}
+
 function BoardTR({ data }: { data: Scoreboard }) {
   const SCORE_KEY: (keyof Scoreboard)[] = [
     'score1',
