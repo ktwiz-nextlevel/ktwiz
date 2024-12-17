@@ -1,15 +1,26 @@
 import { ScheduleType, Scoreboard, ScoreboardList } from '@/types'
-import { Label } from './label'
-import { WinLossStats } from './win-loss-status'
-import { HomeLabel } from './home-label'
+import { Label } from '../../../../../components/boxscore/score-board/label'
+import { WinLossStats } from '../../../../../components/boxscore/score-board/win-loss-status'
+import { HomeLabel } from '../../../../../components/boxscore/score-board/home-label'
+import { cn } from '@/utils'
+import Board from '@/components/common/board/board'
 
-export async function ScoreBoard() {
-  // const res = await fetch(
-  //   'http://54.180.229.183/api/game/boxscore?gameDate=20241008&gmkey=33331008LGKT0',
-  // )
-  // const data = await res.json()
-  // const { current }: ScheduleType = data.data.schedule
-  // const scoreboard: ScoreboardList = data.data.scoreboard
+export async function ScoreBoard({
+  gameDate,
+  gmkey,
+}: {
+  gameDate: string
+  gmkey: string
+}) {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/game/boxscore?gameDate=${gameDate}&gmkey=${gmkey} `,
+  )
+  if (!response.ok) {
+    return <Board>게임 정보가 없습니다.</Board>
+  }
+  const data = await response.json()
+  // const { current }: ScheduleType = data.schedule
+  // const scoreboard: ScoreboardList = data.scoreboard
   // const visitBoard: Scoreboard = scoreboard.filter((score) => score.bhome === 0)
   // const homeBoard: Scoreboard = scoreboard.filter((score) => score.bhome === 1)
   const vivitBoard: Scoreboard = {
@@ -35,10 +46,13 @@ export async function ScoreBoard() {
   }
 
   return (
-    <BoardWrapper>
+    <Board>
       <BoxscoreBoardHeader />
-      <BoardTH />
-      <BoardTBody>
+      {/* <BoardTH /> */}
+      <Board.li>
+        <BoardTH />
+      </Board.li>
+      <Board.li style="flex justify-center">
         <table>
           <tbody>
             <BoardTR data={vivitBoard} />
@@ -46,28 +60,17 @@ export async function ScoreBoard() {
             <BoardTR data={vivitBoard} />
           </tbody>
         </table>
-      </BoardTBody>
-    </BoardWrapper>
+      </Board.li>
+    </Board>
   )
 }
-function BoardWrapper({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="mt-5 overflow-hidden rounded-md border border-gray-200 bg-[--red-color-300]">
-      <ul role="list" className="divide-y divide-gray-200">
-        {children}
-      </ul>
-    </div>
-  )
-}
-function BoardHeader({ children }: { children: React.ReactNode }) {
-  return <li className="px-6 py-4">{children}</li>
-}
+
 function BoardTH() {
   const TEAM_NAME = '팀명'
   const INING_NUMBER = 9
   const GAME_INFO = ['R', 'H', 'E', 'B']
   return (
-    <li className="flex justify-center px-6 py-4 text-gray-400">
+    <div className="flex justify-center text-gray-400">
       <span className="inline-block w-[60px] text-center hover:text-gray-800">
         {TEAM_NAME}
       </span>
@@ -87,7 +90,7 @@ function BoardTH() {
           {info}
         </span>
       ))}
-    </li>
+    </div>
   )
 }
 function BoardTBody({ children }: { children: React.ReactNode }) {
@@ -130,7 +133,7 @@ function BoardTR({ data }: { data: Scoreboard }) {
 }
 async function BoxscoreBoardHeader() {
   const res = await fetch(
-    'http://54.180.229.183/api/game/boxscore?gameDate=20241008&gmkey=33331008LGKT0',
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/game/boxscore?gameDate=20241008&gmkey=33331008LGKT0`,
   )
   const data = await res.json()
 

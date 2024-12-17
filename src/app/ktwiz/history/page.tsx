@@ -1,4 +1,4 @@
-import { Banner } from '@/components/common/banner'
+import { Banner } from '@/components/common/banner/banner'
 import TabMenu from '@/components/common/tab-menu2'
 import { KTWIZ_BANNER_DATA } from '@/contants/index'
 
