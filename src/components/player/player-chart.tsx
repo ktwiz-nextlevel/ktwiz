@@ -4,12 +4,12 @@ import ChartRadar from './rechart/radar-chart'
 
 export default function PlayerChart() {
   const data = [
-    { subject: 'Math', A: 120, B: 110, fullMark: 150 },
-    { subject: 'Chinese', A: 98, B: 130, fullMark: 150 },
-    { subject: 'English', A: 86, B: 130, fullMark: 150 },
-    { subject: 'Geography', A: 99, B: 100, fullMark: 150 },
-    { subject: 'Physics', A: 85, B: 90, fullMark: 150 },
-    { subject: 'History', A: 65, B: 85, fullMark: 150 },
+    { subject: '1', A: 120, B: 110, fullMark: 150 },
+    { subject: '2', A: 98, B: 130, fullMark: 150 },
+    { subject: '3', A: 86, B: 130, fullMark: 150 },
+    { subject: '4', A: 99, B: 100, fullMark: 150 },
+    { subject: '5', A: 85, B: 90, fullMark: 150 },
+    { subject: '6', A: 65, B: 85, fullMark: 150 },
   ]
 
   return (

@@ -8,7 +8,7 @@ export default function PlayerSeasonData() {
           <div className="flex-1 border px-4 py-2 font-semibold">ERA</div>
           <div className="flex-1 border px-4 py-2 font-semibold">승</div>
           <div className="flex-1 border px-4 py-2 font-semibold">패</div>
-          <div className="flex-1 border px-4 py-2 font-semibold">세</div>
+          <div className="flex-1 border px-4 py-2 font-semibold">세이브</div>
           <div className="flex-1 border px-4 py-2 font-semibold">경기</div>
         </div>
         <div className="flex text-center">
