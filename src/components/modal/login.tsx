@@ -1,31 +1,32 @@
 'use client'
 import Image from 'next/image'
 import Modal from '../common/modal'
-import LoginButton from '../example/kakao-login'
 import { useEffect, useState } from 'react'
 import { createClient } from '@/utils/supabase/client'
+import KakaoLoginButton from '../common/kakao-login'
 
 interface ModalProps {
   onClose: () => void
 }
 export default function LoginModal({ onClose }: ModalProps) {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState<any | null>(null)
   const [loading, setLoading] = useState(true) // 로딩 상태
   const supabase = createClient()
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const { data, error } = await supabase.auth.getUser()
+  /** 유저 정보 불러오기 */
+  const fetchSession = async () => {
+    const { data, error } = await supabase.auth.getSession()
 
-      if (error) {
-        console.error('Error fetching user:', error)
-      } else {
-        setUser(data.user)
-      }
-      setLoading(false) // 로딩 완료
+    if (error) {
+      console.error('Error fetching session:', error)
+    } else {
+      setUser(data?.session?.user || null)
     }
+    setLoading(false)
+  }
 
-    fetchUser()
+  useEffect(() => {
+    fetchSession()
   }, [])
 
   if (loading) {
@@ -61,7 +62,7 @@ export default function LoginModal({ onClose }: ModalProps) {
         <div className="flex flex-col gap-[12px]">
           {/* refactor: 로그인 버튼 컴포넌트로 뺴기 */}
 
-          <LoginButton />
+          <KakaoLoginButton />
 
           {/* <button
             className="h-[40px] w-full rounded-[8px] border bg-[#f2f2f2]"

@@ -8,7 +8,7 @@ function KakaoLoginButton() {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'kakao',
       options: {
-        redirectTo: 'http://localhost:3000/', // 리디렉션될 url
+        redirectTo: process.env.BASE_URL, // 리디렉션될 url
       },
     })
 
