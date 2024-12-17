@@ -16,8 +16,8 @@ export default function PlayerCardList({ onCardClick }) {
         {cards.map(({ id, name }) => (
           <div
             key={id}
-            className="flex h-24 items-center justify-center bg-gray-200"
-            onClick={() => onCardClick(id)}
+            className="flex h-full items-center justify-center bg-gray-200"
+            onClick={() => onCardClick(id)} // 부모 컴포넌트의 핸들러 호출
           >
             <img
               src="/images/player-test-img.jpg"
