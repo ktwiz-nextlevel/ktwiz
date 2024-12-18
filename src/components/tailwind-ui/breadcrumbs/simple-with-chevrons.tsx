@@ -36,9 +36,7 @@ export default function Breadcrumbs({ pages }: BreadcrumbProps) {
               )}
               <p
                 className={`ml-4 text-sm font-medium ${
-                  index === pages.length - 1
-                    ? 'text-red-500'
-                    : 'text-gray-300 hover:text-gray-700'
+                  index === pages.length - 1 ? 'text-red-500' : 'text-gray-300'
                 }`}
               >
                 {page}

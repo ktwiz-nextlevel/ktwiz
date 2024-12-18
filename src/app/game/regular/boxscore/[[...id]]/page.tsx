@@ -3,7 +3,6 @@ import { ScoreBoard } from '@/components/boxscore/score-board/score-board'
 import { TabNavigation } from '@/components/boxscore/score-board/tab-navigation'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 import BatterRecords from './batter-records'
-import KTWizFooter from '@/components/common/KTWizFooter'
 import PitcherRecords from './pitcher-records'
 
 const TABS = [
@@ -43,7 +42,6 @@ async function BoxscorePage({ params }: { params: Promise<{ id: string[] }> }) {
         home={data.data.schedule.current.home}
         visit={data.data.schedule.current.visit}
       />
-      <div className="w-full"></div>
     </div>
   )
 }
