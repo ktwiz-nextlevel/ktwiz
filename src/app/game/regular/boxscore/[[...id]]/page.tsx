@@ -43,7 +43,7 @@ async function BoxscorePage({ params }: { params: Promise<{ id: string[] }> }) {
         home={data.data.schedule.current.home}
         visit={data.data.schedule.current.visit}
       />
-      <div className="h-[300px] w-full"></div>
+      <div className="w-full"></div>
     </div>
   )
 }
