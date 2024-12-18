@@ -4,30 +4,26 @@ import Title from '@/components/common/title/title'
 import { cn } from '@/utils'
 import { WithVerticalLines as Table } from '@/components/tailwind-ui/tables/with-vertical-lines'
 const TH_KEY = [
-  { title: '타순', key: '' },
-  // { title: '타순', key: 'oneturn' },
-  { title: '포지션', key: 'position' },
-  { title: '이름', key: 'name' },
-  { title: '1', key: 'inn1' },
-  { title: '2', key: 'inn2' },
-  { title: '3', key: 'inn3' },
-  { title: '4', key: 'inn4' },
-  { title: '5', key: 'inn5' },
-  { title: '6', key: 'inn6' },
-  { title: '7', key: 'inn7' },
-  { title: '8', key: 'inn8' },
-  { title: '9', key: 'inn9' },
-  { title: '10', key: 'inn10' },
-  { title: '11', key: 'inn11' },
-  { title: '12', key: 'inn12' },
+  { title: '선수', key: 'name' },
+  { title: '등판', key: 'changeinn' },
+  { title: '결과', key: '' },
+  { title: '승', key: 'w' },
+  { title: '패', key: 'l' },
+  { title: '세', key: 's' },
+  { title: '이닝', key: 'inn' },
+  { title: '타자', key: 'pa' },
+  { title: '타구수', key: 'bf' },
   { title: '타수', key: 'ab' },
-  { title: '득점', key: 'run' },
-  { title: '안타', key: 'hit' },
-  { title: '타점', key: 'rbi' },
-  { title: '타율', key: '' },
+  { title: '피안타', key: 'hit' },
+  { title: '피홈런', key: 'hr' },
+  { title: '사구', key: 'bbhp' },
+  { title: '삼진', key: 'kk' },
+  { title: '실점', key: 'r' },
+  { title: '자책', key: 'er' },
+  { title: '평균 자책점', key: '' },
 ]
 
-function BatterRecords({
+function PitcherRecords({
   data,
   // type,
   home,
@@ -39,7 +35,7 @@ function BatterRecords({
   visit: string
 }) {
   // const title = type === 'batter' ? '타자 기록' : '투수 기록'
-  const title = '타자 기록'
+  const title = '투수 기록'
 
   // const DATA_TYPE = {
   //   BATTER_VISIT: data.vbatters,
@@ -48,14 +44,13 @@ function BatterRecords({
   //   PITCHERS_HOME: data.hpitchers,
   // }
   const DATA_TYPE = {
-    BATTER_VISIT: data.vbatters,
-    BATTER_HOME: data.hbatters,
+    PITCHERS_VISIT: data.vpitchers,
+    PITCHERS_HOME: data.hpitchers,
   }
   const [activeTab, setActiveTab] = useState({ ishome: true, name: home })
-
   const tableData = activeTab.ishome
-    ? DATA_TYPE.BATTER_HOME
-    : DATA_TYPE.BATTER_VISIT
+    ? DATA_TYPE.PITCHERS_HOME
+    : DATA_TYPE.PITCHERS_VISIT
   function handleTab() {
     setActiveTab((prev) =>
       prev.ishome
@@ -78,7 +73,7 @@ function BatterRecords({
   )
 }
 
-export default BatterRecords
+export default PitcherRecords
 
 function TabMenu({
   activeTab,
