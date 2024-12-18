@@ -17,7 +17,13 @@ export default function TabMenu({
   return (
     <div className="flex gap-1">
       {tabs?.map((tab, index) => {
-        const isActive = tab.href === pathname
+        let isActive = tab.href === pathname
+        if (
+          pathname === '/game/regular/watchpoint' &&
+          tab.path === 'boxscore'
+        ) {
+          isActive = true
+        }
         return (
           <Link
             href={tab.href || ''}

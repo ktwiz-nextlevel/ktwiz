@@ -1,5 +1,5 @@
 import KeyRecords from '@/app/game/regular/boxscore/[[...id]]/key-records'
-import { ScoreBoard } from '@/app/game/regular/boxscore/[[...id]]/score-board'
+import { ScoreBoard } from '@/components/boxscore/score-board/score-board'
 import { TabNavigation } from '@/components/boxscore/score-board/tab-navigation'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 import BatterRecords from './batter-records'

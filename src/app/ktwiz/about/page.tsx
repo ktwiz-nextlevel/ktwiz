@@ -1,11 +1,15 @@
-import { Banner } from '@/components/common/banner/banner'
+import Banner from '@/components/common/banner/banner'
 import TabMenu from '@/components/common/tab-menu2'
 import { KTWIZ_BANNER_DATA } from '@/contants/index'
 
 function KtwizAboutPage() {
   return (
     <div className="w-full">
-      <Banner {...KTWIZ_BANNER_DATA['']}>
+      <Banner>
+        <Banner.Heading
+          title={KTWIZ_BANNER_DATA[''].title}
+          subtitle={KTWIZ_BANNER_DATA[''].description}
+        />
         <TabMenu tabs={KTWIZ_BANNER_DATA[''].tabs} />
       </Banner>
 

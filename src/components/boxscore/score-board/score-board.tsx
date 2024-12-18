@@ -1,7 +1,7 @@
 import { ScheduleType, Scoreboard, ScoreboardList } from '@/types'
-import { Label } from '../../../../../components/boxscore/score-board/label'
-import { WinLossStats } from '../../../../../components/boxscore/score-board/win-loss-status'
-import { HomeLabel } from '../../../../../components/boxscore/score-board/home-label'
+import { Label } from './label'
+import { WinLossStats } from './win-loss-status'
+import { HomeLabel } from './home-label'
 import { cn } from '@/utils'
 import Board from '@/components/common/board/board'
 

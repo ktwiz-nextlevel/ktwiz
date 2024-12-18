@@ -11,7 +11,8 @@ export function TabNavigation({
   return (
     <div className="flex gap-1">
       {tabs?.map((tab, index) => {
-        const isActive = tab.path === activeTab?.path
+        let isActive = tab.path === activeTab?.path
+
         return (
           <Link
             href={tab.href || ''}
