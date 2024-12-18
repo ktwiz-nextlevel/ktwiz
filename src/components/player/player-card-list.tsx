@@ -23,9 +23,9 @@ export default function PlayerCardList({ onCardClick }) {
       <div className="flex flex-col gap-4">
         {cards.map((card) => (
           <div
-            key={card.backnum}
+            key={card.pcode}
             className="group relative flex h-60 w-full cursor-pointer items-center justify-center rounded-lg bg-gray-200 transition-all duration-300 hover:bg-gray-300 hover:shadow-md active:scale-95"
-            onClick={() => onCardClick(card.backnum)}
+            onClick={() => onCardClick(card.pcode)}
           >
             <img
               src={card.playerPrvwIm || '/images/ktwiz-basic-img.png'}
