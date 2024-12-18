@@ -16,6 +16,7 @@ export default function LoginModal({ onClose }: ModalProps) {
   /** 유저 정보 불러오기 */
   const fetchSession = async () => {
     const { data, error } = await supabase.auth.getSession()
+    console.log(data)
 
     if (error) {
       console.error('Error fetching session:', error)
@@ -61,7 +62,6 @@ export default function LoginModal({ onClose }: ModalProps) {
         {/* 소셜 로그인 목록 */}
         <div className="flex flex-col gap-[12px]">
           {/* refactor: 로그인 버튼 컴포넌트로 뺴기 */}
-
           <KakaoLoginButton />
 
           {/* <button
