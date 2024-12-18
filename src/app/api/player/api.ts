@@ -11,6 +11,16 @@ export const getPitcherPlayerList = async () => {
 
 /**[투수] 선수 상세데이터 요청 */
 
+export const getPitcherPlayerDetail = async (pcode) => {
+  try {
+    const response = await fetch(`/player/pitcher/${pcode}.json`)
+    return await response.json()
+  } catch (error) {
+    console.error('getPlayerDetail 요청 에러:', error)
+    throw error
+  }
+}
+
 // ----------------------------------------------------------------------------------
 
 /**[외야] 선수 리스트 요청*/
