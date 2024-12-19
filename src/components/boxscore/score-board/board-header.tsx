@@ -2,6 +2,8 @@ import { ScheduleType } from '@/types'
 import { Label } from './label'
 import { WinLossStats } from './win-loss-status'
 import { HomeLabel } from './home-label'
+import PrevButton from './prev-button'
+import NextButton from './next-button'
 
 async function BoardHeader() {
   const res = await fetch(
@@ -12,25 +14,33 @@ async function BoardHeader() {
   const { current, prev, next }: ScheduleType = data.data.schedule
   const gameDate = `${current.gyear}년 ${current.gmonth}월 ${current.gday}일`
   const gameInfo = `${current.gmonth}.${current.gday} ${current.gtime} | ${current.stadium}`
+
   return (
-    <>
-      <Label data={current} />
-      <h1 className="mt-2 text-xl text-gray-700">{gameDate}</h1>
-      <p className="mt-1 text-xs text-gray-400">{gameInfo}</p>
-      <div className="mt-2 flex justify-center gap-5">
-        <LeftVisitTeam
-          teamName={current.visit}
-          teamLogo={current.visitLogo}
-          isWin={current.vscore > current.hscore && current.endFlag === '1'}
-        />
-        <Score vscore={current.vscore} hscore={current.hscore} />
-        <RightHomeTeam
-          teamName={current.home}
-          teamLogo={current.homeLogo}
-          isWin={current.vscore < current.hscore && current.endFlag === '1'}
-        />
+    <div className="flex flex-1">
+      <PrevButton gameDate={prev.gameDate} gmkey={prev.gmkey} />
+      <div className="w-fit">
+        <div className="flex flex-col items-center">
+          <Label data={current} />
+          <h1 className="mt-2 text-xl text-gray-700">{gameDate}</h1>
+          <p className="mt-1 text-xs text-gray-400">{gameInfo}</p>
+        </div>
+
+        <div className="mt-2 flex justify-center gap-5">
+          <LeftVisitTeam
+            teamName={current.visit}
+            teamLogo={current.visitLogo}
+            isWin={current.vscore > current.hscore && current.endFlag === '1'}
+          />
+          <Score vscore={current.vscore} hscore={current.hscore} />
+          <RightHomeTeam
+            teamName={current.home}
+            teamLogo={current.homeLogo}
+            isWin={current.vscore < current.hscore && current.endFlag === '1'}
+          />
+        </div>
       </div>
-    </>
+      <NextButton gameDate={next.gameDate} gmkey={next.gmkey} />
+    </div>
   )
 }
 function LeftVisitTeam({

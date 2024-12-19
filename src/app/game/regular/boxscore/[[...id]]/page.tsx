@@ -21,8 +21,14 @@ async function BoxscorePage({ params }: { params: Promise<{ id: string[] }> }) {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/game/boxscore?gameDate=${gameDate}&gmkey=${gmkey} `,
   )
+
   if (!response.ok) {
-    return <div>게임 정보가 없습니다.</div>
+    return (
+      <div>
+        <BreadCrumb />
+        게임 정보가 없습니다.
+      </div>
+    )
   }
   const data = await response.json()
 

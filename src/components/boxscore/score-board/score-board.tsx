@@ -1,4 +1,4 @@
-import { Scoreboard } from '@/types'
+import { ScheduleType, Scoreboard, ScoreboardList } from '@/types'
 
 import Board from '@/components/common/board/board'
 import BoardHeader from './board-header'
@@ -14,11 +14,12 @@ export async function ScoreBoard({
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/game/boxscore?gameDate=${gameDate}&gmkey=${gmkey} `,
   )
   if (!response.ok) {
-    return <Board>게임 정보가 없습니다.</Board>
+    return <Board>스코어보드 정보가 없습니다.</Board>
   }
   const data = await response.json()
-  // const { current }: ScheduleType = data.schedule
-  // const scoreboard: ScoreboardList = data.scoreboard
+  // const { current }: ScheduleType = data.data.schedule
+  const scoreboard: ScoreboardList = data.data.scoreboard
+
   // const visitBoard: Scoreboard = scoreboard.filter((score) => score.bhome === 0)
   // const homeBoard: Scoreboard = scoreboard.filter((score) => score.bhome === 1)
   const vivitBoard: Scoreboard = {
@@ -45,7 +46,7 @@ export async function ScoreBoard({
 
   return (
     <Board>
-      <Board.li style="w-full flex-col items-center">
+      <Board.li style="w-full flex justify-center">
         <BoardHeader />
       </Board.li>
       <Board.li>
