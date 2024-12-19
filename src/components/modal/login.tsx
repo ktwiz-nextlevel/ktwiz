@@ -9,6 +9,8 @@ interface ModalProps {
 
 async function signInWithKakao() {
   const supabase = await createClient()
+
+  // 카카오 로그인
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'kakao',
     options: {
