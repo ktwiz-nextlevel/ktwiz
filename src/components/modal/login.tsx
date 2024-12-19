@@ -1,53 +1,28 @@
 'use client'
 import Image from 'next/image'
 import Modal from '../common/modal'
-import { useEffect, useState } from 'react'
 import { createClient } from '@/utils/supabase/client'
-import KakaoLoginButton from '../common/kakao-login'
 
 interface ModalProps {
   onClose: () => void
 }
+
+async function signInWithKakao() {
+  const supabase = await createClient()
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'kakao',
+    options: {
+      redirectTo: process.env.BASE_URL
+        ? `https://${process.env.BASE_URL}/auth/callback`
+        : 'http://localhost:3000/auth/callback',
+    },
+  })
+}
+
 export default function LoginModal({ onClose }: ModalProps) {
-  const [user, setUser] = useState<any | null>(null)
-  const [loading, setLoading] = useState(true) // 로딩 상태
-  const supabase = createClient()
-
-  /** 유저 정보 불러오기 */
-  const fetchSession = async () => {
-    const { data, error } = await supabase.auth.getSession()
-    console.log(data)
-
-    if (error) {
-      console.error('Error fetching session:', error)
-    } else {
-      setUser(data?.session?.user || null)
-    }
-    setLoading(false)
-  }
-
-  useEffect(() => {
-    fetchSession()
-  }, [])
-
-  if (loading) {
-    return <p>로딩 중...</p> // 로딩 중 상태 표시
-  }
-
   return (
     <>
       <Modal onClose={onClose}>
-        {user ? (
-          <p>
-            안녕하세요,{' '}
-            {user.user_metadata.full_name ||
-              user.user_metadata.name ||
-              '사용자'}
-            님!
-          </p>
-        ) : (
-          <p>로그인하지 않았습니다.</p>
-        )}
         {/* 로고 + 타이틀 */}
         <div className="py-[20px]">
           <Image
@@ -60,9 +35,20 @@ export default function LoginModal({ onClose }: ModalProps) {
           <p className="mt-[10px] text-center text-[20px] font-bold">로그인</p>
         </div>
         {/* 소셜 로그인 목록 */}
-        <div className="flex flex-col gap-[12px]">
+        <div className="gap-[ 2px] flex flex-col">
           {/* refactor: 로그인 버튼 컴포넌트로 뺴기 */}
-          <KakaoLoginButton />
+          <button
+            className="h-[40px] w-full rounded-[8px] bg-[#ffe900]"
+            style={{
+              backgroundImage: 'url(/images/kakao-logo.webp)',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: '10px, 50%',
+              backgroundSize: '24px',
+            }}
+            onClick={signInWithKakao}
+          >
+            카카오 로그인
+          </button>
 
           {/* <button
             className="h-[40px] w-full rounded-[8px] border bg-[#f2f2f2]"

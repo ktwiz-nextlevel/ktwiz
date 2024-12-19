@@ -1,5 +1,3 @@
-'use server'
-
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
@@ -27,11 +25,15 @@ export async function login(formData: FormData) {
 }
 
 // 카카오 로그인
-export async function signInWithKakao() {
+export async function signInWithKakao(formData: FormData) {
   const supabase = await createServerSupabaseClient()
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'kakao',
+    options: {
+      redirectTo: process.env.BASE_URL, // 리디렉션될 url
+    },
   })
+
   if (error) {
     redirect('/error')
   }
