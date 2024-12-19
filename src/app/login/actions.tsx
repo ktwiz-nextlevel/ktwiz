@@ -3,11 +3,11 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
-import { createServerSupabaseClient } from '@/utils/supabase/server'
+import { createClient } from '@/utils/supabase/server'
 
 // 이메일 로그인
 export async function login(formData: FormData) {
-  const supabase = await createServerSupabaseClient()
+  const supabase = await createClient()
 
   // type-casting here for convenience
   // in practice, you should validate your inputs
@@ -28,7 +28,7 @@ export async function login(formData: FormData) {
 
 // 카카오 로그인
 export async function signInWithKakao(formData: FormData) {
-  const supabase = await createServerSupabaseClient()
+  const supabase = await createClient()
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'kakao',
     options: {
@@ -46,7 +46,7 @@ export async function signInWithKakao(formData: FormData) {
 
 // 이메일 회원가입
 export async function signup(formData: FormData) {
-  const supabase = await createServerSupabaseClient()
+  const supabase = await createClient()
 
   // type-casting here for convenience
   // in practice, you should validate your inputs

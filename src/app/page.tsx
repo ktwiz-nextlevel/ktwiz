@@ -1,8 +1,8 @@
 import LoginModal from '@/components/modal/login'
-import { createServerSupabaseClient } from '@/utils/supabase/server'
+import { createClient } from '@/utils/supabase/server'
 
 export default async function Page() {
-  const supabase = await createServerSupabaseClient()
+  const supabase = await createClient()
   const {
     data: { session },
   } = await supabase.auth.getSession()
