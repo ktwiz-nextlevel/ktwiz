@@ -3,7 +3,8 @@ import LiveTalk from '@/components/board/live-talk'
 import LiveTalkToggle from '@/components/board/live-talk-toggle'
 import { CreatePost } from '@/components/board/post-buttons'
 import PostCard from '@/components/board/post-card'
-import { Banner } from '@/components/common/banner'
+import Banner from '@/components/common/banner/banner'
+
 import Pagination from '@/components/common/pagination'
 import TabMenu from '@/components/common/tab-menu2'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
@@ -33,9 +34,14 @@ export default async function FanBoardPage({
 
   return (
     <div className="h-full w-full">
-      <Banner {...FAN_BANNER_DATA['/']}>
+      <Banner>
+        <Banner.Heading
+          title={FAN_BANNER_DATA['/'].title}
+          subtitle={FAN_BANNER_DATA['/'].description}
+        />
         <TabMenu tabs={FAN_BANNER_DATA['/'].tabs} />
       </Banner>
+
       <div className="flex w-full space-x-4 px-10 pb-16 lg:pl-20 xl:pl-52">
         <div className="max-w-[1100px] flex-1">
           <div className="mt-[50px] flex w-full justify-between">
