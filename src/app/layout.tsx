@@ -3,6 +3,7 @@ import '../styles/globals.css'
 import '../styles/main.css'
 
 import { WithFullWidthFlyoutMenu as Header } from '@/components/tailwind-ui/'
+import KTWizFooter from '@/components/common/KTWizFooter'
 
 export const metadata: Metadata = {
   title: "kimpuro's next.js template",
@@ -19,9 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="flex h-full w-dvw flex-col">
+      <body className="flex w-dvw flex-col">
         <Header />
         {children}
+        <KTWizFooter />
       </body>
     </html>
   )
