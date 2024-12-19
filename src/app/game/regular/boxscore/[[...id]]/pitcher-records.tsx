@@ -60,7 +60,7 @@ function PitcherRecords({
   }
 
   return (
-    <section className="gray-red-400 w-full pt-3">
+    <section className="gray-red-400 w-full pt-5">
       <Title text={title} />
       <TabMenu
         activeTab={activeTab}

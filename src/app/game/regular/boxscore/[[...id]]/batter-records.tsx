@@ -65,7 +65,7 @@ function BatterRecords({
   }
 
   return (
-    <section className="gray-red-400 w-full pt-3">
+    <section className="gray-red-400 w-full pt-6">
       <Title text={title} />
       <TabMenu
         activeTab={activeTab}

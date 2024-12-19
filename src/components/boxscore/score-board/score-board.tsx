@@ -1,7 +1,10 @@
+'use client'
 import { ScheduleType, Scoreboard, ScoreboardList } from '@/types'
 
 import Board from '@/components/common/board/board'
 import BoardHeader from './board-header'
+
+// import { useState } from 'react'
 
 export async function ScoreBoard({
   gameDate,
@@ -17,33 +20,22 @@ export async function ScoreBoard({
     return <Board>스코어보드 정보가 없습니다.</Board>
   }
   const data = await response.json()
-  // const { current }: ScheduleType = data.data.schedule
   const scoreboard: ScoreboardList = data.data.scoreboard
+  const visitBoard: Scoreboard = scoreboard.filter(
+    (score) => score.bhome === 0,
+  )[0]
+  const homeBoard: Scoreboard = scoreboard.filter(
+    (score) => score.bhome === 1,
+  )[0]
 
-  // const visitBoard: Scoreboard = scoreboard.filter((score) => score.bhome === 0)
-  // const homeBoard: Scoreboard = scoreboard.filter((score) => score.bhome === 1)
-  const vivitBoard: Scoreboard = {
-    ballfour: '4',
-    bhome: 0, // 홈팀 여부 (1: 홈팀, 0: 원정팀)
-    bhomeName: 'NC', // 팀 이름
-    error: '3', // 실책 수
-    gameDate: 20240102, // 경기 날짜 (YYYYMMDD 형식)
-    hit: '1', // 안타 수
-    run: '8', // 득점
-    score1: '1', // 1회 점수
-    score2: '2', // 2회 점수
-    score3: '3', // 3회 점수
-    score4: '4', // 4회 점수
-    score5: '5', // 5회 점수
-    score6: '6', // 6회 점수
-    score7: '7', // 7회 점수
-    score8: '8', // 8회 점수
-    score9: '9', // 9회 점수
-    score10: '10', // 연장 10회 점수
-    score11: '11', // 연장 11회 점수
-    score12: '12', // 연장 12회 점수
-  }
+  // const [hoverIndex, setHoverIndex] = useState<number | null>(null)
+  // const handleMouseEnter = (index: number) => {
+  //   setHoverIndex(index)
+  // }
 
+  // const handleMouseLeave = () => {
+  //   setHoverIndex(null)
+  // }
   return (
     <Board>
       <Board.li style="w-full flex justify-center">
@@ -51,13 +43,15 @@ export async function ScoreBoard({
       </Board.li>
       <Board.li>
         <BoardTH />
+        {/* <BoardTH hoverIndex={ hoverIndex}    onMouseEnter={() => handleMouseEnter(index)}
+          onMouseLeave={handleMouseLeave} /> */}
       </Board.li>
       <Board.li style="flex justify-center">
         <table>
           <tbody>
-            <BoardTR data={vivitBoard} />
+            <BoardTR data={visitBoard} />
             {/* homeBoard 삽입 */}
-            <BoardTR data={vivitBoard} />
+            <BoardTR data={homeBoard} />
           </tbody>
         </table>
       </Board.li>
@@ -71,21 +65,18 @@ function BoardTH() {
   const GAME_INFO = ['R', 'H', 'E', 'B']
   return (
     <div className="flex justify-center text-gray-400">
-      <span className="inline-block w-[60px] text-center hover:text-gray-800">
+      <span className="w-[60px] text-center hover:text-gray-800">
         {TEAM_NAME}
       </span>
       {Array.from({ length: INING_NUMBER }, (_, index) => (
-        <span
-          key={index + 'ining-number'}
-          className="inline-block px-2 hover:text-gray-800"
-        >
+        <span key={index + 'ining-number'} className="px-2 hover:text-gray-800">
           {index + 1}
         </span>
       ))}
       {GAME_INFO.map((info, idx) => (
         <span
           key={info + 'game-info' + idx}
-          className={`${idx === 0 ? 'inline-block pl-5 pr-2 hover:text-gray-800' : 'inline-block px-2 hover:text-gray-800'}`}
+          className={`${idx === 0 ? 'pl-5 pr-2 hover:text-gray-800' : 'px-2 hover:text-gray-800'}`}
         >
           {info}
         </span>
@@ -115,14 +106,20 @@ function BoardTR({ data }: { data: Scoreboard }) {
   ]
   return (
     <tr className="">
-      <td className="px-5 text-gray-400">{data.bhomeName}</td>
+      <td className="w-[60px] px-5 text-gray-400">{data.bhomeName}</td>
       {SCORE_KEY.map((key, index) => (
-        <td key={key + data[key]} className="px-2 text-gray-400">
+        <td
+          key={key + data[key]}
+          className="px-2 text-gray-400 hover:text-gray-800"
+        >
           {data[key]}
         </td>
       ))}
-      {ADDITIONAL_KEY.map((key) => (
-        <td key={key + data[key]} className="px-2 text-gray-400">
+      {ADDITIONAL_KEY.map((key, idx) => (
+        <td
+          key={key + data[key]}
+          className={`${idx === 0 ? 'pl-5 pr-2' : 'px-2'} text-center text-gray-400 hover:text-gray-800`}
+        >
           {data[key]}
         </td>
       ))}

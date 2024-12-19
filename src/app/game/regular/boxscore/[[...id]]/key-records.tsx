@@ -65,18 +65,19 @@ async function KeyRecords() {
 
   return (
     <section className="gray-red-400 w-full pt-3">
-      <Title text="주요 기록" />
+      <Title text={`주요 기록 `} />
       <div className="flex w-full flex-wrap">
         {etcgames.map((game, idx) => {
           const info = splitPlayers(game.result)
-          // console.log(info, 'dfdf')
           return (
             <div
-              className={`${idx % 2 === 0 ? '' : 'border-l-2'} w-1/2 p-6`}
+              className={`${idx % 2 === 0 ? 'pr-6' : 'border-l-2 pl-6'} w-1/2 py-6`}
               key={game.how + idx}
             >
-              <h2 className="text-gray-600"> {game.how}</h2>
-              <div className="flex justify-start overflow-auto">
+              <h2 className="text-gray-600">
+                {game.how + ` (${info.length})`}
+              </h2>
+              <div className="mt-3 flex justify-start overflow-auto">
                 {/* {info.map((player, idx) => (
                   <div
                     key={player.name + idx}
@@ -87,13 +88,13 @@ async function KeyRecords() {
                   </div>
                 ))} */}
                 {info.map((player, idx) => (
-                  <div key={player + idx} className={`} flex`}>
+                  <div key={player + idx} className={`flex`}>
                     <img
                       src={'/images/players/player.webp'}
                       alt="player"
                       className="w-[100px] object-contain"
                     />
-                    <div className="w-[270px]">
+                    <div className="w-[240px]">
                       <h3 className="text-base">{player}</h3>
                       <p className="text-xs text-gray-300">{player}</p>
                     </div>
