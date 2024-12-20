@@ -1,4 +1,3 @@
-import LoginModal from '@/components/modal/login'
 import { createClient } from '@/utils/supabase/server'
 
 export default async function Page() {
@@ -7,9 +6,6 @@ export default async function Page() {
     data: { session },
   } = await supabase.auth.getSession()
   return (
-    <div className="">
-      Welcome {session?.user?.email?.split('@')?.[0]}!
-      <LoginModal />
-    </div>
+    <div className="">Welcome {session?.user?.email?.split('@')?.[0]}!</div>
   )
 }
