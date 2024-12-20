@@ -141,7 +141,6 @@ export function WithFullWidthFlyoutMenu() {
             </Popover>
           </PopoverGroup>
           {/* login & signup*/}
-          {user}
           <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end">
             <button
               className="text-sm/6 font-semibold text-[--gray-color-100] transition duration-300 ease-in-out hover:text-[--main-red-color] group-hover:text-gray-900"
