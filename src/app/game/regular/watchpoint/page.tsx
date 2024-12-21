@@ -1,5 +1,5 @@
 import { ScoreBoard } from '@/components/boxscore/score-board/score-board'
-import { TabNavigation } from '@/components/boxscore/score-board/tab-navigation'
+import { TabNavigation } from '@/components/common/tab-menu/tab-navigation'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 const TABS = [
   { title: '박스스코어', href: '/game/regular/boxscore', path: 'boxscore' },
