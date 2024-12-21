@@ -2,7 +2,7 @@ import { cn } from '@/utils'
 
 function Board({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mt-5 overflow-hidden rounded-md border border-gray-200 bg-[--red-color-300]">
+    <div className="mt-5 overflow-hidden rounded-md border-gray-200 bg-[--red-color-300]">
       <ul role="list" className="divide-y divide-gray-200">
         {children}
       </ul>

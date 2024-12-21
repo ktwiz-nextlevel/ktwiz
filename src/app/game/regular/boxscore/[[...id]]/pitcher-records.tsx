@@ -31,19 +31,11 @@ function PitcherRecords({
   visit,
 }: {
   data: BoxScore
-  // type: 'batter' | 'pitcher'
   home: string
   visit: string
 }) {
-  // const title = type === 'batter' ? '타자 기록' : '투수 기록'
   const title = '투수 기록'
 
-  // const DATA_TYPE = {
-  //   BATTER_VISIT: data.vbatters,
-  //   BATTER_HOME: data.hbatters,
-  //   PITCHERS_VISIT: data.vpitchers,
-  //   PITCHERS_HOME: data.hpitchers,
-  // }
   const DATA_TYPE = {
     PITCHERS_VISIT: data.vpitchers,
     PITCHERS_HOME: data.hpitchers,

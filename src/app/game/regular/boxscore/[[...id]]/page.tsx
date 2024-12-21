@@ -37,6 +37,7 @@ async function BoxscorePage({ params }: { params: Promise<{ id: string[] }> }) {
       <BreadCrumb />
       <ScoreBoard gameDate={gameDate} gmkey={gmkey} />
       <TabNavigation tabs={TABS} activeTab={TABS[0]} />
+      <br />
       <KeyRecords />
       <BatterRecords
         data={data.data}
