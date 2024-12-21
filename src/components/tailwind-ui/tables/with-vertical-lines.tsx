@@ -1,11 +1,13 @@
+import { Batter, Pitcher } from '@/types'
+import { TeamRank } from '@/types/team-rank'
 import { cn } from '@/utils'
 
 export function WithVerticalLines({
   data,
   thKey,
 }: {
-  data: any
-  thKey: { title: string; key: string }[]
+  data: Pitcher[] | Batter[] | TeamRank[]
+  thKey: { title: string; key: keyof Pitcher | keyof Batter | keyof TeamRank }[]
 }) {
   return (
     <div className="">
@@ -31,7 +33,7 @@ export function WithVerticalLines({
               <tbody className="divide-y divide-gray-200 bg-white">
                 {data.map((player, idx) => (
                   <tr
-                    key={player.name + idx}
+                    key={`data ${idx}`}
                     className={`divide-x divide-gray-200 hover:bg-red-100 ${idx % 2 === 0 ? 'bg-gray-50' : 'bg-white'} `}
                   >
                     {thKey.map((th, index) => {
@@ -43,7 +45,7 @@ export function WithVerticalLines({
                           )}
                         >
                           {index === 0 ? `${idx + 1} ` : ' '}
-                          {player[th.key]}
+                          {player[th.key as keyof typeof player]}
                         </td>
                       )
                     })}
