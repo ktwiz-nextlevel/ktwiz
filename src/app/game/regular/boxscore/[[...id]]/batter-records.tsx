@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Title from '@/components/common/title/title'
 import { cn } from '@/utils'
 import { WithVerticalLines as Table } from '@/components/tailwind-ui/tables/with-vertical-lines'
+import { BoxScore } from '@/types'
 const TH_KEY = [
   { title: '타순', key: '' },
   // { title: '타순', key: 'oneturn' },
@@ -29,11 +30,10 @@ const TH_KEY = [
 
 function BatterRecords({
   data,
-  // type,
   home,
   visit,
 }: {
-  data: any
+  data: BoxScore
   // type: 'batter' | 'pitcher'
   home: string
   visit: string
@@ -73,7 +73,7 @@ function BatterRecords({
         home={home}
         visit={visit}
       />
-      <Table team={activeTab} data={tableData} thKey={TH_KEY} />
+      <Table data={tableData} thKey={TH_KEY} />
     </section>
   )
 }

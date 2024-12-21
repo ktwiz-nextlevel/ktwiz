@@ -1,3 +1,4 @@
+import { EtcGames } from '@/types'
 import playerImgUrl from '/public/images/players/player.webp'
 async function KeyRecords() {
   const res = await fetch(
@@ -5,30 +6,6 @@ async function KeyRecords() {
   )
   const data = await res.json()
 
-  interface EtcGames {
-    gday: string
-    gmkey: string
-    how: string
-    result: string
-    seq: number
-  }
-  type EtcKey =
-    | '결승타'
-    | '홈런'
-    | '3루타'
-    | '2루타'
-    | '1루타'
-    | '볼넷'
-    | '사구'
-    | '포일'
-    | '희생번트'
-    | '도루'
-    | '실책'
-    | '병살타'
-    | '심판'
-    | '주루사'
-    | '폭투'
-    | '보크'
   const etcgames: EtcGames[] = data.data.etcgames
 
   interface PlayerDescriptions {
