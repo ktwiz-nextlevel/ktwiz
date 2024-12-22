@@ -19,7 +19,7 @@ export function WithVerticalLines({
     if (highlightRowKey && player[rowKeyName] === highlightRowKey) {
       return 'bg-red-50 text-[--main-red-color]'
     }
-    return 'bg-white text-gray-500'
+    return 'bg-white text-gray-400'
   }
 
   const getStripeStyle = (idx: number) => {
@@ -61,7 +61,7 @@ export function WithVerticalLines({
                   return (
                     <tr
                       key={`data ${idx}`}
-                      className={`divide-x divide-gray-200 hover:bg-red-50 ${rowStyle} `}
+                      className={`divide-x divide-gray-200 hover:bg-red-50 hover:text-gray-600 ${rowStyle} `}
                     >
                       {thKey.map((th, index) => {
                         return (

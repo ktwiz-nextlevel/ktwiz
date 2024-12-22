@@ -563,6 +563,20 @@ const TEAM_DATA = [
     KIA: '7-8-0',
     Hanwha: '6-10-0',
   },
+  {
+    name: '두산',
+    key: 'Doosan',
+    KT: '7-6-1',
+    Samsung: '7-6-1',
+    Doosan: '',
+    LG: '7-9-0',
+    Kiwoom: '11-2-0',
+    Lotte: '7-7-1',
+    ssg: '8-6-0',
+    NC: '6-6-0',
+    KIA: '7-8-0',
+    Hanwha: '6-10-0',
+  },
 ]
 
 function RankingPage() {
