@@ -499,63 +499,100 @@ const batterData = [
     battingAverage: 0.273,
   },
 ]
+const TH_KEY_TEAM = [
+  { title: '팀명', key: 'teamName' },
+  { title: 'KT (승-패-무)', key: 'KT' },
+  { title: '삼성 (승-패-무)', key: 'Samsung' },
+  { title: '두산 (승-패-무)', key: 'Doosan' },
+  { title: 'LG (승-패-무)', key: 'LG' },
+  { title: '키움 (승-패-무)', key: 'Kiwoom' },
+  { title: '롯데 (승-패-무)', key: 'Lotte' },
+  { title: 'SSG (승-패-무)', key: 'ssg' },
+  { title: 'NC (승-패-무)', key: 'NC' },
+  { title: 'KIA (승-패-무)', key: 'KIA' },
+  { title: '한화 (승-패-무)', key: 'Hanwha' },
+]
+const TEAM_DATA = [
+  {
+    name: 'KT',
+    key: 'KT',
+    KT: '',
+    Samsung: '7-6-1',
+    Doosan: '4-10-0',
+    LG: '7-9-0',
+    Kiwoom: '11-2-0',
+    Lotte: '7-7-1',
+    ssg: '8-6-0',
+    NC: '6-6-0',
+    KIA: '7-8-0',
+    Hanwha: '6-10-0',
+  },
+  {
+    name: '삼성',
+    key: 'Samsung',
+    KT: '7-6-1',
+    Samsung: '',
+    Doosan: '4-10-0',
+    LG: '7-9-0',
+    Kiwoom: '11-2-0',
+    Lotte: '7-7-1',
+    ssg: '8-6-0',
+    NC: '6-6-0',
+    KIA: '7-8-0',
+    Hanwha: '6-10-0',
+  },
+]
 
 function RankingPage() {
   return (
     <div className="w-full">
       <TabNavigation tabs={TABS} activeTab={TABS[0]} />
-      <Rank>
+
+      <SectionWrapper>
         <Title text={`2024 시즌 팀 순위`} />
         <p className="mt-2 font-thin text-gray-400">
           올해 kt wiz 순위를 살펴보세요.
         </p>
         <LineChartComponent />
-      </Rank>
-      <Records>
+      </SectionWrapper>
+
+      <SectionWrapper>
         <Title text={`2024 시즌 팀 기록`} />
         <p className="my-5 mt-2 font-thin text-gray-400">
           올해 kt wiz 팀 기록을 살펴보세요.
         </p>
         <Table data={teamData} thKey={TH_KEY} />
-      </Records>
-      <TeamPitcherStats>
+      </SectionWrapper>
+
+      <SectionWrapper>
         <Title text={`2024 시즌 팀 투수 기록`} />
         <p className="my-5 mt-2 font-thin text-gray-400">
           올해 kt wiz 팀 투수 기록을 살펴보세요.
         </p>
         <Table data={pitcherData} thKey={TH_KEY_PITCHER} />
-      </TeamPitcherStats>
-      <TeamBatterStats>
+      </SectionWrapper>
+
+      <SectionWrapper>
         <Title text={`2024 시즌 팀 타자 기록`} />
         <p className="my-5 mt-2 font-thin text-gray-400">
           올해 kt wiz 팀 타자 기록을 살펴보세요.
         </p>
         <Table data={batterData} thKey={TH_KEY_BATTER} />
-      </TeamBatterStats>
-      <TeamMatchupResults>
+      </SectionWrapper>
+
+      <SectionWrapper>
         <Title text={`2024 시즌 팀 간 승패표`} />
         <p className="my-5 mt-2 font-thin text-gray-400">
           올해 kt wiz 팀 간 승패표를 살펴보세요.
         </p>
-      </TeamMatchupResults>
+        <Table data={TEAM_DATA} thKey={TH_KEY_TEAM} />
+      </SectionWrapper>
     </div>
   )
 }
 
 export default RankingPage
 
-function Rank({ children }: { children: React.ReactNode }) {
-  return <div className="mt-10 w-full">{children}</div>
-}
-function TeamPitcherStats({ children }: { children: React.ReactNode }) {
-  return <div className="mt-10 w-full">{children}</div>
-}
-function TeamMatchupResults({ children }: { children: React.ReactNode }) {
-  return <div className="mt-10 w-full">{children}</div>
-}
-function TeamBatterStats({ children }: { children: React.ReactNode }) {
-  return <div className="mt-10 w-full">{children}</div>
-}
-function Records({ children }: { children: React.ReactNode }) {
-  return <div className="mt-10 w-full">{children}</div>
+function SectionWrapper({ children }: { children: React.ReactNode }) {
+  return <section className="mt-10 w-full">{children}</section>
 }
