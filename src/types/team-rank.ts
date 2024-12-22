@@ -1,6 +1,7 @@
 export type TeamRank = {
   rank: number // 순위
   teamName: string // 팀 이름
+  key: string // 팀 식별자
   games: number // 경기 수
   wins: number // 승리 수
   losses: number // 패배 수

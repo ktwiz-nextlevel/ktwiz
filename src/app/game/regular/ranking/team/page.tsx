@@ -47,6 +47,7 @@ const teamData: TeamRank[] = [
   {
     rank: 1,
     teamName: '기아',
+    key: 'KIA',
     games: 144,
     wins: 85,
     losses: 55,
@@ -65,6 +66,7 @@ const teamData: TeamRank[] = [
   {
     rank: 2,
     teamName: '삼성',
+    key: 'Samsung',
     games: 144,
     wins: 80,
     losses: 60,
@@ -83,6 +85,26 @@ const teamData: TeamRank[] = [
   {
     rank: 3,
     teamName: 'LG',
+    key: 'LG',
+    games: 144,
+    wins: 78,
+    losses: 62,
+    draws: 4,
+    winRate: 0.557,
+    atBats: 5102,
+    streak: '2W',
+    onBasePercentage: 0.34,
+    sluggingPercentage: 0.45,
+    battingAverage: 0.268,
+    earnedRunAverage: 3.6,
+    runsScored: 705,
+    runsAllowed: 655,
+    homeRuns: 140,
+  },
+  {
+    rank: 3,
+    teamName: 'KT',
+    key: 'KT',
     games: 144,
     wins: 78,
     losses: 62,
@@ -500,7 +522,7 @@ const batterData = [
   },
 ]
 const TH_KEY_TEAM = [
-  { title: '팀명', key: 'teamName' },
+  { title: '팀명', key: 'name' },
   { title: 'KT (승-패-무)', key: 'KT' },
   { title: '삼성 (승-패-무)', key: 'Samsung' },
   { title: '두산 (승-패-무)', key: 'Doosan' },
@@ -561,7 +583,7 @@ function RankingPage() {
         <p className="my-5 mt-2 font-thin text-gray-400">
           올해 kt wiz 팀 기록을 살펴보세요.
         </p>
-        <Table data={teamData} thKey={TH_KEY} />
+        <Table data={teamData} thKey={TH_KEY} highlightRowKey={'KT'} />
       </SectionWrapper>
 
       <SectionWrapper>
@@ -569,7 +591,12 @@ function RankingPage() {
         <p className="my-5 mt-2 font-thin text-gray-400">
           올해 kt wiz 팀 투수 기록을 살펴보세요.
         </p>
-        <Table data={pitcherData} thKey={TH_KEY_PITCHER} />
+        <Table
+          data={pitcherData}
+          thKey={TH_KEY_PITCHER}
+          rowKeyName="teamName"
+          highlightRowKey={'KT'}
+        />
       </SectionWrapper>
 
       <SectionWrapper>
@@ -577,7 +604,12 @@ function RankingPage() {
         <p className="my-5 mt-2 font-thin text-gray-400">
           올해 kt wiz 팀 타자 기록을 살펴보세요.
         </p>
-        <Table data={batterData} thKey={TH_KEY_BATTER} />
+        <Table
+          data={batterData}
+          thKey={TH_KEY_BATTER}
+          rowKeyName="teamName"
+          highlightRowKey={'KT'}
+        />
       </SectionWrapper>
 
       <SectionWrapper>
@@ -585,7 +617,13 @@ function RankingPage() {
         <p className="my-5 mt-2 font-thin text-gray-400">
           올해 kt wiz 팀 간 승패표를 살펴보세요.
         </p>
-        <Table data={TEAM_DATA} thKey={TH_KEY_TEAM} />
+        <Table
+          data={TEAM_DATA}
+          thKey={TH_KEY_TEAM}
+          highlightRowKey={'KT'}
+          rowKeyName="key"
+          highlightColumnKey={'KT'}
+        />
       </SectionWrapper>
     </div>
   )
