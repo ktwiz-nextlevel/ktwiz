@@ -1,5 +1,6 @@
 'use client'
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback } from 'react'
+import { User } from '@supabase/supabase-js'
 import {
   Dialog,
   DialogPanel,
@@ -11,28 +12,19 @@ import {
   PopoverGroup,
   PopoverPanel,
 } from '@headlessui/react'
-import {
-  Bars3Icon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
-  XMarkIcon,
-} from '@heroicons/react/24/outline'
-import {
-  ChevronDownIcon,
-  PhoneIcon,
-  PlayCircleIcon,
-  RectangleGroupIcon,
-} from '@heroicons/react/20/solid'
-import { ClientPageRoot } from 'next/dist/client/components/client-page'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
+
 import Link from 'next/link'
-import { twJoin } from 'tailwind-merge'
+
 import { MENU_DATA, LNB_LIST } from '@/contants'
 import LoginModal from '@/components/modal/login'
-import { createClient } from '@/utils/supabase/client'
 
-export function WithFullWidthFlyoutMenu() {
+interface HeaderProps {
+  user?: User | null
+}
+
+export function WithFullWidthFlyoutMenu({ user }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isOpened, setIsOpend] = useState(false)
   const [isLoginPopupVisable, setIsLoginPopupVisable] = useState(false) // 로그인 팝업 토글
@@ -43,6 +35,7 @@ export function WithFullWidthFlyoutMenu() {
   function handleMouseOut() {
     setIsOpend(false)
   }
+
   const getPaddingByIdx = useCallback((idx: number) => {
     const classes: Record<number, string> = {
       2: 'left-8',
@@ -142,21 +135,34 @@ export function WithFullWidthFlyoutMenu() {
           </PopoverGroup>
           {/* login & signup*/}
           <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end">
-            <button
-              className="text-sm/6 font-semibold text-[--gray-color-100] transition duration-300 ease-in-out hover:text-[--main-red-color] group-hover:text-gray-900"
-              onClick={() => setIsLoginPopupVisable(true)}
-            >
-              로그인
-            </button>
-            <span aria-hidden="true" className="text-[--gray-color-100]">
-              &nbsp; | &nbsp;
-            </span>
-            <Link
-              href="/signup"
-              className="text-sm/6 font-semibold text-[--gray-color-100] transition duration-300 ease-in-out hover:text-[--main-red-color] group-hover:text-gray-900"
-            >
-              회원가입
-            </Link>
+            {user ? (
+              <>
+                <span className="mr-3 text-sm/6 font-semibold text-[--gray-color-100] transition duration-300 ease-in-out hover:text-[--main-red-color] group-hover:text-gray-900">
+                  {user.email?.split('@')[0]} 님 안녕하세요!
+                </span>
+                <button className="text-sm/6 font-semibold text-[--gray-color-100] transition duration-300 ease-in-out hover:text-[--main-red-color] group-hover:text-gray-900">
+                  로그아웃
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  className="text-sm/6 font-semibold text-[--gray-color-100] transition duration-300 ease-in-out hover:text-[--main-red-color] group-hover:text-gray-900"
+                  onClick={() => setIsLoginPopupVisable(true)}
+                >
+                  로그인
+                </button>
+                <span aria-hidden="true" className="text-[--gray-color-100]">
+                  &nbsp; | &nbsp;
+                </span>
+                <Link
+                  href="/signup"
+                  className="text-sm/6 font-semibold text-[--gray-color-100] transition duration-300 ease-in-out hover:text-[--main-red-color] group-hover:text-gray-900"
+                >
+                  회원가입
+                </Link>
+              </>
+            )}
           </div>
         </nav>
         <Dialog

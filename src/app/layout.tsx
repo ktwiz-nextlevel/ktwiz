@@ -3,6 +3,7 @@ import '../styles/globals.css'
 import '../styles/main.css'
 
 import { WithFullWidthFlyoutMenu } from '@/components/tailwind-ui/'
+import { createClient } from '@/utils/supabase/server'
 
 export const metadata: Metadata = {
   title: "kimpuro's next.js template",
@@ -17,12 +18,16 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
   return (
     <html lang="ko" className="">
       <body className="flex h-full w-dvw flex-col">
-        <WithFullWidthFlyoutMenu />
+        <WithFullWidthFlyoutMenu user={user} />
         {children}
-        {/* <div className="h-4 w-full bg-black"></div> */}
       </body>
     </html>
   )

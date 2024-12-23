@@ -2,6 +2,8 @@
 import Image from 'next/image'
 import Modal from '../common/modal'
 import { createClient } from '@/utils/supabase/client'
+import { redirect } from 'next/navigation'
+import { revalidatePath } from 'next/cache'
 
 interface ModalProps {
   onClose: () => void
@@ -19,6 +21,11 @@ async function signInWithKakao() {
         : 'http://localhost:3000/auth/callback',
     },
   })
+  if (error) {
+    redirect('/error')
+  }
+  revalidatePath('/', 'layout')
+  redirect('/')
 }
 
 export default function LoginModal({ onClose }: ModalProps) {
