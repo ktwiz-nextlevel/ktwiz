@@ -19,6 +19,8 @@ import Link from 'next/link'
 
 import { MENU_DATA, LNB_LIST } from '@/contants'
 import LoginModal from '@/components/modal/login'
+import { createClient } from '@/utils/supabase/client'
+import { useRouter } from 'next/navigation'
 
 interface HeaderProps {
   user?: User | null
@@ -28,6 +30,18 @@ export function WithFullWidthFlyoutMenu({ user }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isOpened, setIsOpend] = useState(false)
   const [isLoginPopupVisable, setIsLoginPopupVisable] = useState(false) // 로그인 팝업 토글
+  const router = useRouter()
+
+  const handleLogout = async () => {
+    const supabase = createClient()
+    try {
+      await supabase.auth.signOut()
+      router.refresh()
+      router.push('/login')
+    } catch (error) {
+      console.error('로그아웃 중 에러가 발생했습니다:', error)
+    }
+  }
 
   function handleMouseOver() {
     setIsOpend(true)
@@ -140,7 +154,10 @@ export function WithFullWidthFlyoutMenu({ user }: HeaderProps) {
                 <span className="mr-3 text-sm/6 font-semibold text-[--gray-color-100] transition duration-300 ease-in-out hover:text-[--main-red-color] group-hover:text-gray-900">
                   {user.email?.split('@')[0]} 님 안녕하세요!
                 </span>
-                <button className="text-sm/6 font-semibold text-[--gray-color-100] transition duration-300 ease-in-out hover:text-[--main-red-color] group-hover:text-gray-900">
+                <button
+                  className="text-sm/6 font-semibold text-[--gray-color-100] transition duration-300 ease-in-out hover:text-[--main-red-color] group-hover:text-gray-900"
+                  onClick={handleLogout}
+                >
                   로그아웃
                 </button>
               </>
