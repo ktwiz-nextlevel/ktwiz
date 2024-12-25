@@ -26,7 +26,7 @@ export default async function RootLayout({
   return (
     <html lang="ko" className="">
       <body className="flex h-full w-dvw flex-col">
-        <WithFullWidthFlyoutMenu user={user} />
+        <WithFullWidthFlyoutMenu initialUser={user} />
         {children}
       </body>
     </html>

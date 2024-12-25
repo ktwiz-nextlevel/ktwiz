@@ -3,7 +3,6 @@ import Image from 'next/image'
 import Modal from '../common/modal'
 import { createClient } from '@/utils/supabase/client'
 import { redirect } from 'next/navigation'
-import { revalidatePath } from 'next/cache'
 
 interface ModalProps {
   onClose: () => void
@@ -24,8 +23,6 @@ async function signInWithKakao() {
   if (error) {
     redirect('/error')
   }
-  revalidatePath('/', 'layout')
-  redirect('/')
 }
 
 export default function LoginModal({ onClose }: ModalProps) {
@@ -83,7 +80,7 @@ export default function LoginModal({ onClose }: ModalProps) {
           </button> */}
         </div>
         <div className="mt-[14px] text-center">
-          <button>회원가입</button>
+          <button onClick={onClose}>회원가입</button>
         </div>
       </Modal>
     </>

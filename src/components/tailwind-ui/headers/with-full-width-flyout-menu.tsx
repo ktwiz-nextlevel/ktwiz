@@ -21,23 +21,28 @@ import { MENU_DATA, LNB_LIST } from '@/contants'
 import LoginModal from '@/components/modal/login'
 import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/navigation'
+import SignupModal from '@/components/modal/sign-up'
 
 interface HeaderProps {
-  user?: User | null
+  initialUser?: User | null
 }
 
-export function WithFullWidthFlyoutMenu({ user }: HeaderProps) {
+export function WithFullWidthFlyoutMenu({ initialUser }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isOpened, setIsOpend] = useState(false)
   const [isLoginPopupVisable, setIsLoginPopupVisable] = useState(false) // 로그인 팝업 토글
+  const [isSignupPopupVisable, setIsSignupPopupVisable] = useState(false) // 회원가입 팝업 토글
   const router = useRouter()
+  const [user, setUser] = useState(initialUser)
 
+  /** 로그아웃 */
   const handleLogout = async () => {
     const supabase = createClient()
     try {
       await supabase.auth.signOut()
+      setUser(null)
       router.refresh()
-      router.push('/login')
+      router.push('/')
     } catch (error) {
       console.error('로그아웃 중 에러가 발생했습니다:', error)
     }
@@ -62,8 +67,6 @@ export function WithFullWidthFlyoutMenu({ user }: HeaderProps) {
     }
     return classes[idx] || 'left-3'
   }, [])
-
-  // supabase에서 유저 정보 가져오기
 
   return (
     <>
@@ -172,12 +175,12 @@ export function WithFullWidthFlyoutMenu({ user }: HeaderProps) {
                 <span aria-hidden="true" className="text-[--gray-color-100]">
                   &nbsp; | &nbsp;
                 </span>
-                <Link
-                  href="/signup"
+                <button
                   className="text-sm/6 font-semibold text-[--gray-color-100] transition duration-300 ease-in-out hover:text-[--main-red-color] group-hover:text-gray-900"
+                  onClick={() => setIsSignupPopupVisable(true)}
                 >
                   회원가입
-                </Link>
+                </button>
               </>
             )}
           </div>
@@ -238,18 +241,18 @@ export function WithFullWidthFlyoutMenu({ user }: HeaderProps) {
                   ))}
                 </div>
                 <div className="py-6">
-                  <Link
-                    href="/login"
+                  <button
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 hover:text-[--main-red-color]"
+                    onClick={() => setIsLoginPopupVisable(true)}
                   >
                     로그인
-                  </Link>
-                  <Link
-                    href="/singup"
+                  </button>
+                  <button
                     className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50 hover:text-[--main-red-color]"
+                    onClick={() => setIsSignupPopupVisable(true)}
                   >
                     회원가입
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>
@@ -258,6 +261,9 @@ export function WithFullWidthFlyoutMenu({ user }: HeaderProps) {
       </header>
       {isLoginPopupVisable && (
         <LoginModal onClose={() => setIsLoginPopupVisable(false)} />
+      )}
+      {isSignupPopupVisable && (
+        <SignupModal onClose={() => setIsSignupPopupVisable(false)} />
       )}
     </>
   )
