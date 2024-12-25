@@ -8,6 +8,8 @@ import { useState } from 'react'
 export default function Pitcher() {
   const [playerPcode, setPlayerPcode] = useState(53006)
 
+  console.log('playerPcode', playerPcode)
+
   return (
     <div className="page-large mx-auto flex max-w-6xl flex-col gap-6 px-6 py-8">
       <div className="flex flex-col gap-6 md:flex-row">
