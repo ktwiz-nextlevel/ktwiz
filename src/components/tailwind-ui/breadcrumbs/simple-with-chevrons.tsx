@@ -17,7 +17,7 @@ interface BreadcrumbProps {
 export default function Breadcrumbs({ pages }: BreadcrumbProps) {
   return (
     <nav aria-label="Breadcrumb" className="flex">
-      <ol role="list" className="flex items-center space-x-4">
+      <ol role="list" className="flex items-center space-x-2">
         <li>
           <HomeIcon aria-hidden="true" className="size-5 shrink-0" />
           <span className="sr-only">Home</span>
