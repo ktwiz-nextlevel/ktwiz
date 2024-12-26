@@ -114,3 +114,51 @@ export async function createPost(formData: FormData) {
   revalidatePath('/fan/board')
   redirect('/fan/board')
 }
+
+export async function deletePost(postId: number) {
+  try {
+    const supabase = await createClient()
+    const { data: images, error: imagesError } = await supabase
+      .from('images')
+      .select('image_url')
+      .eq('post_id', postId)
+
+    if (imagesError) {
+      return { message: '이미지 정보를 가져오는 데 실패했습니다.' }
+    }
+
+    if (images && images.length > 0) {
+      const imagePaths = images.map((img) =>
+        new URL(img.image_url).pathname.replace(
+          '/storage/v1/object/public/post-images/',
+          '',
+        ),
+      )
+
+      const { error: deleteError } = await supabase.storage
+        .from('post-images')
+        .remove(imagePaths)
+
+      if (deleteError) {
+        console.error('스토리지에서 이미지 삭제 실패:', deleteError.message)
+        return { message: '이미지 파일 삭제 중 오류가 발생했습니다.' }
+      }
+    }
+
+    const { error: postError } = await supabase
+      .from('posts')
+      .delete()
+      .eq('id', postId)
+
+    if (postError) {
+      return { message: '게시글 삭제에 실패했습니다' }
+    }
+  } catch (error) {
+    console.error('Error creating post:', error)
+    return {
+      message: '예상치 못한 오류가 발생했습니다. 나중에 다시 시도해주세요.',
+    }
+  }
+  revalidatePath('/fan/board')
+  redirect('/fan/board')
+}
