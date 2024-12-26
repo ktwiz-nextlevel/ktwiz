@@ -1,15 +1,14 @@
 import BoardSearchBar from '@/components/board/board-search-bar'
 import LiveTalk from '@/components/board/live-talk'
-import LiveTalkToggle from '@/components/board/live-talk-toggle'
 import { CreatePost } from '@/components/board/post-buttons'
 import PostCard from '@/components/board/post-card'
 import Banner from '@/components/common/banner/banner'
-
 import Pagination from '@/components/common/pagination'
 import TabMenu from '@/components/common/tab-menu2'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 import { FAN_BANNER_DATA } from '@/contants'
 import { fetchFilteredPost, fetchPostsPages } from '@/services/post-service'
+import { fetchProfile } from '@/services/user-service'
 
 export default async function FanBoardPage({
   searchParams,
@@ -23,14 +22,11 @@ export default async function FanBoardPage({
   const query = searchParams?.query || ''
   const currentPage = Number(searchParams?.page) || 1
   const type = searchParams?.type || 'title'
-  const [totalPages, postData] = await Promise.all([
+  const [totalPages, postData, userData] = await Promise.all([
     fetchPostsPages(query),
     fetchFilteredPost(query, currentPage, type),
+    fetchProfile(),
   ])
-  const userData = {
-    id: '12345',
-    nickname: 'test',
-  }
 
   return (
     <div className="h-full w-full">
@@ -53,10 +49,12 @@ export default async function FanBoardPage({
             <div className="mx-auto flex justify-center">
               {totalPages && <Pagination totalPages={totalPages} />}
             </div>
-            <CreatePost />
+            <CreatePost userData={userData} />
           </div>
         </div>
-        <LiveTalkToggle userData={userData} />
+        <div className="hidden pl-4 lg:block">
+          <LiveTalk userData={userData} />
+        </div>
       </div>
     </div>
   )
