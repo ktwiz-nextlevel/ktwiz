@@ -12,7 +12,7 @@ export async function fetchPostsPages(query: string): Promise<number | null> {
     if (error) {
       throw new Error(`Error fetching posts: ${error.message}`)
     }
-    if (count === null) {
+    if (!count) {
       return null
     }
     const totalPages = Math.ceil(count / limit)
