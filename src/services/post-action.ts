@@ -6,42 +6,28 @@ import { redirect } from 'next/navigation'
 import { z } from 'zod'
 import { v4 as uuidv4 } from 'uuid'
 
-const CreateFormSchema = z.object({
-  title: z.string().min(2, { message: '제목을 2글자 이상 입력해주세요' }),
-  content: z.string().min(2, { message: '내용을 2글자 이상 입력해주세요' }),
-  imageFiles: z
-    .array(z.instanceof(File))
-    .optional()
-    .refine(
-      (files) => !files || files.every((file) => file.type.includes('image')),
-      { message: '이미지 파일만 첨부할 수 있습니다' },
-    )
-    .refine((files) => !files || files.length <= 3, {
-      message: '이미지는 최대 3개까지 첨부할 수 있습니다',
-    }),
+const postSchema = z.object({
+  title: z
+    .string()
+    .min(2, '제목을 2글자 이상 입력하세요')
+    .max(100, '제목은 100자 이내여야 합니다.'),
+  content: z
+    .string()
+    .min(2, '내용을 2글자 이상 입력하세요')
+    .max(1000, '내용은 1000자 이내여야 합니다.'),
 })
 
-export interface PostState {
-  errors?: {
-    title?: string[]
-    content?: string[]
-    imageFiles?: string[]
-  }
-  message?: string | null
-}
-
-export async function createPost(prevState: PostState, formData: FormData) {
-  const supabase = await createClient()
+export async function createPost(formData: FormData) {
   try {
-    console.log()
-    const imageFiles = formData
+    const supabase = await createClient()
+    const images = formData
       .getAll('images')
       .filter((file): file is File => file instanceof File)
 
-    const validateFields = CreateFormSchema.safeParse({
+    const validateFields = postSchema.safeParse({
       title: formData.get('title') as string,
       content: formData.get('content') as string,
-      imageFiles: imageFiles.length > 0 ? imageFiles : undefined,
+      images: images.length > 0 ? images : undefined,
     })
 
     if (!validateFields.success) {
@@ -88,9 +74,9 @@ export async function createPost(prevState: PostState, formData: FormData) {
     }
     const postId = postData.id
 
-    if (imageFiles.length) {
+    if (images.length) {
       const uploadResults = await Promise.allSettled(
-        imageFiles.map(async (image) => {
+        images.map(async (image) => {
           const extension = image.name.split('.').pop() || 'png'
           const fileName = `${Date.now()}_${uuidv4()}.${extension}`
 
@@ -118,6 +104,7 @@ export async function createPost(prevState: PostState, formData: FormData) {
       }
     }
   } catch (error) {
+    console.error('Error creating post:', error)
     return {
       message:
         '게시글 작성 중 예상치 못한 오류가 발생했습니다. 나중에 다시 시도해주세요.',
