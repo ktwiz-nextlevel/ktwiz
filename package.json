@@ -20,6 +20,7 @@
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
+    "@hookform/resolvers": "^3.9.1",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.47.8",
     "class-variance-authority": "^0.7.1",
@@ -29,7 +30,10 @@
     "react-dom": "^18",
     "react-is": "^18.3.1",
     "recharts": "^2.15.0",
-    "tailwind-merge": "^2.5.5"
+    "react-hook-form": "^7.54.2",
+    "tailwind-merge": "^2.5.5",
+    "uuid": "^11.0.3",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.0",
