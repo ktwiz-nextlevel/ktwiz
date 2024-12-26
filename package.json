@@ -10,7 +10,8 @@
     "commit": "cz",
     "prepare": "husky",
     "lint:commit": "commitlint --from=HEAD~1",
-    "test": "jest"
+    "test": "jest",
+    "generate-types": "npx supabase gen types typescript --project-id cqkokcdznyzzshxwkoav --schema public > types_db.ts"
   },
   "config": {
     "commitizen": {
@@ -20,12 +21,14 @@
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
+    "@supabase/auth-helpers-nextjs": "^0.10.0",
     "@hookform/resolvers": "^3.9.1",
     "@supabase/ssr": "^0.5.2",
-    "@supabase/supabase-js": "^2.47.8",
+    "@supabase/supabase-js": "^2.47.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "next": "14.2.18",
+    "next-auth": "^4.24.11",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.54.2",
