@@ -1,0 +1,49 @@
+.calendar {
+  margin: 20px auto;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.row {
+  display: flex;
+}
+
+.col {
+  flex: 1;
+  text-align: center;
+  padding: 5px;
+}
+
+.col-start {
+  text-align: left;
+}
+
+.col-end {
+  text-align: right;
+}
+
+.cell {
+  border: 1px solid #ddd;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.cell.disabled {
+  color: #ccc;
+  background-color: #f9f9f9;
+  cursor: not-allowed;
+}
+
+.cell.selected {
+  background-color: #007bff;
+  color: white;
+}
