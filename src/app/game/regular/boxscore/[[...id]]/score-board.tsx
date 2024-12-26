@@ -1,10 +1,7 @@
-'use client'
-import { ScheduleType, Scoreboard, ScoreboardList } from '@/types'
+import { Scoreboard, ScoreboardList } from '@/types'
 
 import Board from '@/components/common/board/board'
-import BoardHeader from './board-header'
-
-// import { useState } from 'react'
+import BoardHeader from '@/components/boxscore/score-board/board-header'
 
 export async function ScoreBoard({
   gameDate,
@@ -28,14 +25,6 @@ export async function ScoreBoard({
     (score) => score.bhome === 1,
   )[0]
 
-  // const [hoverIndex, setHoverIndex] = useState<number | null>(null)
-  // const handleMouseEnter = (index: number) => {
-  //   setHoverIndex(index)
-  // }
-
-  // const handleMouseLeave = () => {
-  //   setHoverIndex(null)
-  // }
   return (
     <Board>
       <Board.li style="w-full flex justify-center">
@@ -43,8 +32,6 @@ export async function ScoreBoard({
       </Board.li>
       <Board.li>
         <BoardTH />
-        {/* <BoardTH hoverIndex={ hoverIndex}    onMouseEnter={() => handleMouseEnter(index)}
-          onMouseLeave={handleMouseLeave} /> */}
       </Board.li>
       <Board.li style="flex justify-center">
         <table>

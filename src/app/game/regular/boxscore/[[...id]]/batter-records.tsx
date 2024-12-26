@@ -1,12 +1,11 @@
 'use client'
 import { useState } from 'react'
 import Title from '@/components/common/title/title'
-import { cn } from '@/utils'
 import { WithVerticalLines as Table } from '@/components/tailwind-ui/tables/with-vertical-lines'
 import { BoxScore } from '@/types'
+
 const TH_KEY = [
   { title: '타순', key: '' },
-  // { title: '타순', key: 'oneturn' },
   { title: '포지션', key: 'position' },
   { title: '이름', key: 'name' },
   { title: '1', key: 'inn1' },
@@ -34,19 +33,11 @@ function BatterRecords({
   visit,
 }: {
   data: BoxScore
-  // type: 'batter' | 'pitcher'
   home: string
   visit: string
 }) {
-  // const title = type === 'batter' ? '타자 기록' : '투수 기록'
   const title = '타자 기록'
 
-  // const DATA_TYPE = {
-  //   BATTER_VISIT: data.vbatters,
-  //   BATTER_HOME: data.hbatters,
-  //   PITCHERS_VISIT: data.vpitchers,
-  //   PITCHERS_HOME: data.hpitchers,
-  // }
   const DATA_TYPE = {
     BATTER_VISIT: data.vbatters,
     BATTER_HOME: data.hbatters,
@@ -56,6 +47,7 @@ function BatterRecords({
   const tableData = activeTab.ishome
     ? DATA_TYPE.BATTER_HOME
     : DATA_TYPE.BATTER_VISIT
+
   function handleTab() {
     setActiveTab((prev) =>
       prev.ishome

@@ -1,9 +1,9 @@
 import { ScheduleType } from '@/types'
-import { Label } from './label'
 import { WinLossStats } from './win-loss-status'
-import { HomeLabel } from './home-label'
 import PrevButton from './prev-button'
+import { Label } from './game-status-label'
 import NextButton from './next-button'
+import { HomeLabel } from './home-label'
 
 async function BoardHeader() {
   const res = await fetch(

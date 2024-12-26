@@ -1,5 +1,5 @@
 import { EtcGames } from '@/types'
-import playerImgUrl from '/public/images/players/player.webp'
+
 async function KeyRecords() {
   const res = await fetch(
     'http://54.180.229.183/api/game/boxscore?gameDate=20241008&gmkey=33331008LGKT0',

@@ -1,9 +1,9 @@
 'use client'
 import { useState } from 'react'
 import Title from '@/components/common/title/title'
-import { cn } from '@/utils'
 import { WithVerticalLines as Table } from '@/components/tailwind-ui/tables/with-vertical-lines'
 import { BoxScore } from '@/types'
+
 const TH_KEY = [
   { title: '선수', key: 'name' },
   { title: '등판', key: 'changeinn' },
@@ -26,7 +26,6 @@ const TH_KEY = [
 
 function PitcherRecords({
   data,
-  // type,
   home,
   visit,
 }: {
