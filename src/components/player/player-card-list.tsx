@@ -3,8 +3,17 @@
 import { getPitcherPlayerList } from '@/app/api/player/api'
 import { useEffect, useState } from 'react'
 
-export default function PlayerCardList({ onCardClick }) {
-  const [cards, setCards] = useState([])
+interface PlayerCard {
+  pcode: string | number
+  playerName: string
+  playerPrvwImg?: string
+}
+interface PlayerCardListProps {
+  onCardClick: (pcode: string | number) => void
+}
+
+export default function PlayerCardList({ onCardClick }: PlayerCardListProps) {
+  const [cards, setCards] = useState<PlayerCard[]>([])
 
   useEffect(() => {
     const fetchPitcherPlayerList = async () => {
@@ -28,7 +37,7 @@ export default function PlayerCardList({ onCardClick }) {
             onClick={() => onCardClick(card.pcode)}
           >
             <img
-              src={card.playerPrvwIm || '/images/ktwiz-basic-img.png'}
+              src={card.playerPrvwImg || '/images/ktwiz-basic-img.png'}
               alt={card.playerName}
               className="h-full w-full rounded-lg object-cover"
             />

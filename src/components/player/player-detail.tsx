@@ -8,8 +8,6 @@ export default function PlayerDetail(pcode) {
   const [detailData, setDetailData] = useState([])
   const [seasonData, setSeasonData] = useState([])
 
-  console.log('seasonData : ', seasonData)
-
   useEffect(() => {
     const fetchPitcherPlayerDetail = async () => {
       try {

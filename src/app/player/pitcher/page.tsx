@@ -6,7 +6,7 @@ import PlayerChart from '@/components/player/player-chart'
 import { useState } from 'react'
 
 export default function Pitcher() {
-  const [playerPcode, setPlayerPcode] = useState(53006)
+  const [playerPcode, setPlayerPcode] = useState<number | string>(53006)
 
   console.log('playerPcode', playerPcode)
 
