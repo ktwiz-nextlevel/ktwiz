@@ -1,9 +1,9 @@
 import { ScheduleType } from '@/types'
-import { Label } from './label'
 import { WinLossStats } from './win-loss-status'
-import { HomeLabel } from './home-label'
 import PrevButton from './prev-button'
+import { Label } from './game-status-label'
 import NextButton from './next-button'
+import { HomeLabel } from './home-label'
 
 async function BoardHeader() {
   const res = await fetch(
@@ -21,7 +21,7 @@ async function BoardHeader() {
       <div className="w-fit">
         <div className="flex flex-col items-center">
           <Label data={current} />
-          <h1 className="mt-2 text-xl text-gray-700">{gameDate}</h1>
+          <h1 className="mt-3 text-xl text-gray-700">{gameDate}</h1>
           <p className="mt-1 text-xs text-gray-400">{gameInfo}</p>
         </div>
 
@@ -55,7 +55,11 @@ function LeftVisitTeam({
   return (
     <div className={'flex w-[150px] items-center justify-end gap-1'}>
       <div className="hidden justify-end md:flex md:flex-col">
-        <span className="align-top text-base text-gray-400">{teamName}</span>
+        <span
+          className={`align-top text-base ${isWin ? 'text-gray-700' : 'text-gray-400'} `}
+        >
+          {teamName}
+        </span>
         <WinLossStats isWin={isWin} />
       </div>
       <img src={teamLogo} alt="teamLogo" className="w-16" />
@@ -77,7 +81,11 @@ function RightHomeTeam({
       <div className="hidden justify-start md:flex md:flex-col">
         <div className="flex gap-1">
           <HomeLabel />
-          <span className="text-base text-gray-400">{teamName}</span>
+          <span
+            className={`text-base ${isWin ? 'text-gray-700' : 'text-gray-400'}`}
+          >
+            {teamName}
+          </span>
         </div>
         <WinLossStats isWin={isWin} style="left" />
       </div>

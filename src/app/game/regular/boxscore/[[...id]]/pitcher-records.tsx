@@ -1,8 +1,9 @@
 'use client'
 import { useState } from 'react'
 import Title from '@/components/common/title/title'
-import { cn } from '@/utils'
 import { WithVerticalLines as Table } from '@/components/tailwind-ui/tables/with-vertical-lines'
+import { BoxScore } from '@/types'
+
 const TH_KEY = [
   { title: '선수', key: 'name' },
   { title: '등판', key: 'changeinn' },
@@ -25,24 +26,15 @@ const TH_KEY = [
 
 function PitcherRecords({
   data,
-  // type,
   home,
   visit,
 }: {
-  data: any
-  // type: 'batter' | 'pitcher'
+  data: BoxScore
   home: string
   visit: string
 }) {
-  // const title = type === 'batter' ? '타자 기록' : '투수 기록'
   const title = '투수 기록'
 
-  // const DATA_TYPE = {
-  //   BATTER_VISIT: data.vbatters,
-  //   BATTER_HOME: data.hbatters,
-  //   PITCHERS_VISIT: data.vpitchers,
-  //   PITCHERS_HOME: data.hpitchers,
-  // }
   const DATA_TYPE = {
     PITCHERS_VISIT: data.vpitchers,
     PITCHERS_HOME: data.hpitchers,
@@ -68,7 +60,7 @@ function PitcherRecords({
         home={home}
         visit={visit}
       />
-      <Table team={activeTab} data={tableData} thKey={TH_KEY} />
+      <Table data={tableData} thKey={TH_KEY} />
     </section>
   )
 }

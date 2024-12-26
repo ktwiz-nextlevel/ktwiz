@@ -1,10 +1,7 @@
-'use client'
-import { ScheduleType, Scoreboard, ScoreboardList } from '@/types'
+import { Scoreboard, ScoreboardList } from '@/types'
 
 import Board from '@/components/common/board/board'
-import BoardHeader from './board-header'
-
-// import { useState } from 'react'
+import BoardHeader from '@/components/boxscore/score-board/board-header'
 
 export async function ScoreBoard({
   gameDate,
@@ -28,14 +25,6 @@ export async function ScoreBoard({
     (score) => score.bhome === 1,
   )[0]
 
-  // const [hoverIndex, setHoverIndex] = useState<number | null>(null)
-  // const handleMouseEnter = (index: number) => {
-  //   setHoverIndex(index)
-  // }
-
-  // const handleMouseLeave = () => {
-  //   setHoverIndex(null)
-  // }
   return (
     <Board>
       <Board.li style="w-full flex justify-center">
@@ -43,8 +32,6 @@ export async function ScoreBoard({
       </Board.li>
       <Board.li>
         <BoardTH />
-        {/* <BoardTH hoverIndex={ hoverIndex}    onMouseEnter={() => handleMouseEnter(index)}
-          onMouseLeave={handleMouseLeave} /> */}
       </Board.li>
       <Board.li style="flex justify-center">
         <table>
@@ -62,23 +49,48 @@ export async function ScoreBoard({
 function BoardTH() {
   const TEAM_NAME = '팀명'
   const INING_NUMBER = 9
-  const GAME_INFO = ['R', 'H', 'E', 'B']
+
+  const GAME_INFO = [
+    {
+      title: 'R',
+      key: 'run',
+      color: 'text-red-500',
+    },
+    {
+      title: 'H',
+      key: 'hit',
+      color: 'text-blue-500',
+    },
+    {
+      title: 'E',
+      key: 'error',
+      color: 'text-orange-500', // 에러에 적합한 경고 색상
+    },
+    {
+      title: 'B',
+      key: 'ballfour',
+      color: 'text-green-500', // 볼넷에 적합한 중립 색상
+    },
+  ]
   return (
-    <div className="flex justify-center text-gray-400">
+    <div className="flex justify-center gap-2 text-gray-700">
       <span className="w-[60px] text-center hover:text-gray-800">
         {TEAM_NAME}
       </span>
       {Array.from({ length: INING_NUMBER }, (_, index) => (
-        <span key={index + 'ining-number'} className="px-2 hover:text-gray-800">
+        <span
+          key={index + 'ining-number'}
+          className="w-7 text-center hover:text-gray-800"
+        >
           {index + 1}
         </span>
       ))}
       {GAME_INFO.map((info, idx) => (
         <span
-          key={info + 'game-info' + idx}
-          className={`${idx === 0 ? 'pl-5 pr-2 hover:text-gray-800' : 'px-2 hover:text-gray-800'}`}
+          key={info.title + 'game-info' + idx}
+          className={`${idx === 0 ? `ml-2 w-7 text-center hover:text-gray-800 ${info.color}` : `${info.color} w-7 text-center hover:text-gray-800`}`}
         >
-          {info}
+          {info.title}
         </span>
       ))}
     </div>
@@ -105,20 +117,24 @@ function BoardTR({ data }: { data: Scoreboard }) {
     'ballfour',
   ]
   return (
-    <tr className="">
-      <td className="w-[60px] px-5 text-gray-400">{data.bhomeName}</td>
+    <tr className="flex gap-2">
+      <td className="h-7 w-[60px] text-center text-gray-700">
+        {data.bhomeName}
+      </td>
+
       {SCORE_KEY.map((key, index) => (
         <td
           key={key + data[key]}
-          className="px-2 text-gray-400 hover:text-gray-800"
+          className="h-7 w-7 text-center text-gray-400 hover:text-gray-800"
         >
           {data[key]}
         </td>
       ))}
+
       {ADDITIONAL_KEY.map((key, idx) => (
         <td
           key={key + data[key]}
-          className={`${idx === 0 ? 'pl-5 pr-2' : 'px-2'} text-center text-gray-400 hover:text-gray-800`}
+          className={`${idx === 0 ? 'ml-2' : ''} h-7 w-7 text-center text-gray-400 hover:text-gray-800`}
         >
           {data[key]}
         </td>

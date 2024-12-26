@@ -1,45 +1,36 @@
-// const TH_KEYs = [
-//   { title: '선수', key: 'name' },
-//   { title: '타수', key: 'changeinn' },
-//   { title: '득점', key: 'title' },
-//   { title: '안타', key: 'email' },
-//   { title: '타점', key: 'role' },
-//   { title: '홈런', key: 'role' },
-//   { title: '볼넷', key: 'role' },
-//   { title: '타점', key: 'role' },
-//   { title: '타율', key: 'role' },
-// ]
-// const TH_KEY = [
-//   { title: '선수', key: 'name' },
-//   { title: '등판', key: 'changeinn' },
-//   { title: '결과', key: '' },
-//   { title: '승', key: 'w' },
-//   { title: '패', key: 'l' },
-//   { title: '세', key: 's' },
-//   { title: '이닝', key: 'inn' },
-//   { title: '타자', key: 'pa' },
-//   { title: '타구수', key: 'bf' },
-//   { title: '타수', key: 'ab' },
-//   { title: '피안타', key: 'hit' },
-//   { title: '피홈런', key: 'hr' },
-//   { title: '사구', key: 'bbhp' },
-//   { title: '삼진', key: 'kk' },
-//   { title: '실점', key: 'r' },
-//   { title: '자책', key: 'er' },
-//   { title: '평균 자책점', key: '' },
-// ]
-
+import { Batter, Pitcher } from '@/types'
+import { TeamRank } from '@/types/team-rank'
 import { cn } from '@/utils'
 
 export function WithVerticalLines({
-  team,
   data,
   thKey,
+  highlightRowKey,
+  rowKeyName = 'key',
+  highlightColumnKey,
 }: {
-  team: { ishome: boolean; name: string }
-  data: any
-  thKey: { title: string; key: string }[]
+  data: Pitcher[] | Batter[] | TeamRank[]
+  thKey: { title: string; key: keyof Pitcher | keyof Batter | keyof TeamRank }[]
+  highlightRowKey?: string
+  rowKeyName?: string
+  highlightColumnKey?: string
 }) {
+  const getRowStyle = (idx: number, player: any) => {
+    if (highlightRowKey && player[rowKeyName] === highlightRowKey) {
+      return 'bg-red-50 text-[--main-red-color]'
+    }
+    return 'bg-white text-gray-400'
+  }
+
+  const getStripeStyle = (idx: number) => {
+    return idx % 2 === 0 ? 'bg-gray-50' : 'bg-white' // 기본 줄무늬 (짝수는 연한 핑크색, 홀수는 흰색)
+  }
+  const getHighlightStyle = (idx: number) => {
+    higlightColumIndex === idx ? 'bg-red-50' : 'bg-white'
+  }
+  const higlightColumIndex = highlightColumnKey
+    ? thKey.findIndex((th) => th.key === highlightColumnKey)
+    : -1
   return (
     <div className="">
       <div className="mt-2 flow-root">
@@ -53,7 +44,7 @@ export function WithVerticalLines({
                       <th
                         key={th.key + idx}
                         scope="col"
-                        className="border-none px-4 py-3.5 text-left text-sm font-semibold text-gray-900"
+                        className={`border-none px-4 py-3.5 text-left text-sm font-semibold text-gray-900 ${higlightColumIndex === idx ? 'bg-red-50' : 'bg-white'}`}
                       >
                         {th.title}
                       </th>
@@ -62,26 +53,34 @@ export function WithVerticalLines({
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
-                {data.map((player, idx) => (
-                  <tr
-                    key={player.name + idx}
-                    className={`divide-x divide-gray-200 hover:bg-red-100 ${idx % 2 === 0 ? 'bg-gray-50' : 'bg-white'} `}
-                  >
-                    {thKey.map((th, index) => {
-                      return (
-                        <td
-                          key={th.key + index}
-                          className={cn(
-                            `${index === 0 ? `text-start` : 'text-center'} whitespace-nowrap border-none px-4 py-4 text-sm font-medium text-gray-900 sm:pl-0`,
-                          )}
-                        >
-                          {index === 0 ? `${idx + 1} ` : ' '}
-                          {player[th.key]}
-                        </td>
-                      )
-                    })}
-                  </tr>
-                ))}
+                {data.map((player, idx) => {
+                  const rowStyle = highlightRowKey
+                    ? getRowStyle(idx, player)
+                    : getStripeStyle(idx)
+
+                  return (
+                    <tr
+                      key={`data ${idx}`}
+                      className={`divide-x divide-gray-200 hover:bg-red-50 hover:text-gray-600 ${rowStyle} `}
+                    >
+                      {thKey.map((th, index) => {
+                        return (
+                          <td
+                            key={th.key + index}
+                            className={cn(
+                              `${index === 0 ? `pl-2 text-start` : `px-4 text-center`} whitespace-nowrap border-none py-4 text-sm font-normal`,
+                            )}
+                          >
+                            {/* {index === 0 ? `${idx + 1} ` : ' '} */}
+                            {player[th.key as keyof typeof player] === ''
+                              ? '-'
+                              : player[th.key as keyof typeof player]}
+                          </td>
+                        )
+                      })}
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
           </div>
