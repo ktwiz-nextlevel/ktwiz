@@ -10,51 +10,68 @@ import {
   isSameMonth,
   isSameDay,
 } from 'date-fns'
-import './Calendar.css'
+import { ko } from 'date-fns/locale'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 
 const Calendar = () => {
-  const [currentMonth, setCurrentMonth] = useState(new Date())
-  const [selectedDate, setSelectedDate] = useState(new Date())
+  const now = new Date() // 현재 날짜
+  const [currentMonth, setCurrentMonth] = useState(new Date()) // 현재 월
+  const [selectedDate, setSelectedDate] = useState(new Date()) // 선택된 날짜
+
+  const handleTodayBtn = () => {
+    setSelectedDate(now)
+    setCurrentMonth(now)
+  }
 
   // 헤더 렌더링
   const renderHeader = () => {
     const dateFormat = 'MMMM yyyy'
     return (
-      <div className="header row flex-middle">
-        <div className="col col-start">
-          <button onClick={() => setCurrentMonth(addDays(currentMonth, -30))}>
-            ❮
-          </button>
-        </div>
-        <div className="col col-center">
-          <span>{format(currentMonth, dateFormat)}</span>
-        </div>
-        <div className="col col-end">
-          <button onClick={() => setCurrentMonth(addDays(currentMonth, 30))}>
-            ❯
-          </button>
+      <div className="mb-5 flex items-center justify-between">
+        <button
+          className="rounded-full border border-gray-200 px-4 leading-8"
+          onClick={handleTodayBtn}
+        >
+          Today
+        </button>
+        <button
+          className="ml-1.5 h-8 w-8 rounded-full border text-xl font-bold text-gray-600 hover:text-gray-800"
+          onClick={() => setCurrentMonth(addDays(currentMonth, -30))}
+        >
+          <ChevronLeftIcon className="mx-auto size-5" />
+        </button>
+        <button
+          className="ml-1.5 h-8 w-8 rounded-full border text-xl font-bold text-gray-600 hover:text-gray-800"
+          onClick={() => setCurrentMonth(addDays(currentMonth, 30))}
+        >
+          <ChevronRightIcon className="mx-auto size-5" />
+        </button>
+        <div className="ml-3 mr-auto text-lg font-semibold text-gray-800">
+          {format(currentMonth, dateFormat, { locale: ko })}
         </div>
       </div>
     )
   }
 
-  // 요일을 렌더링
+  // 요일 렌더링
   const renderDays = () => {
     const days = []
-    const dateFormat = 'EEEE'
-    const startDate = startOfWeek(currentMonth)
+    const startDate = startOfWeek(currentMonth, { weekStartsOn: 0 })
 
     for (let i = 0; i < 7; i++) {
       days.push(
-        <div className="col col-center" key={i}>
-          {format(addDays(startDate, i), dateFormat)}
+        <div
+          key={i}
+          className="flex items-center justify-center text-sm font-medium text-gray-600"
+        >
+          {format(addDays(startDate, i), 'EEEE', { locale: ko }).charAt(0)}
         </div>,
       )
     }
-    return <div className="days row">{days}</div>
+    return <div className="grid grid-cols-7">{days}</div>
   }
 
-  // 날짜 셀을 렌더링
+  // 셀 렌더링
   const renderCells = () => {
     const monthStart = startOfMonth(currentMonth)
     const monthEnd = endOfMonth(monthStart)
@@ -70,34 +87,34 @@ const Calendar = () => {
         const cloneDay = day
         days.push(
           <div
-            className={`col cell ${
+            key={day.toString()}
+            className={`flex h-32 flex-col rounded-md border border-gray-200 pl-2 pt-1 ${
               !isSameMonth(day, monthStart)
-                ? 'disabled'
+                ? 'bg-gray-100 text-gray-400'
                 : isSameDay(day, selectedDate)
-                  ? 'selected'
-                  : ''
-            }`}
-            key={day.toISOString()}
+                  ? 'bg-blue-500 font-bold text-white'
+                  : 'text-gray-700 hover:bg-gray-200'
+            } cursor-pointer`}
             onClick={() => setSelectedDate(cloneDay)}
           >
-            <span className="number">{format(day, 'd')}</span>
+            <span className="text-base">{format(day, 'd')}</span>
           </div>,
         )
         day = addDays(day, 1)
       }
       rows.push(
-        <div className="row" key={day.toISOString()}>
+        <div key={day.toString()} className="mb-1 grid grid-cols-7 gap-1">
           {days}
         </div>,
       )
       days = []
     }
 
-    return <div className="body">{rows}</div>
+    return <div>{rows}</div>
   }
 
   return (
-    <div className="mx-auto mt-10 px-2.5">
+    <div className="mx-auto mt-10 rounded-lg bg-white p-4 shadow-lg">
       {renderHeader()}
       {renderDays()}
       {renderCells()}
