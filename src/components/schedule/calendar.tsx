@@ -49,6 +49,12 @@ const Calendar = () => {
         <div className="ml-3 mr-auto text-lg font-semibold text-gray-800">
           {format(currentMonth, dateFormat, { locale: ko })}
         </div>
+
+        {/* 경기 전환 */}
+        <div className="rounded-full border border-gray-200 px-4 leading-8">
+          <button>KT 경기</button>
+          <button>전체 경기</button>
+        </div>
       </div>
     )
   }
@@ -92,8 +98,8 @@ const Calendar = () => {
               !isSameMonth(day, monthStart)
                 ? 'bg-gray-100 text-gray-400'
                 : isSameDay(day, selectedDate)
-                  ? 'bg-blue-500 font-bold text-white'
-                  : 'text-gray-700 hover:bg-gray-200'
+                  ? 'border-4 border-yellow-400'
+                  : 'text-gray-700 hover:bg-yellow-50'
             } cursor-pointer`}
             onClick={() => setSelectedDate(cloneDay)}
           >
