@@ -19,10 +19,7 @@ export default function Breadcrumbs({ pages }: BreadcrumbProps) {
     <nav aria-label="Breadcrumb" className="flex">
       <ol role="list" className="flex items-center space-x-2">
         <li>
-          <HomeIcon
-            aria-hidden="true"
-            className="size-4 shrink-0 text-gray-300"
-          />
+          <HomeIcon aria-hidden="true" className="size-5 shrink-0" />
           <span className="sr-only">Home</span>
         </li>
         {pages.map((page, index) => (
@@ -31,12 +28,14 @@ export default function Breadcrumbs({ pages }: BreadcrumbProps) {
               {index > 0 && (
                 <ChevronRightIcon
                   aria-hidden="true"
-                  className="size-5 shrink-0 text-gray-300"
+                  className="size-5 shrink-0 text-gray-400"
                 />
               )}
               <p
                 className={`ml-4 text-sm font-medium ${
-                  index === pages.length - 1 ? 'text-red-500' : 'text-gray-300'
+                  index === pages.length - 1
+                    ? 'text-red-500'
+                    : 'text-gray-500 hover:text-gray-700'
                 }`}
               >
                 {page}

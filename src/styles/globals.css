@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .page {
+    @apply mx-auto max-w-[1100px];
+  }
+
+  .dfdf {
+    @apply bg-blue-500 text-red-500;
+  }
+}

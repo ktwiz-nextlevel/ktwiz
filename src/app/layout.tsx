@@ -3,7 +3,8 @@ import '../styles/globals.css'
 import '../styles/main.css'
 
 import { WithFullWidthFlyoutMenu as Header } from '@/components/tailwind-ui/'
-import KTWizFooter from '@/components/common/KTWizFooter'
+import { createClient } from '@/utils/supabase/server'
+import Footer from '@/components/common/footer'
 
 export const metadata: Metadata = {
   title: "kimpuro's next.js template",
@@ -13,17 +14,22 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const supabase = await createClient()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
   return (
     <html lang="ko">
       <body className="flex w-dvw flex-col">
-        <Header />
+        <Header initialUser={user} />
         {children}
-        <KTWizFooter />
+        <Footer />
       </body>
     </html>
   )
