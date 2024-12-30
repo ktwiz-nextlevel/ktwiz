@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import TabMenu from '../tab-menu'
+import TabMenu from '../tab-menu/tab-menu'
 
 //이 컴포넌트는 TabMenu컴포넌트를 두 가지 목적(페이지 이동용, 상태 전환용)으로 동시에 사용하는 예시를 제공합니다.
 export default function TabMenuExample() {

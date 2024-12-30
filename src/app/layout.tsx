@@ -2,8 +2,9 @@ import type { Metadata } from 'next'
 import '../styles/globals.css'
 import '../styles/main.css'
 
-import { WithFullWidthFlyoutMenu } from '@/components/tailwind-ui/'
+import { WithFullWidthFlyoutMenu as Header } from '@/components/tailwind-ui/'
 import { createClient } from '@/utils/supabase/server'
+import Footer from '@/components/common/footer'
 
 export const metadata: Metadata = {
   title: "kimpuro's next.js template",
@@ -24,10 +25,11 @@ export default async function RootLayout({
   } = await supabase.auth.getUser()
 
   return (
-    <html lang="ko" className="">
-      <body className="flex h-full w-dvw flex-col">
-        <WithFullWidthFlyoutMenu initialUser={user} />
+    <html lang="ko">
+      <body className="flex w-dvw flex-col">
+        <Header initialUser={user} />
         {children}
+        <Footer />
       </body>
     </html>
   )

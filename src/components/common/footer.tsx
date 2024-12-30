@@ -92,7 +92,7 @@ const navigation = {
   ],
 }
 
-export default function KTWizFooter() {
+export default function Footer() {
   return (
     <footer className="relative w-full bg-white">
       <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
