@@ -3,12 +3,12 @@ import { ProfileDetail } from '@/types'
 import { createClient } from '@/utils/supabase/client'
 import { useEffect, useRef, useState } from 'react'
 
-interface Message {
+interface MessageEntity {
   id: string
-  userId: string
+  user_id: string
   nickname: string
   content: string
-  createdAt: string
+  created_at: Date
 }
 const supabase = createClient()
 
@@ -17,9 +17,9 @@ export default function LiveTalk({
 }: {
   userData: ProfileDetail | null
 }) {
-  const [input, setInput] = useState('')
-  const [messages, setMessages] = useState<Message[]>([])
-  const [isAutoUpdate, setIsAutoUpdate] = useState(true) // 자동 업데이트 상태
+  const [input, setInput] = useState<string>('')
+  const [messages, setMessages] = useState<MessageEntity[]>([])
+  const [isAutoUpdate, setIsAutoUpdate] = useState<boolean>(true) // 자동 업데이트 상태
   const chatContainerRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
@@ -30,20 +30,7 @@ export default function LiveTalk({
         .order('created_at', { ascending: true })
 
       if (data) {
-        const clientMessages = data.map((msg) => ({
-          id: msg.id,
-          userId: msg.user_id,
-          nickname: msg.nickname,
-          content: msg.content,
-          createdAt: new Date(msg.created_at).toLocaleDateString('ko-KR', {
-            year: 'numeric',
-            month: '2-digit',
-            day: '2-digit',
-            hour: '2-digit',
-            minute: '2-digit',
-          }),
-        }))
-        setMessages(clientMessages)
+        setMessages(data as MessageEntity[])
       }
       if (error) console.error('Error fetching messages:', error.message)
     }
@@ -63,7 +50,7 @@ export default function LiveTalk({
           (payload) => {
             setMessages((prevMessages) => [
               ...prevMessages,
-              payload.new as Message,
+              payload.new as MessageEntity,
             ])
           },
         )
@@ -84,11 +71,18 @@ export default function LiveTalk({
   }, [messages])
 
   const handleSendMessage = async () => {
-    if (!input.trim() || !userData) return
+    if (!userData) {
+      alert('로그인이 필요합니다')
+      return
+    }
+    if (!input.trim()) {
+      alert('메시지를 입력해주세요')
+      return
+    }
     const { error } = await supabase.from('messages').insert([
       {
         user_id: userData.id,
-        nickname: userData.nickname || 'Anonymous',
+        nickname: userData.nickname,
         content: input.trim(),
       },
     ])
@@ -102,13 +96,21 @@ export default function LiveTalk({
 
   const messagesList = messages.map((msgObj) => (
     <div key={msgObj.id} className="flex w-full">
-      <div className="flex w-full flex-col text-sm">
-        <div className="w-full space-y-3 break-words rounded-xl bg-gray-100 px-4 pb-4 pt-2 text-gray-800 shadow-sm">
+      <div className="flex w-full flex-col py-2 text-sm">
+        <div className="w-full space-y-4 break-words rounded-xl bg-gray-100 px-4 pb-4 pt-2 text-gray-800 shadow-sm">
           <div className="mb-1 flex items-center justify-between">
             <div className="text-xs font-semibold text-gray-600">
               {msgObj.nickname}
             </div>
-            <div className="text-xs text-gray-400">{msgObj.createdAt}</div>
+            <div className="text-xs text-gray-400">
+              {new Date(msgObj.created_at).toLocaleDateString('ko-KR', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
+            </div>
           </div>
           <div className="whitespace-pre-wrap">{msgObj.content}</div>{' '}
           {/**줄바꿈 표시*/}
@@ -118,7 +120,7 @@ export default function LiveTalk({
   ))
 
   return (
-    <div className="mt-[30px] flex h-[600px] w-[350px] flex-col rounded-xl border bg-white p-2">
+    <div className="mt-[50px] flex h-[630px] w-[350px] flex-col rounded-xl border bg-white p-2">
       <div className="p-4 pb-1 font-extrabold">응원 오픈톡</div>
       <div className="flex items-center justify-end px-2">
         <span className="text-xs">자동 업데이트</span>
@@ -144,7 +146,7 @@ export default function LiveTalk({
         </div>
       </div>
       <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-2">
-        <div className="flex flex-col-reverse space-y-4">{messagesList}</div>
+        <div className="flex flex-col-reverse">{messagesList}</div>
       </div>
     </div>
   )
