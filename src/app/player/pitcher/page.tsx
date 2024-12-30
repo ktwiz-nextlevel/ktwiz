@@ -7,9 +7,10 @@ import { useState } from 'react'
 import Banner from '@/components/common/banner/banner'
 import { PLAYER_BANNER_DATA } from '@/contants/player'
 import TabMenu from '@/components/common/tab-menu/tab-menu'
+import { PlayerCode } from '@/types/player'
 
 export default function Pitcher() {
-  const [playerPcode, setPlayerPcode] = useState<number | string>(53006)
+  const [playerPcode, setPlayerPcode] = useState<PlayerCode>({ pcode: 53006 })
 
   return (
     <>
