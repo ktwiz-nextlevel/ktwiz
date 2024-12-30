@@ -1,18 +1,6 @@
-interface PlayerData {
-  backnum: string
-  birth: string
-  height: string
-  weight: string
-  playerName: string
-  position: string
-  hittype: string
-}
+import { PlayerData } from '@/types/player'
 
-interface PlayerDetailData {
-  playerData: PlayerData
-}
-
-export default function PlayerDetailData({ playerData }: PlayerDetailData) {
+export default function PlayerDetailData({ playerData }: PlayerData) {
   return (
     <>
       <h2 className="text-xl font-bold text-red-500">

@@ -1,6 +1,4 @@
-interface PlayerImage {
-  img: string
-}
+import { PlayerImage } from '@/types/player'
 
 export default function PlayerImg({ img }: PlayerImage) {
   return (

@@ -1,14 +1,4 @@
-interface SeasonData {
-  era: string // 방어율 (Earned Run Average)
-  gamenum: number // 출전 경기 수
-  w: number // 승리 수 (Wins)
-  l: number // 패배 수 (Losses)
-  sv: number // 세이브 (Saves)
-}
-
-interface PlayerSeasonDataProps {
-  seasonData: SeasonData
-}
+import { PlayerSeasonDataProps } from '@/types/player'
 
 export default function PlayerSeasonData({
   seasonData,

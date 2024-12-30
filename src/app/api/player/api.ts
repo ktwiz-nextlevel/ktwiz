@@ -1,5 +1,7 @@
 /**[투수] 선수 리스트 요청 */
 
+import { PlayerCode } from '@/types/player'
+
 export const getPitcherPlayerList = async () => {
   try {
     const response = await fetch('/player/pitcherlist.json')
@@ -11,7 +13,7 @@ export const getPitcherPlayerList = async () => {
 }
 
 /**[투수] 선수 상세데이터 요청 */
-export const getPitcherPlayerDetail = async (pcode: number) => {
+export const getPitcherPlayerDetail = async (pcode: PlayerCode) => {
   try {
     const response = await fetch(`/player/pitcher/${pcode}.json`)
     return await response.json()
