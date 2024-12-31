@@ -17,9 +17,9 @@
 .page {
   width: 100%;
   max-width: 1100px;
-  height: 100lvh;
+  /* height: 100lvh; */
   margin: 0 auto;
-  border: 1px solid #333333;
+  /* border: 1px solid #333333; */
 }
 
 .page-large {
