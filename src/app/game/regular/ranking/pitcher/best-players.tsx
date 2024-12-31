@@ -1,83 +1,6 @@
+import { Player, Top3player } from '@/types'
 import Image from 'next/image'
 import React from 'react'
-type Player = {
-  ab: number
-  bb: number
-  bb9: number
-  bf: number
-  bk: number
-  bs: number
-  cba: string
-  cg: number
-  cs: number
-  dpp: string
-  er: number
-  era: string
-  err: number
-  fo: number
-  gamenum: number
-  go: number
-  gofo: string
-  gyear: string
-  h1: number
-  h2: number
-  h3: number
-  hit: number
-  hit9: number
-  hold: number
-  hp: number
-  hr: number
-  ib: number
-  inBa: string
-  inFlag: string
-  inn: number
-  inn2: number
-  iso: string
-  kk: number
-  kk9: number
-  kkbb: string
-  l: number
-  lCg: number
-  lba: string
-  oavg: string
-  obp: string
-  oops: string
-  oslg: string
-  outBa: string
-  pcode: string
-  playerName: string
-  playerPrvwImg: string
-  po: number
-  qs: number
-  qsPlus: number
-  quit: number
-  quitInn2: number
-  r: number
-  rba: string
-  sb: number
-  sbTryCn: number
-  sf: number
-  sh: number
-  sho: number
-  start: number
-  startInn2: number
-  sv: number
-  svo: number
-  teamName: string
-  tugucount: number
-  tugucountinn: number
-  w: number
-  wCg: number
-  whip: string
-  wp: number
-  wra: string
-}
-//getTop3PitcherWins 에 사용되는 Top3playerWin 타입
-interface Top3player {
-  data: {
-    list: [Player, Player, Player]
-  }
-}
 
 const getTop3PitcherEras = async () => {
   try {
@@ -136,7 +59,9 @@ export async function Top3PitcherWins() {
           <Image
             src={winlist[0].playerPrvwImg}
             alt="player"
-            className="relative left-3 w-[180px] object-contain"
+            width={180}
+            height={180}
+            className="relative left-3 object-contain"
           />
         )}
         <div className="ribbon absolute left-0 top-0 h-[100px] w-[60px] justify-center bg-[url('/images/bow.png')] bg-contain bg-no-repeat pt-3 text-center">
@@ -176,8 +101,8 @@ export async function Top3PitcherEras() {
           <Image
             src={top3PitcherEras[0].playerPrvwImg}
             alt="player"
-            layout="fill"
-            objectFit="contain"
+            width={180}
+            height={180}
             className="relative left-3 w-[180px]"
           />
         )}

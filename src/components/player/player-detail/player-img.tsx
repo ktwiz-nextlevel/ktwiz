@@ -1,4 +1,4 @@
-import { PlayerImage } from '@/types/player'
+import { PlayerImage } from '@/types/player.type'
 
 export default function PlayerImg({ img }: PlayerImage) {
   return (

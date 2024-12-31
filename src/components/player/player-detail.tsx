@@ -3,7 +3,7 @@ import PlayerDetailData from './player-detail/player-detail-data'
 import PlayerImg from './player-detail/player-img'
 import PlayerSeasonData from './player-detail/player-season-data'
 import { useEffect, useState } from 'react'
-import { PlayerCode } from '@/types/player'
+import { PlayerCode } from '@/types/player.type'
 
 interface PlayerDetailProps {
   pcode: PlayerCode

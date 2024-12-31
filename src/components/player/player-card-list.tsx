@@ -1,7 +1,7 @@
 'use client'
 
 import { getPitcherPlayerList } from '@/app/api/player/api'
-import { PlayerCode } from '@/types/player'
+import { PlayerCode } from '@/types/player.type'
 import { useEffect, useState } from 'react'
 
 interface PlayerCard {
