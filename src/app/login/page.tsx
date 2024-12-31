@@ -1,6 +1,6 @@
 'use client'
-import InputPassword from '@/components/common/input-password'
-import InputWithDelBtn from '@/components/common/input-with-del'
+import InputPassword from '@/components/common/input/input-password'
+import InputWithDelBtn from '@/components/common/input/input-with-del'
 import { login, signup } from './actions'
 
 export default function LoginPage() {
