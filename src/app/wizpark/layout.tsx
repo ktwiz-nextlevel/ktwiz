@@ -1,5 +1,5 @@
 import Banner from '@/components/common/banner/banner'
-import TabMenu from '@/components/common/tab-menu2'
+import TabMenu from '@/components/common/tab-menu/tab-menu'
 import { GAME_BANNER_DATA, WIZ_PARK_BANNER_DATA } from '@/contants'
 import React from 'react'
 import WizparkContainer from '@/components/wizpark/wizpark-container'
