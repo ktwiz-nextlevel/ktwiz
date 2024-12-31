@@ -3,7 +3,7 @@ import { EtcGames } from '@/types'
 
 async function KeyRecords() {
   const res = await fetch(
-    'http://54.180.229.183/api/game/boxscore?gameDate=20241008&gmkey=33331008LGKT0',
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/game/boxscore?gameDate=20241008&gmkey=33331008LGKT0`,
   )
   const data = await res.json()
 
