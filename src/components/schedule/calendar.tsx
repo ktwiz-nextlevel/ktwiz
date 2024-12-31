@@ -13,6 +13,52 @@ import {
 import { ko } from 'date-fns/locale'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 
+// 샘플 게임 데이터
+const gameData = [
+  {
+    broadcast: 'MS-T',
+    displayDate: '20240904',
+    gameDate: 20240904,
+    gmkey: '20240904KTLT0',
+    gtime: '18:30',
+    home: '롯데',
+    homeKey: 'LT',
+    homeLogo: 'http://54.180.228.165/api/static/LT.png',
+    homeScore: 7,
+    matchTeamCode: 'LT',
+    matchTeamName: '롯데',
+    outcome: '패',
+    stadium: '사직',
+    stadiumKey: 'SJ',
+    status: '3',
+    visit: 'KT',
+    visitKey: 'KT',
+    visitLogo: 'http://54.180.228.165/api/static/KT.png',
+    visitScore: 5,
+  },
+  {
+    broadcast: 'SS-T',
+    displayDate: '20240905',
+    gameDate: 20240905,
+    gmkey: '20240905KTLT0',
+    gtime: '18:30',
+    home: '롯데',
+    homeKey: 'LT',
+    homeLogo: 'http://54.180.228.165/api/static/LT.png',
+    homeScore: 2,
+    matchTeamCode: 'LT',
+    matchTeamName: '롯데',
+    outcome: '승',
+    stadium: '사직',
+    stadiumKey: 'SJ',
+    status: '3',
+    visit: 'KT',
+    visitKey: 'KT',
+    visitLogo: 'http://54.180.228.165/api/static/KT.png',
+    visitScore: 12,
+  },
+]
+
 const Calendar = () => {
   const now = new Date() // 현재 날짜
   const [currentMonth, setCurrentMonth] = useState(new Date()) // 현재 월
@@ -77,7 +123,7 @@ const Calendar = () => {
     return <div className="grid grid-cols-7">{days}</div>
   }
 
-  // 셀 렌더링
+  // 일자 렌더링
   const renderCells = () => {
     const monthStart = startOfMonth(currentMonth)
     const monthEnd = endOfMonth(monthStart)
@@ -91,6 +137,13 @@ const Calendar = () => {
     while (day <= endDate) {
       for (let i = 0; i < 7; i++) {
         const cloneDay = day
+        const formattedDate = format(day, 'yyyyMMdd')
+
+        // 해당 날짜의 게임 데이터 필터링
+        const dailyGames = gameData.filter(
+          (game) => game.displayDate === formattedDate,
+        )
+
         days.push(
           <div
             key={day.toString()}
@@ -103,7 +156,25 @@ const Calendar = () => {
             } cursor-pointer`}
             onClick={() => setSelectedDate(cloneDay)}
           >
+            {/* 날짜 */}
             <span className="text-base">{format(day, 'd')}</span>
+
+            {/* 게임 데이터 렌더링 */}
+            {dailyGames.map((game) => (
+              <div key={game.gmkey} className="mt-2 text-xs">
+                <img
+                  src={game.visitLogo}
+                  alt={`${game.visit} logo`}
+                  className="mr-1 inline h-4 w-4"
+                />
+                {game.visit} {game.visitScore} : {game.homeScore} {game.home}
+                <img
+                  src={game.homeLogo}
+                  alt={`${game.home} logo`}
+                  className="ml-1 inline h-4 w-4"
+                />
+              </div>
+            ))}
           </div>,
         )
         day = addDays(day, 1)
