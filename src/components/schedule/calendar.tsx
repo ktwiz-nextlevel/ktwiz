@@ -12,54 +12,59 @@ import {
 } from 'date-fns'
 import { ko } from 'date-fns/locale'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
+import { GameScheduleData } from '@/types'
 
 // 샘플 게임 데이터
-const gameData = [
-  {
-    broadcast: 'MS-T',
-    displayDate: '20240904',
-    gameDate: 20240904,
-    gmkey: '20240904KTLT0',
-    gtime: '18:30',
-    home: '롯데',
-    homeKey: 'LT',
-    homeLogo: 'http://54.180.228.165/api/static/LT.png',
-    homeScore: 7,
-    matchTeamCode: 'LT',
-    matchTeamName: '롯데',
-    outcome: '패',
-    stadium: '사직',
-    stadiumKey: 'SJ',
-    status: '3',
-    visit: 'KT',
-    visitKey: 'KT',
-    visitLogo: 'http://54.180.228.165/api/static/KT.png',
-    visitScore: 5,
-  },
-  {
-    broadcast: 'SS-T',
-    displayDate: '20240905',
-    gameDate: 20240905,
-    gmkey: '20240905KTLT0',
-    gtime: '18:30',
-    home: '롯데',
-    homeKey: 'LT',
-    homeLogo: 'http://54.180.228.165/api/static/LT.png',
-    homeScore: 2,
-    matchTeamCode: 'LT',
-    matchTeamName: '롯데',
-    outcome: '승',
-    stadium: '사직',
-    stadiumKey: 'SJ',
-    status: '3',
-    visit: 'KT',
-    visitKey: 'KT',
-    visitLogo: 'http://54.180.228.165/api/static/KT.png',
-    visitScore: 12,
-  },
-]
+// const gameData = [
+//   {
+//     broadcast: 'MS-T',
+//     displayDate: '20240904',
+//     gameDate: 20240904,
+//     gmkey: '20240904KTLT0',
+//     gtime: '18:30',
+//     home: '롯데',
+//     homeKey: 'LT',
+//     homeLogo: 'http://54.180.228.165/api/static/LT.png',
+//     homeScore: 7,
+//     matchTeamCode: 'LT',
+//     matchTeamName: '롯데',
+//     outcome: '패',
+//     stadium: '사직',
+//     stadiumKey: 'SJ',
+//     status: '3',
+//     visit: 'KT',
+//     visitKey: 'KT',
+//     visitLogo: 'http://54.180.228.165/api/static/KT.png',
+//     visitScore: 5,
+//   },
+//   {
+//     broadcast: 'SS-T',
+//     displayDate: '20240905',
+//     gameDate: 20240905,
+//     gmkey: '20240905KTLT0',
+//     gtime: '18:30',
+//     home: '롯데',
+//     homeKey: 'LT',
+//     homeLogo: 'http://54.180.228.165/api/static/LT.png',
+//     homeScore: 2,
+//     matchTeamCode: 'LT',
+//     matchTeamName: '롯데',
+//     outcome: '승',
+//     stadium: '사직',
+//     stadiumKey: 'SJ',
+//     status: '3',
+//     visit: 'KT',
+//     visitKey: 'KT',
+//     visitLogo: 'http://54.180.228.165/api/static/KT.png',
+//     visitScore: 12,
+//   },
+// ]
 
-const Calendar = () => {
+interface CalendarProps {
+  gameData: GameScheduleData[]
+}
+
+const Calendar = ({ gameData }: CalendarProps) => {
   const now = new Date() // 현재 날짜
   const [currentMonth, setCurrentMonth] = useState(new Date()) // 현재 월
   const [selectedDate, setSelectedDate] = useState(new Date()) // 선택된 날짜
@@ -147,7 +152,7 @@ const Calendar = () => {
         days.push(
           <div
             key={day.toString()}
-            className={`flex h-32 flex-col rounded-md border border-gray-200 pl-2 pt-1 ${
+            className={`relative flex h-32 flex-col rounded-md border border-gray-200 pl-2 pt-1 ${
               !isSameMonth(day, monthStart)
                 ? 'bg-gray-100 text-gray-400'
                 : isSameDay(day, selectedDate)
@@ -157,24 +162,60 @@ const Calendar = () => {
             onClick={() => setSelectedDate(cloneDay)}
           >
             {/* 날짜 */}
-            <span className="text-base">{format(day, 'd')}</span>
+            <span className="absolute text-base">{format(day, 'd')}</span>
 
             {/* 게임 데이터 렌더링 */}
-            {dailyGames.map((game) => (
-              <div key={game.gmkey} className="mt-2 text-xs">
-                <img
-                  src={game.visitLogo}
-                  alt={`${game.visit} logo`}
-                  className="mr-1 inline h-4 w-4"
-                />
-                {game.visit} {game.visitScore} : {game.homeScore} {game.home}
-                <img
-                  src={game.homeLogo}
-                  alt={`${game.home} logo`}
-                  className="ml-1 inline h-4 w-4"
-                />
-              </div>
-            ))}
+            {dailyGames.map((game) => {
+              // KT의 승패 여부 계산
+              const isKTVisit = game.visit === 'KT'
+              const isKTHome = game.home === 'KT'
+              let result = ''
+
+              if (isKTVisit) {
+                result = '무'
+                result = game.visitScore > game.homeScore ? '승' : '패'
+              } else if (isKTHome) {
+                result = game.homeScore > game.visitScore ? '승' : '패'
+              }
+
+              return (
+                <div key={game.gmkey} className="mt-2 text-xs">
+                  <div className="mt-2 text-center">
+                    {/* KT 상대팀 정보 표시*/}
+                    <img
+                      src={game.visit === 'KT' ? game.homeLogo : game.visitLogo}
+                      alt={`${game.visit === 'KT' ? game.visit : game.home} logo`}
+                      className="mx-auto w-16"
+                    />
+                    <span>
+                      {game.gtime} {game.stadium} / {game.broadcast}
+                    </span>
+                  </div>
+
+                  {/* KT의 경기 결과 표시 */}
+                  {isKTVisit || isKTHome ? (
+                    <div className="absolute right-0 top-0">
+                      <div
+                        className={`h-0 w-0 border-l-[40px] border-t-[40px] border-l-transparent border-t-orange-400 text-sm font-bold ${
+                          result === '승'
+                            ? 'border-t-[#FE653B]'
+                            : result === '무'
+                              ? 'border-[#495A8D]'
+                              : result === '패'
+                                ? 'border-t-[#D6D6D6]'
+                                : ''
+                        }`}
+                      ></div>
+                      <span
+                        className={`absolute right-1.5 top-2 ${result === '승' || result === '무' ? 'text-white' : ''}`}
+                      >
+                        {result}
+                      </span>
+                    </div>
+                  ) : null}
+                </div>
+              )
+            })}
           </div>,
         )
         day = addDays(day, 1)
