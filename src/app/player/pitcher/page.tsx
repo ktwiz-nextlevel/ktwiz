@@ -11,6 +11,7 @@ import { PlayerCode } from '@/types/player'
 
 export default function Pitcher() {
   const [playerPcode, setPlayerPcode] = useState<PlayerCode>({ pcode: 53006 })
+  console.log('playerPcode = ' + playerPcode.pcode)
 
   return (
     <>
