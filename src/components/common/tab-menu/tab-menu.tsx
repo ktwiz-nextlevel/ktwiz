@@ -2,28 +2,46 @@
 import { TabsType } from '@/types'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-// import { usePathname } from 'next/navigation'
 
 export default function TabMenu({
   tabs,
-  // currentPath,   const [activeTab,setActiveTab  ]=  useState({name:"kt ",ref});
+  isActiveCondition,
 }: {
   tabs?: TabsType[] | null
-  // currentPath?: string
+  isActiveCondition?: (pathname: string, tab: TabsType) => boolean | undefined
 }) {
   const pathname = usePathname()
-  // console.log('params', tabs)
-
+  const customIsActiveCondition = (pathname: string, tab: TabsType) => {
+    if (pathname === '/game/regular/watchpoint' && tab.path === 'boxscore') {
+      return true
+    }
+    if (
+      pathname === '/game/regular/ranking/pitcher' &&
+      tab.path === 'ranking/team'
+    ) {
+      return true
+    }
+    if (
+      pathname === '/game/regular/ranking/batter' &&
+      tab.path === 'ranking/team'
+    ) {
+      return true
+    }
+    if (
+      pathname === '/game/regular/ranking/crowd' &&
+      tab.path === 'ranking/team'
+    ) {
+      return true
+    }
+    if (tab.href === pathname) {
+      return true
+    } else false
+  }
   return (
     <div className="flex gap-1">
       {tabs?.map((tab, index) => {
-        let isActive = tab.href === pathname
-        if (
-          pathname === '/game/regular/watchpoint' &&
-          tab.path === 'boxscore'
-        ) {
-          isActive = true
-        }
+        let isActive = customIsActiveCondition(pathname, tab)
+
         return (
           <Link
             href={tab.href || ''}

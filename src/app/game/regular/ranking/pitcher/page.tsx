@@ -1,4 +1,4 @@
-import { TabNavigation } from '@/components/common/tab-menu/tab-navigation'
+import { TabNavigation as TabMenu } from '@/components/common/tab-menu/tab-navigation'
 import { Top3PitcherEras, Top3PitcherWins } from './best-players'
 
 import { Top5PitcherEras } from '@/types'
@@ -29,7 +29,7 @@ async function RankPitcherPage() {
   const top5PitcherEras: Top5PitcherEras = await getTop5PitcherEras()
   return (
     <div className="w-full">
-      <TabNavigation tabs={TABS} activeTab={TABS[1]} />
+      <TabMenu tabs={TABS} activeTab={TABS[1]} />
 
       <section className="pitcher-board mt-10 flex justify-between gap-10">
         <div className="best-players flex gap-2 rounded-lg bg-gray-100 p-6">
@@ -39,6 +39,11 @@ async function RankPitcherPage() {
         <TeamERAOverview
           {...createTeamERAOverview(top5PitcherEras, '전체 투수 평균자책점')}
         />
+      </section>
+      <section className="mt-20">
+        <div className="flex justify-between border border-red-300">
+          {/* <TabMenu /> */}
+        </div>
       </section>
     </div>
   )
