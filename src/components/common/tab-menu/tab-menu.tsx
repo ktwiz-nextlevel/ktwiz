@@ -3,13 +3,7 @@ import { TabsType } from '@/types'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-export default function TabMenu({
-  tabs,
-  isActiveCondition,
-}: {
-  tabs?: TabsType[] | null
-  isActiveCondition?: (pathname: string, tab: TabsType) => boolean | undefined
-}) {
+export default function TabMenu({ tabs }: { tabs?: TabsType[] | null }) {
   const pathname = usePathname()
   const customIsActiveCondition = (pathname: string, tab: TabsType) => {
     if (pathname === '/game/regular/watchpoint' && tab.path === 'boxscore') {
