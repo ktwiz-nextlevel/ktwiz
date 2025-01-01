@@ -58,7 +58,7 @@ export default function WizparkDescription() {
           </div>
           <img
             alt="Product screenshot"
-            src="/images/ktwizpark.jpg"
+            src="/images/wiz-park/ktwizpark.jpg"
             width={2432}
             height={1442}
             className="m-auto w-full rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
