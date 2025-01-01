@@ -19,9 +19,7 @@ export default function Page() {
 function Breadcrumb() {
   return (
     <div className="mb-2 mt-[50px] flex w-full justify-end border-b-2 border-[#ec0a0b] p-2">
-      <Breadcrumbs
-        pages={['HOME', 'Suwon kt wiz park', 'kt wiz park', '구장 소개']}
-      />
+      <Breadcrumbs pages={['HOME', 'Suwon kt wiz park', '찾아오기']} />
     </div>
   )
 }

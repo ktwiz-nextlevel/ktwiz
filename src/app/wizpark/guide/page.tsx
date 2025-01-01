@@ -31,7 +31,7 @@ function Breadcrumb() {
   return (
     <div className="mb-2 mt-[50px] flex w-full justify-end border-b-2 border-[#ec0a0b] p-2">
       <Breadcrumbs
-        pages={['HOME', 'Suwon kt wiz park', 'kt wiz park', ' 구장 안내도']}
+        pages={['HOME', 'Suwon kt wiz park', 'kt wiz park', '구장 안내도']}
       />
     </div>
   )
