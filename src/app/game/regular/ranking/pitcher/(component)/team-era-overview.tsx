@@ -1,4 +1,5 @@
 import { TeamERAOverPlayer } from '@/types'
+import ERATitle from './era-title'
 
 export async function TeamERAOverview({
   isError,
@@ -37,7 +38,7 @@ export async function TeamERAOverview({
             return (
               <li
                 key={player.teamName + idx}
-                className="flex justify-between border-b-2 py-1 text-sm text-gray-500"
+                className="flex justify-between border-b-[1px] border-gray-50 py-2 text-sm text-gray-500"
               >
                 <span>
                   {`${idx + 1}   ${player.playerName} (${player.teamName})`}
@@ -49,12 +50,5 @@ export async function TeamERAOverview({
       </ol>
       <div className="text-right text-xs font-thin">{`※ 2024 정규리그 시즌`}</div>
     </div>
-  )
-}
-const ERATitle = ({ title }: { title: string }) => {
-  return (
-    <h2 className="mt-4 self-stretch font-normal">
-      <span className="text-[--main-red-color]">{title}</span> TOP5
-    </h2>
   )
 }

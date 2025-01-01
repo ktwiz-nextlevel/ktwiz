@@ -5,6 +5,7 @@ import { Top5PitcherEras } from '@/types'
 import { TeamERAOverview } from './(component)/team-era-overview'
 import { createTeamERAOverview } from './(lib)/adapter'
 import { getTop5PitcherEras } from './(lib)/api'
+import RankingTable from './ranking-table'
 
 const TABS = [
   { title: '팀순위', href: '/game/regular/ranking/team', path: 'team' },
@@ -25,14 +26,14 @@ const TABS = [
   },
 ]
 
-async function RankPitcherPage() {
+async function Page() {
   const top5PitcherEras: Top5PitcherEras = await getTop5PitcherEras()
   return (
     <div className="w-full">
       <TabMenu tabs={TABS} activeTab={TABS[1]} />
 
       <section className="pitcher-board mt-10 flex justify-between gap-10">
-        <div className="best-players flex gap-2 rounded-lg bg-gray-100 p-6">
+        <div className="best-players flex items-center gap-2 rounded-lg bg-gray-100 p-6">
           <Top3PitcherEras />
           <Top3PitcherWins />
         </div>
@@ -40,13 +41,9 @@ async function RankPitcherPage() {
           {...createTeamERAOverview(top5PitcherEras, '전체 투수 평균자책점')}
         />
       </section>
-      <section className="mt-20">
-        <div className="flex justify-between border border-red-300">
-          {/* <TabMenu /> */}
-        </div>
-      </section>
+      <RankingTable />
     </div>
   )
 }
 
-export default RankPitcherPage
+export default Page
