@@ -203,3 +203,26 @@ export interface GameData {
   cancelFlag: '0' | '1'
   endFlag: '0' | '1'
 }
+
+// 게임 데이터 타입 정의
+export interface GameScheduleData {
+  broadcast: string
+  displayDate: string
+  gameDate: number
+  gmkey: string
+  gtime: string
+  home: string
+  homeKey: string
+  homeLogo: string
+  homeScore: number
+  matchTeamCode: string
+  matchTeamName: string
+  outcome: string
+  stadium: string
+  stadiumKey: string
+  status: string
+  visit: string
+  visitKey: string
+  visitLogo: string
+  visitScore: number
+}

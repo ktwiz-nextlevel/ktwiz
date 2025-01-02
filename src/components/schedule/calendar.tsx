@@ -1,5 +1,4 @@
-'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import {
   startOfMonth,
   endOfMonth,
@@ -8,97 +7,46 @@ import {
   addDays,
   format,
   isSameMonth,
-  isSameDay,
+  parse,
 } from 'date-fns'
 import { ko } from 'date-fns/locale'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import { GameScheduleData } from '@/types'
-
-// 샘플 게임 데이터
-// const gameData = [
-//   {
-//     broadcast: 'MS-T',
-//     displayDate: '20240904',
-//     gameDate: 20240904,
-//     gmkey: '20240904KTLT0',
-//     gtime: '18:30',
-//     home: '롯데',
-//     homeKey: 'LT',
-//     homeLogo: 'http://54.180.228.165/api/static/LT.png',
-//     homeScore: 7,
-//     matchTeamCode: 'LT',
-//     matchTeamName: '롯데',
-//     outcome: '패',
-//     stadium: '사직',
-//     stadiumKey: 'SJ',
-//     status: '3',
-//     visit: 'KT',
-//     visitKey: 'KT',
-//     visitLogo: 'http://54.180.228.165/api/static/KT.png',
-//     visitScore: 5,
-//   },
-//   {
-//     broadcast: 'SS-T',
-//     displayDate: '20240905',
-//     gameDate: 20240905,
-//     gmkey: '20240905KTLT0',
-//     gtime: '18:30',
-//     home: '롯데',
-//     homeKey: 'LT',
-//     homeLogo: 'http://54.180.228.165/api/static/LT.png',
-//     homeScore: 2,
-//     matchTeamCode: 'LT',
-//     matchTeamName: '롯데',
-//     outcome: '승',
-//     stadium: '사직',
-//     stadiumKey: 'SJ',
-//     status: '3',
-//     visit: 'KT',
-//     visitKey: 'KT',
-//     visitLogo: 'http://54.180.228.165/api/static/KT.png',
-//     visitScore: 12,
-//   },
-// ]
+import Link from 'next/link'
 
 interface CalendarProps {
   gameData: GameScheduleData[]
+  currentDate: string
 }
 
-const Calendar = ({ gameData }: CalendarProps) => {
-  const now = new Date() // 현재 날짜
-  const [currentMonth, setCurrentMonth] = useState(new Date()) // 현재 월
-  const [selectedDate, setSelectedDate] = useState(new Date()) // 선택된 날짜
-
-  const handleTodayBtn = () => {
-    setSelectedDate(now)
-    setCurrentMonth(now)
-  }
+const Calendar = ({ gameData, currentDate }: CalendarProps) => {
+  const formattedCurrentDate = parse(currentDate, 'yyyyMM', new Date())
 
   // 헤더 렌더링
   const renderHeader = () => {
     const dateFormat = 'MMMM yyyy'
     return (
       <div className="mb-5 flex items-center justify-between">
-        <button
+        <Link
           className="rounded-full border border-gray-200 px-4 leading-8"
-          onClick={handleTodayBtn}
+          href={`/game/regular/schedule/${format(new Date(), 'yyyyMM')}`}
         >
           Today
-        </button>
-        <button
-          className="ml-1.5 h-8 w-8 rounded-full border text-xl font-bold text-gray-600 hover:text-gray-800"
-          onClick={() => setCurrentMonth(addDays(currentMonth, -30))}
+        </Link>
+        <Link
+          className="ml-1.5 flex h-8 w-8 items-center rounded-full border text-xl font-bold text-gray-600 hover:text-gray-800"
+          href={`/game/regular/schedule/${format(new Date(formattedCurrentDate).setMonth(formattedCurrentDate.getMonth() - 1), 'yyyyMM')}`}
         >
           <ChevronLeftIcon className="mx-auto size-5" />
-        </button>
-        <button
-          className="ml-1.5 h-8 w-8 rounded-full border text-xl font-bold text-gray-600 hover:text-gray-800"
-          onClick={() => setCurrentMonth(addDays(currentMonth, 30))}
+        </Link>
+        <Link
+          className="ml-1.5 flex h-8 w-8 items-center rounded-full border text-xl font-bold text-gray-600 hover:text-gray-800"
+          href={`/game/regular/schedule/${format(new Date(formattedCurrentDate).setMonth(formattedCurrentDate.getMonth() + 1), 'yyyyMM')}`}
         >
           <ChevronRightIcon className="mx-auto size-5" />
-        </button>
+        </Link>
         <div className="ml-3 mr-auto text-lg font-semibold text-gray-800">
-          {format(currentMonth, dateFormat, { locale: ko })}
+          {format(formattedCurrentDate, dateFormat, { locale: ko })}
         </div>
 
         {/* 경기 전환 */}
@@ -113,7 +61,7 @@ const Calendar = ({ gameData }: CalendarProps) => {
   // 요일 렌더링
   const renderDays = () => {
     const days = []
-    const startDate = startOfWeek(currentMonth, { weekStartsOn: 0 })
+    const startDate = startOfWeek(formattedCurrentDate, { weekStartsOn: 0 })
 
     for (let i = 0; i < 7; i++) {
       days.push(
@@ -130,7 +78,7 @@ const Calendar = ({ gameData }: CalendarProps) => {
 
   // 일자 렌더링
   const renderCells = () => {
-    const monthStart = startOfMonth(currentMonth)
+    const monthStart = startOfMonth(formattedCurrentDate)
     const monthEnd = endOfMonth(monthStart)
     const startDate = startOfWeek(monthStart)
     const endDate = endOfWeek(monthEnd)
@@ -141,7 +89,6 @@ const Calendar = ({ gameData }: CalendarProps) => {
 
     while (day <= endDate) {
       for (let i = 0; i < 7; i++) {
-        const cloneDay = day
         const formattedDate = format(day, 'yyyyMMdd')
 
         // 해당 날짜의 게임 데이터 필터링
@@ -155,11 +102,8 @@ const Calendar = ({ gameData }: CalendarProps) => {
             className={`relative flex h-32 flex-col rounded-md border border-gray-200 pl-2 pt-1 ${
               !isSameMonth(day, monthStart)
                 ? 'bg-gray-100 text-gray-400'
-                : isSameDay(day, selectedDate)
-                  ? 'border-4 border-yellow-400'
-                  : 'text-gray-700 hover:bg-yellow-50'
+                : 'text-gray-700'
             } cursor-pointer`}
-            onClick={() => setSelectedDate(cloneDay)}
           >
             {/* 날짜 */}
             <span className="absolute text-base">{format(day, 'd')}</span>
@@ -196,7 +140,7 @@ const Calendar = ({ gameData }: CalendarProps) => {
                   {isKTVisit || isKTHome ? (
                     <div className="absolute right-0 top-0">
                       <div
-                        className={`h-0 w-0 border-l-[40px] border-t-[40px] border-l-transparent border-t-orange-400 text-sm font-bold ${
+                        className={`h-0 w-0 border-l-[40px] border-t-[40px] border-l-transparent text-sm font-bold ${
                           result === '승'
                             ? 'border-t-[#FE653B]'
                             : result === '무'
