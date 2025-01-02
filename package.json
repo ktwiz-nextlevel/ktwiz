@@ -21,8 +21,8 @@
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
-    "@supabase/auth-helpers-nextjs": "^0.10.0",
     "@hookform/resolvers": "^3.9.1",
+    "@supabase/auth-helpers-nextjs": "^0.10.0",
     "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.47.6",
     "class-variance-authority": "^0.7.1",
@@ -30,10 +30,12 @@
     "next": "14.2.18",
     "next-auth": "^4.24.11",
     "react": "^18",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18",
+    "react-hook-form": "^7.54.2",
     "react-is": "^18.3.1",
     "recharts": "^2.15.0",
-    "react-hook-form": "^7.54.2",
     "tailwind-merge": "^2.5.5",
     "uuid": "^11.0.3",
     "zod": "^3.24.1"

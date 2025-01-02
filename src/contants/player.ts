@@ -6,9 +6,9 @@ export const PLAYER_BANNER_DATA = {
       { href: '/player/catcher', title: '포수', paht: 'catcher' },
       { href: '/player/batter', title: '타자', path: 'batter' },
       {
-        href: '/player/custom_squad',
+        href: '/player/custom-squad',
         title: '커스텀 스쿼드',
-        path: 'custom_squad',
+        path: 'custom-squad',
       },
     ],
   },
