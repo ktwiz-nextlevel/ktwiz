@@ -2,15 +2,15 @@ import { Batter, Pitcher } from '@/types'
 import { TeamRank } from '@/types/team-rank'
 import { cn } from '@/utils'
 
-export function WithVerticalLines({
+export function WithVerticalLines<T>({
   data,
   thKey,
   highlightRowKey,
   rowKeyName = 'key',
   highlightColumnKey,
 }: {
-  data: Pitcher[] | Batter[] | TeamRank[]
-  thKey: { title: string; key: keyof Pitcher | keyof Batter | keyof TeamRank }[]
+  data: T[]
+  thKey: { title: string; key: keyof T }[]
   highlightRowKey?: string
   rowKeyName?: string
   highlightColumnKey?: string
@@ -42,7 +42,7 @@ export function WithVerticalLines({
                   {thKey.map((th, idx) => {
                     return (
                       <th
-                        key={th.key + idx}
+                        key={idx + 'thkey'}
                         scope="col"
                         className={`border-none px-4 py-3.5 text-left text-sm font-semibold text-gray-900 ${higlightColumIndex === idx ? 'bg-red-50' : 'bg-white'}`}
                       >
@@ -66,7 +66,7 @@ export function WithVerticalLines({
                       {thKey.map((th, index) => {
                         return (
                           <td
-                            key={th.key + index}
+                            key={index + 'key'}
                             className={cn(
                               `${index === 0 ? `pl-2 text-start` : `px-4 text-center`} whitespace-nowrap border-none py-4 text-sm font-normal`,
                             )}

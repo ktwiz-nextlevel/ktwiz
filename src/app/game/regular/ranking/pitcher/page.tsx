@@ -28,6 +28,7 @@ const TABS = [
 
 async function Page() {
   const top5PitcherEras: Top5PitcherEras = await getTop5PitcherEras()
+
   return (
     <div className="w-full">
       <TabMenu tabs={TABS} activeTab={TABS[1]} />

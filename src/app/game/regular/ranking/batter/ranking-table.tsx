@@ -1,14 +1,14 @@
 'use client'
 
-import { TabMenu } from './(component)/tab-menu'
-import SearchBar from './(component)/search-bar'
-import { useSelection } from './(lib)/use-selection'
-import { TabMenuProps } from './(lib)/tabmenu.type'
-import SelectBox from './(component)/select-box'
+import SelectBox from '../pitcher/(component)/select-box'
 import { WithVerticalLines as Table } from '@/components/tailwind-ui/tables/with-vertical-lines'
 import { useEffect, useState } from 'react'
-import { getKTPitcherRankings, getPitcherRankings } from './(lib)/api'
+import { getKTPitcherRankings, getPitcherRankings } from '../pitcher/(lib)/api'
 import { useSearchParams } from 'next/navigation'
+import { useSelection } from './(lib)/use-selection'
+import { TabMenu } from './(component)/tab-menu'
+import SearchBar from './(component)/search-bar'
+import { getbatterRankings, getKTBatterRankings } from './(lib)/api'
 const TH_KEY = [
   { title: '선수명', key: 'playerName' },
   { title: '팀명', key: 'teamName' },
@@ -31,9 +31,9 @@ const TH_KEY = [
 
 function RankingTable() {
   const searchParams = useSearchParams()
-  const { items, activeItem, handleSelect } = useSelection<TabMenuProps>([
-    { name: 'kt wiz 투수', id: 'kt wiz pitcher' },
-    { name: '전체 투수 순위', id: 'all pitcher' },
+  const { items, activeItem, handleSelect } = useSelection([
+    { name: 'kt wiz 타자', id: 'kt wiz batter' },
+    { name: '전체 타자 순위', id: 'all batter' },
   ])
   const {
     items: selectItems,
@@ -50,12 +50,12 @@ function RankingTable() {
   const fetchRankings = async () => {
     try {
       const rankings =
-        activeItem.id === 'kt wiz pitcher'
-          ? await getKTPitcherRankings({
+        activeItem.id === 'kt wiz batter'
+          ? await getKTBatterRankings({
               gyear: activeSeason.name,
               pname: searchValue,
             })
-          : await getPitcherRankings({
+          : await getbatterRankings({
               gyear: activeSeason.name,
               pname: searchValue,
             })
