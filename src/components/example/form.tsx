@@ -1,9 +1,9 @@
 'use client'
 import { useState } from 'react'
-import Input from '../common/input'
-import InputWithDelBtn from '../common/input-with-del'
-import InputPassword from '../common/input-password'
-import InputBtn from '../common/input-button'
+import Input from '../common/input/input'
+import InputWithDelBtn from '../common/input/input-with-del'
+import InputPassword from '../common/input/input-password'
+import InputBtn from '../common/input/input-button'
 
 export default function FormExample() {
   // 상태를 객체로 묶어서 관리
