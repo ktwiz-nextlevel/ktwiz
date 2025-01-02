@@ -96,6 +96,9 @@ const Calendar = ({ gameData, currentDate }: CalendarProps) => {
           (game) => game.displayDate === formattedDate,
         )
 
+        // 같은 날짜의 경기 결과를 합쳐서 처리
+        const gameOutcomes = dailyGames.map((game) => game.outcome).join('/')
+
         days.push(
           <div
             key={day.toString()}
@@ -109,57 +112,47 @@ const Calendar = ({ gameData, currentDate }: CalendarProps) => {
             <span className="absolute text-base">{format(day, 'd')}</span>
 
             {/* 게임 데이터 렌더링 */}
-            {dailyGames.map((game) => {
-              // KT의 승패 여부 계산
-              const isKTVisit = game.visit === 'KT'
-              const isKTHome = game.home === 'KT'
-              let result = ''
-
-              if (isKTVisit) {
-                result = '무'
-                result = game.visitScore > game.homeScore ? '승' : '패'
-              } else if (isKTHome) {
-                result = game.homeScore > game.visitScore ? '승' : '패'
-              }
-
-              return (
-                <div key={game.gmkey} className="mt-2 text-xs">
-                  <div className="mt-2 text-center">
-                    {/* KT 상대팀 정보 표시*/}
-                    <img
-                      src={game.visit === 'KT' ? game.homeLogo : game.visitLogo}
-                      alt={`${game.visit === 'KT' ? game.visit : game.home} logo`}
-                      className="mx-auto w-16"
-                    />
-                    <span>
-                      {game.gtime} {game.stadium} / {game.broadcast}
-                    </span>
-                  </div>
-
-                  {/* KT의 경기 결과 표시 */}
-                  {isKTVisit || isKTHome ? (
-                    <div className="absolute right-0 top-0">
-                      <div
-                        className={`h-0 w-0 border-l-[40px] border-t-[40px] border-l-transparent text-sm font-bold ${
-                          result === '승'
-                            ? 'border-t-[#FE653B]'
-                            : result === '무'
-                              ? 'border-[#495A8D]'
-                              : result === '패'
-                                ? 'border-t-[#D6D6D6]'
-                                : ''
-                        }`}
-                      ></div>
-                      <span
-                        className={`absolute right-1.5 top-2 ${result === '승' || result === '무' ? 'text-white' : ''}`}
-                      >
-                        {result}
-                      </span>
-                    </div>
-                  ) : null}
+            {dailyGames.length > 0 && (
+              <div className="mt-2 text-xs">
+                <div className="mt-2 text-center">
+                  <img
+                    src={
+                      dailyGames[0].visit === 'KT'
+                        ? dailyGames[0].homeLogo
+                        : dailyGames[0].visitLogo
+                    }
+                    alt={`KT logo`}
+                    className="mx-auto w-16"
+                  />
+                  <span>
+                    {dailyGames[0].gtime} {dailyGames[0].stadium} /{' '}
+                    {dailyGames[0].broadcast}
+                  </span>
                 </div>
-              )
-            })}
+                <div className="absolute right-0 top-0">
+                  <div
+                    className={`h-0 w-0 border-l-[40px] border-t-[40px] border-l-transparent text-sm font-bold ${
+                      gameOutcomes.includes('승')
+                        ? 'border-t-[#FE653B]'
+                        : gameOutcomes.includes('무')
+                          ? 'border-[#495A8D]'
+                          : gameOutcomes.includes('패')
+                            ? 'border-t-[#D6D6D6]'
+                            : ''
+                    }`}
+                  ></div>
+                  <span
+                    className={`absolute right-1.5 top-2 ${
+                      gameOutcomes.includes('승') || gameOutcomes.includes('무')
+                        ? 'text-white'
+                        : ''
+                    }`}
+                  >
+                    {gameOutcomes}
+                  </span>
+                </div>
+              </div>
+            )}
           </div>,
         )
         day = addDays(day, 1)
