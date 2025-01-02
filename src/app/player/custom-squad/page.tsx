@@ -147,8 +147,8 @@ const BannerTest = () => {
   return (
     <Banner>
       <Banner.Heading
-        title="투수"
-        subtitle="수 관련 정보 및 데이터를 확인하세요"
+        title="커스텀 스쿼드"
+        subtitle="나만의 커스텀 스쿼드를 만들어 보세요!"
       />
       <TabMenu tabs={PLAYER_BANNER_DATA['/player'].tabs} />
     </Banner>
