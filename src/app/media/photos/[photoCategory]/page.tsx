@@ -1,8 +1,8 @@
-import BoardSearchBar from '@/components/board/board-search-bar'
 import Banner from '@/components/common/banner/banner'
 import TabMenu from '@/components/common/tab-menu/tab-menu'
 import NoDataList from '@/components/media/common/no-data-list'
 import PhotoList from '@/components/media/photo/photo-list'
+import PhotoSearchBar from '@/components/media/photo/photo-search-bar'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 import { MEDIA_BANNER_DATA } from '@/contants'
 import { NUMBER_OF_PHOTOS_TO_FETCH } from '@/contants/media'
@@ -47,7 +47,7 @@ export default async function PhotoPage({
       <div className="flex w-full px-10 pb-16">
         <div className="mx-auto max-w-[1100px] flex-1">
           <div className="mt-[50px] flex w-full justify-between">
-            <BoardSearchBar />
+            <PhotoSearchBar />
             <Breadcrumbs pages={['HOME', 'MEDIA', 'wiz 포토']} />
           </div>
           {initialPhotos.length > 0 ? (
