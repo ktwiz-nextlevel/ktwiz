@@ -1,0 +1,1 @@
+export const NUMBER_OF_PHOTOS_TO_FETCH = 12

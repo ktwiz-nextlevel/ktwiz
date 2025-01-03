@@ -25,6 +25,7 @@ export async function getPhotoList(
     }
   } catch (error: unknown) {
     console.log(error)
+    throw new Error(`An error happened: ${error}`)
   }
 }
 
@@ -41,6 +42,7 @@ export async function getVideoList(
     return result.data.list as Video[]
   } catch (error: unknown) {
     console.log(error)
+    throw new Error(`An error happened: ${error}`)
   }
 }
 
@@ -52,6 +54,7 @@ export async function getPopularVideoList() {
     return result.top3 as Video[]
   } catch (error: unknown) {
     console.log(error)
+    throw new Error(`An error happened: ${error}`)
   }
 }
 
@@ -63,5 +66,6 @@ export async function getVideoDetail(videoId: number) {
     return result.data.article as Video
   } catch (error: unknown) {
     console.log(error)
+    throw new Error(`An error happened: ${error}`)
   }
 }
