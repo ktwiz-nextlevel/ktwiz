@@ -7,6 +7,7 @@ function StadiumIframe() {
         width={1100}
         height={636.172}
         title="KTWiz Stadium 3D"
+        className="hidden md:block"
       ></iframe>
     </div>
   )
