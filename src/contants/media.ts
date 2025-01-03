@@ -1,1 +1,2 @@
 export const NUMBER_OF_PHOTOS_TO_FETCH = 12
+export const NUMBER_OF_VIDEOS_TO_FETCH = 12
