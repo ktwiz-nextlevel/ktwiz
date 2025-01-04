@@ -226,3 +226,37 @@ export interface GameScheduleData {
   visitLogo: string
   visitScore: number
 }
+
+// 경기정보 타입 정의
+export interface GameInfo {
+  displayDate: string // 경기 날짜 (표시용) - YYYYMMDD 형식
+  game: string // 경기 상태 - 현재 경기 (예: "current")
+  gameDate: number // 경기 날짜 (숫자형) - YYYYMMDD 형식
+  gday: number // 경기 일자 - 일(day) 정보
+  gmkey: string // 경기 고유 키
+  gmonth: number // 경기 월 - 월(month) 정보
+  gtime: string // 경기 시간 - HH:mm 형식
+  gyear: string // 경기 연도
+  home: string // 홈팀 코드
+  homeDecision: string // 홈팀 경기 결과 (승리, 패배 등)
+  homeDecisionPitcher: string // 홈팀 경기 결과 투수
+  homeFullname: string // 홈팀 이름
+  homeKey: string // 홈팀 키
+  homeLogo: string // 홈팀 로고 이미지 URL
+  homeScore: number // 홈팀 점수
+  homeStarter: string // 홈팀 선발 투수
+  matchTeamCode: string // 대진팀 코드
+  matchTeamName: string // 대진팀 이름
+  outcome: string // 경기 결과 (현재 팀 기준, 승/패)
+  stadium: string // 경기장 이름
+  stadiumKey: string // 경기장 코드
+  status: string // 경기 상태 코드 (예: "3" - 경기 종료)
+  visit: string // 원정팀 코드
+  visitDecision: string // 원정팀 경기 결과
+  visitDecisionPitcher: string // 원정팀 경기 결과 투수
+  visitFullname: string // 원정팀 이름
+  visitKey: string // 원정팀 키
+  visitLogo: string // 원정팀 로고 이미지 URL
+  visitScore: number // 원정팀 점수
+  visitStarter: string // 원정팀 선발 투수
+}

@@ -50,10 +50,10 @@ const Calendar = ({ gameData, currentDate }: CalendarProps) => {
         </div>
 
         {/* 경기 전환 */}
-        <div className="rounded-full border border-gray-200 px-4 leading-8">
+        {/* <div className="rounded-full border border-gray-200 px-4 leading-8">
           <button>KT 경기</button>
           <button>전체 경기</button>
-        </div>
+        </div> */}
       </div>
     )
   }
@@ -113,7 +113,7 @@ const Calendar = ({ gameData, currentDate }: CalendarProps) => {
 
             {/* 게임 데이터 렌더링 */}
             {dailyGames.length > 0 && (
-              <div className="mt-2 text-xs">
+              <Link className="mt-2 text-xs" href={`/game/regular/boxscore`}>
                 <div className="mt-2 text-center">
                   <img
                     src={
@@ -138,20 +138,22 @@ const Calendar = ({ gameData, currentDate }: CalendarProps) => {
                           ? 'border-[#495A8D]'
                           : gameOutcomes.includes('패')
                             ? 'border-t-[#D6D6D6]'
-                            : ''
+                            : gameOutcomes.includes('취')
+                              ? 'border-t-[#555]'
+                              : ''
                     }`}
                   ></div>
                   <span
                     className={`absolute right-1.5 top-2 ${
-                      gameOutcomes.includes('승') || gameOutcomes.includes('무')
-                        ? 'text-white'
-                        : ''
+                      gameOutcomes.includes('패') && !gameOutcomes.includes('/')
+                        ? 'text-[#222]'
+                        : 'text-white'
                     }`}
                   >
                     {gameOutcomes}
                   </span>
                 </div>
-              </div>
+              </Link>
             )}
           </div>,
         )

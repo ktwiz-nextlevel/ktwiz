@@ -15,7 +15,7 @@ async function SchedulePage({ params }: { params: Promise<{ date: string }> }) {
     return <div>게임 정보가 없습니다.</div>
   }
 
-  const data = await res.json()
+  const { data } = await res.json()
 
   return (
     <div className="w-full">
@@ -23,7 +23,7 @@ async function SchedulePage({ params }: { params: Promise<{ date: string }> }) {
         <Breadcrumbs pages={['HOME', '정규리그', '경기일정']} />
       </div>
       <ScoreCardGroup />
-      {data && <Calendar gameData={data.data.list} currentDate={currentDate} />}
+      {data && <Calendar gameData={data.list} currentDate={currentDate} />}
     </div>
   )
 }
