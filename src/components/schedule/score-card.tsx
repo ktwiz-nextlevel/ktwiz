@@ -2,6 +2,7 @@
 import { GameInfo } from '@/types'
 import { cn } from '@/utils'
 import Image from 'next/image'
+import Link from 'next/link'
 
 interface ScoreCardProps {
   className: string
@@ -55,9 +56,12 @@ export default function ScoreCard({
             <div className="mt-5 text-xs text-[#da3835]">
               {gameInfo.outcome}
             </div>
-            <button className="mt-2 rounded-full bg-[#909090] px-3 text-sm leading-6 text-white">
+            <Link
+              href={`/game/regular/boxscore/${gameInfo.gameDate}/${gameInfo.gmkey}`}
+              className="mt-2 inline-block rounded-full bg-[#909090] px-3 text-sm leading-6 text-white"
+            >
               경기 정보
-            </button>
+            </Link>
           </div>
 
           {/* 홈팀 */}

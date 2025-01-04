@@ -113,7 +113,10 @@ const Calendar = ({ gameData, currentDate }: CalendarProps) => {
 
             {/* 게임 데이터 렌더링 */}
             {dailyGames.length > 0 && (
-              <Link className="mt-2 text-xs" href={`/game/regular/boxscore`}>
+              <Link
+                className="mt-2 text-xs"
+                href={`/game/regular/boxscore/${dailyGames[0].gameDate}/${dailyGames[0].gmkey}`}
+              >
                 <div className="mt-2 text-center">
                   <img
                     src={
