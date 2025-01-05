@@ -1,6 +1,4 @@
-export interface PlayerCode {
-  pcode: number | string
-}
+export type PlayerCode = number | string
 
 export interface PlayerImage {
   img: string | undefined
