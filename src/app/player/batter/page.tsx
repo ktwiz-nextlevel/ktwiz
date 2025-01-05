@@ -17,7 +17,9 @@ export default function Batter() {
       <BannerTest />
       <div className="page-large mx-auto flex max-w-6xl flex-col gap-6 px-6 py-8">
         <div className="flex flex-col gap-6 md:flex-row">
-          <div className="w-full flex-shrink-0 rounded-lg p-4 shadow-md md:w-1/5"></div>
+          <div className="w-full flex-shrink-0 rounded-lg p-4 shadow-md md:w-1/5">
+            {/* <PlayerCardList onCardClick={setPlayerPcode} /> */}
+          </div>
 
           <div className="w-full flex-grow rounded-lg p-4 shadow-md md:w-4/5">
             <PlayerDetail pcode={playerPcode} />

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { PlayerCode } from '@/types/player'
 import Banner from '@/components/common/banner/banner'
 import TabMenu from '@/components/common/tab-menu/tab-menu'
@@ -13,6 +13,7 @@ interface PlayerCard {
   playerName: string
   playerPrvwImg?: string
 }
+
 interface SquareStatus {
   playerName: string
   playerPrvwImg?: string
@@ -27,6 +28,7 @@ interface SquarePosition {
 export default function CustomSquad() {
   const [cards, setCards] = useState<PlayerCard[]>([])
   const [draggedCard, setDraggedCard] = useState<PlayerCard | null>(null)
+  const dragImageRef = useRef<HTMLDivElement | null>(null)
 
   const [squareStates, setSquareStates] = useState<SquarePosition[]>([
     { top: '78%', left: '48%', status: { playerName: '포수' } },
@@ -40,6 +42,7 @@ export default function CustomSquad() {
     { top: '56%', left: '34%', status: { playerName: '내야수' } },
   ])
 
+  // 선수 전체 호출로 변경 필요
   useEffect(() => {
     const fetchPitcherPlayerList = async () => {
       try {
@@ -52,8 +55,22 @@ export default function CustomSquad() {
     fetchPitcherPlayerList()
   }, [])
 
-  const handleDrag = (card: PlayerCard) => {
+  const handleDrag = (card: PlayerCard, e: React.DragEvent) => {
     setDraggedCard(card)
+
+    if (dragImageRef.current) {
+      const dragImage = dragImageRef.current
+      dragImage.style.display = 'block'
+      e.dataTransfer.setDragImage(dragImage, 104, 70)
+    }
+  }
+
+  const handleDragEnd = () => {
+    setDraggedCard(null)
+
+    if (dragImageRef.current) {
+      dragImageRef.current.style.display = 'none'
+    }
   }
 
   const handleDrop = (index: number) => {
@@ -83,7 +100,8 @@ export default function CustomSquad() {
                 <div
                   key={index}
                   draggable
-                  onDragStart={() => handleDrag(card)}
+                  onDragStart={(e) => handleDrag(card, e)}
+                  onDragEnd={handleDragEnd}
                   className="group relative flex h-60 w-full cursor-pointer items-center justify-center rounded-lg bg-gray-200 transition-all duration-300 hover:bg-gray-300 hover:shadow-md active:scale-95"
                 >
                   <img
@@ -120,16 +138,11 @@ export default function CustomSquad() {
                   }}
                 >
                   {position.status.playerPrvwImg ? (
-                    <>
-                      <img
-                        src={position.status.playerPrvwImg}
-                        alt={position.status.playerName}
-                        className="h-full w-full rounded-lg object-cover"
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black bg-opacity-50 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                        {position.status.playerName}
-                      </div>
-                    </>
+                    <img
+                      src={position.status.playerPrvwImg}
+                      alt={position.status.playerName}
+                      className="h-full w-full rounded-lg object-cover"
+                    />
                   ) : (
                     position.status.playerName
                   )}
@@ -137,6 +150,21 @@ export default function CustomSquad() {
               ))}
             </div>
           </div>
+        </div>
+
+        {/* 드래그 이미지 */}
+        <div
+          ref={dragImageRef}
+          className="pointer-events-none fixed h-[104px] w-[70px] overflow-hidden rounded-lg shadow-lg"
+          style={{ display: 'none', zIndex: 1000 }}
+        >
+          {draggedCard && (
+            <img
+              src={draggedCard.playerPrvwImg}
+              alt={draggedCard.playerName}
+              className="h-full w-full object-cover"
+            />
+          )}
         </div>
       </div>
     </>
