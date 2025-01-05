@@ -1,7 +1,6 @@
-/**[투수] 선수 리스트 요청 */
-
 import { PlayerCode } from '@/types/player'
 
+/**[투수] 선수 리스트 요청 */
 export const getPitcherPlayerList = async () => {
   try {
     const response = await fetch(
@@ -9,7 +8,7 @@ export const getPitcherPlayerList = async () => {
     )
     return await response.json()
   } catch (error) {
-    console.error('getPlayerList 요청 에러:', error)
+    console.error('투수리스트 요청 에러:', error)
     throw error
   }
 }
@@ -22,7 +21,7 @@ export const getPitcherPlayerDetail = async (pcode: PlayerCode) => {
     )
     return await response.json()
   } catch (error) {
-    console.error('getPlayerDetail 요청 에러:', error)
+    console.error('투수 상세데이터 요청 에러:', error)
     throw error
   }
 }
@@ -36,11 +35,55 @@ export const getPitcherPlayerDetail = async (pcode: PlayerCode) => {
 // ----------------------------------------------------------------------------------
 
 /**[내야] 선수 리스트 요청*/
+export const getInfielderPlayerList = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_PLAYER_REQUEST_URL}/api/player/infielderlist`,
+    )
+    return await response.json()
+  } catch (error) {
+    console.error('내야수 리스트 요청 에러:', error)
+    throw error
+  }
+}
 
 /**[내야] 선수 상세데이터 요청 */
+export const getInfielderPlayerDetail = async (pcode: PlayerCode) => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_PLAYER_REQUEST_URL}/api/player/infielderdetail?pcode=${pcode}`,
+    )
+    return await response.json()
+  } catch (error) {
+    console.error('내야수 상세데이터 요청 에러:', error)
+    throw error
+  }
+}
 
 // ----------------------------------------------------------------------------------
 
 /**[포수] 선수 리스트 요청*/
+export const getCatcherPlayerList = async () => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_PLAYER_REQUEST_URL}/api/player/catcherlist`,
+    )
+    return await response.json()
+  } catch (error) {
+    console.error('포수리스트 요청 에러:', error)
+    throw error
+  }
+}
 
 /**[포수] 선수 상세데이터 요청 */
+export const getCatcherPlayerDetail = async (pcode: PlayerCode) => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_PLAYER_REQUEST_URL}/api/player/catcherdetail?pcode=${pcode}`,
+    )
+    return await response.json()
+  } catch (error) {
+    console.error('포수 상세데이터 요청 에러:', error)
+    throw error
+  }
+}
