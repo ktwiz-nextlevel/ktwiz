@@ -8,6 +8,10 @@ import Banner from '@/components/common/banner/banner'
 import { PLAYER_BANNER_DATA } from '@/contants/player'
 import TabMenu from '@/components/common/tab-menu/tab-menu'
 import { PlayerCode } from '@/types/player'
+import {
+  getInfielderPlayerList,
+  getCatcherPlayerList,
+} from '@/app/api/player/api'
 
 interface PlayerCard {
   pcode: PlayerCode
@@ -16,10 +20,24 @@ interface PlayerCard {
 }
 
 export default function Batter() {
-  const [playerPcode, setPlayerPcode] = useState<PlayerCode>({ pcode: 53006 })
+  const [playerPcode, setPlayerPcode] = useState<PlayerCode>({ pcode: 69064 })
   const [cards, setCards] = useState<PlayerCard[]>([])
 
-  useEffect(() => {}, [])
+  useEffect(() => {
+    const fetchBatterPlayerList = async () => {
+      try {
+        const [infielderData, catcherData] = await Promise.all([
+          getInfielderPlayerList(),
+          getCatcherPlayerList(), //외야수 데이터도 필요함
+        ])
+
+        setCards([...infielderData, ...catcherData])
+      } catch (error) {
+        console.error('타자데이터 요청 실패:', error)
+      }
+    }
+    fetchBatterPlayerList()
+  }, [])
 
   return (
     <>
@@ -27,7 +45,7 @@ export default function Batter() {
       <div className="page-large mx-auto flex max-w-6xl flex-col gap-6 px-6 py-8">
         <div className="flex flex-col gap-6 md:flex-row">
           <div className="w-full flex-shrink-0 rounded-lg p-4 shadow-md md:w-1/5">
-            {/* <PlayerCardList onCardClick={setPlayerPcode} /> */}
+            <PlayerCardList onCardClick={setPlayerPcode} cards={cards} />
           </div>
 
           <div className="w-full flex-grow rounded-lg p-4 shadow-md md:w-4/5">
