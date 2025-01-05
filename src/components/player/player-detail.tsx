@@ -1,13 +1,10 @@
-import { getPitcherPlayerDetail } from '@/app/api/player/api'
 import PlayerDetailData from './player-detail/player-detail-data'
 import PlayerImg from './player-detail/player-img'
 import PlayerSeasonData from './player-detail/player-season-data'
-import { useEffect, useState } from 'react'
-import { PlayerData, PlayerSeasonDataProps } from '@/types/player'
-
-interface PlayerDetailProps {
-  detailData: PlayerData
-  seasonData: PlayerSeasonDataProps
+import { PlayerDetailDataList, SeasonData } from '@/types/player'
+interface DetailProps {
+  detailData: PlayerDetailDataList | undefined
+  seasonData: SeasonData | undefined
   playerImg: string | undefined
 }
 
@@ -15,7 +12,8 @@ export default function PlayerDetail({
   detailData,
   seasonData,
   playerImg,
-}: PlayerDetailProps) {
+}: DetailProps) {
+  console.log('detailData', detailData)
   return (
     <div className="mx-auto flex max-w-6xl flex-col rounded-lg p-6 md:flex-row md:gap-12">
       <div className="flex w-full flex-col items-center space-y-4 md:w-1/2">

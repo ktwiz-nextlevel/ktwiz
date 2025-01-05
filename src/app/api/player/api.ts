@@ -1,4 +1,4 @@
-import { PlayerCode } from '@/types/player'
+import { PlayerChart, PlayerCode } from '@/types/player'
 
 /**[투수] 선수 리스트 요청 */
 export const getPitcherPlayerList = async () => {
@@ -84,6 +84,19 @@ export const getCatcherPlayerDetail = async (pcode: PlayerCode) => {
     return await response.json()
   } catch (error) {
     console.error('포수 상세데이터 요청 에러:', error)
+    throw error
+  }
+}
+
+/**투수 차트 데이터 get 요청 */
+export const getPitcherChart = async (name: PlayerChart) => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_PLAYER_REQUEST_URL}/api/additionalInfo?team=KT&player=${name}`,
+    )
+    return await response.json()
+  } catch (error) {
+    console.error('투수차트 요청 에러:', error)
     throw error
   }
 }
