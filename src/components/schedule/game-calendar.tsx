@@ -1,9 +1,23 @@
 import Calendar from './calendar'
 
-export default function GameCalendar() {
+interface GameCalendarProps {
+  currentDate: string
+}
+
+export default async function GameCalendar({ currentDate }: GameCalendarProps) {
+  // 월 스케쥴 api
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/game/monthschedule?yearMonth=${currentDate}`,
+  )
+
+  if (!res.ok) {
+    return <div>게임 정보가 없습니다.</div>
+  }
+
+  const { data } = await res.json()
   return (
     <div>
-      <Calendar />
+      {data && <Calendar gameData={data.list} currentDate={currentDate} />}
     </div>
   )
 }

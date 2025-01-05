@@ -1,4 +1,5 @@
-import React from 'react'
+'use client'
+import React, { useState } from 'react'
 import {
   startOfMonth,
   endOfMonth,
@@ -13,6 +14,7 @@ import { ko } from 'date-fns/locale'
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import { GameScheduleData } from '@/types'
 import Link from 'next/link'
+import KtwizCalendarCell from './ktwiz-calendar-cell'
 
 interface CalendarProps {
   gameData: GameScheduleData[]
@@ -21,6 +23,7 @@ interface CalendarProps {
 
 const Calendar = ({ gameData, currentDate }: CalendarProps) => {
   const formattedCurrentDate = parse(currentDate, 'yyyyMM', new Date())
+  const [activeSchedule, setActiveSchedule] = useState('KT') // KT 또는 ALL
 
   // 헤더 렌더링
   const renderHeader = () => {
@@ -50,10 +53,22 @@ const Calendar = ({ gameData, currentDate }: CalendarProps) => {
         </div>
 
         {/* 경기 전환 */}
-        {/* <div className="rounded-full border border-gray-200 px-4 leading-8">
-          <button>KT 경기</button>
-          <button>전체 경기</button>
-        </div> */}
+        <div
+          className={`relative rounded-full border border-gray-200 px-4 leading-8 ${activeSchedule === 'KT' ? 'pl-28' : 'pr-28'}`}
+        >
+          <button
+            className={`${activeSchedule === 'KT' && 'absolute left-0 w-24 rounded-full bg-red-500 text-white'}`}
+            onClick={() => setActiveSchedule('KT')}
+          >
+            KT 경기
+          </button>
+          <button
+            className={`${activeSchedule === 'ALL' && 'absolute right-0 w-24 rounded-full bg-red-500 text-white'}`}
+            onClick={() => setActiveSchedule('ALL')}
+          >
+            전체 경기
+          </button>
+        </div>
       </div>
     )
   }
@@ -111,52 +126,12 @@ const Calendar = ({ gameData, currentDate }: CalendarProps) => {
             {/* 날짜 */}
             <span className="absolute text-base">{format(day, 'd')}</span>
 
-            {/* 게임 데이터 렌더링 */}
-            {dailyGames.length > 0 && (
-              <Link
-                className="mt-2 text-xs"
-                href={`/game/regular/boxscore/${dailyGames[0].gameDate}/${dailyGames[0].gmkey}`}
-              >
-                <div className="mt-2 text-center">
-                  <img
-                    src={
-                      dailyGames[0].visit === 'KT'
-                        ? dailyGames[0].homeLogo
-                        : dailyGames[0].visitLogo
-                    }
-                    alt={`KT logo`}
-                    className="mx-auto w-16"
-                  />
-                  <span>
-                    {dailyGames[0].gtime} {dailyGames[0].stadium} /{' '}
-                    {dailyGames[0].broadcast}
-                  </span>
-                </div>
-                <div className="absolute right-0 top-0">
-                  <div
-                    className={`h-0 w-0 border-l-[40px] border-t-[40px] border-l-transparent text-sm font-bold ${
-                      gameOutcomes.includes('승')
-                        ? 'border-t-[#FE653B]'
-                        : gameOutcomes.includes('무')
-                          ? 'border-[#495A8D]'
-                          : gameOutcomes.includes('패')
-                            ? 'border-t-[#D6D6D6]'
-                            : gameOutcomes.includes('취')
-                              ? 'border-t-[#555]'
-                              : ''
-                    }`}
-                  ></div>
-                  <span
-                    className={`absolute right-1.5 top-2 ${
-                      gameOutcomes.includes('패') && !gameOutcomes.includes('/')
-                        ? 'text-[#222]'
-                        : 'text-white'
-                    }`}
-                  >
-                    {gameOutcomes}
-                  </span>
-                </div>
-              </Link>
+            {/* KT 게임 데이터 렌더링 */}
+            {activeSchedule === 'KT' && dailyGames.length > 0 && (
+              <KtwizCalendarCell
+                cellData={dailyGames[0]}
+                gameOutcomes={gameOutcomes}
+              />
             )}
           </div>,
         )
@@ -176,8 +151,8 @@ const Calendar = ({ gameData, currentDate }: CalendarProps) => {
   return (
     <div className="mx-auto mt-10 rounded-lg bg-white p-4 shadow-lg">
       {renderHeader()}
-      {renderDays()}
-      {renderCells()}
+      {gameData.length > 0 && renderDays()}
+      {gameData.length > 0 ? renderCells() : <div>게임 정보가 없습니다.</div>}
     </div>
   )
 }
