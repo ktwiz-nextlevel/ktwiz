@@ -3,33 +3,34 @@ import { TabsType } from '@/types'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-export default function TabMenu({ tabs }: { tabs?: TabsType[] | null }) {
+export default function TabMenu({ tabs }: { tabs: TabsType[] }) {
   const pathname = usePathname()
-  const customIsActiveCondition = (pathname: string, tab: TabsType) => {
-    if (pathname === '/game/regular/watchpoint' && tab.path === 'boxscore') {
-      return true
+  type TabsType = {
+    path: string
+    href: string
+  }
+
+  // 특정 경로와 탭 매핑
+  const customIsActiveCondition = (
+    pathname: string,
+    tab: TabsType,
+  ): boolean => {
+    const specialCases: Record<string, (path: string) => boolean> = {
+      '/game/regular/watchpoint': (path) => tab.path === 'boxscore',
+      '/game/regular/ranking/pitcher': (path) => tab.path === 'ranking/team',
+      '/game/regular/ranking/batter': (path) => tab.path === 'ranking/team',
+      '/game/regular/ranking/crowd': (path) => tab.path === 'ranking/team',
+      '/game/regular/boxscore': (path) =>
+        path.startsWith('/game/regular/boxscore') && tab.path === 'boxscore', // 동적 경로 지원
     }
-    if (
-      pathname === '/game/regular/ranking/pitcher' &&
-      tab.path === 'ranking/team'
-    ) {
-      return true
+
+    for (const basePath in specialCases) {
+      if (pathname.startsWith(basePath) && specialCases[basePath](pathname)) {
+        return true
+      }
     }
-    if (
-      pathname === '/game/regular/ranking/batter' &&
-      tab.path === 'ranking/team'
-    ) {
-      return true
-    }
-    if (
-      pathname === '/game/regular/ranking/crowd' &&
-      tab.path === 'ranking/team'
-    ) {
-      return true
-    }
-    if (tab.href === pathname) {
-      return true
-    } else false
+
+    return tab.href === pathname
   }
   return (
     <div className="flex gap-1">

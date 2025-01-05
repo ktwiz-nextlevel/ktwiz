@@ -74,7 +74,7 @@ export const getbatterRankings = async ({
 
     const {
       data: { list },
-    }: Top5player = await response.json()
+    } = await response.json()
 
     return list
   } catch (error) {
