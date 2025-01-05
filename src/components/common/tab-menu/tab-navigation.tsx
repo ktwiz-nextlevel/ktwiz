@@ -14,8 +14,7 @@ export function TabNavigation({
   const { id } = useParams()
   const gameDate = id ? id[0] : '20241008'
   const gmkey = id ? id[1] : '33331008LGKT0'
-  console.log(id)
-  // `/${gameDate}/${gmkey}`
+
   return (
     <div className="flex gap-1">
       {tabs?.map((tab, index) => {

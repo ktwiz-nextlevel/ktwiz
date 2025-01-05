@@ -10,7 +10,6 @@ export default function TabMenu({ tabs }: { tabs: TabsType[] }) {
     href: string
   }
 
-  // 특정 경로와 탭 매핑
   const customIsActiveCondition = (
     pathname: string,
     tab: TabsType,

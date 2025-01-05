@@ -5,8 +5,6 @@ import { NextResponse } from 'next/server'
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // If the user visits `/game/regular/boxscore`, redirect to the specific path
-  console.log(pathname)
   if (pathname === '/game/regular/boxscore') {
     const newUrl = new URL(
       '/game/regular/boxscore/20241008/33331008LGKT0',

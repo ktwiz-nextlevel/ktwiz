@@ -3,12 +3,12 @@
 import SelectBox from '../pitcher/(component)/select-box'
 import { WithVerticalLines as Table } from '@/components/tailwind-ui/tables/with-vertical-lines'
 import { useEffect, useState } from 'react'
-import { getKTPitcherRankings, getPitcherRankings } from '../pitcher/(lib)/api'
 import { useSearchParams } from 'next/navigation'
-import { useSelection } from './(lib)/use-selection'
-import { TabMenu } from './(component)/tab-menu'
-import SearchBar from './(component)/search-bar'
-import { getbatterRankings, getKTBatterRankings } from './(lib)/api'
+import { useSelection } from './_lib/use-selection'
+import { getbatterRankings, getKTBatterRankings } from './_lib/api'
+import { TabMenu } from './_component/tab-menu'
+import SearchBar from './_component/search-bar'
+
 const TH_KEY = [
   { title: '선수명', key: 'playerName' },
   { title: '팀명', key: 'teamName' },

@@ -10,7 +10,7 @@ export function WithVerticalLines<T>({
   highlightColumnKey,
 }: {
   data: T[]
-  thKey: { title: string; key: keyof T }[]
+  thKey: { title: string; key: keyof T | string }[]
   highlightRowKey?: string
   rowKeyName?: string
   highlightColumnKey?: string
@@ -26,7 +26,7 @@ export function WithVerticalLines<T>({
     return idx % 2 === 0 ? 'bg-gray-50' : 'bg-white' // 기본 줄무늬 (짝수는 연한 핑크색, 홀수는 흰색)
   }
   const getHighlightStyle = (idx: number) => {
-    higlightColumIndex === idx ? 'bg-red-50' : 'bg-white'
+    return higlightColumIndex === idx ? 'bg-red-50' : 'bg-white'
   }
   const higlightColumIndex = highlightColumnKey
     ? thKey.findIndex((th) => th.key === highlightColumnKey)
@@ -56,7 +56,9 @@ export function WithVerticalLines<T>({
                 {data.map((player, idx) => {
                   const rowStyle = highlightRowKey
                     ? getRowStyle(idx, player)
-                    : getStripeStyle(idx)
+                    : highlightColumnKey
+                      ? getHighlightStyle(idx)
+                      : getStripeStyle(idx)
 
                   return (
                     <tr
@@ -64,6 +66,7 @@ export function WithVerticalLines<T>({
                       className={`divide-x divide-gray-200 hover:bg-red-50 hover:text-gray-600 ${rowStyle} `}
                     >
                       {thKey.map((th, index) => {
+                        const isSameKey = !player[th.key as keyof T]
                         return (
                           <td
                             key={index + 'key'}
@@ -71,10 +74,7 @@ export function WithVerticalLines<T>({
                               `${index === 0 ? `pl-2 text-start` : `px-4 text-center`} whitespace-nowrap border-none py-4 text-sm font-normal`,
                             )}
                           >
-                            {/* {index === 0 ? `${idx + 1} ` : ' '} */}
-                            {player[th.key as keyof typeof player] === ''
-                              ? '-'
-                              : player[th.key as keyof typeof player]}
+                            {isSameKey ? '-' : player[th.key]}
                           </td>
                         )
                       })}

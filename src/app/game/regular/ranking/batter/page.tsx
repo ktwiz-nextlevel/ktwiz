@@ -1,9 +1,10 @@
 import { TabNavigation } from '@/components/common/tab-menu/tab-navigation'
 import React from 'react'
 import { Top3BatterEras, Top3BatterWins } from './best-players'
-import { getTop5battertotal } from './(lib)/api'
+
 import { createTeamERAOverview, TeamERAOverview } from './team-era-overview'
 import RankingTable from './ranking-table'
+import { getTop5battertotal } from './_lib/api'
 const TABS = [
   { title: '팀순위', href: '/game/regular/ranking/team', path: 'team' },
   {
@@ -24,7 +25,7 @@ const TABS = [
 ]
 async function RankBatterPage() {
   const top5total = await getTop5battertotal()
-  console.log(top5total)
+  // console.log(top5total)
   return (
     <div className="w-full">
       <TabNavigation tabs={TABS} activeTab={TABS[2]} />

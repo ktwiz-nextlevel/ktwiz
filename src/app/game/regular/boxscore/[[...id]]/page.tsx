@@ -18,8 +18,7 @@ async function BoxscorePage({ params }: { params: Promise<{ id: string[] }> }) {
   const { id } = await params
   const gameDate = id ? id[0] : '20241008'
   const gmkey = id ? id[1] : '33331008LGKT0'
-  // console.log(gameDate)
-  // console.log(gmkey)
+
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/game/boxscore?gameDate=${gameDate}&gmkey=${gmkey} `,
   )

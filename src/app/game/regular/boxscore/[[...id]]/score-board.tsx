@@ -10,8 +10,6 @@ export async function ScoreBoard({
   gameDate: string
   gmkey: string
 }) {
-  // console.log(gameDate)
-  // console.log(gmkey)
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/game/boxscore?gameDate=${gameDate}&gmkey=${gmkey} `,
   )
@@ -26,9 +24,7 @@ export async function ScoreBoard({
   const homeBoard: Scoreboard = scoreboard.filter(
     (score) => score.bhome === 1,
   )[0]
-  // console.log(data)
-  // console.log(gameDate)
-  // console.log(gmkey)
+
   return (
     <Board>
       <Board.li style="w-full flex justify-center">
