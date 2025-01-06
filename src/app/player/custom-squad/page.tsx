@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState, useRef } from 'react'
-import { PlayerCode } from '@/types/player'
+import { PlayerCode } from '@/types'
 import Banner from '@/components/common/banner/banner'
 import TabMenu from '@/components/common/tab-menu/tab-menu'
 import { PLAYER_BANNER_DATA } from '@/contants/player'

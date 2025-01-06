@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react'
 import Banner from '@/components/common/banner/banner'
 import { PLAYER_BANNER_DATA } from '@/contants/player'
 import TabMenu from '@/components/common/tab-menu/tab-menu'
-import { PlayerCode, PlayerData } from '@/types/player'
+import { PlayerCode, PlayerData } from '@/types'
 import {
   getPitcherPlayerList,
   getPitcherPlayerDetail,

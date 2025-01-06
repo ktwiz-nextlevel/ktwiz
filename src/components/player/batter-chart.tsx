@@ -43,13 +43,11 @@ export default function PlayerChart({ data }: PlayerChartProps) {
 
   return (
     <div className="flex w-full items-center justify-center space-x-4 p-4">
-      {/* 첫 번째 히트 스프레이 차트 */}
       <div className="h-96 w-1/2">
         <h3 className="mb-2 text-center font-bold">히트스프레이</h3>
         <ChartScatter scatterData={processedData} />
       </div>
 
-      {/* 두 번째 차트 */}
       <div className="h-96 w-1/2">
         <h3 className="mb-2 text-center font-bold">24시즌vs23시즌</h3>
         {/* <ChartRadar2 data={data2} /> */}

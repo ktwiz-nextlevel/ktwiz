@@ -1,13 +1,20 @@
 import Title from '@/components/common/title/title'
 import { EtcGames } from '@/types'
 
-async function KeyRecords() {
+async function KeyRecords({
+  gameDate = '20241008',
+  gmkey = '33331008LGKT0',
+}: {
+  gameDate: string
+  gmkey: string
+}) {
+  console.log(gameDate, gmkey)
   const res = await fetch(
-    'http://54.180.229.183/api/game/boxscore?gameDate=20241008&gmkey=33331008LGKT0',
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/game/boxscore?gameDate=${gameDate}&gmkey=${gmkey}`,
   )
   const data = await res.json()
 
-  const etcgames: EtcGames[] = data.data.etcgames
+  const etcgames: EtcGames[] = data.data?.etcgames
 
   interface PlayerDescriptions {
     player: string
@@ -45,18 +52,19 @@ async function KeyRecords() {
     <section className="gray-red-400 w-full pt-3">
       <Title text={`주요 기록 `} />
       <div className="flex w-full flex-wrap">
-        {etcgames.map((game, idx) => {
-          const info = splitPlayers(game.result)
-          return (
-            <div
-              className={`${idx % 2 === 0 ? 'pr-6' : 'border-l-2 pl-6'} w-1/2 py-6`}
-              key={game.how + idx}
-            >
-              <h2 className="text-gray-600">
-                {game.how + ` (${info.length})`}
-              </h2>
-              <div className="mt-3 flex justify-start overflow-auto">
-                {/* {info.map((player, idx) => (
+        {etcgames &&
+          etcgames.map((game, idx) => {
+            const info = parsePlayerDescriptions(game.result)
+            return (
+              <div
+                className={`${idx % 2 === 0 ? 'pr-6' : 'border-l-2 pl-6'} w-1/2 py-6`}
+                key={game.how + idx}
+              >
+                <h2 className="text-gray-600">
+                  {game.how + ` (${info.length})`}
+                </h2>
+                <div className="mt-3 flex justify-start overflow-auto">
+                  {/* {info.map((player, idx) => (
                   <div
                     key={player.name + idx}
                     className="border border-red-500"
@@ -65,23 +73,23 @@ async function KeyRecords() {
                     <p>{player.des}</p>
                   </div>
                 ))} */}
-                {info.map((player, idx) => (
-                  <div key={player + idx} className={`flex`}>
-                    <img
-                      src={'/images/players/player.webp'}
-                      alt="player"
-                      className="w-[100px] object-contain"
-                    />
-                    <div className="w-[240px]">
-                      <h3 className="text-base">{player}</h3>
-                      <p className="text-xs text-gray-300">{player}</p>
+                  {info.map((player, idx) => (
+                    <div key={player.name + idx} className={`flex`}>
+                      <img
+                        src={`/images/players/${player.name}.jpg`}
+                        alt="player"
+                        className="w-[100px] object-contain"
+                      />
+                      <div className="w-[240px]">
+                        <h3 className="text-base">{player.name}</h3>
+                        <p className="text-xs text-gray-300">{player.des}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
-            </div>
-          )
-        })}
+            )
+          })}
       </div>
     </section>
   )

@@ -2,11 +2,17 @@
 
 import { useRouter } from 'next/navigation'
 
-function PrevButton({ gameDate, gmkey }: { gameDate: number; gmkey: string }) {
+function PrevButton({
+  gameDate,
+  gmkey,
+}: {
+  gameDate?: number
+  gmkey?: string
+}) {
   const router = useRouter()
   function handlePrevDate(e: React.MouseEvent<HTMLDivElement>) {
     e.preventDefault()
-    console.log('prev')
+
     if (gameDate && gmkey) {
       router.push(`/game/regular/boxscore/${gameDate}/${gmkey}`)
     }
