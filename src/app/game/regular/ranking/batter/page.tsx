@@ -1,4 +1,4 @@
-import { TabNavigation } from '@/components/common/tab-menu/tab-navigation'
+import { TabNavigation } from '@/components/common/tab-menu/tab'
 import React from 'react'
 import { Top3BatterEras, Top3BatterWins } from './best-players'
 

@@ -43,7 +43,7 @@ const getTop3PitcherHr = async (): Promise<
 export async function Top3BatterWins() {
   const winlist: [Player, Player, Player] | string = await getTop3PitcherHr()
 
-  if (winlist === 'string') {
+  if (winlist === 'string' || winlist.length === 0) {
     return (
       <div className="flex">
         {/* 이미지 */}
@@ -85,7 +85,7 @@ export async function Top3BatterWins() {
 export async function Top3BatterEras() {
   const top3PitcherEras: [Player, Player, Player] | string =
     await getTop3BatterHra()
-  if (top3PitcherEras === 'string') {
+  if (top3PitcherEras === 'string' || top3PitcherEras.length === 0) {
     return (
       <div className="flex">
         {/* 이미지 */}
@@ -115,9 +115,9 @@ export async function Top3BatterEras() {
       <div className="flex flex-col items-start justify-center gap-2">
         {typeof top3PitcherEras !== 'string' && (
           <>
-            <span className="font-bold">{`1. ${top3PitcherEras[0].playerName} (${top3PitcherEras[0].hra})`}</span>
-            <span className="text-gray-400">{`2. ${top3PitcherEras[1].playerName} (${top3PitcherEras[1].hra})`}</span>
-            <span className="text-gray-400">{`3. ${top3PitcherEras[2].playerName} (${top3PitcherEras[2].hra})`}</span>
+            <span className="font-bold">{`1. ${top3PitcherEras[0].playerName} (${top3PitcherEras[0]?.hra})`}</span>
+            <span className="text-gray-400">{`2. ${top3PitcherEras[1].playerName} (${top3PitcherEras[1]?.hra})`}</span>
+            <span className="text-gray-400">{`3. ${top3PitcherEras[2].playerName} (${top3PitcherEras[2]?.hra})`}</span>
           </>
         )}
       </div>

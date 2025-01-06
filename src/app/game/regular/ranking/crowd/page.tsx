@@ -1,4 +1,4 @@
-import { TabNavigation } from '@/components/common/tab-menu/tab-navigation'
+import { TabNavigation } from '@/components/common/tab-menu/tab'
 import React from 'react'
 const TABS = [
   { title: '팀순위', href: '/game/regular/ranking/team', path: 'team' },

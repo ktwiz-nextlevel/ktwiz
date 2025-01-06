@@ -1,4 +1,4 @@
-import { TabNavigation as TabMenu } from '@/components/common/tab-menu/tab-navigation'
+import { TabNavigation as TabMenu } from '@/components/common/tab-menu/tab'
 import { Top3PitcherEras, Top3PitcherWins } from './best-players'
 
 import { Top5PitcherEras } from '@/types'

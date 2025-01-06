@@ -42,8 +42,8 @@ const getTop3PitcherWins = async (): Promise<
 
 export async function Top3PitcherWins() {
   const winlist: [Player, Player, Player] | string = await getTop3PitcherWins()
-
-  if (winlist === 'string') {
+  console.log(winlist)
+  if (winlist === 'string' || winlist.length === 0) {
     return (
       <div className="flex">
         {/* 이미지 */}
@@ -85,7 +85,7 @@ export async function Top3PitcherWins() {
 export async function Top3PitcherEras() {
   const top3PitcherEras: [Player, Player, Player] | string =
     await getTop3PitcherEras()
-  if (top3PitcherEras === 'string') {
+  if (top3PitcherEras === 'string' || top3PitcherEras.length === 0) {
     return (
       <div className="flex">
         {/* 이미지 */}

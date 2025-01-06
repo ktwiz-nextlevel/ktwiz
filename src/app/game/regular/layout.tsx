@@ -25,10 +25,12 @@ function Layout({
           title={GAME_BANNER_DATA['/regular'].title}
           subtitle={GAME_BANNER_DATA['/regular'].description}
         />
-        <TabMenu
-          tabs={GAME_BANNER_DATA['/regular'].tabs}
-          // isActiveCondition={customIsActiveCondition}
-        />
+        {GAME_BANNER_DATA['/regular'].tabs && (
+          <TabMenu
+            tabs={GAME_BANNER_DATA['/regular'].tabs}
+            // isActiveCondition={customIsActiveCondition}
+          />
+        )}
       </Banner>
       <div className="page"> {children}</div>
     </div>

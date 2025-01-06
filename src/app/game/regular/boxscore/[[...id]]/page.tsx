@@ -43,7 +43,7 @@ async function BoxscorePage({ params }: { params: Promise<{ id: string[] }> }) {
         // path={`/${gameDate}/${gmkey}`}
       />
       <br />
-      <KeyRecords />
+      <KeyRecords gameDate={gameDate} gmkey={gmkey} />
       <BatterRecords
         data={data.data}
         home={data.data.schedule.current.home}

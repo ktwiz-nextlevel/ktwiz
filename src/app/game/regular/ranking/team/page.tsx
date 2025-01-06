@@ -1,4 +1,4 @@
-import { TabNavigation } from '@/components/common/tab-menu/tab-navigation'
+import { TabNavigation } from '@/components/common/tab-menu/tab'
 
 import LineChartComponent from './charts'
 import Title from '@/components/common/title/title'
