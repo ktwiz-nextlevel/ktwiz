@@ -4,8 +4,7 @@ import Title from '@/components/common/title/title'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 
 import BoardHeader from '@/components/boxscore/score-board/board-header'
-import RadarChartComponent from './radar-chart'
-import { useParams } from 'next/navigation'
+import { RadarChartComponent as Chart } from './radar-chart'
 
 const TABS = [
   { title: '박스스코어', href: '/game/regular/boxscore', path: 'boxscore' },
@@ -132,7 +131,7 @@ async function BoxscorePage({ params }: { params: Promise<{ id: string[] }> }) {
           <p className="my-5 mt-2 font-thin text-gray-400">
             각 팀의 선발 투수의 데이터입니다.
           </p>
-          <RadarChartComponent />
+          <Chart gameDate={gameDate} gmkey={gmkey} />
         </SectionWrapper>
         <SectionWrapper>
           <Title text={`라인업`} />
@@ -185,3 +184,42 @@ function BreadCrumb() {
 function SectionWrapper({ children }: { children: React.ReactNode }) {
   return <section className="mt-10 h-[700px] w-1/2">{children}</section>
 }
+
+const data = [
+  {
+    subject: 'ERA (자책점 평균)',
+    A: 120,
+    B: 110,
+    fullMark: 150,
+  },
+  {
+    subject: 'WHIP',
+    A: 98,
+    B: 130,
+    fullMark: 150,
+  },
+  {
+    subject: 'K/9 ',
+    A: 86,
+    B: 130,
+    fullMark: 150,
+  },
+  {
+    subject: 'BB/9 (9이닝당 볼넷 허용)',
+    A: 99,
+    B: 100,
+    fullMark: 150,
+  },
+  {
+    subject: 'IP (이닝)',
+    A: 136,
+    B: 90,
+    fullMark: 150,
+  },
+  {
+    subject: 'BAbip',
+    A: 140,
+    B: 85,
+    fullMark: 150,
+  },
+]

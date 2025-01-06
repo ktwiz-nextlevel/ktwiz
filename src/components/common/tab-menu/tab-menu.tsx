@@ -5,11 +5,6 @@ import { usePathname } from 'next/navigation'
 
 export default function TabMenu({ tabs }: { tabs: TabsType[] }) {
   const pathname = usePathname()
-  type TabsType = {
-    path: string
-    href: string
-  }
-
   const customIsActiveCondition = (
     pathname: string,
     tab: TabsType,
