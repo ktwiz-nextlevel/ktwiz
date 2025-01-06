@@ -1,26 +1,29 @@
 'use client'
 import Image from 'next/image'
+import { useState } from 'react'
 
-interface PlayerImageProps {
-  player: {
-    name: string
-  }
-}
-
-const PlayerImage: React.FC<PlayerImageProps> = ({ player }) => {
-  const defaultImage = '/images/players/player.png'
+function PlayerImage({
+  player,
+}: {
+  player: { name: string; des: string | null; playerImg: string }
+}) {
+  const [imgSrc, setImgSrc] = useState(player.playerImg)
 
   return (
-    <Image
-      src={`/images/players/${player.name}.png`}
-      alt="player"
-      width={100}
-      height={100}
-      onError={(e: any) => {
-        e.target.src = defaultImage
-      }}
-    />
+    <div className="flex">
+      <Image
+        src={imgSrc}
+        alt="player"
+        width={100}
+        height={100}
+        className="object-cover"
+        onError={() => setImgSrc('/images/players/player.png')}
+      />
+      <div className="ml-2 w-[240px]">
+        <h3 className="mb-3 text-base">{player.name}</h3>
+        <p className="text-xs text-gray-300">{player.des}</p>
+      </div>
+    </div>
   )
 }
-
 export default PlayerImage
