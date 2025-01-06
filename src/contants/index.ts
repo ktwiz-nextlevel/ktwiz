@@ -111,7 +111,7 @@ export const MENU_DATA: MenuData[] = [
       // },
       {
         name: 'wiz 포토',
-        href: '/media/photos',
+        href: '/media/photos/1',
       },
       {
         name: '하이라이트',
@@ -383,6 +383,14 @@ export const FAN_BANNER_DATA: BannerData = {
   '/': {
     title: '게시판',
     description: 'KT Wiz의 게시판입니다.',
+    tabs: [],
+  },
+}
+
+export const MYPAGE_BANNER_DATA: BannerData = {
+  '/': {
+    title: '마이페이지',
+    description: '',
     tabs: [],
   },
 }
