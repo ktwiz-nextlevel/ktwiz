@@ -1,4 +1,3 @@
-import Calendar from '@/components/schedule/calendar'
 import GameCalendar from '@/components/schedule/game-calendar'
 import ScoreCardGroup from '@/components/schedule/score-card-group'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'

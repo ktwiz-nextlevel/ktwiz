@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   startOfMonth,
   endOfMonth,
@@ -17,13 +17,16 @@ import Link from 'next/link'
 import KtwizCalendarCell from './ktwiz-calendar-cell'
 
 interface CalendarProps {
-  gameData: GameScheduleData[]
+  ktGameData: GameScheduleData[]
+  allGameData: GameScheduleData[]
   currentDate: string
 }
 
-const Calendar = ({ gameData, currentDate }: CalendarProps) => {
+const Calendar = ({ ktGameData, currentDate, allGameData }: CalendarProps) => {
   const formattedCurrentDate = parse(currentDate, 'yyyyMM', new Date())
   const [activeSchedule, setActiveSchedule] = useState('KT') // KT 또는 ALL
+  const [activatedData, setActivatedData] = useState(ktGameData)
+  console.log(ktGameData)
 
   // 헤더 렌더링
   const renderHeader = () => {
@@ -53,7 +56,7 @@ const Calendar = ({ gameData, currentDate }: CalendarProps) => {
         </div>
 
         {/* 경기 전환 */}
-        <div
+        {/* <div
           className={`relative rounded-full border border-gray-200 px-4 leading-8 ${activeSchedule === 'KT' ? 'pl-28' : 'pr-28'}`}
         >
           <button
@@ -68,7 +71,7 @@ const Calendar = ({ gameData, currentDate }: CalendarProps) => {
           >
             전체 경기
           </button>
-        </div>
+        </div> */}
       </div>
     )
   }
@@ -107,7 +110,7 @@ const Calendar = ({ gameData, currentDate }: CalendarProps) => {
         const formattedDate = format(day, 'yyyyMMdd')
 
         // 해당 날짜의 게임 데이터 필터링
-        const dailyGames = gameData.filter(
+        const dailyGames = activatedData.filter(
           (game) => game.displayDate === formattedDate,
         )
 
@@ -133,6 +136,9 @@ const Calendar = ({ gameData, currentDate }: CalendarProps) => {
                 gameOutcomes={gameOutcomes}
               />
             )}
+
+            {/* 전체 게임 데이터 렌더링 */}
+            {activeSchedule === 'ALL' && <div>ㅣ</div>}
           </div>,
         )
         day = addDays(day, 1)
@@ -151,8 +157,12 @@ const Calendar = ({ gameData, currentDate }: CalendarProps) => {
   return (
     <div className="mx-auto mt-10 rounded-lg bg-white p-4 shadow-lg">
       {renderHeader()}
-      {gameData.length > 0 && renderDays()}
-      {gameData.length > 0 ? renderCells() : <div>게임 정보가 없습니다.</div>}
+      {activatedData.length > 0 || (allGameData.length > 0 && renderDays())}
+      {activatedData.length > 0 ? (
+        renderCells()
+      ) : (
+        <div className="text-center">게임 정보가 없습니다.</div>
+      )}
     </div>
   )
 }
