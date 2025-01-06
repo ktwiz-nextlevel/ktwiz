@@ -23,6 +23,8 @@ export default function PhotoModal({
   const [currentIndex, setCurrentIndex] = useState(selectedIndex)
   const [scale, setScale] = useState(1) // 확대/축소 비율
   const [isAutoSliding, setIsAutoSliding] = useState(false)
+  const [dragStartX, setDragStartX] = useState<number | null>(null)
+  const [dragDistance, setDragDistance] = useState(0)
 
   const handleZoomIn = () => {
     setScale((prevScale) => Math.min(prevScale + 0.5, 5)) // 최대 5배 확대
@@ -63,6 +65,53 @@ export default function PhotoModal({
       if (slideInterval) clearInterval(slideInterval)
     }
   }, [isAutoSliding, photoList.length])
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setDragStartX(e.clientX)
+    setDragDistance(0) // 초기화
+  }
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (dragStartX !== null) {
+      setDragDistance(e.clientX - dragStartX)
+    }
+  }
+
+  const handleMouseUp = () => {
+    if (dragStartX !== null) {
+      // 드래그 거리에 따라 슬라이드 전환
+      if (dragDistance > 100 && currentIndex > 0) {
+        handlePrev()
+      } else if (dragDistance < -100 && currentIndex < photoList.length - 1) {
+        handleNext()
+      }
+    }
+    setDragStartX(null)
+    setDragDistance(0)
+  }
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setDragStartX(e.touches[0].clientX)
+    setDragDistance(0)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (dragStartX !== null) {
+      setDragDistance(e.touches[0].clientX - dragStartX)
+    }
+  }
+
+  const handleTouchEnd = () => {
+    if (dragStartX !== null) {
+      if (dragDistance > 100 && currentIndex > 0) {
+        handlePrev()
+      } else if (dragDistance < -100 && currentIndex < photoList.length - 1) {
+        handleNext()
+      }
+    }
+    setDragStartX(null)
+    setDragDistance(0)
+  }
 
   if (!photoList[currentIndex]) return null
 
@@ -115,7 +164,15 @@ export default function PhotoModal({
           </div>
         </div>
 
-        <div className="relative flex h-full items-center justify-center overflow-hidden">
+        <div
+          className="relative flex h-full items-center justify-center overflow-hidden"
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
           <button
             onClick={handlePrev}
             disabled={currentIndex === 0}
@@ -138,6 +195,7 @@ export default function PhotoModal({
                   src={photo.imgFilePath}
                   alt={photo.artcTitle}
                   className="max-h-[1000px] max-w-[1600px] object-contain"
+                  draggable={false}
                   style={{
                     transform: `scale(${scale})`,
                     transition: 'transform 0.3s ease-in-out',
