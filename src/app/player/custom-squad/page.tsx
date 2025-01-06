@@ -9,6 +9,7 @@ import Image from 'next/image'
 import { getPitcherPlayerList } from '@/app/api/player/api'
 import html2canvas from 'html2canvas'
 import OverlayGuide from '@/components/player/overlay-guide'
+import PlayerList from '@/components/player/custom-squad/player-list'
 
 interface PlayerCard {
   pcode: PlayerCode
@@ -133,35 +134,12 @@ export default function CustomSquad() {
           </button>
         </div>
         <div className="flex h-screen flex-col gap-6 md:flex-row">
-          <div className="w-full flex-shrink-0 rounded-lg p-4 shadow-md md:w-1/6">
-            <div className="flex max-h-screen flex-col gap-4 overflow-y-auto">
-              {cards.map((card, index) => (
-                <div
-                  key={index}
-                  draggable
-                  onDragStart={(e) => handleDrag(card, e)}
-                  onDragEnd={handleDragEnd}
-                  className={`group relative flex h-60 w-full cursor-pointer items-center justify-center rounded-lg bg-gray-200 transition-all duration-300 hover:bg-gray-300 hover:shadow-md active:scale-95 ${
-                    draggedCard?.pcode === card.pcode ? 'opacity-50' : ''
-                  }`}
-                >
-                  <img
-                    src={card.playerPrvwImg || '/images/ktwiz-basic-img.png'}
-                    alt={card.playerName}
-                    className="h-full w-full rounded-lg object-cover"
-                  />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center rounded-lg bg-black bg-opacity-50 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <div className="text-lg font-bold">{card.playerName}</div>
-                    {card.position && (
-                      <div className="mt-1 text-sm text-gray-300">
-                        {card.position}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+          <PlayerList
+            cards={cards}
+            draggedCard={draggedCard}
+            handleDrag={handleDrag}
+            handleDragEnd={handleDragEnd}
+          />
 
           <div className="relative h-full w-full flex-grow rounded-lg p-4 shadow-md md:w-4/5">
             <Image
