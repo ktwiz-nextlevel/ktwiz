@@ -1,12 +1,12 @@
 'use client'
 
-import { PlayerCode } from '@/types/player'
+import { PlayerCode } from '@/types'
 
 interface PlayerCard {
   pcode: PlayerCode
   playerName: string
   playerPrvwImg?: string
-  position?: string // position 속성 추가
+  position?: string
 }
 
 interface PlayerCardListProps {
@@ -25,7 +25,6 @@ export default function PlayerCardList({
           <div
             key={card.pcode}
             role="button"
-            aria-label={`${card.playerName} 카드`}
             className="group relative flex h-60 w-full cursor-pointer items-center justify-center rounded-lg bg-gray-200 transition-all duration-300 hover:bg-gray-300 hover:shadow-md active:scale-95"
             onClick={() => onCardClick(card.pcode)}
           >
