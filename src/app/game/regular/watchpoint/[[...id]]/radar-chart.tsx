@@ -1,5 +1,5 @@
 'use client'
-import React, { PureComponent } from 'react'
+import React, { PureComponent, useEffect, useState } from 'react'
 
 import {
   Radar,
@@ -11,63 +11,108 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from 'recharts'
+import { ChartData, WatchPointData } from './_lib/watch-point.type'
 
-const data = [
+const data: ChartData[] = [
   {
-    subject: 'ERA (자책점 평균)',
-    A: 120,
-    B: 110,
+    subject: 'sb',
+    key: 'sb',
+    A: 1,
+    B: 1,
+    fullMark: 100,
+  },
+  {
+    subject: 'hr',
+    key: 'hr',
+    A: 0.5,
+    B: 1,
     fullMark: 150,
   },
   {
-    subject: 'WHIP',
-    A: 98,
-    B: 130,
-    fullMark: 150,
-  },
-  {
-    subject: 'K/9 ',
+    subject: 'game 경기수 ',
+    key: 'game',
     A: 86,
     B: 130,
     fullMark: 150,
   },
   {
-    subject: 'BB/9 (9이닝당 볼넷 허용)',
-    A: 99,
-    B: 100,
-    fullMark: 150,
+    subject: 'win 승률',
+    key: 'win',
+    A: 0.5,
+    B: 0.3,
+    fullMark: 100,
   },
   {
-    subject: 'IP (이닝)',
-    A: 136,
-    B: 90,
-    fullMark: 150,
-  },
-  {
-    subject: 'BAbip',
-    A: 140,
-    B: 85,
-    fullMark: 150,
+    subject: '패배율',
+    key: 'lose',
+    A: 70,
+    B: 80,
+    fullMark: 100,
   },
 ]
+function creatChartData(res: WatchPointData | null) {
+  if (res) {
+    return data.map((info) => {
+      const homeData = res.homeTeamRank[info.key]
+      const visitData = res.visitTeamRank[info.key]
+      return {
+        ...info,
+        A: homeData,
+        B: visitData,
+      }
+    })
+  }
+}
+export function RadarChartComponent({
+  gameDate = '20241008',
+  gmkey = '33331008LGKT0',
+}: {
+  gameDate: string
+  gmkey: string
+}) {
+  const [data, setData] = useState<null | WatchPointData>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<null | string>(null)
+  let chartData = creatChartData(data)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API_SERVER_URL}/game/watchpoint?gameDate=${gameDate}&gmkey=${gmkey}`,
+        )
+        if (!res.ok) {
+          throw new Error('Failed to fetch data')
+        }
+        const result = await res.json()
+        setData(result.data)
+      } catch (err) {
+        setError('error')
+      } finally {
+        setLoading(false)
+      }
+    }
 
-function RadarChartComponent() {
+    fetchData()
+  }, [gameDate, gmkey])
+
+  if (loading) return <div>Loading...</div>
+  if (error) return <div>Error: {error}</div>
   return (
     <ResponsiveContainer width="80%" height="80%">
-      <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
+      <RadarChart cx="50%" cy="50%" outerRadius="80%" data={chartData}>
         <PolarGrid />
         <PolarAngleAxis dataKey="subject" />
-        <PolarRadiusAxis angle={30} domain={[0, 150]} />
+        <PolarRadiusAxis angle={30} domain={[0, 100]} />
 
         <Radar
-          name="KT"
+          name={data?.homeTeamRank.teamName}
           dataKey="B"
           stroke="#ea0101"
           fill="#ea0101"
           fillOpacity={0.2}
         />
         <Radar
-          name="LG"
+          name={data?.visitTeamRank.teamName}
           dataKey="A"
           stroke={'#0098af'}
           fill="#0098af"
@@ -79,5 +124,3 @@ function RadarChartComponent() {
     </ResponsiveContainer>
   )
 }
-
-export default RadarChartComponent
