@@ -21,6 +21,8 @@ export default function TabMenu({ tabs }: { tabs: TabsType[] }) {
       '/game/regular/ranking/crowd': (path) => tab.path === 'ranking/team',
       '/game/regular/boxscore': (path) =>
         path.startsWith('/game/regular/boxscore') && tab.path === 'boxscore', // 동적 경로 지원
+      '/game/regular/schedule': (path) =>
+        path.startsWith('/game/regular/schedule') && tab.path === 'schedule',
     }
 
     for (const basePath in specialCases) {
