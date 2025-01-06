@@ -1,4 +1,4 @@
-import { Batter } from '@/types'
+import { Batter, Pitcher } from '@/types'
 
 export const TABLE_TITLE_KEY_BATTER: {
   title: string
@@ -24,4 +24,27 @@ export const TABLE_TITLE_KEY_BATTER: {
   { title: '안타', key: 'hit' },
   { title: '타점', key: 'rbi' },
   { title: '타율', key: 'avg' },
+]
+
+export const TABLE_TITLE_KEY_PITCHER: {
+  title: string
+  key: keyof Pitcher | 'result' | 'era'
+}[] = [
+  { title: '선수', key: 'name' },
+  { title: '등판', key: 'changeinn' },
+  { title: '결과', key: 'result' },
+  { title: '승', key: 'w' },
+  { title: '패', key: 'l' },
+  { title: '세', key: 's' },
+  { title: '이닝', key: 'inn' },
+  { title: '타자', key: 'pa' },
+  { title: '타구수', key: 'bf' },
+  { title: '타수', key: 'ab' },
+  { title: '피안타', key: 'hit' },
+  { title: '피홈런', key: 'hr' },
+  { title: '사구', key: 'bbhp' },
+  { title: '삼진', key: 'kk' },
+  { title: '실점', key: 'r' },
+  { title: '자책', key: 'er' },
+  { title: '평균 자책점', key: 'era' },
 ]

@@ -2,9 +2,10 @@
 import { useState } from 'react'
 import Title from '@/components/common/title/title'
 import { WithVerticalLines as Table } from '@/components/tailwind-ui/tables/with-vertical-lines'
-import { Batter, BoxScore } from '@/types'
+import { BoxScore } from '@/types'
 import { TabMenu } from '../_component/tabmenu-records'
 import { TABLE_TITLE_KEY_BATTER } from '../_lib/records.type'
+import { createBatterTableData } from '../_lib/adapter'
 
 function BatterRecords({
   data,
@@ -41,13 +42,6 @@ function BatterRecords({
       />
     </section>
   )
-}
-function createBatterTableData(data: Batter[]) {
-  return data.map((player) => {
-    const seasonAvg = player.accmAb > 0 ? player.accmHit / player.accmAb : 0
-    const truncatedAvg = Math.floor(seasonAvg * 1000) / 1000
-    return { ...player, avg: truncatedAvg }
-  })
 }
 
 export default BatterRecords
