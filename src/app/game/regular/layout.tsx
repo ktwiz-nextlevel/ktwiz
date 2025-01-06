@@ -8,6 +8,15 @@ function Layout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  // const customIsActiveCondition = (pathname: string, tab: TabsType) => {
+  //   if (pathname === '/game/regular/watchpoint' && tab.path === 'boxscore') {
+  //     return true
+  //   }
+  //   if (tab.href === pathname) {
+  //     return true
+  //   } else false
+  // }
+
   return (
     <div>
       <Banner>
@@ -15,7 +24,12 @@ function Layout({
           title={GAME_BANNER_DATA['/regular'].title}
           subtitle={GAME_BANNER_DATA['/regular'].description}
         />
-        <TabMenu tabs={GAME_BANNER_DATA['/regular'].tabs} />
+        {GAME_BANNER_DATA['/regular'].tabs && (
+          <TabMenu
+            tabs={GAME_BANNER_DATA['/regular'].tabs}
+            // isActiveCondition={customIsActiveCondition}
+          />
+        )}
       </Banner>
       <div className="page"> {children}</div>
     </div>

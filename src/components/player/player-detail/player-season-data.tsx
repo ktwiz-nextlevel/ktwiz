@@ -1,4 +1,4 @@
-import { PlayerSeasonDataProps } from '@/types/player'
+import { PlayerSeasonDataProps } from '@/types/player.type'
 
 export default function PlayerSeasonData({
   seasonData,
