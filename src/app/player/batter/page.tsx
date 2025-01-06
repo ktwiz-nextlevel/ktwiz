@@ -43,9 +43,9 @@ export default function Batter() {
       try {
         const [infielderPlayerList, catcherPlayerList, outfielderPlayerList] =
           await Promise.all([
+            getOutfielderPlayerList(),
             getInfielderPlayerList(),
             getCatcherPlayerList(),
-            getOutfielderPlayerList(),
           ])
 
         setCards([
@@ -119,7 +119,7 @@ export default function Batter() {
           </div>
         </div>
 
-        <div className="mb-6 h-[800px] w-full rounded-lg p-10">
+        <div className="mb-6 h-full w-full rounded-lg p-10">
           <PlayerChart data={hitSprayData} />
         </div>
       </div>
