@@ -2,15 +2,15 @@ import { Batter, Pitcher } from '@/types'
 import { TeamRank } from '@/types/team-rank'
 import { cn } from '@/utils'
 
-export function WithVerticalLines({
+export function WithVerticalLines<T>({
   data,
   thKey,
   highlightRowKey,
   rowKeyName = 'key',
   highlightColumnKey,
 }: {
-  data: Pitcher[] | Batter[] | TeamRank[]
-  thKey: { title: string; key: keyof Pitcher | keyof Batter | keyof TeamRank }[]
+  data: T[]
+  thKey: { title: string; key: keyof T | string }[]
   highlightRowKey?: string
   rowKeyName?: string
   highlightColumnKey?: string
@@ -26,7 +26,7 @@ export function WithVerticalLines({
     return idx % 2 === 0 ? 'bg-gray-50' : 'bg-white' // 기본 줄무늬 (짝수는 연한 핑크색, 홀수는 흰색)
   }
   const getHighlightStyle = (idx: number) => {
-    higlightColumIndex === idx ? 'bg-red-50' : 'bg-white'
+    return higlightColumIndex === idx ? 'bg-red-50' : 'bg-white'
   }
   const higlightColumIndex = highlightColumnKey
     ? thKey.findIndex((th) => th.key === highlightColumnKey)
@@ -42,7 +42,7 @@ export function WithVerticalLines({
                   {thKey.map((th, idx) => {
                     return (
                       <th
-                        key={th.key + idx}
+                        key={idx + 'thkey'}
                         scope="col"
                         className={`border-none px-4 py-3.5 text-left text-sm font-semibold text-gray-900 ${higlightColumIndex === idx ? 'bg-red-50' : 'bg-white'}`}
                       >
@@ -56,7 +56,9 @@ export function WithVerticalLines({
                 {data.map((player, idx) => {
                   const rowStyle = highlightRowKey
                     ? getRowStyle(idx, player)
-                    : getStripeStyle(idx)
+                    : highlightColumnKey
+                      ? getHighlightStyle(idx)
+                      : getStripeStyle(idx)
 
                   return (
                     <tr
@@ -64,17 +66,15 @@ export function WithVerticalLines({
                       className={`divide-x divide-gray-200 hover:bg-red-50 hover:text-gray-600 ${rowStyle} `}
                     >
                       {thKey.map((th, index) => {
+                        const isSameKey = !player[th.key as keyof T]
                         return (
                           <td
-                            key={th.key + index}
+                            key={index + 'key'}
                             className={cn(
                               `${index === 0 ? `pl-2 text-start` : `px-4 text-center`} whitespace-nowrap border-none py-4 text-sm font-normal`,
                             )}
                           >
-                            {/* {index === 0 ? `${idx + 1} ` : ' '} */}
-                            {player[th.key as keyof typeof player] === ''
-                              ? '-'
-                              : player[th.key as keyof typeof player]}
+                            {isSameKey ? '-' : player[th.key]}
                           </td>
                         )
                       })}

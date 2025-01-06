@@ -28,7 +28,7 @@ export async function ScoreBoard({
   return (
     <Board>
       <Board.li style="w-full flex justify-center">
-        <BoardHeader />
+        <BoardHeader gameDate={gameDate} gmkey={gmkey} />
       </Board.li>
       <Board.li>
         <BoardTH />

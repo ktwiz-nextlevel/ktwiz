@@ -2,8 +2,10 @@ import Board from '@/components/common/board/board'
 import { TabNavigation } from '@/components/common/tab-menu/tab-navigation'
 import Title from '@/components/common/title/title'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
-import RadarChartComponent from './radar-chart'
+
 import BoardHeader from '@/components/boxscore/score-board/board-header'
+import RadarChartComponent from './radar-chart'
+import { useParams } from 'next/navigation'
 
 const TABS = [
   { title: '박스스코어', href: '/game/regular/boxscore', path: 'boxscore' },
@@ -49,7 +51,7 @@ async function BoxscorePage({ params }: { params: Promise<{ id: string[] }> }) {
       <BreadCrumb />
       <Board>
         <Board.li style="w-full flex justify-center">
-          <BoardHeader />
+          <BoardHeader gameDate={gameDate} gmkey={gmkey} />
         </Board.li>
         <Board.li style="flex justify-center gap-6">
           <div>
@@ -119,7 +121,11 @@ async function BoxscorePage({ params }: { params: Promise<{ id: string[] }> }) {
           </div>
         </Board.li>
       </Board>
-      <TabNavigation tabs={TABS} activeTab={TABS[1]} />
+      <TabNavigation
+        tabs={TABS}
+        activeTab={TABS[1]}
+        // path={`/${gameDate}/${gmkey}`}
+      />
       <div className="flex w-full flex-wrap justify-center">
         <SectionWrapper>
           <Title text={`선발 투수 비교`} />
