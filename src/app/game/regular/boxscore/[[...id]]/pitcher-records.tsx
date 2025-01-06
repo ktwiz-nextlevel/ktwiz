@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Title from '@/components/common/title/title'
 import { WithVerticalLines as Table } from '@/components/tailwind-ui/tables/with-vertical-lines'
 import { BoxScore } from '@/types'
+import { TabMenu } from '../_component/tabmenu-records'
 
 const TH_KEY = [
   { title: '선수', key: 'name' },
@@ -33,16 +34,8 @@ function PitcherRecords({
   home: string
   visit: string
 }) {
-  const title = '투수 기록'
-
-  const DATA_TYPE = {
-    PITCHERS_VISIT: data.vpitchers,
-    PITCHERS_HOME: data.hpitchers,
-  }
   const [activeTab, setActiveTab] = useState({ ishome: true, name: home })
-  const tableData = activeTab.ishome
-    ? DATA_TYPE.PITCHERS_HOME
-    : DATA_TYPE.PITCHERS_VISIT
+  const tableData = activeTab.ishome ? data.hpitchers : data.vpitchers
   function handleTab() {
     setActiveTab((prev) =>
       prev.ishome
@@ -53,7 +46,7 @@ function PitcherRecords({
 
   return (
     <section className="gray-red-400 w-full pt-5">
-      <Title text={title} />
+      <Title text="투수 기록" />
       <TabMenu
         activeTab={activeTab}
         setActiveTab={handleTab}
@@ -66,30 +59,3 @@ function PitcherRecords({
 }
 
 export default PitcherRecords
-
-function TabMenu({
-  activeTab,
-  setActiveTab,
-  home,
-  visit,
-}: {
-  activeTab: { ishome: boolean; name: string }
-  setActiveTab: any
-  home: string
-  visit: string
-}) {
-  return (
-    <div className="mt-3 flex gap-1" onClick={setActiveTab}>
-      <div
-        className={`rounded-md px-4 py-1 ${activeTab.ishome ? 'bg-gray-200' : ''}`}
-      >
-        {home}
-      </div>
-      <div
-        className={`rounded-md px-4 py-1 ${!activeTab.ishome ? 'bg-gray-200' : ''}`}
-      >
-        {visit}
-      </div>
-    </div>
-  )
-}

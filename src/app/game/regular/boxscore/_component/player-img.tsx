@@ -14,7 +14,7 @@ function PlayerImage({
       <Image
         src={imgSrc}
         alt="player"
-        width={100}
+        width={70}
         height={100}
         className="object-cover"
         onError={() => setImgSrc('/images/players/player.png')}

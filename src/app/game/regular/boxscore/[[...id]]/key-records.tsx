@@ -1,8 +1,6 @@
 import Title from '@/components/common/title/title'
 import { EtcGames } from '@/types'
-import Image from 'next/image'
-import { useState } from 'react'
-import PlayerImage from './player-img'
+import PlayerImage from '../_component/player-img'
 
 async function KeyRecords({
   gameDate = '20241008',
