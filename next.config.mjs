@@ -1,7 +1,7 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
   images: {
-    domains: ['wizzap.ktwiz.co.kr'], // 외부 이미지 호스트 추가
+    domains: ['54.180.228.165'], // 외부 이미지 도메인 추가
   },
 }
 
