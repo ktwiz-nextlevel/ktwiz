@@ -131,7 +131,9 @@ export interface Pitcher {
   pos: string // 포지션
   tb: string // 팀 약어
   w: number // 승리 수
-  wls: string // 승패 (W: 승, L: 패)
+  wls: 'W' | 'L' | 'S' // 승패 (W: 승, L: 패)
+  s: number
+  r: number
 }
 export interface GameSchedule {
   broadcast: string // 방송사

@@ -37,11 +37,7 @@ async function BoxscorePage({ params }: { params: Promise<{ id: string[] }> }) {
     <div className="w-full">
       <BreadCrumb />
       <ScoreBoard gameDate={gameDate} gmkey={gmkey} />
-      <TabNavigation
-        tabs={TABS}
-        activeTab={TABS[0]}
-        // path={`/${gameDate}/${gmkey}`}
-      />
+      <TabNavigation tabs={TABS} activeTab={TABS[0]} />
       <br />
       <KeyRecords gameDate={gameDate} gmkey={gmkey} />
       <BatterRecords
