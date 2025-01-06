@@ -10,3 +10,9 @@ export const createTeamERAOverview = (
     list: typeof top5PitcherEras !== 'string' ? top5PitcherEras : undefined,
   } as const
 }
+
+export function createPlayerList(list: any[], key: string) {
+  return list.map((player, idx) => {
+    return { playerName: player.playerName, data: player[key] }
+  })
+}

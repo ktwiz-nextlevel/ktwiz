@@ -1,11 +1,12 @@
 import { TabNavigation as TabMenu } from '@/components/common/tab-menu/tab'
-import { Top3PitcherEras, Top3PitcherWins } from './best-players'
+import { Top3PitcherEras } from './best-players'
 
 import { Top5PitcherEras } from '@/types'
 import { TeamERAOverview } from './(component)/team-era-overview'
 import { createTeamERAOverview } from './(lib)/adapter'
 import { getTop5PitcherEras } from './(lib)/api'
 import RankingTable from './ranking-table'
+import { Top3PitcherWins } from './top3-pitcher-wins'
 
 const TABS = [
   { title: '팀순위', href: '/game/regular/ranking/team', path: 'team' },

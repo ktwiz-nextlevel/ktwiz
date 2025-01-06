@@ -1,7 +1,5 @@
 import { TabNavigation } from '@/components/common/tab-menu/tab'
-
 import LineChartComponent from './charts'
-import Title from '@/components/common/title/title'
 import { WithVerticalLines as Table } from '@/components/tailwind-ui/tables/with-vertical-lines'
 import { TeamRank } from '@/types/team-rank'
 import {
@@ -11,6 +9,7 @@ import {
   fetchTeamRankteamvs,
 } from './_lib/api'
 import { transformData } from './_lib/adapter'
+import TitleWithYear from '@/components/common/title/title-with-year'
 const TABS = [
   { title: '팀순위', href: '/game/regular/ranking/team', path: 'team' },
   {
@@ -178,7 +177,7 @@ async function RankingPage() {
       <TabNavigation tabs={TABS} activeTab={TABS[0]} />
 
       <SectionWrapper>
-        <Title text={`2024 시즌 팀 순위`} />
+        <TitleWithYear text={`시즌 팀 순위`} />
         <p className="mt-2 font-thin text-gray-400">
           올해 kt wiz 순위를 살펴보세요.
         </p>
@@ -186,7 +185,7 @@ async function RankingPage() {
       </SectionWrapper>
 
       <SectionWrapper>
-        <Title text={`2024 시즌 팀 기록`} />
+        <TitleWithYear text={`시즌 팀 기록`} />
         <p className="my-5 mt-2 font-thin text-gray-400">
           올해 kt wiz 팀 기록을 살펴보세요.
         </p>
@@ -199,7 +198,7 @@ async function RankingPage() {
       </SectionWrapper>
 
       <SectionWrapper>
-        <Title text={`2024 시즌 팀 투수 기록`} />
+        <TitleWithYear text={`시즌 팀 투수 기록`} />
         <p className="my-5 mt-2 font-thin text-gray-400">
           올해 kt wiz 팀 투수 기록을 살펴보세요.
         </p>
@@ -212,7 +211,7 @@ async function RankingPage() {
       </SectionWrapper>
 
       <SectionWrapper>
-        <Title text={`2024 시즌 팀 타자 기록`} />
+        <TitleWithYear text={` 시즌 팀 타자 기록`} />
         <p className="my-5 mt-2 font-thin text-gray-400">
           올해 kt wiz 팀 타자 기록을 살펴보세요.
         </p>
@@ -225,7 +224,7 @@ async function RankingPage() {
       </SectionWrapper>
 
       <SectionWrapper>
-        <Title text={`2024 시즌 팀 간 승패표`} />
+        <TitleWithYear text={` 시즌 팀 간 승패표`} />
         <p className="my-5 mt-2 font-thin text-gray-400">
           올해 kt wiz 팀 간 승패표를 살펴보세요.
         </p>

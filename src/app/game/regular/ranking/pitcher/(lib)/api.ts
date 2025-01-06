@@ -1,4 +1,4 @@
-import { Top5player } from '@/types'
+import { Player, Top3player, Top5player } from '@/types'
 
 export const getTop5PitcherEras = async () => {
   try {
@@ -82,5 +82,42 @@ export const getPitcherRankings = async ({
   } catch (error) {
     console.error('Error fetching KT pitcher rankings:', error)
     return []
+  }
+}
+
+export const getTop3PitcherWins = async (
+  year: number,
+): Promise<[Player, Player, Player] | string> => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_SERVER_URL}/game/rank/pitcher/win/top3?gyear=${year} `,
+    )
+
+    if (!response.ok) {
+      return '게임 승리 정보가 없습니다.'
+    }
+    const {
+      data: { list: list },
+    }: Top3player = await response.json()
+    list.sort((a, b) => b.w - a.w)
+    return list
+  } catch (error) {
+    throw new Error('Error fetching data')
+  }
+}
+export const getTop3PitcherEras = async (year: number) => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_SERVER_URL}/game/rank/pitcher/era/top3?gyear=${year}  `,
+    )
+    if (!response.ok) {
+      return '게임 평균자책점 정보가 없습니다.'
+    }
+    const {
+      data: { list: list },
+    }: Top3player = await response.json()
+    return list
+  } catch (error) {
+    throw new Error('Error fetching data')
   }
 }

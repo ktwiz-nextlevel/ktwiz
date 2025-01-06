@@ -31,7 +31,7 @@ export const getKTBatterRankings = async ({
     params.append('pname', pname)
 
     const url = `${process.env.NEXT_PUBLIC_API_SERVER_URL}/game/rank/kt/batter?${params.toString()}`
-    console.log(url)
+    // console.log(url)
     const response = await fetch(url)
 
     if (!response.ok) {

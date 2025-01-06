@@ -46,7 +46,7 @@ function RankingTable() {
 
   const [data, setData] = useState<any[]>([])
   const [searchValue, setSearch] = useState(searchParams.get('pname') || '')
-  console.log(data)
+  // console.log(data)
   const fetchRankings = async () => {
     try {
       const rankings =
