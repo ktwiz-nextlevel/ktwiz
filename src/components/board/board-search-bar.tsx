@@ -1,6 +1,6 @@
 'use client'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import TextSearchBar from '../media/common/text-search-bar'
+import SelectSearchBar from '../media/common/select-search-bar'
 
 const options = [
   { name: 'title', displayString: '제목' },
@@ -32,7 +32,7 @@ export default function BoardSearchBar() {
   }
 
   return (
-    <TextSearchBar
+    <SelectSearchBar
       options={options}
       defaultQuery={defaultQuery}
       onSubmit={handleTextSearch}
