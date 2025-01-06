@@ -2,7 +2,7 @@
 
 import PlayerCardList from '@/components/player/player-card-list'
 import PlayerDetail from '@/components/player/player-detail'
-import PlayerChart from '@/components/player/player-chart'
+import PlayerChart from '@/components/player/pitcher-chart'
 import { useState, useEffect } from 'react'
 import Banner from '@/components/common/banner/banner'
 import { PLAYER_BANNER_DATA } from '@/contants/player'

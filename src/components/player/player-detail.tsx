@@ -13,7 +13,6 @@ export default function PlayerDetail({
   seasonData,
   playerImg,
 }: DetailProps) {
-  console.log('detailData', detailData)
   return (
     <div className="mx-auto flex max-w-6xl flex-col rounded-lg p-6 md:flex-row md:gap-12">
       <div className="flex w-full flex-col items-center space-y-4 md:w-1/2">

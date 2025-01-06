@@ -41,7 +41,7 @@ export interface PlayerDetailDataList {
 }
 
 export interface PlayerData {
-  playerData: PlayerDetailData
+  playerData: PlayerDetailDataList
 }
 
 export interface SeasonData {

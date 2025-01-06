@@ -2,7 +2,6 @@
 
 import PlayerCardList from '@/components/player/player-card-list'
 import PlayerDetail from '@/components/player/player-detail'
-import PlayerChart from '@/components/player/player-chart'
 import { useState, useEffect } from 'react'
 import Banner from '@/components/common/banner/banner'
 import { PLAYER_BANNER_DATA } from '@/contants/player'
@@ -11,7 +10,11 @@ import { PlayerCode } from '@/types/player'
 import {
   getInfielderPlayerList,
   getCatcherPlayerList,
+  getInfielderPlayerDetail,
+  getCatcherPlayerDetail,
+  getHitSprayChart,
 } from '@/app/api/player/api'
+import PlayerChart from '@/components/player/batter-chart'
 
 interface PlayerCard {
   pcode: PlayerCode
@@ -20,24 +23,61 @@ interface PlayerCard {
 }
 
 export default function Batter() {
-  const [playerPcode, setPlayerPcode] = useState<PlayerCode>({ pcode: 69064 })
+  const [playerPcode, setPlayerPcode] = useState<PlayerCode>(50066)
+  const [playerName, setPlayerName] = useState('강현우')
   const [cards, setCards] = useState<PlayerCard[]>([])
+  const [detailData, setDetailData] = useState()
+  const [seasonData, setSeasonData] = useState()
+  const [playerImg, setPlayerImg] = useState()
+  const [hitSprayData, setHitSprayData] = useState()
 
   useEffect(() => {
-    const fetchBatterPlayerList = async () => {
+    const fetchBatterList = async () => {
       try {
-        const [infielderData, catcherData] = await Promise.all([
+        const [infielderPlayerList, catcherPlayerList] = await Promise.all([
           getInfielderPlayerList(),
           getCatcherPlayerList(), //외야수 데이터도 필요함
         ])
 
-        setCards([...infielderData, ...catcherData])
+        setCards([...infielderPlayerList, ...catcherPlayerList])
       } catch (error) {
         console.error('타자데이터 요청 실패:', error)
       }
     }
-    fetchBatterPlayerList()
+    fetchBatterList()
   }, [])
+
+  useEffect(() => {
+    const fetchBatterData = async () => {
+      try {
+        //이게 왜 되면 안되는건데 돌아가네...
+        const [batterData] = await Promise.all([
+          getInfielderPlayerDetail(playerPcode),
+          getCatcherPlayerDetail(playerPcode),
+        ])
+        setDetailData(batterData.data.gameplayer)
+        setPlayerImg(batterData.data.gameplayer.playerPrvwImg1)
+        setSeasonData(batterData.data.yearrecordlist[0])
+      } catch (error) {
+        console.error('fetchBatterData 요청 실패:', error)
+      }
+    }
+
+    fetchBatterData()
+  }, [playerPcode])
+
+  // useEffect(() => {
+  //   const fetchHitSprayData = async () => {
+  //     try {
+  //       const data = await getHitSprayChart(playerName)
+  //       setHitSprayData(data)
+  //     } catch (error) {
+  //       console.error('fetchHitSprayData 요청 실패:', error)
+  //     }
+  //   }
+
+  //   fetchHitSprayData()
+  // }, [playerName])
 
   return (
     <>
@@ -49,12 +89,16 @@ export default function Batter() {
           </div>
 
           <div className="w-full flex-grow rounded-lg p-4 shadow-md md:w-4/5">
-            <PlayerDetail pcode={playerPcode} />
+            <PlayerDetail
+              detailData={detailData}
+              seasonData={seasonData}
+              playerImg={playerImg}
+            />
           </div>
         </div>
 
-        <div className="mb-6 w-full rounded-lg p-4 shadow-md">
-          {/* <PlayerChart /> */}
+        <div className="mb-6 h-full w-full rounded-lg p-4 shadow-md">
+          <PlayerChart />
         </div>
       </div>
     </>

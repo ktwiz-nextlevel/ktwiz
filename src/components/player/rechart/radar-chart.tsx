@@ -9,7 +9,20 @@ import {
   Tooltip,
 } from 'recharts'
 
-export default function ChartRadar({ data }) {
+interface RadarChartData {
+  subject: string
+  A: number
+  B: number
+  fullMark: number
+}
+
+interface ChartRadarProps {
+  data: RadarChartData[]
+}
+
+export default function ChartRadar({ data }: ChartRadarProps) {
+  console.log(data)
+
   return (
     <ResponsiveContainer width="100%" height="100%">
       <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>

@@ -100,3 +100,16 @@ export const getPitcherChart = async (name: PlayerChart) => {
     throw error
   }
 }
+
+/**히트스프레이 차트 데이터 get 요청 */
+export const getHitSprayChart = async (name: PlayerChart) => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_PLAYER_REQUEST_URL}/api/hitsSpray?team=KT&player=${name}`,
+    )
+    return await response.json()
+  } catch (error) {
+    console.error('히트스프레이 요청 에러:', error)
+    throw error
+  }
+}
