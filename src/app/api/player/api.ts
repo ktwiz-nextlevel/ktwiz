@@ -1,4 +1,4 @@
-import { PlayerChart, PlayerCode } from '@/types/player'
+import { PlayerChart, PlayerCode } from '@/types'
 
 /**[투수] 선수 리스트 요청 */
 export const getPitcherPlayerList = async () => {

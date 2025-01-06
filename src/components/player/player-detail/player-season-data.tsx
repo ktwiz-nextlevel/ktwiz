@@ -1,11 +1,14 @@
 import { PlayerSeasonDataProps } from '@/types/player.type'
+import useYearStore from '@/store/useYearStore'
 
 export default function PlayerSeasonData({
   seasonData,
 }: PlayerSeasonDataProps) {
+  const { currentYear } = useYearStore()
+
   return (
     <>
-      <h3 className="mb-2 text-lg font-semibold">2024 시즌 기록</h3>
+      <h3 className="mb-2 text-lg font-semibold">{currentYear} 시즌 기록</h3>
 
       <div className="w-full border border-gray-300">
         <div className="flex bg-gray-100 text-center">
