@@ -64,5 +64,6 @@ export interface ProfileEntity {
 export interface ProfileDetail {
   id: string
   nickname: string
+  email?: string
   avatarUrl?: string
 }
