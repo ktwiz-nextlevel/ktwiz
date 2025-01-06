@@ -21,8 +21,6 @@ interface ChartRadarProps {
 }
 
 export default function ChartRadar({ data }: ChartRadarProps) {
-  console.log(data)
-
   return (
     <ResponsiveContainer width="100%" height="100%">
       <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>

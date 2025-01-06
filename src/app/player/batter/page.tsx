@@ -12,7 +12,7 @@ import {
   getCatcherPlayerList,
   getInfielderPlayerDetail,
   getCatcherPlayerDetail,
-  getHitSprayChart,
+  getPlayerChart,
 } from '@/app/api/player/api'
 import PlayerChart from '@/components/player/batter-chart'
 
@@ -22,6 +22,11 @@ interface PlayerCard {
   playerPrvwImg?: string
 }
 
+interface HitSprayItem {
+  info: string
+  style: string
+}
+
 export default function Batter() {
   const [playerPcode, setPlayerPcode] = useState<PlayerCode>(50066)
   const [playerName, setPlayerName] = useState('강현우')
@@ -29,7 +34,7 @@ export default function Batter() {
   const [detailData, setDetailData] = useState()
   const [seasonData, setSeasonData] = useState()
   const [playerImg, setPlayerImg] = useState()
-  const [hitSprayData, setHitSprayData] = useState()
+  const [hitSprayData, setHitSprayData] = useState<HitSprayItem[]>([])
 
   useEffect(() => {
     const fetchBatterList = async () => {
@@ -58,6 +63,7 @@ export default function Batter() {
         setDetailData(batterData.data.gameplayer)
         setPlayerImg(batterData.data.gameplayer.playerPrvwImg1)
         setSeasonData(batterData.data.yearrecordlist[0])
+        setPlayerName(batterData.data.gameplayer.playerName)
       } catch (error) {
         console.error('fetchBatterData 요청 실패:', error)
       }
@@ -66,18 +72,25 @@ export default function Batter() {
     fetchBatterData()
   }, [playerPcode])
 
-  // useEffect(() => {
-  //   const fetchHitSprayData = async () => {
-  //     try {
-  //       const data = await getHitSprayChart(playerName)
-  //       setHitSprayData(data)
-  //     } catch (error) {
-  //       console.error('fetchHitSprayData 요청 실패:', error)
-  //     }
-  //   }
+  useEffect(() => {
+    const fetchHitSprayData = async () => {
+      try {
+        const data = await getPlayerChart(playerName)
 
-  //   fetchHitSprayData()
-  // }, [playerName])
+        const addData = []
+
+        addData.push(...(data['course double'] || []))
+        addData.push(...(data['course home_run'] || []))
+        addData.push(...(data['course single'] || []))
+        addData.push(...(data['course triple'] || []))
+        setHitSprayData(addData)
+      } catch (error) {
+        console.error('fetchHitSprayData 요청 실패:', error)
+      }
+    }
+
+    fetchHitSprayData()
+  }, [playerName])
 
   return (
     <>
@@ -97,8 +110,8 @@ export default function Batter() {
           </div>
         </div>
 
-        <div className="mb-6 h-full w-full rounded-lg p-4 shadow-md">
-          <PlayerChart />
+        <div className="mb-6 h-[800px] w-full rounded-lg p-10">
+          <PlayerChart data={hitSprayData} />
         </div>
       </div>
     </>

@@ -11,7 +11,7 @@ import { PlayerCode, PlayerData } from '@/types/player'
 import {
   getPitcherPlayerList,
   getPitcherPlayerDetail,
-  getPitcherChart,
+  getPlayerChart,
 } from '@/app/api/player/api'
 
 interface PlayerCard {
@@ -68,7 +68,7 @@ export default function Pitcher() {
   useEffect(() => {
     const fetchPitcherChart = async () => {
       try {
-        const data = await getPitcherChart(playerName)
+        const data = await getPlayerChart(playerName)
         setPitchingRatioChart(data.pitchingRatio)
         setPitchingValueChart(data.pitchingValue)
       } catch (error) {

@@ -23,8 +23,8 @@ export default function PlayerChart({
   thisYearChart = {},
   lastYearChart = {},
 }: PlayerChartProps) {
-  console.log('thisYearChart : ', thisYearChart)
-  console.log('pitchingRatioChart : ', pitchingRatioChart)
+  // console.log('thisYearChart : ', thisYearChart)
+  // console.log('pitchingRatioChart : ', pitchingRatioChart)
 
   // 첫 번째 차트 데이터 매핑
   const data1: ChartItem[] = Object.keys({
