@@ -6,7 +6,12 @@ import Banner from '@/components/common/banner/banner'
 import TabMenu from '@/components/common/tab-menu/tab-menu'
 import { PLAYER_BANNER_DATA } from '@/contants/player'
 import Image from 'next/image'
-import { getPitcherPlayerList } from '@/app/api/player/api'
+import {
+  getCatcherPlayerList,
+  getInfielderPlayerList,
+  getOutfielderPlayerList,
+  getPitcherPlayerList,
+} from '@/app/api/player/api'
 import html2canvas from 'html2canvas'
 import OverlayGuide from '@/components/player/overlay-guide'
 import PlayerList from '@/components/player/custom-squad/player-list'
@@ -51,15 +56,27 @@ export default function CustomSquad() {
 
   // 선수 리스트 호출
   useEffect(() => {
-    const fetchPitcherPlayerList = async () => {
+    const fetchPlayerList = async () => {
       try {
-        const data = await getPitcherPlayerList()
-        setCards(data)
+        const [pitcherPlayer, infielderPlayer, catcherPlayer, outfiederPlayer] =
+          await Promise.all([
+            getOutfielderPlayerList(),
+            getInfielderPlayerList(),
+            getPitcherPlayerList(),
+            getCatcherPlayerList(),
+          ])
+
+        setCards([
+          ...pitcherPlayer,
+          ...infielderPlayer,
+          ...catcherPlayer,
+          ...outfiederPlayer,
+        ])
       } catch (error) {
-        console.error('fetchPitcherPlayerList 요청 실패:', error)
+        console.error('fetchPlayerList 요청 실패:', error)
       }
     }
-    fetchPitcherPlayerList()
+    fetchPlayerList()
   }, [])
 
   // 드래그 시작

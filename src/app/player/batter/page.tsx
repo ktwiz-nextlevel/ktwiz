@@ -13,6 +13,8 @@ import {
   getInfielderPlayerDetail,
   getCatcherPlayerDetail,
   getPlayerChart,
+  getOutfielderPlayerList,
+  getOutfielderPlayerDetail,
 } from '@/app/api/player/api'
 import PlayerChart from '@/components/player/batter-chart'
 
@@ -39,12 +41,18 @@ export default function Batter() {
   useEffect(() => {
     const fetchBatterList = async () => {
       try {
-        const [infielderPlayerList, catcherPlayerList] = await Promise.all([
-          getInfielderPlayerList(),
-          getCatcherPlayerList(), //외야수 데이터도 필요함
-        ])
+        const [infielderPlayerList, catcherPlayerList, outfielderPlayerList] =
+          await Promise.all([
+            getInfielderPlayerList(),
+            getCatcherPlayerList(),
+            getOutfielderPlayerList(),
+          ])
 
-        setCards([...infielderPlayerList, ...catcherPlayerList])
+        setCards([
+          ...infielderPlayerList,
+          ...catcherPlayerList,
+          ...outfielderPlayerList,
+        ])
       } catch (error) {
         console.error('타자데이터 요청 실패:', error)
       }
@@ -59,6 +67,7 @@ export default function Batter() {
         const [batterData] = await Promise.all([
           getInfielderPlayerDetail(playerPcode),
           getCatcherPlayerDetail(playerPcode),
+          getOutfielderPlayerDetail(playerPcode),
         ])
         setDetailData(batterData.data.gameplayer)
         setPlayerImg(batterData.data.gameplayer.playerPrvwImg1)
