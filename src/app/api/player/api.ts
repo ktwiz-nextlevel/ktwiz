@@ -1,6 +1,6 @@
 /**[투수] 선수 리스트 요청 */
 
-import { PlayerCode } from '@/types/player'
+import { PlayerCode } from '@/types/player.type'
 
 export const getPitcherPlayerList = async () => {
   try {

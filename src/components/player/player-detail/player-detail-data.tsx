@@ -1,4 +1,4 @@
-import { PlayerData } from '@/types/player'
+import { PlayerData } from '@/types/player.type'
 
 export default function PlayerDetailData({ playerData }: PlayerData) {
   return (
