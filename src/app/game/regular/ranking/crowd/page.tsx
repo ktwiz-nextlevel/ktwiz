@@ -12,11 +12,11 @@ const TABS = [
     href: '/game/regular/ranking/batter',
     path: 'batter',
   },
-  {
-    title: '관중현황',
-    href: '/game/regular/ranking/crowd',
-    path: 'crowd',
-  },
+  // {
+  //   title: '관중현황',
+  //   href: '/game/regular/ranking/crowd',
+  //   path: 'crowd',
+  // },
 ]
 function RankCrowdPage() {
   return (
