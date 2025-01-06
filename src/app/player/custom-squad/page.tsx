@@ -7,16 +7,20 @@ import TabMenu from '@/components/common/tab-menu/tab-menu'
 import { PLAYER_BANNER_DATA } from '@/contants/player'
 import Image from 'next/image'
 import { getPitcherPlayerList } from '@/app/api/player/api'
+import html2canvas from 'html2canvas'
+import OverlayGuide from '@/components/player/overlay-guide'
 
 interface PlayerCard {
   pcode: PlayerCode
   playerName: string
   playerPrvwImg?: string
+  position?: string
 }
 
 interface SquareStatus {
   playerName: string
   playerPrvwImg?: string
+  isDrop?: boolean
 }
 
 interface SquarePosition {
@@ -29,6 +33,8 @@ export default function CustomSquad() {
   const [cards, setCards] = useState<PlayerCard[]>([])
   const [draggedCard, setDraggedCard] = useState<PlayerCard | null>(null)
   const dragImageRef = useRef<HTMLDivElement | null>(null)
+  const captureRef = useRef<HTMLDivElement | null>(null)
+  const [showGuide, setShowGuide] = useState(true)
 
   const [squareStates, setSquareStates] = useState<SquarePosition[]>([
     { top: '78%', left: '48%', status: { playerName: '포수' } },
@@ -42,7 +48,7 @@ export default function CustomSquad() {
     { top: '56%', left: '34%', status: { playerName: '내야수' } },
   ])
 
-  // 선수 전체 호출로 변경 필요
+  // 선수 리스트 호출
   useEffect(() => {
     const fetchPitcherPlayerList = async () => {
       try {
@@ -55,9 +61,9 @@ export default function CustomSquad() {
     fetchPitcherPlayerList()
   }, [])
 
+  // 드래그 시작
   const handleDrag = (card: PlayerCard, e: React.DragEvent) => {
     setDraggedCard(card)
-
     if (dragImageRef.current) {
       const dragImage = dragImageRef.current
       dragImage.style.display = 'block'
@@ -65,22 +71,37 @@ export default function CustomSquad() {
     }
   }
 
+  // 드래그 종료
   const handleDragEnd = () => {
     setDraggedCard(null)
-
     if (dragImageRef.current) {
       dragImageRef.current.style.display = 'none'
     }
   }
 
+  // 카드 드롭
   const handleDrop = (index: number) => {
     if (draggedCard) {
       const updatedSquares = [...squareStates]
+
+      // 이미 채워진 경우 드롭 불가
+      if (updatedSquares[index].status.isDrop) {
+        return
+      }
+
       updatedSquares[index].status = {
         playerName: draggedCard.playerName,
         playerPrvwImg: draggedCard.playerPrvwImg,
+        isDrop: true,
       }
+
       setSquareStates(updatedSquares)
+
+      // 카드 목록에서 드래그된 카드 제거
+      setCards((prevCards) =>
+        prevCards.filter((card) => card.pcode !== draggedCard.pcode),
+      )
+
       setDraggedCard(null)
     }
   }
@@ -89,12 +110,30 @@ export default function CustomSquad() {
     e.preventDefault()
   }
 
+  const handleRefresh = () => {
+    window.location.reload()
+  }
+
+  const handleCloseGuide = () => {
+    setShowGuide(false)
+  }
+
   return (
     <>
       <BannerTest />
+      {showGuide && <OverlayGuide onClose={handleCloseGuide} />}
+
       <div className="page-large">
+        <div className="flex justify-end">
+          <button
+            onClick={handleRefresh}
+            className="rounded-lg bg-blue-500 px-4 py-2 text-white shadow-md hover:bg-blue-600"
+          >
+            초기화
+          </button>
+        </div>
         <div className="flex h-screen flex-col gap-6 md:flex-row">
-          <div className="w-full flex-shrink-0 rounded-lg p-4 shadow-md md:w-1/5">
+          <div className="w-full flex-shrink-0 rounded-lg p-4 shadow-md md:w-1/6">
             <div className="flex max-h-screen flex-col gap-4 overflow-y-auto">
               {cards.map((card, index) => (
                 <div
@@ -102,15 +141,22 @@ export default function CustomSquad() {
                   draggable
                   onDragStart={(e) => handleDrag(card, e)}
                   onDragEnd={handleDragEnd}
-                  className="group relative flex h-60 w-full cursor-pointer items-center justify-center rounded-lg bg-gray-200 transition-all duration-300 hover:bg-gray-300 hover:shadow-md active:scale-95"
+                  className={`group relative flex h-60 w-full cursor-pointer items-center justify-center rounded-lg bg-gray-200 transition-all duration-300 hover:bg-gray-300 hover:shadow-md active:scale-95 ${
+                    draggedCard?.pcode === card.pcode ? 'opacity-50' : ''
+                  }`}
                 >
                   <img
                     src={card.playerPrvwImg || '/images/ktwiz-basic-img.png'}
                     alt={card.playerName}
                     className="h-full w-full rounded-lg object-cover"
                   />
-                  <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black bg-opacity-50 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    {card.playerName}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center rounded-lg bg-black bg-opacity-50 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    <div className="text-lg font-bold">{card.playerName}</div>
+                    {card.position && (
+                      <div className="mt-1 text-sm text-gray-300">
+                        {card.position}
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
@@ -131,7 +177,7 @@ export default function CustomSquad() {
                   key={index}
                   onDrop={() => handleDrop(index)}
                   onDragOver={handleDragOver}
-                  className="group absolute flex h-[104px] w-[70px] cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-white bg-opacity-50 text-xs text-black"
+                  className="group absolute flex h-[104px] w-[70px] items-center justify-center rounded-lg border border-gray-300 bg-white bg-opacity-50 text-xs text-black"
                   style={{
                     top: position.top,
                     left: position.left,
@@ -151,7 +197,6 @@ export default function CustomSquad() {
             </div>
           </div>
         </div>
-
         {/* 드래그 이미지 */}
         <div
           ref={dragImageRef}
