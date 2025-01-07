@@ -67,30 +67,19 @@ export const MENU_DATA: MenuData[] = [
     gnb: 'Player',
     href: '/player',
     lnb: [
-      // {
-      //   name: '코칭스텝',
-      //   href: '/player/coach',
-      // },
       {
         name: '투수',
         href: '/player/pitcher',
       },
       {
         name: '타자',
-        href: '/player/catcher',
+        href: '/player/batter',
       },
-      {
-        name: '포수',
-        href: '/player/cheer',
-      },
+
       {
         name: '커스텀 스쿼드',
-        href: '/player/song',
+        href: '/player/custom-squad',
       },
-      // {
-      //   name: '응원가 저작권',
-      //   href: '/player/song-copyright',
-      // },
     ],
   },
   {
