@@ -1,5 +1,5 @@
 import { TeamRank } from '@/types/team-rank'
-import { PartialVsTeamTableData, Team } from './team.type'
+import { Team } from './team.type'
 
 export const TABS = [
   { title: '팀순위', href: '/game/regular/ranking/team', path: 'team' },
@@ -38,33 +38,20 @@ export const TH_KEY: {
 
 export const TH_KEY_PITCHER = [
   { title: '팀명', key: 'teamName' },
-  { title: '타석', key: 'pa' },
-  { title: '타수', key: 'ab' },
   { title: '희타', key: 'sh' },
   { title: '희비', key: 'sf' },
   { title: '볼넷', key: 'bb' },
   { title: '고의4구', key: 'ib' },
   { title: '사구', key: 'hp' },
   { title: '탈삼진', key: 'kk' },
-  { title: '9이닝당 탈삼진', key: 'kk9' },
   { title: '폭투', key: 'wp' },
   { title: '보크', key: 'bk' },
   { title: '실점', key: 'r' },
   { title: '자책점', key: 'er' },
-  { title: 'ERA', key: 'era' },
   { title: '블론세이브', key: 'bs' },
-  { title: '세이브', key: 'sv' },
-  { title: '홀드', key: 'hold' },
   { title: 'WHIP', key: 'whip' },
   { title: '피안타율', key: 'oavg' },
-  { title: '출루율', key: 'obp' },
-  { title: '장타율', key: 'oslg' },
-  { title: 'OPS', key: 'oops' },
   { title: 'QS', key: 'qs' },
-  { title: '완투', key: 'cg' },
-  { title: '완봉', key: 'sho' },
-  { title: '투구수', key: 'tugucount' },
-  { title: '이닝당 투구수', key: 'tugucountinn' },
 ]
 
 export const TH_KEY_BATTER = [
@@ -74,9 +61,7 @@ export const TH_KEY_BATTER = [
   { title: '3루타', key: 'h3' },
   { title: '홈런', key: 'hr' },
   { title: '타점', key: 'rbi' },
-  { title: '득점', key: 'run' }, // 추가됨
   { title: '도루', key: 'sb' },
-  { title: '도루 성공률', key: 'sba' }, // 추가됨
   { title: '볼넷', key: 'bb' },
   { title: '고의4구', key: 'ib' },
   { title: '사구', key: 'hp' },
@@ -85,11 +70,7 @@ export const TH_KEY_BATTER = [
   { title: '장타율', key: 'slg' },
   { title: '출루율', key: 'bra' },
   { title: 'OPS', key: 'ops' },
-  { title: 'ISO', key: 'iso' }, // 추가됨
   { title: '실책', key: 'err' },
-  { title: 'DER', key: 'der' }, // 추가됨
-  { title: '타석', key: 'pa' }, // 추가됨
-  { title: '타수', key: 'ab' }, // 추가됨
   { title: '타율', key: 'hra' },
 ]
 //승-패-무
