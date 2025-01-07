@@ -1,8 +1,6 @@
-import { Batter, Pitcher } from '@/types'
-import { TeamRank } from '@/types/team-rank'
 import { cn } from '@/utils'
 
-export function WithVerticalLines<T>({
+export function WithVerticalLines<T extends Record<string, any>>({
   data,
   thKey,
   highlightRowKey,
@@ -10,7 +8,7 @@ export function WithVerticalLines<T>({
   highlightColumnKey,
 }: {
   data: T[]
-  thKey: { title: string; key: keyof T | string }[]
+  thKey: { title: string; key: keyof T }[]
   highlightRowKey?: string
   rowKeyName?: string
   highlightColumnKey?: string
@@ -44,7 +42,7 @@ export function WithVerticalLines<T>({
                       <th
                         key={idx + 'thkey'}
                         scope="col"
-                        className={`border-none px-4 py-3.5 text-left text-sm font-semibold text-gray-900 ${higlightColumIndex === idx ? 'bg-red-50' : 'bg-white'}`}
+                        className={`border-none px-4 py-3.5 text-left text-xs font-semibold text-gray-900 ${higlightColumIndex === idx ? 'bg-red-50' : 'bg-white'}`}
                       >
                         {th.title}
                       </th>
@@ -66,15 +64,15 @@ export function WithVerticalLines<T>({
                       className={`divide-x divide-gray-200 hover:bg-red-50 hover:text-gray-600 ${rowStyle} `}
                     >
                       {thKey.map((th, index) => {
-                        const isSameKey = !player[th.key as keyof T]
+                        // const isSameKey = !player[th.key as keyof T]
                         return (
                           <td
                             key={index + 'key'}
                             className={cn(
-                              `${index === 0 ? `pl-2 text-start` : `px-4 text-center`} whitespace-nowrap border-none py-4 text-sm font-normal`,
+                              `${index === 0 ? `pl-3 text-start` : `px-4 text-center`} whitespace-nowrap border-none py-4 text-xs font-normal`,
                             )}
                           >
-                            {isSameKey ? '-' : player[th.key]}
+                            {player[th.key as keyof T]}
                           </td>
                         )
                       })}

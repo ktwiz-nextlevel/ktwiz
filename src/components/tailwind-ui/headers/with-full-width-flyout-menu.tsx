@@ -46,23 +46,23 @@ export function WithFullWidthFlyoutMenu({ initialUser }: HeaderProps) {
     setIsOpend(false)
   }
 
-  const getPaddingByIdx = useCallback((idx: number) => {
-    const classes: Record<number, string> = {
-      2: 'left-8',
-      3: 'left-9',
-      4: 'left-11',
-      5: 'left-12',
-      6: 'left-6',
-      7: 'left-12',
-      8: 'left-12',
-    }
-    return classes[idx] || 'left-3'
-  }, [])
+  // const getPaddingByIdx = useCallback((idx: number) => {
+  //   const classes: Record<number, string> = {
+  //     2: 'left-8',
+  //     3: 'left-9',
+  //     4: 'left-11',
+  //     5: 'left-12',
+  //     6: 'left-6',
+  //     7: 'left-12',
+  //     8: 'left-12',
+  //   }
+  //   return classes[idx] || 'left-3'
+  // }, [])
 
   return (
     <>
       <header
-        className="group relative isolate z-10 w-full bg-[--black-color-100] transition duration-300 ease-in-out hover:bg-white"
+        className="group relative isolate z-10 w-full bg-[--black-color-100] py-2 transition duration-300 ease-in-out hover:bg-white"
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
       >
@@ -107,7 +107,7 @@ export function WithFullWidthFlyoutMenu({ initialUser }: HeaderProps) {
                 // GNB
                 <PopoverButton
                   key={menu.gnb + idx}
-                  className="box-border flex items-center gap-x-1 border-none bg-[--black-color-100] text-sm/4 font-semibold text-white outline-none transition duration-300 ease-in-out hover:text-gray-900 focus:outline-none active:outline-none active:ring-0 group-hover:border-white group-hover:bg-white group-hover:text-gray-900"
+                  className="box-border flex w-[70px] items-center gap-x-1 border-red-200 bg-[--black-color-100] text-center text-sm/4 font-semibold text-white outline-none transition duration-300 ease-in-out hover:text-gray-900 focus:outline-none active:outline-none active:ring-0 group-hover:border-white group-hover:bg-white group-hover:text-gray-900"
                 >
                   {menu.gnb}
                 </PopoverButton>
@@ -122,7 +122,8 @@ export function WithFullWidthFlyoutMenu({ initialUser }: HeaderProps) {
                       return (
                         <div
                           key={idx + 'lnb'}
-                          className={`group relative ${getPaddingByIdx(idx)} w-[70px] text-sm/6`}
+                          // className={`group relative ${getPaddingByIdx(idx)} w-[70px] text-sm/6`}
+                          className={`group relative w-[70px] text-sm/6`}
                         >
                           {menu?.map((lnb, idx) => (
                             <Link
