@@ -3,30 +3,20 @@ import Link from 'next/link'
 const navigation = {
   wizpark: [
     { name: '구장 소개', href: '/wizpark/intro' },
-    { name: '주차예약', href: '/wizpark/parking' },
     { name: '찾아오기', href: '/wizpark/location' },
     { name: '익산야구장', href: '/wizpark/iksan' },
   ],
-  game: [
-    { name: '정규리그', href: '/game/regular/schedule' },
-    { name: '퓨처스 리그', href: '/game/futures/schedule' },
-  ],
+  game: [{ name: '정규리그', href: '/game/regular/schedule' }],
   player: [
-    { name: '코칭스텝', href: '/player/coach' },
     { name: '투수', href: '/player/pitcher' },
     { name: '타자', href: '/player/catcher' },
-    { name: '응원단', href: '/player/cheer' },
-    { name: '응원가', href: '/player/song' },
-    { name: '응원가 저작권', href: '/player/song-copyright' },
+    { name: '커스텀 스쿼드', href: '/player/custom-squad' },
   ],
   media: [
-    { name: 'wiz 뉴스', href: '/media/wiznews' },
-    { name: 'wiz 스토리', href: '/media/wizstory' },
-    { name: '시구자 정보', href: '/media/firstpitch' },
     { name: 'wiz 포토', href: '/media/photos/1' },
     { name: '하이라이트', href: '/media/highlight' },
-    { name: 'Live 영상 모음', href: '/media/live/pts' },
   ],
+  fan: [{ name: '게시판', href: '/fan/board' }],
   social: [
     {
       name: 'Facebook',
@@ -95,7 +85,7 @@ const navigation = {
 export default function Footer() {
   return (
     <footer className="relative w-full bg-white">
-      <div className="mx-auto max-w-7xl px-6 pb-8 lg:px-8">
+      <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <img
             alt="img-logo-kr"
@@ -135,6 +125,23 @@ export default function Footer() {
                     </li>
                   ))}
                 </ul>
+                <div className="mt-10 md:mt-0">
+                  <h3 className="mt-6 text-sm/6 font-semibold text-gray-900">
+                    팬
+                  </h3>
+                  <ul role="list" className="mt-6 space-y-4">
+                    {navigation.fan.map((item) => (
+                      <li key={item.name}>
+                        <Link
+                          href={item.href}
+                          className="text-sm/6 text-gray-600 hover:text-gray-900"
+                        >
+                          {item.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
             <div className="md:grid md:grid-cols-2 md:gap-8">
