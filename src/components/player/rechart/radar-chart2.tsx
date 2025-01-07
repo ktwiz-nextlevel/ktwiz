@@ -9,13 +9,24 @@ import {
   Tooltip,
 } from 'recharts'
 
-export default function ChartRadar2({ data }) {
+interface RadarChartData {
+  subject: string
+  A: number
+  B: number
+  fullMark: number
+}
+
+interface ChartRadarProps {
+  data: RadarChartData[]
+}
+
+export default function ChartRadar2({ data }: ChartRadarProps) {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
         <PolarGrid />
         <PolarAngleAxis dataKey="subject" />
-        <PolarRadiusAxis angle={30} domain={[0, 50]} />
+        <PolarRadiusAxis angle={30} domain={[0, 100]} />
         <Radar
           name="24시즌"
           dataKey="A"
