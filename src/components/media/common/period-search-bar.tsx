@@ -29,14 +29,14 @@ export default function PeriodSearchBar({
         <input
           id="start-date"
           type="date"
-          className="h-[30px] w-[120px] border border-[#9a9a9a] px-[8px]"
+          className="h-[30px] w-[120px] border border-[#9a9a9a] px-[8px] focus:outline-red-300"
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
         />
         <input
           id="end-date"
           type="date"
-          className="h-[30px] w-[120px] border border-[#9a9a9a] px-[8px]"
+          className="h-[30px] w-[120px] border border-[#9a9a9a] px-[8px] focus:outline-red-300"
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)}
         />
