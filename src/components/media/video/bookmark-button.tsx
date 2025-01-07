@@ -3,6 +3,7 @@
 import { addBookmark, removeBookmark } from '@/services/media-action'
 import { BookmarkIcon as SolidBookmarkIcon } from '@heroicons/react/20/solid'
 import { BookmarkIcon as OutlineBookmarkIcon } from '@heroicons/react/24/outline'
+import clsx from 'clsx'
 
 export default function BookmarkButton({
   videoId,
@@ -39,7 +40,13 @@ export default function BookmarkButton({
   return (
     <button
       onClick={handleClick}
-      className="flex w-44 items-center justify-center bg-[--black-color-600] px-4 py-2 text-sm text-white hover:bg-gray-500"
+      className={clsx(
+        'flex w-44 items-center justify-center px-4 py-2 text-sm text-white',
+        {
+          'bg-[--main-red-color] hover:bg-[--black-color-600]': isBookmarked,
+          'bg-[--black-color-600] hover:bg-[--main-red-color]': !isBookmarked,
+        },
+      )}
     >
       {isBookmarked ? (
         <SolidBookmarkIcon className="mr-2 h-4 w-4" />
