@@ -24,6 +24,7 @@ export default function BookmarkButton({
       if (removeResult && removeResult.message) {
         alert(removeResult.message)
       }
+      alert('북마크에서 삭제되었습니다.')
     } else {
       const result = await addBookmark(
         videoId,
@@ -34,6 +35,7 @@ export default function BookmarkButton({
       if (result && result.message) {
         alert(result.message)
       }
+      alert('북마크에 저장되었습니다.')
     }
   }
 
