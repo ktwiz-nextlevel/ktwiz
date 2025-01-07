@@ -4,6 +4,7 @@ import { NUMBER_OF_PHOTOS_TO_FETCH } from '@/contants/media'
 import { Photo } from '@/types/media'
 import { getPhotoList } from '@/services/media-action'
 import PhotoModal from './photo-modal'
+import { ArrowUpIcon } from '@heroicons/react/24/outline'
 
 interface PhotoListProps {
   initialPhotos: Photo[]
@@ -28,6 +29,7 @@ export default function PhotoList({
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(
     null,
   )
+  const [showScrollToTop, setShowScrollToTop] = useState(false)
 
   const loadMorePhotos = useCallback(async () => {
     if (isLoading || !hasMore) return
@@ -92,6 +94,22 @@ export default function PhotoList({
     }
   }, [loadMorePhotos])
 
+  useEffect(() => {
+    // if (typeof window === 'undefined') return;
+    const handleScroll = () => {
+      setShowScrollToTop(window.scrollY > 200) // 200px 이상 스크롤되면 보이기
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
     <div className="container mx-auto mt-10">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
@@ -127,7 +145,7 @@ export default function PhotoList({
             <div className="mb-6 h-10 w-10 animate-spin rounded-full border-4 border-gray-400 border-t-transparent"></div>
           </div>
         )}
-        {!hasMore && <p className="text-gray-400">마지막 사진입니다.</p>}
+        {!hasMore && <p className="py-4 text-gray-400">마지막 사진입니다.</p>}
       </div>
       {selectedPhotoIndex !== null && (
         <PhotoModal
@@ -135,6 +153,14 @@ export default function PhotoList({
           selectedIndex={selectedPhotoIndex}
           onClose={() => setSelectedPhotoIndex(null)}
         />
+      )}
+      {showScrollToTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-[--main-red-color] text-white shadow-lg hover:bg-red-600"
+        >
+          <ArrowUpIcon className="h-6 w-6" />
+        </button>
       )}
     </div>
   )
