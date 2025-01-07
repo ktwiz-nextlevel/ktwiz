@@ -2,7 +2,7 @@
 import { getTop3PitcherEras } from './(lib)/api'
 import useYearStore from '@/store/useYearStore'
 import { useEffect, useState } from 'react'
-import { BestPlayersTop3 } from './best-players-Top3'
+import { BestPlayersTop3 } from '../../../../../components/rank/best-players-Top3'
 import { createPlayerList } from './(lib)/adapter'
 
 export function Top3PitcherEras() {

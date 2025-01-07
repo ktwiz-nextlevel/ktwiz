@@ -1,9 +1,9 @@
 import Image from 'next/image'
 
-type BestPlayer = {
-  playerName: string
-  data: string | number
-}
+// type BestPlayer = {
+//   playerName: string
+//   data: string | number
+// }
 export function BestPlayersTop3({
   isErrored,
   playerPrvwImg,

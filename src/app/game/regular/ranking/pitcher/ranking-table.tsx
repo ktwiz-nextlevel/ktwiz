@@ -42,6 +42,9 @@ function RankingTable() {
   } = useSelection([
     { name: '2024', displayString: '2024 시즌' },
     { name: '2023', displayString: '2023 시즌' },
+    { name: '2022', displayString: '2022 시즌' },
+    { name: '2021', displayString: '2021 시즌' },
+    { name: '2020', displayString: '2020 시즌' },
   ])
 
   const [data, setData] = useState<any[]>([])
