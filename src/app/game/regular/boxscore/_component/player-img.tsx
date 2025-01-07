@@ -21,7 +21,7 @@ function PlayerImage({
       />
       <div className="ml-2 w-[240px]">
         <h3 className="mb-3 text-base">{player.name}</h3>
-        <p className="text-xs text-gray-300">{player.des}</p>
+        <p className="text-sm text-gray-400">{player.des}</p>
       </div>
     </div>
   )
