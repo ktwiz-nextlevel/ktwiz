@@ -1,11 +1,13 @@
-import { createClient } from '@/utils/supabase/server'
+import MainGallery from '@/components/main/main-gallery'
+import MainVideo from '@/components/main/main-video'
+import { getMainPhotoList, getMainVideoList } from '@/services/media-service'
 import Link from 'next/link'
 
 export default async function Page() {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  const [videoData, photoData] = await Promise.all([
+    getMainVideoList(),
+    getMainPhotoList(),
+  ])
   return (
     <div className="">
       <div className="relative h-[1000px] w-full bg-[url('/images/main/2024_post_bg_web.png')] bg-cover bg-center">
@@ -30,6 +32,8 @@ export default async function Page() {
           </div>
         </div>
       </div>
+      <MainVideo videos={videoData} />
+      <MainGallery photoList={photoData} />
     </div>
   )
 }
