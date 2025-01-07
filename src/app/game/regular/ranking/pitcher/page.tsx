@@ -31,7 +31,7 @@ async function Page() {
   const top5PitcherEras: Top5PitcherEras = await getTop5PitcherEras()
 
   return (
-    <div className="w-full">
+    <div className="mb-[250px] w-full">
       <TabMenu tabs={TABS} activeTab={TABS[1]} />
 
       <section className="pitcher-board mt-10 flex justify-between gap-10">
