@@ -15,6 +15,7 @@ import {
 import html2canvas from 'html2canvas'
 import OverlayGuide from '@/components/player/overlay-guide'
 import PlayerList from '@/components/player/custom-squad/player-list'
+import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 
 interface PlayerCard {
   pcode: PlayerCode
@@ -142,6 +143,9 @@ export default function CustomSquad() {
       {showGuide && <OverlayGuide onClose={handleCloseGuide} />}
 
       <div className="page-large">
+        <div className="mb-7 mt-[50px] flex w-full justify-end">
+          <Breadcrumbs pages={['HOME', 'Player', '커스텀 스쿼드']} />
+        </div>
         <div className="flex justify-end">
           <button
             onClick={handleRefresh}
