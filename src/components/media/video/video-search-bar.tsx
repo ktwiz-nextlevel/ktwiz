@@ -1,6 +1,6 @@
 'use client'
+import TextSearchBar from '@/components/common/search-bar/text-search-bar'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import TextSearchBar from '../common/text-search-bar'
 import { useState } from 'react'
 
 export default function VideoSearchBar() {

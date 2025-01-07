@@ -1,7 +1,7 @@
 'use client'
+import PeriodSearchBar from '@/components/common/search-bar/period-search-bar'
+import TextSearchBar from '@/components/common/search-bar/text-search-bar'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import TextSearchBar from '../common/text-search-bar'
-import PeriodSearchBar from '../common/period-search-bar'
 import { useState } from 'react'
 
 export default function PhotoSearchBar() {

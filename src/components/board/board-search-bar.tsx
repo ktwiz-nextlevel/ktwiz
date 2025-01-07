@@ -1,8 +1,8 @@
 'use client'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
-import TextSearchBar from '../media/common/text-search-bar'
-import CustomSelectBox from '../media/common/custom-select-box'
+import CustomSelectBox from '../common/custom-select-box'
+import TextSearchBar from '../common/search-bar/text-search-bar'
 
 const options = [
   { name: 'title', displayString: '제목' },
