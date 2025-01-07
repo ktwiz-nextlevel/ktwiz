@@ -12,7 +12,7 @@ export default function MainVideo({ videos }: MainVideoProps) {
   const embedUrl = `https://tv.naver.com/embed/${clipNo}`
 
   return (
-    <div className="page py-10">
+    <div className="page pb-10 pt-20">
       <div className="relative h-full w-full py-16">
         <div className="absolute top-0 z-0 flex w-full justify-center">
           <img
