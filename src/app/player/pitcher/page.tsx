@@ -13,6 +13,7 @@ import {
   getPitcherPlayerDetail,
   getPlayerChart,
 } from '@/app/api/player/api'
+import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 
 interface PlayerCard {
   pcode: PlayerCode
@@ -82,6 +83,9 @@ export default function Pitcher() {
     <>
       <BannerTest />
       <div className="page-large mx-auto flex max-w-6xl flex-col gap-6 px-6 py-8">
+        <div className="mb-7 mt-[50px] flex w-full justify-end">
+          <Breadcrumbs pages={['HOME', 'Player', '투수']} />
+        </div>
         <div className="flex flex-col gap-6 md:flex-row">
           <div className="w-full flex-shrink-0 rounded-lg p-4 shadow-md md:w-1/5">
             <PlayerCardList onCardClick={setPlayerPcode} cards={cards} />

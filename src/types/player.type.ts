@@ -45,11 +45,16 @@ export interface PlayerData {
 }
 
 export interface SeasonData {
-  era: string // 방어율 (Earned Run Average)
-  gamenum: number // 출전 경기 수
-  w: number // 승리 수 (Wins)
-  l: number // 패배 수 (Losses)
-  sv: number // 세이브 (Saves)
+  era?: string // 방어율 (Earned Run Average)
+  gamenum?: number // 출전 경기 수
+  w?: number // 승리 수 (Wins)
+  l?: number // 패배 수 (Losses)
+  sv?: number // 세이브 (Saves)
+
+  hra?: number //타율
+  bra?: number //출루율
+  hr?: number //홈런
+  rbi?: number //타점
 }
 export interface PlayerSeasonDataProps {
   seasonData: SeasonData

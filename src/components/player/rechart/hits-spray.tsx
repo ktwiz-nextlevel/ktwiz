@@ -26,8 +26,7 @@ export default function CustomScatter({ scatterData }: CustomScatterProps) {
   }
 
   return (
-    <div className="relative mx-auto h-[500px] w-[500px] overflow-hidden bg-[url('/images/players/background.png')] bg-cover bg-center">
-      {/* 데이터 포인트 */}
+    <div className="relative mx-auto h-[500px] w-[500px] bg-[url('/images/players/background.png')] bg-cover bg-center">
       {scatterData.map((point, index) => (
         <div
           key={index}
