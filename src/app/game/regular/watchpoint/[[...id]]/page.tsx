@@ -140,7 +140,7 @@ async function BoxscorePage({ params }: { params: Promise<{ id: string[] }> }) {
         <div className="flex w-full flex-wrap justify-center">
           <SectionWrapper>
             <Title text={`선발 투수 비교`} />
-            <p className="my-5 mt-2 font-thin text-gray-400">
+            <p className="my-5 mt-2 font-thin text-gray-500">
               각 팀의 선발 투수의 데이터입니다. 마우스를 호버해보세요
             </p>
             <Chart gameDate={gameDate} gmkey={gmkey} />
@@ -148,11 +148,10 @@ async function BoxscorePage({ params }: { params: Promise<{ id: string[] }> }) {
 
           <SectionWrapper>
             <Title text={`라인업`} />
-            <p className="my-5 mt-2 font-thin text-gray-400">
+            <p className="my-5 mt-2 font-thin text-gray-500">
               각 구단 아이콘을 클릭하여 구단별 라인업을 살펴보세요.
             </p>
             <div className="flex justify-center">
-              {/* <img src={'/images/group.png'} alt="lineup" /> */}
               <LineUp
                 home={watchData.data.homeLineup}
                 visit={watchData.data.visitLineup}
@@ -160,32 +159,22 @@ async function BoxscorePage({ params }: { params: Promise<{ id: string[] }> }) {
                 visitLogo={data.data.schedule.current.visitLogo}
               />
             </div>
-            {/* <div className="mt-6 flex justify-center">
-              <img
-                src={data.data.schedule.current.homeLogo}
-                alt="homeLogo"
-                className="h-20 w-20"
-              />
-              <img src={'/images/vs.svg'} alt="lineup" className="h-25 w-25" />
-              <img
-                src={data.data.schedule.current.visitLogo}
-                alt="homeLogo"
-                className="h-20 w-20"
-              />
-            </div> */}
           </SectionWrapper>
 
           <SectionWrapper>
             <Title text={`중계 채널`} />
-            <p className="my-5 mt-2 font-thin text-gray-400">
-              sportsTV.news.naver.com에서 중계를 시청하세요.
+            <p className="my-5 mt-4 font-thin text-gray-500">
+              해당 채널에서 경기를 중계합니다.
+              <br /> {data.data.schedule.current.broadcast}
             </p>
+            <p className="my-5 font-thin text-gray-500"></p>
           </SectionWrapper>
           <SectionWrapper>
-            <Title text={`홈구장 날씨`} />
+            <></>
+            {/* <Title text={`홈구장 날씨`} />
             <p className="my-5 mt-2 font-thin text-gray-400">
               경기 당일 날씨만 제공됩니다.
-            </p>
+            </p> */}
           </SectionWrapper>
         </div>
       </div>

@@ -161,11 +161,11 @@ export const MENU_DATA: MenuData[] = [
       },
     ],
   },
-  {
-    gnb: '챗봇',
-    href: '/chatbot',
-    lnb: null,
-  },
+  // {
+  //   gnb: '챗봇',
+  //   href: '/chatbot',
+  //   lnb: null,
+  // },
 ]
 // [[{},{}],null]
 export const LNB_LIST: LnbDataArray = MENU_DATA.map((menu) =>
