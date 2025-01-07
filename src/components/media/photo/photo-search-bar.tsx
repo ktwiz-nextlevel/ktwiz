@@ -2,12 +2,17 @@
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import TextSearchBar from '../common/text-search-bar'
 import PeriodSearchBar from '../common/period-search-bar'
+import { useState } from 'react'
 
 export default function PhotoSearchBar() {
   const searchParams = useSearchParams()
   const { replace } = useRouter()
   const pathname = usePathname()
   const defaultQuery = searchParams.get('query') || ''
+
+  const [query, setQuery] = useState(defaultQuery)
+  const [startDate, setStartDate] = useState('')
+  const [endDate, setEndDate] = useState('')
 
   const handleTextSearch = ({ query }: { query: string }) => {
     const params = new URLSearchParams(searchParams)
@@ -19,6 +24,8 @@ export default function PhotoSearchBar() {
     } else {
       params.delete('query')
     }
+    setStartDate('')
+    setEndDate('')
     replace(`${pathname}?${params.toString()}`)
   }
 
@@ -34,13 +41,24 @@ export default function PhotoSearchBar() {
 
     params.set('startDate', startDate)
     params.set('endDate', endDate)
+    setQuery('')
     replace(`${pathname}?${params.toString()}`)
   }
 
   return (
     <div className="flex space-x-4">
-      <TextSearchBar defaultQuery={defaultQuery} onSubmit={handleTextSearch} />
-      <PeriodSearchBar onSubmit={handlePeriodSearch} />
+      <TextSearchBar
+        query={query}
+        setQuery={setQuery}
+        onSubmit={handleTextSearch}
+      />
+      <PeriodSearchBar
+        startDate={startDate}
+        endDate={endDate}
+        setStartDate={setStartDate}
+        setEndDate={setEndDate}
+        onSubmit={handlePeriodSearch}
+      />
     </div>
   )
 }

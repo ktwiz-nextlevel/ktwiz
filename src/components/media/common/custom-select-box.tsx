@@ -8,31 +8,25 @@ import {
 } from '@headlessui/react'
 import { ChevronUpDownIcon } from '@heroicons/react/16/solid'
 import { CheckIcon } from '@heroicons/react/20/solid'
-import { useState } from 'react'
 
-type OptionType = {
+interface OptionType {
   name: string
   displayString: string
 }
 
+interface CustomSelectBoxProps {
+  options: OptionType[]
+  selected: OptionType
+  onChange: (selected: OptionType) => void
+}
+
 export default function CustomSelectBox({
   options,
+  selected,
   onChange,
-}: {
-  options: OptionType[]
-  onChange: (selected: OptionType) => void
-}) {
-  const [selected, setSelected] = useState(options[0])
-
-  const handleChange = (value: OptionType) => {
-    setSelected(value)
-    if (onChange) {
-      onChange(value)
-    }
-  }
-
+}: CustomSelectBoxProps) {
   return (
-    <Listbox value={selected} onChange={handleChange}>
+    <Listbox value={selected} onChange={onChange}>
       <div className="relative">
         <ListboxButton className="grid w-full cursor-default grid-cols-1 rounded-md bg-white py-1.5 pl-3 pr-2 text-left text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-[--gray-color-100]">
           <span className="col-start-1 row-start-1 whitespace-nowrap pr-6">

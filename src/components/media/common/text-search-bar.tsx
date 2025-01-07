@@ -1,16 +1,14 @@
-import { useState } from 'react'
-
 interface TextSearchBarProps {
-  defaultQuery?: string
+  query: string
+  setQuery: (query: string) => void
   onSubmit: (searchParams: { query: string }) => void
 }
 
 export default function TextSearchBar({
-  defaultQuery = '',
+  query,
+  setQuery,
   onSubmit,
 }: TextSearchBarProps) {
-  const [query, setQuery] = useState(defaultQuery)
-
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     onSubmit({ query })
