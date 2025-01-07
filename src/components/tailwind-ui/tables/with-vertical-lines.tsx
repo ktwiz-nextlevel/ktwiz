@@ -54,9 +54,8 @@ export function WithVerticalLines<T extends Record<string, any>>({
                 {data.map((player, idx) => {
                   const rowStyle = highlightRowKey
                     ? getRowStyle(idx, player)
-                    : highlightColumnKey
-                      ? getHighlightStyle(idx)
-                      : getStripeStyle(idx)
+                    : getStripeStyle(idx)
+                  //[{'bg-gray-50',"",""}]
 
                   return (
                     <tr

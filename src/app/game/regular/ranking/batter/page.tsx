@@ -27,7 +27,7 @@ async function RankBatterPage() {
   const top5total = await getTop5battertotal()
   // console.log(top5total)
   return (
-    <div className="w-full">
+    <div className="mb-[250px] w-full">
       <TabNavigation tabs={TABS} activeTab={TABS[2]} />
       <section className="pitcher-board mt-10 flex justify-between gap-10">
         <div className="best-players flex items-center gap-2 rounded-lg bg-gray-100 p-6">
