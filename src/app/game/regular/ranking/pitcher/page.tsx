@@ -7,25 +7,26 @@ import { createTeamERAOverview } from './(lib)/adapter'
 import { getTop5PitcherEras } from './(lib)/api'
 import RankingTable from './ranking-table'
 import { Top3PitcherWins } from './top3-pitcher-wins'
+import { TABS } from '../team/_lib/constants'
 
-const TABS = [
-  { title: '팀순위', href: '/game/regular/ranking/team', path: 'team' },
-  {
-    title: '투수순위',
-    href: '/game/regular/ranking/pitcher',
-    path: 'pitcher',
-  },
-  {
-    title: '타자순위',
-    href: '/game/regular/ranking/batter',
-    path: 'batter',
-  },
-  // {
-  //   title: '관중현황',
-  //   href: '/game/regular/ranking/crowd',
-  //   path: 'crowd',
-  // },
-]
+// const TABS = [
+//   { title: '팀순위', href: '/game/regular/ranking/team', path: 'team' },
+//   {
+//     title: '투수순위',
+//     href: '/game/regular/ranking/pitcher',
+//     path: 'pitcher',
+//   },
+//   {
+//     title: '타자순위',
+//     href: '/game/regular/ranking/batter',
+//     path: 'batter',
+//   },
+//   // {
+//   //   title: '관중현황',
+//   //   href: '/game/regular/ranking/crowd',
+//   //   path: 'crowd',
+//   // },
+// ]
 
 async function Page() {
   const top5PitcherEras: Top5PitcherEras = await getTop5PitcherEras()

@@ -5,24 +5,8 @@ import { Top3BatterEras, Top3BatterWins } from './best-players'
 import { createTeamERAOverview, TeamERAOverview } from './team-era-overview'
 import RankingTable from './ranking-table'
 import { getTop5battertotal } from './_lib/api'
-const TABS = [
-  { title: '팀순위', href: '/game/regular/ranking/team', path: 'team' },
-  {
-    title: '투수순위',
-    href: '/game/regular/ranking/pitcher',
-    path: 'pitcher',
-  },
-  {
-    title: '타자순위',
-    href: '/game/regular/ranking/batter',
-    path: 'batter',
-  },
-  // {
-  //   title: '관중현황',
-  //   href: '/game/regular/ranking/crowd',
-  //   path: 'crowd',
-  // },
-]
+import { TABS } from '../team/_lib/constants'
+
 async function RankBatterPage() {
   const top5total = await getTop5battertotal()
   // console.log(top5total)
