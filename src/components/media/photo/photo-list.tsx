@@ -5,6 +5,7 @@ import { Photo } from '@/types/media'
 import { getPhotoList } from '@/services/media-action'
 import PhotoModal from './photo-modal'
 import { ArrowUpIcon } from '@heroicons/react/24/outline'
+import ClientImageFallback from '../common/client-image-fallback'
 
 interface PhotoListProps {
   initialPhotos: Photo[]
@@ -120,9 +121,14 @@ export default function PhotoList({
             onClick={() => setSelectedPhotoIndex(index)}
           >
             <div className="relative pt-[56.25%]">
-              <img
-                src={photo.imgFilePath}
-                alt={`post-image-${photo.artcSeq}`}
+              <ClientImageFallback
+                src={
+                  photo.imgFilePath
+                    ? photo.imgFilePath
+                    : '/images/fallback-img.png'
+                }
+                alt={`post-image-${photo.artcTitle}`}
+                fallbackSrc="/images/fallback-img.png"
                 className="absolute left-0 top-0 h-full w-full rounded-xl object-cover"
                 loading="lazy"
               />
