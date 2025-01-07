@@ -1,0 +1,726 @@
+{
+  "data": {
+    "list": [
+      {
+        "drawn": 0,
+        "lose": 11,
+        "teamCode": "HH",
+        "teamName": "한화",
+        "vsTeamCode": "HT",
+        "win": 5
+      },
+      {
+        "drawn": 0,
+        "lose": 6,
+        "teamCode": "HH",
+        "teamName": "한화",
+        "vsTeamCode": "KT",
+        "win": 10
+      },
+      {
+        "drawn": 0,
+        "lose": 8,
+        "teamCode": "HH",
+        "teamName": "한화",
+        "vsTeamCode": "LG",
+        "win": 8
+      },
+      {
+        "drawn": 0,
+        "lose": 9,
+        "teamCode": "HH",
+        "teamName": "한화",
+        "vsTeamCode": "LT",
+        "win": 7
+      },
+      {
+        "drawn": 2,
+        "lose": 10,
+        "teamCode": "HH",
+        "teamName": "한화",
+        "vsTeamCode": "NC",
+        "win": 4
+      },
+      {
+        "drawn": 0,
+        "lose": 6,
+        "teamCode": "HH",
+        "teamName": "한화",
+        "vsTeamCode": "OB",
+        "win": 10
+      },
+      {
+        "drawn": 0,
+        "lose": 6,
+        "teamCode": "HH",
+        "teamName": "한화",
+        "vsTeamCode": "SK",
+        "win": 10
+      },
+      {
+        "drawn": 0,
+        "lose": 10,
+        "teamCode": "HH",
+        "teamName": "한화",
+        "vsTeamCode": "SS",
+        "win": 6
+      },
+      {
+        "drawn": 0,
+        "lose": 10,
+        "teamCode": "HH",
+        "teamName": "한화",
+        "vsTeamCode": "WO",
+        "win": 6
+      },
+      {
+        "drawn": 0,
+        "lose": 5,
+        "teamCode": "HT",
+        "teamName": "KIA",
+        "vsTeamCode": "HH",
+        "win": 11
+      },
+      {
+        "drawn": 0,
+        "lose": 7,
+        "teamCode": "HT",
+        "teamName": "KIA",
+        "vsTeamCode": "KT",
+        "win": 9
+      },
+      {
+        "drawn": 0,
+        "lose": 3,
+        "teamCode": "HT",
+        "teamName": "KIA",
+        "vsTeamCode": "LG",
+        "win": 13
+      },
+      {
+        "drawn": 1,
+        "lose": 8,
+        "teamCode": "HT",
+        "teamName": "KIA",
+        "vsTeamCode": "LT",
+        "win": 7
+      },
+      {
+        "drawn": 0,
+        "lose": 4,
+        "teamCode": "HT",
+        "teamName": "KIA",
+        "vsTeamCode": "NC",
+        "win": 12
+      },
+      {
+        "drawn": 1,
+        "lose": 9,
+        "teamCode": "HT",
+        "teamName": "KIA",
+        "vsTeamCode": "OB",
+        "win": 6
+      },
+      {
+        "drawn": 0,
+        "lose": 10,
+        "teamCode": "HT",
+        "teamName": "KIA",
+        "vsTeamCode": "SK",
+        "win": 6
+      },
+      {
+        "drawn": 0,
+        "lose": 4,
+        "teamCode": "HT",
+        "teamName": "KIA",
+        "vsTeamCode": "SS",
+        "win": 12
+      },
+      {
+        "drawn": 0,
+        "lose": 5,
+        "teamCode": "HT",
+        "teamName": "KIA",
+        "vsTeamCode": "WO",
+        "win": 11
+      },
+      {
+        "drawn": 0,
+        "lose": 10,
+        "teamCode": "KT",
+        "teamName": "KT",
+        "vsTeamCode": "HH",
+        "win": 6
+      },
+      {
+        "drawn": 0,
+        "lose": 9,
+        "teamCode": "KT",
+        "teamName": "KT",
+        "vsTeamCode": "HT",
+        "win": 7
+      },
+      {
+        "drawn": 0,
+        "lose": 9,
+        "teamCode": "KT",
+        "teamName": "KT",
+        "vsTeamCode": "LG",
+        "win": 7
+      },
+      {
+        "drawn": 1,
+        "lose": 7,
+        "teamCode": "KT",
+        "teamName": "KT",
+        "vsTeamCode": "LT",
+        "win": 8
+      },
+      {
+        "drawn": 0,
+        "lose": 6,
+        "teamCode": "KT",
+        "teamName": "KT",
+        "vsTeamCode": "NC",
+        "win": 10
+      },
+      {
+        "drawn": 0,
+        "lose": 12,
+        "teamCode": "KT",
+        "teamName": "KT",
+        "vsTeamCode": "OB",
+        "win": 4
+      },
+      {
+        "drawn": 0,
+        "lose": 8,
+        "teamCode": "KT",
+        "teamName": "KT",
+        "vsTeamCode": "SK",
+        "win": 8
+      },
+      {
+        "drawn": 1,
+        "lose": 7,
+        "teamCode": "KT",
+        "teamName": "KT",
+        "vsTeamCode": "SS",
+        "win": 8
+      },
+      {
+        "drawn": 0,
+        "lose": 2,
+        "teamCode": "KT",
+        "teamName": "KT",
+        "vsTeamCode": "WO",
+        "win": 14
+      },
+      {
+        "drawn": 0,
+        "lose": 8,
+        "teamCode": "LG",
+        "teamName": "LG",
+        "vsTeamCode": "HH",
+        "win": 8
+      },
+      {
+        "drawn": 0,
+        "lose": 13,
+        "teamCode": "LG",
+        "teamName": "LG",
+        "vsTeamCode": "HT",
+        "win": 3
+      },
+      {
+        "drawn": 0,
+        "lose": 7,
+        "teamCode": "LG",
+        "teamName": "LG",
+        "vsTeamCode": "KT",
+        "win": 9
+      },
+      {
+        "drawn": 0,
+        "lose": 5,
+        "teamCode": "LG",
+        "teamName": "LG",
+        "vsTeamCode": "LT",
+        "win": 11
+      },
+      {
+        "drawn": 0,
+        "lose": 4,
+        "teamCode": "LG",
+        "teamName": "LG",
+        "vsTeamCode": "NC",
+        "win": 12
+      },
+      {
+        "drawn": 0,
+        "lose": 7,
+        "teamCode": "LG",
+        "teamName": "LG",
+        "vsTeamCode": "OB",
+        "win": 9
+      },
+      {
+        "drawn": 1,
+        "lose": 4,
+        "teamCode": "LG",
+        "teamName": "LG",
+        "vsTeamCode": "SK",
+        "win": 11
+      },
+      {
+        "drawn": 1,
+        "lose": 8,
+        "teamCode": "LG",
+        "teamName": "LG",
+        "vsTeamCode": "SS",
+        "win": 7
+      },
+      {
+        "drawn": 0,
+        "lose": 10,
+        "teamCode": "LG",
+        "teamName": "LG",
+        "vsTeamCode": "WO",
+        "win": 6
+      },
+      {
+        "drawn": 0,
+        "lose": 7,
+        "teamCode": "LT",
+        "teamName": "롯데",
+        "vsTeamCode": "HH",
+        "win": 9
+      },
+      {
+        "drawn": 1,
+        "lose": 7,
+        "teamCode": "LT",
+        "teamName": "롯데",
+        "vsTeamCode": "HT",
+        "win": 8
+      },
+      {
+        "drawn": 1,
+        "lose": 8,
+        "teamCode": "LT",
+        "teamName": "롯데",
+        "vsTeamCode": "KT",
+        "win": 7
+      },
+      {
+        "drawn": 0,
+        "lose": 11,
+        "teamCode": "LT",
+        "teamName": "롯데",
+        "vsTeamCode": "LG",
+        "win": 5
+      },
+      {
+        "drawn": 0,
+        "lose": 7,
+        "teamCode": "LT",
+        "teamName": "롯데",
+        "vsTeamCode": "NC",
+        "win": 9
+      },
+      {
+        "drawn": 1,
+        "lose": 7,
+        "teamCode": "LT",
+        "teamName": "롯데",
+        "vsTeamCode": "OB",
+        "win": 8
+      },
+      {
+        "drawn": 1,
+        "lose": 9,
+        "teamCode": "LT",
+        "teamName": "롯데",
+        "vsTeamCode": "SK",
+        "win": 6
+      },
+      {
+        "drawn": 0,
+        "lose": 10,
+        "teamCode": "LT",
+        "teamName": "롯데",
+        "vsTeamCode": "SS",
+        "win": 6
+      },
+      {
+        "drawn": 0,
+        "lose": 8,
+        "teamCode": "LT",
+        "teamName": "롯데",
+        "vsTeamCode": "WO",
+        "win": 8
+      },
+      {
+        "drawn": 2,
+        "lose": 4,
+        "teamCode": "NC",
+        "teamName": "NC",
+        "vsTeamCode": "HH",
+        "win": 10
+      },
+      {
+        "drawn": 0,
+        "lose": 12,
+        "teamCode": "NC",
+        "teamName": "NC",
+        "vsTeamCode": "HT",
+        "win": 4
+      },
+      {
+        "drawn": 0,
+        "lose": 10,
+        "teamCode": "NC",
+        "teamName": "NC",
+        "vsTeamCode": "KT",
+        "win": 6
+      },
+      {
+        "drawn": 0,
+        "lose": 12,
+        "teamCode": "NC",
+        "teamName": "NC",
+        "vsTeamCode": "LG",
+        "win": 4
+      },
+      {
+        "drawn": 0,
+        "lose": 9,
+        "teamCode": "NC",
+        "teamName": "NC",
+        "vsTeamCode": "LT",
+        "win": 7
+      },
+      {
+        "drawn": 0,
+        "lose": 12,
+        "teamCode": "NC",
+        "teamName": "NC",
+        "vsTeamCode": "OB",
+        "win": 4
+      },
+      {
+        "drawn": 0,
+        "lose": 5,
+        "teamCode": "NC",
+        "teamName": "NC",
+        "vsTeamCode": "SK",
+        "win": 11
+      },
+      {
+        "drawn": 0,
+        "lose": 10,
+        "teamCode": "NC",
+        "teamName": "NC",
+        "vsTeamCode": "SS",
+        "win": 6
+      },
+      {
+        "drawn": 0,
+        "lose": 7,
+        "teamCode": "NC",
+        "teamName": "NC",
+        "vsTeamCode": "WO",
+        "win": 9
+      },
+      {
+        "drawn": 0,
+        "lose": 10,
+        "teamCode": "OB",
+        "teamName": "두산",
+        "vsTeamCode": "HH",
+        "win": 6
+      },
+      {
+        "drawn": 1,
+        "lose": 6,
+        "teamCode": "OB",
+        "teamName": "두산",
+        "vsTeamCode": "HT",
+        "win": 9
+      },
+      {
+        "drawn": 0,
+        "lose": 4,
+        "teamCode": "OB",
+        "teamName": "두산",
+        "vsTeamCode": "KT",
+        "win": 12
+      },
+      {
+        "drawn": 0,
+        "lose": 9,
+        "teamCode": "OB",
+        "teamName": "두산",
+        "vsTeamCode": "LG",
+        "win": 7
+      },
+      {
+        "drawn": 1,
+        "lose": 8,
+        "teamCode": "OB",
+        "teamName": "두산",
+        "vsTeamCode": "LT",
+        "win": 7
+      },
+      {
+        "drawn": 0,
+        "lose": 4,
+        "teamCode": "OB",
+        "teamName": "두산",
+        "vsTeamCode": "NC",
+        "win": 12
+      },
+      {
+        "drawn": 0,
+        "lose": 9,
+        "teamCode": "OB",
+        "teamName": "두산",
+        "vsTeamCode": "SK",
+        "win": 7
+      },
+      {
+        "drawn": 0,
+        "lose": 12,
+        "teamCode": "OB",
+        "teamName": "두산",
+        "vsTeamCode": "SS",
+        "win": 4
+      },
+      {
+        "drawn": 0,
+        "lose": 6,
+        "teamCode": "OB",
+        "teamName": "두산",
+        "vsTeamCode": "WO",
+        "win": 10
+      },
+      {
+        "drawn": 0,
+        "lose": 10,
+        "teamCode": "SK",
+        "teamName": "SSG",
+        "vsTeamCode": "HH",
+        "win": 6
+      },
+      {
+        "drawn": 0,
+        "lose": 6,
+        "teamCode": "SK",
+        "teamName": "SSG",
+        "vsTeamCode": "HT",
+        "win": 10
+      },
+      {
+        "drawn": 0,
+        "lose": 8,
+        "teamCode": "SK",
+        "teamName": "SSG",
+        "vsTeamCode": "KT",
+        "win": 8
+      },
+      {
+        "drawn": 1,
+        "lose": 11,
+        "teamCode": "SK",
+        "teamName": "SSG",
+        "vsTeamCode": "LG",
+        "win": 4
+      },
+      {
+        "drawn": 1,
+        "lose": 6,
+        "teamCode": "SK",
+        "teamName": "SSG",
+        "vsTeamCode": "LT",
+        "win": 9
+      },
+      {
+        "drawn": 0,
+        "lose": 11,
+        "teamCode": "SK",
+        "teamName": "SSG",
+        "vsTeamCode": "NC",
+        "win": 5
+      },
+      {
+        "drawn": 0,
+        "lose": 7,
+        "teamCode": "SK",
+        "teamName": "SSG",
+        "vsTeamCode": "OB",
+        "win": 9
+      },
+      {
+        "drawn": 0,
+        "lose": 7,
+        "teamCode": "SK",
+        "teamName": "SSG",
+        "vsTeamCode": "SS",
+        "win": 9
+      },
+      {
+        "drawn": 0,
+        "lose": 4,
+        "teamCode": "SK",
+        "teamName": "SSG",
+        "vsTeamCode": "WO",
+        "win": 12
+      },
+      {
+        "drawn": 0,
+        "lose": 6,
+        "teamCode": "SS",
+        "teamName": "삼성",
+        "vsTeamCode": "HH",
+        "win": 10
+      },
+      {
+        "drawn": 0,
+        "lose": 12,
+        "teamCode": "SS",
+        "teamName": "삼성",
+        "vsTeamCode": "HT",
+        "win": 4
+      },
+      {
+        "drawn": 1,
+        "lose": 8,
+        "teamCode": "SS",
+        "teamName": "삼성",
+        "vsTeamCode": "KT",
+        "win": 7
+      },
+      {
+        "drawn": 1,
+        "lose": 7,
+        "teamCode": "SS",
+        "teamName": "삼성",
+        "vsTeamCode": "LG",
+        "win": 8
+      },
+      {
+        "drawn": 0,
+        "lose": 6,
+        "teamCode": "SS",
+        "teamName": "삼성",
+        "vsTeamCode": "LT",
+        "win": 10
+      },
+      {
+        "drawn": 0,
+        "lose": 6,
+        "teamCode": "SS",
+        "teamName": "삼성",
+        "vsTeamCode": "NC",
+        "win": 10
+      },
+      {
+        "drawn": 0,
+        "lose": 4,
+        "teamCode": "SS",
+        "teamName": "삼성",
+        "vsTeamCode": "OB",
+        "win": 12
+      },
+      {
+        "drawn": 0,
+        "lose": 9,
+        "teamCode": "SS",
+        "teamName": "삼성",
+        "vsTeamCode": "SK",
+        "win": 7
+      },
+      {
+        "drawn": 0,
+        "lose": 6,
+        "teamCode": "SS",
+        "teamName": "삼성",
+        "vsTeamCode": "WO",
+        "win": 10
+      },
+      {
+        "drawn": 0,
+        "lose": 6,
+        "teamCode": "WO",
+        "teamName": "키움",
+        "vsTeamCode": "HH",
+        "win": 10
+      },
+      {
+        "drawn": 0,
+        "lose": 11,
+        "teamCode": "WO",
+        "teamName": "키움",
+        "vsTeamCode": "HT",
+        "win": 5
+      },
+      {
+        "drawn": 0,
+        "lose": 14,
+        "teamCode": "WO",
+        "teamName": "키움",
+        "vsTeamCode": "KT",
+        "win": 2
+      },
+      {
+        "drawn": 0,
+        "lose": 6,
+        "teamCode": "WO",
+        "teamName": "키움",
+        "vsTeamCode": "LG",
+        "win": 10
+      },
+      {
+        "drawn": 0,
+        "lose": 8,
+        "teamCode": "WO",
+        "teamName": "키움",
+        "vsTeamCode": "LT",
+        "win": 8
+      },
+      {
+        "drawn": 0,
+        "lose": 9,
+        "teamCode": "WO",
+        "teamName": "키움",
+        "vsTeamCode": "NC",
+        "win": 7
+      },
+      {
+        "drawn": 0,
+        "lose": 10,
+        "teamCode": "WO",
+        "teamName": "키움",
+        "vsTeamCode": "OB",
+        "win": 6
+      },
+      {
+        "drawn": 0,
+        "lose": 12,
+        "teamCode": "WO",
+        "teamName": "키움",
+        "vsTeamCode": "SK",
+        "win": 4
+      },
+      {
+        "drawn": 0,
+        "lose": 10,
+        "teamCode": "WO",
+        "teamName": "키움",
+        "vsTeamCode": "SS",
+        "win": 6
+      }
+    ]
+  }
+}
