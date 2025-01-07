@@ -49,7 +49,7 @@ export default function PostCard({ posts }: PostCardProps) {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
-                {posts &&
+                {posts && posts.length > 0 ? (
                   posts.map((post) => (
                     <tr
                       key={post.id}
@@ -73,7 +73,17 @@ export default function PostCard({ posts }: PostCardProps) {
                         {post.viewCount}
                       </td>
                     </tr>
-                  ))}
+                  ))
+                ) : (
+                  <tr>
+                    <td
+                      colSpan={5}
+                      className="py-8 text-center text-sm text-gray-500"
+                    >
+                      검색 내용에 관련한 게시글이 없습니다.
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>

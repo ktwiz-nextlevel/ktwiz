@@ -1,6 +1,5 @@
 'use client'
 import { useState, useCallback } from 'react'
-import { User } from '@supabase/supabase-js'
 import {
   Dialog,
   DialogPanel,
@@ -13,18 +12,16 @@ import {
   PopoverPanel,
 } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
-
+import { ChevronDownIcon, UserIcon } from '@heroicons/react/20/solid'
 import Link from 'next/link'
-
 import { MENU_DATA, LNB_LIST } from '@/contants'
 import LoginModal from '@/components/modal/login'
-import { createClient } from '@/utils/supabase/client'
-import { useRouter } from 'next/navigation'
 import SignupModal from '@/components/modal/sign-up'
+import { ProfileDetail } from '@/types'
+import { signout } from '@/app/login/actions'
 
 interface HeaderProps {
-  initialUser?: User | null
+  initialUser?: ProfileDetail | null
 }
 
 export function WithFullWidthFlyoutMenu({ initialUser }: HeaderProps) {
@@ -32,17 +29,11 @@ export function WithFullWidthFlyoutMenu({ initialUser }: HeaderProps) {
   const [isOpened, setIsOpend] = useState(false)
   const [isLoginPopupVisable, setIsLoginPopupVisable] = useState(false) // 로그인 팝업 토글
   const [isSignupPopupVisable, setIsSignupPopupVisable] = useState(false) // 회원가입 팝업 토글
-  const router = useRouter()
-  const [user, setUser] = useState(initialUser)
 
   /** 로그아웃 */
   const handleLogout = async () => {
-    const supabase = createClient()
     try {
-      await supabase.auth.signOut()
-      setUser(null)
-      router.refresh()
-      router.push('/')
+      await signout()
     } catch (error) {
       console.error('로그아웃 중 에러가 발생했습니다:', error)
     }
@@ -55,23 +46,23 @@ export function WithFullWidthFlyoutMenu({ initialUser }: HeaderProps) {
     setIsOpend(false)
   }
 
-  const getPaddingByIdx = useCallback((idx: number) => {
-    const classes: Record<number, string> = {
-      2: 'left-8',
-      3: 'left-9',
-      4: 'left-11',
-      5: 'left-12',
-      6: 'left-6',
-      7: 'left-12',
-      8: 'left-12',
-    }
-    return classes[idx] || 'left-3'
-  }, [])
+  // const getPaddingByIdx = useCallback((idx: number) => {
+  //   const classes: Record<number, string> = {
+  //     2: 'left-8',
+  //     3: 'left-9',
+  //     4: 'left-11',
+  //     5: 'left-12',
+  //     6: 'left-6',
+  //     7: 'left-12',
+  //     8: 'left-12',
+  //   }
+  //   return classes[idx] || 'left-3'
+  // }, [])
 
   return (
     <>
       <header
-        className="group relative isolate z-10 w-full bg-[--black-color-100] transition duration-300 ease-in-out hover:bg-white"
+        className="group relative isolate z-10 w-full bg-[--black-color-100] py-2 transition duration-300 ease-in-out hover:bg-white"
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
       >
@@ -116,7 +107,7 @@ export function WithFullWidthFlyoutMenu({ initialUser }: HeaderProps) {
                 // GNB
                 <PopoverButton
                   key={menu.gnb + idx}
-                  className="box-border flex items-center gap-x-1 border-none bg-[--black-color-100] text-sm/4 font-semibold text-white outline-none transition duration-300 ease-in-out hover:text-gray-900 focus:outline-none active:outline-none active:ring-0 group-hover:border-white group-hover:bg-white group-hover:text-gray-900"
+                  className="box-border flex w-[70px] items-center gap-x-1 border-red-200 bg-[--black-color-100] text-center text-sm/4 font-semibold text-white outline-none transition duration-300 ease-in-out hover:text-gray-900 focus:outline-none active:outline-none active:ring-0 group-hover:border-white group-hover:bg-white group-hover:text-gray-900"
                 >
                   {menu.gnb}
                 </PopoverButton>
@@ -131,7 +122,8 @@ export function WithFullWidthFlyoutMenu({ initialUser }: HeaderProps) {
                       return (
                         <div
                           key={idx + 'lnb'}
-                          className={`group relative ${getPaddingByIdx(idx)} w-[70px] text-sm/6`}
+                          // className={`group relative ${getPaddingByIdx(idx)} w-[70px] text-sm/6`}
+                          className={`group relative w-[70px] text-sm/6`}
                         >
                           {menu?.map((lnb, idx) => (
                             <Link
@@ -151,11 +143,11 @@ export function WithFullWidthFlyoutMenu({ initialUser }: HeaderProps) {
             </Popover>
           </PopoverGroup>
           {/* login & signup*/}
-          <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end">
-            {user ? (
+          <div className="hidden space-x-4 lg:flex lg:flex-1 lg:items-center lg:justify-end">
+            {initialUser ? (
               <>
-                <span className="mr-3 text-sm/6 font-semibold text-[--gray-color-100] transition duration-300 ease-in-out hover:text-[--main-red-color] group-hover:text-gray-900">
-                  {user.email?.split('@')[0]} 님 안녕하세요!
+                <span className="text-sm/6 font-semibold text-[--gray-color-100] transition duration-300 ease-in-out hover:text-[--main-red-color] group-hover:text-gray-900">
+                  {initialUser.nickname?.split('@')[0]} 님 안녕하세요!
                 </span>
                 <button
                   className="text-sm/6 font-semibold text-[--gray-color-100] transition duration-300 ease-in-out hover:text-[--main-red-color] group-hover:text-gray-900"
@@ -163,6 +155,12 @@ export function WithFullWidthFlyoutMenu({ initialUser }: HeaderProps) {
                 >
                   로그아웃
                 </button>
+                <Link
+                  href="/mypage"
+                  className="text-sm/6 font-semibold text-[--gray-color-100] transition duration-300 ease-in-out hover:text-[--main-red-color] group-hover:text-gray-900"
+                >
+                  <UserIcon className="h-6 w-6" />
+                </Link>
               </>
             ) : (
               <>

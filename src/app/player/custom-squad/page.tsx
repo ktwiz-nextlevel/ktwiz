@@ -6,17 +6,28 @@ import Banner from '@/components/common/banner/banner'
 import TabMenu from '@/components/common/tab-menu/tab-menu'
 import { PLAYER_BANNER_DATA } from '@/contants/player'
 import Image from 'next/image'
-import { getPitcherPlayerList } from '@/app/api/player/api'
+import {
+  getCatcherPlayerList,
+  getInfielderPlayerList,
+  getOutfielderPlayerList,
+  getPitcherPlayerList,
+} from '@/app/api/player/api'
+import html2canvas from 'html2canvas'
+import OverlayGuide from '@/components/player/overlay-guide'
+import PlayerList from '@/components/player/custom-squad/player-list'
+import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 
 interface PlayerCard {
   pcode: PlayerCode
   playerName: string
   playerPrvwImg?: string
+  position?: string
 }
 
 interface SquareStatus {
   playerName: string
   playerPrvwImg?: string
+  isDrop?: boolean
 }
 
 interface SquarePosition {
@@ -29,6 +40,8 @@ export default function CustomSquad() {
   const [cards, setCards] = useState<PlayerCard[]>([])
   const [draggedCard, setDraggedCard] = useState<PlayerCard | null>(null)
   const dragImageRef = useRef<HTMLDivElement | null>(null)
+  const captureRef = useRef<HTMLDivElement | null>(null)
+  const [showGuide, setShowGuide] = useState(true)
 
   const [squareStates, setSquareStates] = useState<SquarePosition[]>([
     { top: '78%', left: '48%', status: { playerName: '포수' } },
@@ -42,22 +55,34 @@ export default function CustomSquad() {
     { top: '56%', left: '34%', status: { playerName: '내야수' } },
   ])
 
-  // 선수 전체 호출로 변경 필요
+  // 선수 리스트 호출
   useEffect(() => {
-    const fetchPitcherPlayerList = async () => {
+    const fetchPlayerList = async () => {
       try {
-        const data = await getPitcherPlayerList()
-        setCards(data)
+        const [pitcherPlayer, infielderPlayer, catcherPlayer, outfiederPlayer] =
+          await Promise.all([
+            getOutfielderPlayerList(),
+            getInfielderPlayerList(),
+            getPitcherPlayerList(),
+            getCatcherPlayerList(),
+          ])
+
+        setCards([
+          ...pitcherPlayer,
+          ...infielderPlayer,
+          ...catcherPlayer,
+          ...outfiederPlayer,
+        ])
       } catch (error) {
-        console.error('fetchPitcherPlayerList 요청 실패:', error)
+        console.error('fetchPlayerList 요청 실패:', error)
       }
     }
-    fetchPitcherPlayerList()
+    fetchPlayerList()
   }, [])
 
+  // 드래그 시작
   const handleDrag = (card: PlayerCard, e: React.DragEvent) => {
     setDraggedCard(card)
-
     if (dragImageRef.current) {
       const dragImage = dragImageRef.current
       dragImage.style.display = 'block'
@@ -65,63 +90,112 @@ export default function CustomSquad() {
     }
   }
 
+  // 드래그 종료
   const handleDragEnd = () => {
     setDraggedCard(null)
-
     if (dragImageRef.current) {
       dragImageRef.current.style.display = 'none'
     }
   }
 
+  // 카드 드롭
   const handleDrop = (index: number) => {
     if (draggedCard) {
       const updatedSquares = [...squareStates]
+
+      // 이미 채워진 경우 드롭 불가
+      if (updatedSquares[index].status.isDrop) {
+        return
+      }
+
       updatedSquares[index].status = {
         playerName: draggedCard.playerName,
         playerPrvwImg: draggedCard.playerPrvwImg,
+        isDrop: true,
       }
+
       setSquareStates(updatedSquares)
+
+      // 카드 목록에서 드래그된 카드 제거
+      setCards((prevCards) =>
+        prevCards.filter((card) => card.pcode !== draggedCard.pcode),
+      )
+
       setDraggedCard(null)
     }
   }
 
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault()
+  const handleDragOver = (e: React.DragEvent) => e.preventDefault()
+
+  const handleRefresh = () => window.location.reload()
+
+  const handleCloseGuide = () => setShowGuide(false)
+
+  const handleCapture = async () => {
+    if (captureRef.current) {
+      try {
+        const canvas = await html2canvas(captureRef.current, {
+          useCORS: true, // 이미지 CORS 이슈 방지
+          backgroundColor: null, // 배경색 투명하게
+          allowTaint: false, // 이미지 taint 문제 해결
+          scale: 2, // 고해상도 이미지 캡처
+          logging: true, // 디버깅 로그
+        })
+
+        const image = canvas.toDataURL('image/png')
+
+        // 이미지 다운로드
+        const link = document.createElement('a')
+        link.href = image
+        link.download = 'custom_squad.png'
+        link.click()
+      } catch (error) {
+        console.error('이미지 캡처 중 오류 발생:', error)
+      }
+    } else {
+      console.error('캡처할 요소를 찾을 수 없습니다.')
+    }
   }
 
   return (
     <>
       <BannerTest />
-      <div className="page-large">
-        <div className="flex h-screen flex-col gap-6 md:flex-row">
-          <div className="w-full flex-shrink-0 rounded-lg p-4 shadow-md md:w-1/5">
-            <div className="flex max-h-screen flex-col gap-4 overflow-y-auto">
-              {cards.map((card, index) => (
-                <div
-                  key={index}
-                  draggable
-                  onDragStart={(e) => handleDrag(card, e)}
-                  onDragEnd={handleDragEnd}
-                  className="group relative flex h-60 w-full cursor-pointer items-center justify-center rounded-lg bg-gray-200 transition-all duration-300 hover:bg-gray-300 hover:shadow-md active:scale-95"
-                >
-                  <img
-                    src={card.playerPrvwImg || '/images/ktwiz-basic-img.png'}
-                    alt={card.playerName}
-                    className="h-full w-full rounded-lg object-cover"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black bg-opacity-50 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    {card.playerName}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+      {showGuide && <OverlayGuide onClose={handleCloseGuide} />}
 
-          <div className="relative h-full w-full flex-grow rounded-lg p-4 shadow-md md:w-4/5">
+      <div className="page-large">
+        <div className="mb-7 mt-[50px] flex w-full justify-end">
+          <Breadcrumbs pages={['HOME', 'Player', '커스텀 스쿼드']} />
+        </div>
+        <div className="flex justify-end">
+          <button
+            onClick={handleRefresh}
+            className="rounded-lg bg-blue-500 px-4 py-2 text-white shadow-md hover:bg-blue-600"
+          >
+            초기화
+          </button>
+          <button
+            onClick={handleCapture}
+            className="rounded-lg bg-green-500 px-4 py-2 text-white"
+          >
+            이미지 캡처
+          </button>
+        </div>
+        <div className="flex h-screen flex-col gap-6 md:flex-row">
+          <PlayerList
+            cards={cards}
+            draggedCard={draggedCard}
+            handleDrag={handleDrag}
+            handleDragEnd={handleDragEnd}
+          />
+
+          <div
+            ref={captureRef}
+            className="relative h-full w-full flex-grow rounded-lg p-4 shadow-md md:w-4/5"
+          >
             <Image
               src="/images/players/rb.png"
               alt="Player Image"
-              layout="fill"
+              fill
               objectFit="cover"
               className="rounded-lg p-8"
             />
@@ -131,17 +205,18 @@ export default function CustomSquad() {
                   key={index}
                   onDrop={() => handleDrop(index)}
                   onDragOver={handleDragOver}
-                  className="group absolute flex h-[104px] w-[70px] cursor-pointer items-center justify-center rounded-lg border border-gray-300 bg-white bg-opacity-50 text-xs text-black"
+                  className="group absolute flex h-[104px] w-[70px] items-center justify-center rounded-lg border border-gray-300 bg-white bg-opacity-50 text-xs text-black"
                   style={{
                     top: position.top,
                     left: position.left,
                   }}
                 >
                   {position.status.playerPrvwImg ? (
-                    <img
+                    <Image
                       src={position.status.playerPrvwImg}
                       alt={position.status.playerName}
                       className="h-full w-full rounded-lg object-cover"
+                      fill
                     />
                   ) : (
                     position.status.playerName
@@ -151,7 +226,6 @@ export default function CustomSquad() {
             </div>
           </div>
         </div>
-
         {/* 드래그 이미지 */}
         <div
           ref={dragImageRef}

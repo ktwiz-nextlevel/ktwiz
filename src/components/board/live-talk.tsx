@@ -21,9 +21,12 @@ export default function LiveTalk({
   const [messages, setMessages] = useState<MessageEntity[]>([])
   const [isAutoUpdate, setIsAutoUpdate] = useState<boolean>(true) // 자동 업데이트 상태
   const chatContainerRef = useRef<HTMLDivElement | null>(null)
+  const [isFetching, setIsFetching] = useState<boolean>(false) // 로딩 상태 추가
+  const [isSubscribed, setIsSubscribed] = useState<boolean>(false) // 구독 상태 추가
 
   useEffect(() => {
     const fetchMessages = async () => {
+      setIsFetching(true) // 로딩 시작
       const { data, error } = await supabase
         .from('messages')
         .select('*')
@@ -33,6 +36,7 @@ export default function LiveTalk({
         setMessages(data as MessageEntity[])
       }
       if (error) console.error('Error fetching messages:', error.message)
+      setIsFetching(false) // 로딩 종료
     }
 
     fetchMessages()
@@ -54,12 +58,17 @@ export default function LiveTalk({
             ])
           },
         )
-        .subscribe()
+        .subscribe((status) => {
+          if (status === 'SUBSCRIBED') {
+            setIsSubscribed(true) // 구독 성공 시 상태 업데이트
+          }
+        })
     }
 
     return () => {
       if (channel) {
         supabase.removeChannel(channel)
+        setIsSubscribed(false) // 구독 해제 시 상태 초기화
       }
     }
   }, [isAutoUpdate])
@@ -142,11 +151,24 @@ export default function LiveTalk({
             onKeyUp={(e) =>
               e.key === 'Enter' && !e.shiftKey && handleSendMessage()
             }
+            disabled={!isSubscribed} // 구독 상태가 아니면 입력 비활성화
+            placeholder={isSubscribed ? '메시지를 입력하세요...' : ''}
           />
         </div>
       </div>
       <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-2">
-        <div className="flex flex-col-reverse">{messagesList}</div>
+        {isFetching ? (
+          <div className="flex h-full items-center justify-center">
+            <div className="flex flex-col items-center">
+              <div className="mb-4 h-8 w-8 animate-spin rounded-full border-4 border-gray-400 border-t-transparent"></div>
+              <p className="text-sm text-gray-500">
+                메시지를 불러오는 중입니다...
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div className="flex flex-col-reverse">{messagesList}</div>
+        )}
       </div>
     </div>
   )

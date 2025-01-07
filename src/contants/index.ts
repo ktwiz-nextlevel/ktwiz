@@ -67,30 +67,19 @@ export const MENU_DATA: MenuData[] = [
     gnb: 'Player',
     href: '/player',
     lnb: [
-      // {
-      //   name: '코칭스텝',
-      //   href: '/player/coach',
-      // },
       {
         name: '투수',
         href: '/player/pitcher',
       },
       {
         name: '타자',
-        href: '/player/catcher',
+        href: '/player/batter',
       },
-      {
-        name: '포수',
-        href: '/player/cheer',
-      },
+
       {
         name: '커스텀 스쿼드',
-        href: '/player/song',
+        href: '/player/custom-squad',
       },
-      // {
-      //   name: '응원가 저작권',
-      //   href: '/player/song-copyright',
-      // },
     ],
   },
   {
@@ -111,7 +100,7 @@ export const MENU_DATA: MenuData[] = [
       // },
       {
         name: 'wiz 포토',
-        href: '/media/photos',
+        href: '/media/photos/1',
       },
       {
         name: '하이라이트',
@@ -161,11 +150,11 @@ export const MENU_DATA: MenuData[] = [
       },
     ],
   },
-  {
-    gnb: '챗봇',
-    href: '/chatbot',
-    lnb: null,
-  },
+  // {
+  //   gnb: '챗봇',
+  //   href: '/chatbot',
+  //   lnb: null,
+  // },
 ]
 // [[{},{}],null]
 export const LNB_LIST: LnbDataArray = MENU_DATA.map((menu) =>
@@ -344,7 +333,7 @@ export const MEDIA_BANNER_DATA: BannerData = {
   '/highlight': {
     title: '하이라이트',
     description: '생생한 경기 하이라이트를 담았습니다.',
-    tabs: null,
+    tabs: [],
   },
   '/live/pts': {
     title: 'Live 영상모음',
@@ -383,6 +372,14 @@ export const FAN_BANNER_DATA: BannerData = {
   '/': {
     title: '게시판',
     description: 'KT Wiz의 게시판입니다.',
+    tabs: [],
+  },
+}
+
+export const MYPAGE_BANNER_DATA: BannerData = {
+  '/': {
+    title: '마이페이지',
+    description: '',
     tabs: [],
   },
 }

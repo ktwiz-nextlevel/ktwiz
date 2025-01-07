@@ -13,8 +13,11 @@ import {
   getInfielderPlayerDetail,
   getCatcherPlayerDetail,
   getPlayerChart,
+  getOutfielderPlayerList,
+  getOutfielderPlayerDetail,
 } from '@/app/api/player/api'
 import PlayerChart from '@/components/player/batter-chart'
+import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 
 interface PlayerCard {
   pcode: PlayerCode
@@ -39,12 +42,18 @@ export default function Batter() {
   useEffect(() => {
     const fetchBatterList = async () => {
       try {
-        const [infielderPlayerList, catcherPlayerList] = await Promise.all([
-          getInfielderPlayerList(),
-          getCatcherPlayerList(), //외야수 데이터도 필요함
-        ])
+        const [infielderPlayerList, catcherPlayerList, outfielderPlayerList] =
+          await Promise.all([
+            getOutfielderPlayerList(),
+            getInfielderPlayerList(),
+            getCatcherPlayerList(),
+          ])
 
-        setCards([...infielderPlayerList, ...catcherPlayerList])
+        setCards([
+          ...infielderPlayerList,
+          ...catcherPlayerList,
+          ...outfielderPlayerList,
+        ])
       } catch (error) {
         console.error('타자데이터 요청 실패:', error)
       }
@@ -59,6 +68,7 @@ export default function Batter() {
         const [batterData] = await Promise.all([
           getInfielderPlayerDetail(playerPcode),
           getCatcherPlayerDetail(playerPcode),
+          getOutfielderPlayerDetail(playerPcode),
         ])
         setDetailData(batterData.data.gameplayer)
         setPlayerImg(batterData.data.gameplayer.playerPrvwImg1)
@@ -95,7 +105,11 @@ export default function Batter() {
   return (
     <>
       <BannerTest />
+
       <div className="page-large mx-auto flex max-w-6xl flex-col gap-6 px-6 py-8">
+        <div className="mb-7 mt-[50px] flex w-full justify-end">
+          <Breadcrumbs pages={['HOME', 'Player', '타자']} />
+        </div>
         <div className="flex flex-col gap-6 md:flex-row">
           <div className="w-full flex-shrink-0 rounded-lg p-4 shadow-md md:w-1/5">
             <PlayerCardList onCardClick={setPlayerPcode} cards={cards} />
@@ -110,7 +124,7 @@ export default function Batter() {
           </div>
         </div>
 
-        <div className="mb-6 h-[800px] w-full rounded-lg p-10">
+        <div className="mb-6 h-full w-full rounded-lg p-10">
           <PlayerChart data={hitSprayData} />
         </div>
       </div>

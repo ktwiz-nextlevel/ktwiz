@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import {
   startOfMonth,
   endOfMonth,
@@ -15,6 +15,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import { GameScheduleData } from '@/types'
 import Link from 'next/link'
 import KtwizCalendarCell from './ktwiz-calendar-cell'
+import AllCalendarCell from './all-calendar-cell'
 
 interface CalendarProps {
   ktGameData: GameScheduleData[]
@@ -24,9 +25,7 @@ interface CalendarProps {
 
 const Calendar = ({ ktGameData, currentDate, allGameData }: CalendarProps) => {
   const formattedCurrentDate = parse(currentDate, 'yyyyMM', new Date())
-  const [activeSchedule, setActiveSchedule] = useState('KT') // KT 또는 ALL
   const [activatedData, setActivatedData] = useState(ktGameData)
-  console.log(ktGameData)
 
   // 헤더 렌더링
   const renderHeader = () => {
@@ -56,22 +55,22 @@ const Calendar = ({ ktGameData, currentDate, allGameData }: CalendarProps) => {
         </div>
 
         {/* 경기 전환 */}
-        {/* <div
-          className={`relative rounded-full border border-gray-200 px-4 leading-8 ${activeSchedule === 'KT' ? 'pl-28' : 'pr-28'}`}
+        <div
+          className={`relative rounded-full border border-gray-200 px-4 leading-8 ${activatedData === ktGameData ? 'pl-28' : 'pr-28'}`}
         >
           <button
-            className={`${activeSchedule === 'KT' && 'absolute left-0 w-24 rounded-full bg-red-500 text-white'}`}
-            onClick={() => setActiveSchedule('KT')}
+            className={`${activatedData === ktGameData && 'absolute left-0 w-24 rounded-full bg-red-500 text-white'}`}
+            onClick={() => setActivatedData(ktGameData)}
           >
             KT 경기
           </button>
           <button
-            className={`${activeSchedule === 'ALL' && 'absolute right-0 w-24 rounded-full bg-red-500 text-white'}`}
-            onClick={() => setActiveSchedule('ALL')}
+            className={`${activatedData === allGameData && 'absolute right-0 w-24 rounded-full bg-red-500 text-white'}`}
+            onClick={() => setActivatedData(allGameData)}
           >
             전체 경기
           </button>
-        </div> */}
+        </div>
       </div>
     )
   }
@@ -114,9 +113,6 @@ const Calendar = ({ ktGameData, currentDate, allGameData }: CalendarProps) => {
           (game) => game.displayDate === formattedDate,
         )
 
-        // 같은 날짜의 경기 결과를 합쳐서 처리
-        const gameOutcomes = dailyGames.map((game) => game.outcome).join('/')
-
         days.push(
           <div
             key={day.toString()}
@@ -130,15 +126,14 @@ const Calendar = ({ ktGameData, currentDate, allGameData }: CalendarProps) => {
             <span className="absolute text-base">{format(day, 'd')}</span>
 
             {/* KT 게임 데이터 렌더링 */}
-            {activeSchedule === 'KT' && dailyGames.length > 0 && (
-              <KtwizCalendarCell
-                cellData={dailyGames[0]}
-                gameOutcomes={gameOutcomes}
-              />
+            {activatedData === ktGameData && dailyGames.length > 0 && (
+              <KtwizCalendarCell cellData={dailyGames[0]} />
             )}
 
             {/* 전체 게임 데이터 렌더링 */}
-            {activeSchedule === 'ALL' && <div>ㅣ</div>}
+            {activatedData === allGameData && dailyGames.length > 0 && (
+              <AllCalendarCell cellData={dailyGames} />
+            )}
           </div>,
         )
         day = addDays(day, 1)

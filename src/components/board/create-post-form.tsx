@@ -80,6 +80,7 @@ export default function CreatePostForm() {
       await createPost(formData)
       setImagePreviews([])
       reset()
+      alert('게시글이 작성되었습니다.')
     } catch (error) {
       console.error('Error creating post:', error)
     }
