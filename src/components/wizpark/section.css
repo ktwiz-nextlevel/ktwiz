@@ -82,7 +82,7 @@
   padding-inline-start: 0px;
   padding-left: 0px;
   padding-right: 0px;
-  padding-top: 40px;
+  @apply pt-12 sm:pt-16;
   vertical-align: baseline;
   width: 100%;
 }
