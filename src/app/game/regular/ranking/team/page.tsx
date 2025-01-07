@@ -24,7 +24,7 @@ async function RankingPage() {
   const teamBattingRank = await fetchTeamBattingRank()
   const teamPitchingRank = await fetchTeamPitchingRank()
   const teamRankVs: VsTeam[] = await fetchTeamRankteamvs()
-  // console.log(transformData(teamRankVs))
+
   return (
     <div className="mb-[250px] w-full">
       <TabNavigation tabs={TABS} activeTab={TABS[0]} />
