@@ -3,15 +3,16 @@ import { Suspense } from 'react'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 import WizparkSection from '@/components/wizpark/wizpark-section'
 import WizparkDescription from '@/components/wizpark/wizpark-description'
+import IframeBanner from '@/components/wizpark/iframe-banner'
 
 export default function Page() {
   return (
     <>
       <Breadcrumb />
+      <WizparkDescription />
       <WizparkSection>
         <StadiumIframe />
       </WizparkSection>
-      <WizparkDescription />
     </>
   )
 }
