@@ -125,16 +125,37 @@ export default function CustomSquad() {
     }
   }
 
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault()
-  }
+  const handleDragOver = (e: React.DragEvent) => e.preventDefault()
 
-  const handleRefresh = () => {
-    window.location.reload()
-  }
+  const handleRefresh = () => window.location.reload()
 
-  const handleCloseGuide = () => {
-    setShowGuide(false)
+  const handleCloseGuide = () => setShowGuide(false)
+
+  const handleCapture = async () => {
+    if (captureRef.current) {
+      try {
+        const canvas = await html2canvas(captureRef.current, {
+          useCORS: true, // 이미지 CORS 이슈 방지
+          backgroundColor: null, // 배경색 투명하게
+          allowTaint: false, // 이미지 taint 문제 해결
+          proxy: 'http://localhost:3000/player/custom-squad/',
+          scale: 2, // 고해상도 이미지 캡처
+          logging: true, // 디버깅 로그
+        })
+
+        const image = canvas.toDataURL('image/png')
+
+        // 이미지 다운로드
+        const link = document.createElement('a')
+        link.href = image
+        link.download = 'custom_squad.png'
+        link.click()
+      } catch (error) {
+        console.error('이미지 캡처 중 오류 발생:', error)
+      }
+    } else {
+      console.error('캡처할 요소를 찾을 수 없습니다.')
+    }
   }
 
   return (
@@ -153,6 +174,12 @@ export default function CustomSquad() {
           >
             초기화
           </button>
+          <button
+            onClick={handleCapture}
+            className="rounded-lg bg-green-500 px-4 py-2 text-white"
+          >
+            이미지 캡처
+          </button>
         </div>
         <div className="flex h-screen flex-col gap-6 md:flex-row">
           <PlayerList
@@ -162,7 +189,10 @@ export default function CustomSquad() {
             handleDragEnd={handleDragEnd}
           />
 
-          <div className="relative h-full w-full flex-grow rounded-lg p-4 shadow-md md:w-4/5">
+          <div
+            ref={captureRef}
+            className="relative h-full w-full flex-grow rounded-lg p-4 shadow-md md:w-4/5"
+          >
             <Image
               src="/images/players/rb.png"
               alt="Player Image"
