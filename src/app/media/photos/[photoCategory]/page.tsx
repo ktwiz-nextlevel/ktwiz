@@ -42,7 +42,9 @@ export default async function PhotoPage({
           title={MEDIA_BANNER_DATA['/photos'].title}
           subtitle={MEDIA_BANNER_DATA['/photos'].description}
         />
-        <TabMenu tabs={MEDIA_BANNER_DATA['/photos'].tabs} />
+        {MEDIA_BANNER_DATA['/photos'].tabs && (
+          <TabMenu tabs={MEDIA_BANNER_DATA['/photos'].tabs} />
+        )}
       </Banner>
       <div className="flex w-full px-10 pb-16">
         <div className="mx-auto max-w-[1100px] flex-1">
