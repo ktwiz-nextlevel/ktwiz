@@ -138,7 +138,6 @@ export default function CustomSquad() {
           useCORS: true, // 이미지 CORS 이슈 방지
           backgroundColor: null, // 배경색 투명하게
           allowTaint: false, // 이미지 taint 문제 해결
-          proxy: 'http://localhost:3000/player/custom-squad/',
           scale: 2, // 고해상도 이미지 캡처
           logging: true, // 디버깅 로그
         })
@@ -196,7 +195,7 @@ export default function CustomSquad() {
             <Image
               src="/images/players/rb.png"
               alt="Player Image"
-              layout="fill"
+              fill
               objectFit="cover"
               className="rounded-lg p-8"
             />
@@ -213,10 +212,11 @@ export default function CustomSquad() {
                   }}
                 >
                   {position.status.playerPrvwImg ? (
-                    <img
+                    <Image
                       src={position.status.playerPrvwImg}
                       alt={position.status.playerName}
                       className="h-full w-full rounded-lg object-cover"
+                      fill
                     />
                   ) : (
                     position.status.playerName
