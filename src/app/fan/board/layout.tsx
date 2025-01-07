@@ -14,7 +14,9 @@ function Layout({
           title={FAN_BANNER_DATA['/'].title}
           subtitle={FAN_BANNER_DATA['/'].description}
         />
-        <TabMenu tabs={FAN_BANNER_DATA['/'].tabs} />
+        {FAN_BANNER_DATA['/'].tabs && (
+          <TabMenu tabs={FAN_BANNER_DATA['/'].tabs} />
+        )}
       </Banner>
       <div> {children}</div>
     </div>

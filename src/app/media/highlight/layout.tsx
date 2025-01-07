@@ -14,7 +14,9 @@ function Layout({
           title={MEDIA_BANNER_DATA['/highlight'].title}
           subtitle={MEDIA_BANNER_DATA['/highlight'].description}
         />
-        <TabMenu tabs={MEDIA_BANNER_DATA['/highlight'].tabs} />
+        {MEDIA_BANNER_DATA['/highlight'].tabs && (
+          <TabMenu tabs={MEDIA_BANNER_DATA['/highlight'].tabs} />
+        )}
       </Banner>
       <div> {children}</div>
     </div>

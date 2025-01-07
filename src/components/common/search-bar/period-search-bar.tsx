@@ -1,13 +1,20 @@
 import { useState } from 'react'
 
 interface PeriodSearchBarProps {
+  startDate: string
+  endDate: string
+  setStartDate: (date: string) => void
+  setEndDate: (date: string) => void
   onSubmit: (searchParams: { startDate: string; endDate: string }) => void
 }
 
-export default function PeriodSearchBar({ onSubmit }: PeriodSearchBarProps) {
-  const [startDate, setStartDate] = useState('')
-  const [endDate, setEndDate] = useState('')
-
+export default function PeriodSearchBar({
+  startDate,
+  endDate,
+  setStartDate,
+  setEndDate,
+  onSubmit,
+}: PeriodSearchBarProps) {
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!startDate || !endDate) {
@@ -22,14 +29,14 @@ export default function PeriodSearchBar({ onSubmit }: PeriodSearchBarProps) {
         <input
           id="start-date"
           type="date"
-          className="h-[30px] w-[120px] border border-[#9a9a9a] px-[8px]"
+          className="h-[30px] w-[120px] border border-[#9a9a9a] px-[8px] focus:outline-red-300"
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
         />
         <input
           id="end-date"
           type="date"
-          className="h-[30px] w-[120px] border border-[#9a9a9a] px-[8px]"
+          className="h-[30px] w-[120px] border border-[#9a9a9a] px-[8px] focus:outline-red-300"
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)}
         />

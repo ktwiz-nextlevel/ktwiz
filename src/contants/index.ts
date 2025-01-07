@@ -333,7 +333,7 @@ export const MEDIA_BANNER_DATA: BannerData = {
   '/highlight': {
     title: '하이라이트',
     description: '생생한 경기 하이라이트를 담았습니다.',
-    tabs: null,
+    tabs: [],
   },
   '/live/pts': {
     title: 'Live 영상모음',

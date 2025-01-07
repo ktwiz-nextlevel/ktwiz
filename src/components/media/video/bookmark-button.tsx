@@ -3,6 +3,7 @@
 import { addBookmark, removeBookmark } from '@/services/media-action'
 import { BookmarkIcon as SolidBookmarkIcon } from '@heroicons/react/20/solid'
 import { BookmarkIcon as OutlineBookmarkIcon } from '@heroicons/react/24/outline'
+import clsx from 'clsx'
 
 export default function BookmarkButton({
   videoId,
@@ -23,6 +24,7 @@ export default function BookmarkButton({
       if (removeResult && removeResult.message) {
         alert(removeResult.message)
       }
+      alert('북마크에서 삭제되었습니다.')
     } else {
       const result = await addBookmark(
         videoId,
@@ -33,13 +35,20 @@ export default function BookmarkButton({
       if (result && result.message) {
         alert(result.message)
       }
+      alert('북마크에 저장되었습니다.')
     }
   }
 
   return (
     <button
       onClick={handleClick}
-      className="flex w-44 items-center justify-center bg-[--black-color-600] px-4 py-2 text-sm text-white hover:bg-gray-500"
+      className={clsx(
+        'flex w-44 items-center justify-center px-4 py-2 text-sm text-white',
+        {
+          'bg-[--main-red-color] hover:bg-[--black-color-600]': isBookmarked,
+          'bg-[--black-color-600] hover:bg-[--main-red-color]': !isBookmarked,
+        },
+      )}
     >
       {isBookmarked ? (
         <SolidBookmarkIcon className="mr-2 h-4 w-4" />

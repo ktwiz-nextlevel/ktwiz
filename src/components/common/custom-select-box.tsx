@@ -1,4 +1,5 @@
 'use client'
+
 import {
   Listbox,
   ListboxButton,
@@ -8,24 +9,26 @@ import {
 import { ChevronUpDownIcon } from '@heroicons/react/16/solid'
 import { CheckIcon } from '@heroicons/react/20/solid'
 
-type OptionType = {
+interface OptionType {
   name: string
   displayString: string
 }
 
-export default function BoardSelectBox({
-  options,
-  selected,
-  onChange,
-}: {
+interface CustomSelectBoxProps {
   options: OptionType[]
   selected: OptionType
   onChange: (selected: OptionType) => void
-}) {
+}
+
+export default function CustomSelectBox({
+  options,
+  selected,
+  onChange,
+}: CustomSelectBoxProps) {
   return (
     <Listbox value={selected} onChange={onChange}>
       <div className="relative">
-        <ListboxButton className="grid w-full cursor-default grid-cols-1 rounded-md bg-white py-1.5 pl-3 pr-2 text-left text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-[--gray-color-100]">
+        <ListboxButton className="grid w-full cursor-default grid-cols-1 rounded-md bg-white py-1.5 pl-3 pr-2 text-left text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-red-300">
           <span className="col-start-1 row-start-1 whitespace-nowrap pr-6">
             {selected.displayString}
           </span>
@@ -34,6 +37,7 @@ export default function BoardSelectBox({
             className="col-start-1 row-start-1 size-4 self-center justify-self-end text-gray-500"
           />
         </ListboxButton>
+
         <ListboxOptions
           transition
           className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in"

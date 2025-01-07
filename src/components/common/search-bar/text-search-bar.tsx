@@ -1,35 +1,25 @@
-import { useState } from 'react'
-import CustomSelectBox from './custom-select-box'
-
 interface TextSearchBarProps {
-  options: { name: string; displayString: string }[]
-  defaultQuery?: string
-  onSubmit: (searchParams: { query: string; type: string }) => void
+  query: string
+  setQuery: (query: string) => void
+  onSubmit: (searchParams: { query: string }) => void
 }
 
-export default function SelectSearchBar({
-  options,
-  defaultQuery = '',
+export default function TextSearchBar({
+  query,
+  setQuery,
   onSubmit,
 }: TextSearchBarProps) {
-  const [query, setQuery] = useState(defaultQuery)
-  const [type, setType] = useState(options[0])
-
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    onSubmit({ query, type: type.name })
+    onSubmit({ query })
   }
 
   return (
     <div className="flex gap-[5px] align-middle text-[12px]">
       <form onSubmit={handleSearch} className="flex items-end gap-2">
-        <CustomSelectBox
-          options={options}
-          onChange={(option) => setType(option)}
-        />
         <input
           type="text"
-          className="h-[30px] w-[220px] border border-[#9a9a9a] px-[8px]"
+          className="h-[30px] w-[220px] border border-[#9a9a9a] px-[8px] focus:outline-red-300"
           placeholder="검색어를 입력해주세요"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
