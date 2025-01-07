@@ -3,8 +3,8 @@ import '../styles/globals.css'
 import '../styles/main.css'
 
 import { WithFullWidthFlyoutMenu as Header } from '@/components/tailwind-ui/'
-import { createClient } from '@/utils/supabase/server'
 import Footer from '@/components/common/footer'
+import { fetchProfile } from '@/services/user-service'
 
 export const metadata: Metadata = {
   title: "kimpuro's next.js template",
@@ -19,10 +19,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const supabase = await createClient()
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  const user = await fetchProfile()
 
   return (
     <html lang="ko">

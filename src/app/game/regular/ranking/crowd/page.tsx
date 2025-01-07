@@ -1,4 +1,4 @@
-import { TabNavigation } from '@/components/common/tab-menu/tab-navigation'
+import { TabNavigation } from '@/components/common/tab-menu/tab'
 import React from 'react'
 const TABS = [
   { title: '팀순위', href: '/game/regular/ranking/team', path: 'team' },
@@ -12,11 +12,11 @@ const TABS = [
     href: '/game/regular/ranking/batter',
     path: 'batter',
   },
-  {
-    title: '관중현황',
-    href: '/game/regular/ranking/crowd',
-    path: 'crowd',
-  },
+  // {
+  //   title: '관중현황',
+  //   href: '/game/regular/ranking/crowd',
+  //   path: 'crowd',
+  // },
 ]
 function RankCrowdPage() {
   return (
