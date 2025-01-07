@@ -11,7 +11,10 @@ export const createTeamERAOverview = (
   } as const
 }
 
-export function createPlayerList(list: any[], key: string) {
+export function createPlayerList(
+  list: any[],
+  key: string,
+): [BestPlayer, BestPlayer, BestPlayer] {
   return list.map((player, idx) => {
     return { playerName: player.playerName, data: player[key] }
   })

@@ -12,26 +12,18 @@ import SearchBar from './_component/search-bar'
 const TH_KEY = [
   { title: '선수명', key: 'playerName' },
   { title: '팀명', key: 'teamName' },
+  { title: '타율', key: 'bra' },
   { title: '경기', key: 'gamenum' },
   { title: '타수', key: 'ab' },
-  { title: '타율', key: 'bra' },
-  { title: '출루율', key: 'ops' },
-  { title: '장타율', key: 'slg' },
+  { title: '득점', key: 'run' },
   { title: '홈런', key: 'hr' },
   { title: '타점', key: 'rbi' },
-  { title: '득점', key: 'run' },
+  { title: '도루', key: 'sb' },
   { title: '볼넷', key: 'bb' },
   { title: '삼진', key: 'kk' },
-  { title: '타격비율', key: 'babip' },
-  { title: 'ISO', key: 'iso' },
-  { title: 'OPS+', key: 'opsPlus' },
-  { title: '희생플라이', key: 'sf' },
-  { title: '도루', key: 'sb' },
-  { title: '도루시도', key: 'sbTryCn' },
-  { title: '희생번트', key: 'sh' },
-  { title: '플라이아웃', key: 'fl' },
-  { title: '골든글러브', key: 'gd' },
-  { title: '기타', key: 'wrHit' },
+  { title: '장타율', key: 'slg' },
+
+  { title: '출루율', key: 'ops' },
 ]
 
 function RankingTable() {
@@ -47,6 +39,9 @@ function RankingTable() {
   } = useSelection([
     { name: '2024', displayString: '2024 시즌' },
     { name: '2023', displayString: '2023 시즌' },
+    { name: '2022', displayString: '2022 시즌' },
+    { name: '2021', displayString: '2021 시즌' },
+    { name: '2020', displayString: '2020 시즌' },
   ])
 
   const [data, setData] = useState<any[]>([])
