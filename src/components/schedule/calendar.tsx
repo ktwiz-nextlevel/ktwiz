@@ -15,6 +15,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import { GameScheduleData } from '@/types'
 import Link from 'next/link'
 import KtwizCalendarCell from './ktwiz-calendar-cell'
+import AllCalendarCell from './all-calendar-cell'
 
 interface CalendarProps {
   ktGameData: GameScheduleData[]
@@ -112,9 +113,6 @@ const Calendar = ({ ktGameData, currentDate, allGameData }: CalendarProps) => {
           (game) => game.displayDate === formattedDate,
         )
 
-        // 같은 날짜의 경기 결과를 합쳐서 처리
-        const gameOutcomes = dailyGames.map((game) => game.outcome).join('/')
-
         days.push(
           <div
             key={day.toString()}
@@ -129,19 +127,13 @@ const Calendar = ({ ktGameData, currentDate, allGameData }: CalendarProps) => {
 
             {/* KT 게임 데이터 렌더링 */}
             {activatedData === ktGameData && dailyGames.length > 0 && (
-              <KtwizCalendarCell
-                cellData={dailyGames[0]}
-                gameOutcomes={gameOutcomes}
-              />
+              <KtwizCalendarCell cellData={dailyGames[0]} />
             )}
 
             {/* 전체 게임 데이터 렌더링 */}
-            {/* {activatedData === allGameData && dailyGames.length > 0 && (
-              <KtwizCalendarCell
-                cellData={dailyGames[0]}
-                gameOutcomes={gameOutcomes}
-              />
-            )} */}
+            {activatedData === allGameData && dailyGames.length > 0 && (
+              <AllCalendarCell cellData={dailyGames} />
+            )}
           </div>,
         )
         day = addDays(day, 1)
