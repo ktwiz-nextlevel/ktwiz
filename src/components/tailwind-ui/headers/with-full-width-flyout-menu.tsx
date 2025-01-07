@@ -62,7 +62,7 @@ export function WithFullWidthFlyoutMenu({ initialUser }: HeaderProps) {
   return (
     <>
       <header
-        className="group relative isolate z-10 w-full bg-[--black-color-100] py-2 transition duration-300 ease-in-out hover:bg-white"
+        className="group sticky top-0 isolate z-50 w-full bg-[--black-color-100] py-2 transition duration-300 ease-in-out hover:bg-white"
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
       >

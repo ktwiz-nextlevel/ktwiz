@@ -173,7 +173,7 @@ async function RankingPage() {
   const teamRankVs = await fetchTeamRankteamvs()
   console.log(transformData(teamRankVs))
   return (
-    <div className="w-full">
+    <div className="mb-[250px] w-full">
       <TabNavigation tabs={TABS} activeTab={TABS[0]} />
 
       <SectionWrapper>
