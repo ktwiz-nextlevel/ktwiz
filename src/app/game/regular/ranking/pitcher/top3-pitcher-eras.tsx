@@ -8,13 +8,30 @@ import { createPlayerList } from './(lib)/adapter'
 export function Top3PitcherEras() {
   const { currentYear } = useYearStore()
   const [data, setData] = useState<string | any>('')
+  const [isLoading, setIsLoading] = useState(true)
+
   const fetchData = async () => {
-    const res = await getTop3PitcherEras(currentYear) // 예시 API 호출
-    setData(res)
+    try {
+      setIsLoading(true)
+      const res = await getTop3PitcherEras(currentYear)
+      setData(res)
+    } catch (error) {
+      console.error('Error fetching data:', error)
+    } finally {
+      setIsLoading(false)
+    }
   }
   useEffect(() => {
     fetchData()
   }, [])
+
+  if (isLoading) {
+    return (
+      <div className="loading-container">
+        <p>Loading...</p>
+      </div>
+    )
+  }
   return (
     <div>
       {data.length !== 0 && (
