@@ -8,6 +8,7 @@ import { useSelection } from './_lib/use-selection'
 import { getbatterRankings, getKTBatterRankings } from './_lib/api'
 import { TabMenu } from './_component/tab-menu'
 import SearchBar from './_component/search-bar'
+import { TableWhithHoverPopup } from '@/components/tailwind-ui/tables/hover-popup-table'
 
 const TH_KEY = [
   { title: '선수명', key: 'playerName' },
@@ -90,7 +91,7 @@ function RankingTable() {
           />
         </div>
       </div>
-      <Table data={data} thKey={TH_KEY} />
+      <TableWhithHoverPopup data={data} thKey={TH_KEY} />
     </section>
   )
 }

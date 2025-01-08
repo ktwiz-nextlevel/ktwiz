@@ -9,6 +9,7 @@ import { WithVerticalLines as Table } from '@/components/tailwind-ui/tables/with
 import { useEffect, useState } from 'react'
 import { getKTPitcherRankings, getPitcherRankings } from './(lib)/api'
 import { useSearchParams } from 'next/navigation'
+import { TableWhithHoverPopup } from '@/components/tailwind-ui/tables/hover-popup-table'
 const TH_KEY = [
   { title: '선수명', key: 'playerName' },
   { title: '팀명', key: 'teamName' },
@@ -93,7 +94,7 @@ function RankingTable() {
           />
         </div>
       </div>
-      <Table data={data} thKey={TH_KEY} />
+      <TableWhithHoverPopup data={data} thKey={TH_KEY} />
     </section>
   )
 }
