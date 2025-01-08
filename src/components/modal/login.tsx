@@ -25,6 +25,23 @@ async function signInWithKakao() {
   }
 }
 
+async function signInWithGoogle() {
+  const supabase = await createClient()
+
+  // 구글 로그인
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: process.env.BASE_URL
+        ? `https://${process.env.BASE_URL}/auth/callback`
+        : 'http://localhost:3000/auth/callback',
+    },
+  })
+  if (error) {
+    redirect('/error')
+  }
+}
+
 export default function LoginModal({ onClose }: ModalProps) {
   return (
     <>
@@ -41,7 +58,7 @@ export default function LoginModal({ onClose }: ModalProps) {
           <p className="mt-[10px] text-center text-[20px] font-bold">로그인</p>
         </div>
         {/* 소셜 로그인 목록 */}
-        <div className="gap-[ 2px] flex flex-col">
+        <div className="flex flex-col gap-2.5">
           {/* refactor: 로그인 버튼 컴포넌트로 뺴기 */}
           <button
             className="h-[40px] w-full rounded-[8px] bg-[#ffe900]"
@@ -56,7 +73,7 @@ export default function LoginModal({ onClose }: ModalProps) {
             카카오 로그인
           </button>
 
-          {/* <button
+          <button
             className="h-[40px] w-full rounded-[8px] border bg-[#f2f2f2]"
             style={{
               backgroundImage: 'url(/images/google-logo.webp)',
@@ -64,9 +81,10 @@ export default function LoginModal({ onClose }: ModalProps) {
               backgroundPosition: '10px, 50%',
               backgroundSize: '24px',
             }}
+            onClick={signInWithGoogle}
           >
             google 로그인
-          </button> */}
+          </button>
           {/* <button
             className="h-[40px] w-full rounded-[8px] border border-[#999]"
             style={{
@@ -78,9 +96,6 @@ export default function LoginModal({ onClose }: ModalProps) {
           >
             이메일 로그인
           </button> */}
-        </div>
-        <div className="mt-[14px] text-center">
-          <button onClick={onClose}>회원가입</button>
         </div>
       </Modal>
     </>
