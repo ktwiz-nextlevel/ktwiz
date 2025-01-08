@@ -1,32 +1,32 @@
 import { MenuData, LnbDataArray, BannerData } from '@/types'
 
 export const MENU_DATA: MenuData[] = [
-  {
-    gnb: 'Kt wiz',
-    href: '/ktwiz',
-    lnb: [
-      {
-        name: 'kt wiz는?',
-        href: '/ktwiz/about',
-      },
-      // {
-      //   name: '구단 BI',
-      //   href: '/ktwiz/bi/symbol',
-      // },
-      // {
-      //   name: '회원 정책',
-      //   href: '/ktwiz/policy/regular',
-      // },
-      // {
-      //   name: '스폰서',
-      //   href: '/ktwiz/sponsor',
-      // },
-      // {
-      //   name: '월페이퍼',
-      //   href: '/ktwiz/wallpaper',
-      // },
-    ],
-  },
+  // {
+  //   gnb: 'Kt wiz',
+  //   href: '/ktwiz',
+  //   lnb: [
+  //     {
+  //       name: 'kt wiz는?',
+  //       href: '/ktwiz/about',
+  //     },
+  //     // {
+  //     //   name: '구단 BI',
+  //     //   href: '/ktwiz/bi/symbol',
+  //     // },
+  //     // {
+  //     //   name: '회원 정책',
+  //     //   href: '/ktwiz/policy/regular',
+  //     // },
+  //     // {
+  //     //   name: '스폰서',
+  //     //   href: '/ktwiz/sponsor',
+  //     // },
+  //     // {
+  //     //   name: '월페이퍼',
+  //     //   href: '/ktwiz/wallpaper',
+  //     // },
+  //   ],
+  // },
   {
     gnb: 'wiz park',
     href: '/wizpark',

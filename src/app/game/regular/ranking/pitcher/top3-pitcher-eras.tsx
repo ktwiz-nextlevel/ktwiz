@@ -39,7 +39,7 @@ export function Top3PitcherEras() {
           isErrored={data === '' || data.length === 0}
           playerPrvwImg={data[0]?.playerPrvwImg}
           playerList={createPlayerList(data, 'era')}
-          title="승리"
+          title="평균자책점"
         />
       )}
     </div>
