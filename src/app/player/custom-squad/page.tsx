@@ -18,6 +18,7 @@ import PlayerList from '@/components/player/custom-squad/player-list'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 import CustomSquadTable from '@/components/player/custom-squad/player-table'
 import { toPng } from 'html-to-image'
+import Title from '@/components/common/title/title'
 
 interface PlayerCard {
   pcode: PlayerCode
@@ -259,6 +260,15 @@ export default function CustomSquad() {
               <CustomSquadTable
                 player={squareStates.map((data) => data.status.playerName)}
               />
+            </div>
+
+            <div className="my-8 p-6">
+              <h1 className="text-3xl font-bold text-gray-800">
+                ⚾ KT wiz의 다음 스쿼드를 직접 만들어 주세요!
+              </h1>
+              <p className="mt-4 text-xl text-gray-600">
+                여러분의 스쿼드를 만들고 게시판에 공유해보세요!
+              </p>
             </div>
 
             <Image
