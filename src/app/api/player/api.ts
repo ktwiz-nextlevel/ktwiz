@@ -123,3 +123,15 @@ export const getPlayerChart = async (name: PlayerChart) => {
     throw error
   }
 }
+
+export const getPitcherChart = async (pcode: PlayerCode) => {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_PLAYER_REQUEST_URL}/api/player/pitcherdetail_add?pcode=${pcode}`,
+    )
+    return await response.json()
+  } catch (error) {
+    console.error('투수차트 요청 에러:', error)
+    throw error
+  }
+}

@@ -205,7 +205,7 @@ export default function CustomSquad() {
         <div className="mb-7 mt-[50px] flex w-full justify-end">
           <Breadcrumbs pages={['HOME', 'Player', '커스텀 스쿼드']} />
         </div>
-        <div className="flex justify-end">
+        <div className="flex justify-end space-x-4">
           <button
             onClick={handleRefresh}
             className="rounded-lg bg-red-500 px-4 py-2 text-white shadow-md hover:bg-red-600"
@@ -219,6 +219,7 @@ export default function CustomSquad() {
             이미지 캡처
           </button>
         </div>
+
         <div className="flex h-screen flex-col gap-6 md:flex-row">
           <PlayerList
             cards={cards}
@@ -236,20 +237,7 @@ export default function CustomSquad() {
                 player={squareStates.map((data) => data.status.playerName)}
               />
             </div>
-            {/* <div className="w-1/4">
-              <div className="flex bg-gray-100 text-center">
-                <div className="flex-1 border px-4 py-2 font-semibold">
-                  평균 연봉
-                </div>
-                <div className="flex-1 border px-4 py-2 font-semibold">
-                  총합 연봉
-                </div>
-              </div>
-              <div className="flex text-center">
-                <div className="flex-1 border px-4 py-2"></div>
-                <div className="flex-1 border px-4 py-2"></div>
-              </div>
-            </div> */}
+
             <Image
               src="/images/players/rb.png"
               alt="Player Image"
