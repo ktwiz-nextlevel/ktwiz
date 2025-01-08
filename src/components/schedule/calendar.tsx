@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   startOfMonth,
   endOfMonth,
@@ -26,6 +26,32 @@ interface CalendarProps {
 const Calendar = ({ ktGameData, currentDate, allGameData }: CalendarProps) => {
   const formattedCurrentDate = parse(currentDate, 'yyyyMM', new Date())
   const [activatedData, setActivatedData] = useState(ktGameData)
+  const [activatedBtn, setActivatedBtn] = useState<'KT' | 'ALL' | null>(null)
+
+  // 로컬 스토리지에서 초기값 가져오기
+  useEffect(() => {
+    const savedSelection = localStorage.getItem('selected') as 'KT' | 'ALL'
+    if (savedSelection) {
+      setActivatedBtn(savedSelection)
+      setActivatedData(savedSelection === 'KT' ? ktGameData : allGameData)
+    } else {
+      setActivatedBtn('KT') // 기본값
+      setActivatedData(ktGameData)
+    }
+  }, [ktGameData, allGameData])
+
+  // 로컬 스토리지에 상태 저장
+  useEffect(() => {
+    if (activatedBtn) {
+      localStorage.setItem('selected', activatedBtn)
+      setActivatedData(activatedBtn === 'KT' ? ktGameData : allGameData)
+    }
+  }, [activatedBtn, ktGameData, allGameData])
+
+  // 로딩 상태 처리 (초기화 전 렌더링 방지)
+  if (activatedBtn === null) {
+    return <></>
+  }
 
   // 헤더 렌더링
   const renderHeader = () => {
@@ -60,13 +86,13 @@ const Calendar = ({ ktGameData, currentDate, allGameData }: CalendarProps) => {
         >
           <button
             className={`${activatedData === ktGameData && 'absolute left-0 w-24 rounded-full bg-red-500 text-white'}`}
-            onClick={() => setActivatedData(ktGameData)}
+            onClick={() => setActivatedBtn('KT')}
           >
             KT 경기
           </button>
           <button
             className={`${activatedData === allGameData && 'absolute right-0 w-24 rounded-full bg-red-500 text-white'}`}
-            onClick={() => setActivatedData(allGameData)}
+            onClick={() => setActivatedBtn('ALL')}
           >
             전체 경기
           </button>
@@ -156,7 +182,9 @@ const Calendar = ({ ktGameData, currentDate, allGameData }: CalendarProps) => {
       {activatedData.length > 0 ? (
         renderCells()
       ) : (
-        <div className="text-center">게임 정보가 없습니다.</div>
+        <div className="text-center text-xl leading-[670px] text-gray-500">
+          게임 정보가 없습니다.
+        </div>
       )}
     </div>
   )
