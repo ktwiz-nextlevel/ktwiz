@@ -50,7 +50,6 @@ export default function Pitcher() {
           return { bb, er, hit, hold, hp, hr, kk }
         }
 
-        // 첫 번째와 두 번째 기록에서 필요한 데이터만 추출
         const thisYearData = records[0] ? extractRelevantData(records[0]) : null
         const lastYearData = records[1] ? extractRelevantData(records[1]) : null
 
