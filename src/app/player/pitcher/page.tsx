@@ -12,6 +12,7 @@ import {
   getPitcherPlayerList,
   getPitcherPlayerDetail,
   getPlayerChart,
+  getPitcherChart,
 } from '@/app/api/player/api'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 
@@ -40,27 +41,29 @@ export default function Pitcher() {
         setCards(playerList)
 
         const playerDetail = await getPitcherPlayerDetail(playerPcode)
-        const records = playerDetail.data.yearrecordlist
+        console.log('playerDetail : ', playerDetail)
 
-        console.log('records : ', records)
-
-        // 필요한 속성만 추출하는 함수
-        const extractRelevantData = (record) => {
-          const { bb, er, hit, hold, hp, hr, kk } = record
-          return { bb, er, hit, hold, hp, hr, kk }
-        }
-
-        const thisYearData = records[0] ? extractRelevantData(records[0]) : null
-        const lastYearData = records[1] ? extractRelevantData(records[1]) : null
-
-        setThisYearChart(thisYearData)
-        setLastYearChart(lastYearData)
         setDetailData(playerDetail.data.gameplayer)
         setPlayerImg(playerDetail.data.gameplayer.playerPrvwImg1)
-        setSeasonData(records[0])
         setPlayerName(playerDetail.data.gameplayer.playerName)
+
+        const data = await getPitcherChart(playerPcode)
+        const record1 = data.data.yearrecordlist[0]
+        const record2 = data.data.yearrecordlist[1]
+
+        const valData1 = Object.fromEntries(
+          Object.entries(record1).filter(([key]) => key.endsWith('_val')),
+        )
+
+        const valData2 = Object.fromEntries(
+          Object.entries(record2).filter(([key]) => key.endsWith('_val')),
+        )
+
+        setThisYearChart(valData1)
+        setLastYearChart(valData2)
+        setSeasonData(playerDetail.data.yearrecordlist[0])
       } catch (error) {
-        console.error('fetchPitcherData 요청 실패 :', error)
+        console.error('fetchPitcherData 요청 실패:', error)
       }
     }
 
