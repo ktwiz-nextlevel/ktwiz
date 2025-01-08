@@ -6,11 +6,14 @@ export default async function ScoreCardGroup() {
   )
   const { data } = await res.json()
   return (
-    <div className="flex gap-1">
-      {JSON.stringify(data.data)}
-      <ScoreCard className="flex-1" gameInfo={data.prev} />
-      <ScoreCard className="w-5/12" isCenter={true} gameInfo={data.current} />
-      <ScoreCard className="flex-1" gameInfo={data.next} />
+    <div className="score-card-group flex gap-1">
+      <ScoreCard className="hidden flex-1 md:block" gameInfo={data.prev} />
+      <ScoreCard
+        className="w-full md:w-5/12"
+        isCenter={true}
+        gameInfo={data.current}
+      />
+      <ScoreCard className="hidden flex-1 md:block" gameInfo={data.next} />
     </div>
   )
 }

@@ -35,6 +35,34 @@ export default function SignupModal({ onClose }: ModalProps) {
       router.push('/error')
     }
   }
+
+  // 구글 로그인
+  const signUpWithGoogle = async () => {
+    try {
+      const supabase = createClient()
+
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: process.env.BASE_URL
+            ? `https://${process.env.BASE_URL}/auth/callback`
+            : 'http://localhost:3000/auth/callback',
+          queryParams: {
+            prompt: 'select_account',
+          },
+        },
+      })
+
+      if (error) {
+        console.error('Google signup error:', error)
+        router.push('/error')
+      }
+    } catch (error) {
+      console.error('Unexpected error:', error)
+      router.push('/error')
+    }
+  }
+
   return (
     <>
       <Modal onClose={onClose}>
@@ -52,7 +80,7 @@ export default function SignupModal({ onClose }: ModalProps) {
           </p>
         </div>
         {/* 소셜 로그인 목록 */}
-        <div className="gap-[ 2px] flex flex-col">
+        <div className="flex flex-col gap-2.5">
           {/* refactor: 로그인 버튼 컴포넌트로 뺴기 */}
           <button
             className="h-[40px] w-full rounded-[8px] bg-[#ffe900]"
@@ -66,9 +94,19 @@ export default function SignupModal({ onClose }: ModalProps) {
           >
             카카오로 회원가입
           </button>
-        </div>
-        <div className="mt-[14px] text-center">
-          <button onClick={onClose}>회원가입</button>
+
+          <button
+            className="h-[40px] w-full rounded-[8px] border bg-[#f2f2f2]"
+            style={{
+              backgroundImage: 'url(/images/google-logo.webp)',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: '10px, 50%',
+              backgroundSize: '24px',
+            }}
+            onClick={signUpWithGoogle}
+          >
+            google로 회원가입
+          </button>
         </div>
       </Modal>
     </>
