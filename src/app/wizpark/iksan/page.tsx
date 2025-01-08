@@ -11,7 +11,7 @@ export default function Page() {
       <Breadcrumb />
       <WizparkSection>
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3173.8048142598!2d127.00709357666054!3d37.299759539379345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b5db07ba6e26f%3A0xf8d00419ae70fbb8!2z7IiY7JuQS1TsnITspojtjIztgaw!5e0!3m2!1sko!2skr!4v1735822826125!5m2!1sko!2skr"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3229.169133979718!2d127.00368147662061!3d35.96729021420549!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357015a49458f8b3%3A0xf730b5fced3ee7fc!2z7J217IKwIOq1reqwgOuMgO2RnCDslbzqtazsnqU!5e0!3m2!1sko!2skr!4v1736343187164!5m2!1sko!2skr"
           width="1100"
           height="662"
           allowFullScreen=""
