@@ -70,7 +70,7 @@ export default function MainSchedule() {
   if (!data) return <div className="text-center">No data available</div>
 
   return (
-    <div className="pt-[16vw] text-center md:py-48">
+    <div className="page py-[2.5rem] pt-[5rem] text-center">
       <Image
         src="/images/main/main-schedule.png"
         width="820"
@@ -80,7 +80,7 @@ export default function MainSchedule() {
       />
       <div className="-mt-8 flex justify-between gap-4 rounded-md bg-white p-4 px-10 py-12 shadow-lg shadow-[#f532324d]">
         {/* 경기결과 */}
-        <div className="w-3/5">
+        <div className="w-full md:w-3/5">
           <div className="relative border-b-2 pb-2.5 text-center">
             <ChevronLeftIcon
               onClick={handlePrev}
