@@ -37,15 +37,18 @@ export default function PlayerChart({
     fullMark: 100,
   }))
 
-  // const data2: ChartItem[] = Object.keys({
-  //   ...thisYearChart,
-  //   ...lastYearChart,
-  // }).map((key) => ({
-  //   subject: key,
-  //   A: thisYearChart[key] ?? 0,
-  //   B: lastYearChart[key] ?? 0,
-  //   fullMark: 100,
-  // }))
+  const data2: ChartItem[] = Object.keys({
+    ...thisYearChart,
+    ...lastYearChart,
+  }).map((key) => ({
+    subject: key,
+    A: thisYearChart[key] ?? 0,
+    B: lastYearChart[key] ?? 0,
+    fullMark: 100,
+  }))
+
+  console.log('data1 :', data1)
+  console.log('data2 :', data2)
 
   return (
     <div className="flex w-full items-center justify-center space-x-4 p-4">
@@ -58,7 +61,7 @@ export default function PlayerChart({
       {/* 두 번째 레이더 차트 */}
       <div className="h-96 w-1/2">
         <h3 className="mb-2 text-center font-bold">24시즌vs23시즌</h3>
-        {/* <ChartRadar2 data={data2} /> */}
+        <ChartRadar2 data={data2} />
       </div>
     </div>
   )

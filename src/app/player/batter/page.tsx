@@ -124,7 +124,7 @@ export default function Batter() {
           </div>
         </div>
 
-        <div className="mb-6 h-full w-full rounded-lg p-10">
+        <div className="mb-6 h-full w-full rounded-lg">
           <PlayerChart data={hitSprayData} />
         </div>
       </div>

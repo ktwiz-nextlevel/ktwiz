@@ -42,18 +42,19 @@ export default function Pitcher() {
         const playerDetail = await getPitcherPlayerDetail(playerPcode)
         const records = playerDetail.data.yearrecordlist
 
-        // // 필요한 속성만 추출하는 함수
-        // const extractRelevantData = (record) => {
-        //   const { bb, bf, er, hit, hold, hp, hr, kk } = record
-        //   return { bb, bf, er, hit, hold, hp, hr, kk }
-        // }
+        console.log('records : ', records)
 
-        // // 첫 번째와 두 번째 기록에서 필요한 데이터만 추출
-        // const thisYearData = records[0] ? extractRelevantData(records[0]) : null
-        // const lastYearData = records[1] ? extractRelevantData(records[1]) : null
+        // 필요한 속성만 추출하는 함수
+        const extractRelevantData = (record) => {
+          const { bb, er, hit, hold, hp, hr, kk } = record
+          return { bb, er, hit, hold, hp, hr, kk }
+        }
 
-        // setThisYearChart(thisYearData)
-        // setLastYearChart(lastYearData)
+        const thisYearData = records[0] ? extractRelevantData(records[0]) : null
+        const lastYearData = records[1] ? extractRelevantData(records[1]) : null
+
+        setThisYearChart(thisYearData)
+        setLastYearChart(lastYearData)
         setDetailData(playerDetail.data.gameplayer)
         setPlayerImg(playerDetail.data.gameplayer.playerPrvwImg1)
         setSeasonData(records[0])
@@ -104,8 +105,8 @@ export default function Pitcher() {
           <PlayerChart
             pitchingRatioChart={pitchingRatioChart}
             pitchingValueChart={pitchingValueChart}
-            // thisYearChart={thisYearChart}
-            // lastYearChart={lastYearChart}
+            thisYearChart={thisYearChart}
+            lastYearChart={lastYearChart}
           />
         </div>
       </div>

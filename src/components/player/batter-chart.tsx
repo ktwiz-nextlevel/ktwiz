@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import ChartScatter from './rechart/hits-spray'
+import ChartRadar2 from './rechart/radar-chart2'
 
 interface HitSprayItem {
   info: string
@@ -42,28 +43,32 @@ export default function PlayerChart({ data }: PlayerChartProps) {
   }, [data])
 
   return (
-    <div className="flex w-full flex-col items-stretch justify-center space-y-4 p-4 lg:flex-row lg:items-center lg:space-x-4 lg:space-y-0">
-      {/* 히트스프레이 섹션 */}
-      <div className="h-auto w-full rounded-lg p-4 lg:w-1/2">
+    <div className="flex w-full flex-col items-stretch justify-center space-y-4 lg:flex-row lg:items-center lg:space-x-4 lg:space-y-0">
+      <div className="w-full rounded-lg border border-gray-200 bg-gray-50 p-6 shadow-md lg:w-1/2">
         <h3 className="mb-4 text-center text-xl font-bold text-gray-800">
-          히트스프레이
+          2023 히트스프레이
         </h3>
-        <p className="mt-1 text-center text-sm text-gray-600">
+        <p className="mb-4 text-center text-sm text-gray-600">
           그래프의 빨간 점 위에 마우스를 올리면 해당 데이터에 대한 자세한 정보를
           확인할 수 있습니다.
         </p>
 
-        <div className="w-full flex-1 overflow-auto">
+        <div className="h-[600px] w-full overflow-auto rounded-lg border border-gray-100 bg-white shadow-inner">
           <ChartScatter scatterData={processedData} />
         </div>
       </div>
-
-      {/* 24시즌 vs 23시즌 섹션 */}
-      <div className="h-96 w-full rounded-lg p-4 lg:w-1/2">
+      <div className="w-full rounded-lg border border-gray-200 bg-gray-50 p-6 shadow-md lg:w-1/2">
         <h3 className="mb-4 text-center text-xl font-bold text-gray-800">
-          24시즌vs23시즌
+          2024 히트스프레이
         </h3>
-        {/* <ChartRadar2 data={data2} /> */}
+        <p className="mb-4 text-center text-sm text-gray-600">
+          그래프의 빨간 점 위에 마우스를 올리면 해당 데이터에 대한 자세한 정보를
+          확인할 수 있습니다.
+        </p>
+
+        <div className="h-[600px] w-full overflow-auto rounded-lg border border-gray-100 bg-white p-4 shadow-inner">
+          <ChartScatter scatterData={processedData} />
+        </div>
       </div>
     </div>
   )

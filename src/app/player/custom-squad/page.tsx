@@ -16,6 +16,7 @@ import html2canvas from 'html2canvas'
 import OverlayGuide from '@/components/player/overlay-guide'
 import PlayerList from '@/components/player/custom-squad/player-list'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
+import CustomSquadTable from '@/components/player/custom-squad/player-table'
 
 interface PlayerCard {
   pcode: PlayerCode
@@ -27,6 +28,7 @@ interface PlayerCard {
 interface SquareStatus {
   playerName: string
   playerPrvwImg?: string
+  position: string
   isDrop?: boolean
 }
 
@@ -44,15 +46,51 @@ export default function CustomSquad() {
   const [showGuide, setShowGuide] = useState(true)
 
   const [squareStates, setSquareStates] = useState<SquarePosition[]>([
-    { top: '78%', left: '48%', status: { playerName: '포수' } },
-    { top: '68%', left: '58%', status: { playerName: '1루수' } },
-    { top: '57%', left: '48%', status: { playerName: '2루수' } },
-    { top: '68%', left: '37%', status: { playerName: '3루수' } },
-    { top: '67%', left: '47%', status: { playerName: '투수' } },
-    { top: '56%', left: '70%', status: { playerName: '외야수' } },
-    { top: '50%', left: '20%', status: { playerName: '외야수' } },
-    { top: '40%', left: '50%', status: { playerName: '외야수' } },
-    { top: '56%', left: '34%', status: { playerName: '내야수' } },
+    {
+      top: '78%',
+      left: '48%',
+      status: { playerName: '', position: '포수' },
+    },
+    {
+      top: '68%',
+      left: '58%',
+      status: { playerName: '', position: '1루수' },
+    },
+    {
+      top: '57%',
+      left: '48%',
+      status: { playerName: '', position: '2루수' },
+    },
+    {
+      top: '68%',
+      left: '37%',
+      status: { playerName: '', position: '3루수' },
+    },
+    {
+      top: '67%',
+      left: '47%',
+      status: { playerName: '', position: '투수' },
+    },
+    {
+      top: '56%',
+      left: '70%',
+      status: { playerName: '', position: '외야수' },
+    },
+    {
+      top: '50%',
+      left: '20%',
+      status: { playerName: '', position: '외야수' },
+    },
+    {
+      top: '40%',
+      left: '50%',
+      status: { playerName: '', position: '외야수' },
+    },
+    {
+      top: '56%',
+      left: '34%',
+      status: { playerName: '', position: '내야수' },
+    },
   ])
 
   // 선수 리스트 호출
@@ -111,6 +149,7 @@ export default function CustomSquad() {
       updatedSquares[index].status = {
         playerName: draggedCard.playerName,
         playerPrvwImg: draggedCard.playerPrvwImg,
+        position: draggedCard.position,
         isDrop: true,
       }
 
@@ -169,13 +208,13 @@ export default function CustomSquad() {
         <div className="flex justify-end">
           <button
             onClick={handleRefresh}
-            className="rounded-lg bg-blue-500 px-4 py-2 text-white shadow-md hover:bg-blue-600"
+            className="rounded-lg bg-red-500 px-4 py-2 text-white shadow-md hover:bg-red-600"
           >
             초기화
           </button>
           <button
             onClick={handleCapture}
-            className="rounded-lg bg-green-500 px-4 py-2 text-white"
+            className="rounded-lg bg-black px-4 py-2 text-white hover:bg-black"
           >
             이미지 캡처
           </button>
@@ -192,6 +231,25 @@ export default function CustomSquad() {
             ref={captureRef}
             className="relative h-full w-full flex-grow rounded-lg p-4 shadow-md md:w-4/5"
           >
+            <div className="mb-3 w-3/4">
+              <CustomSquadTable
+                player={squareStates.map((data) => data.status.playerName)}
+              />
+            </div>
+            {/* <div className="w-1/4">
+              <div className="flex bg-gray-100 text-center">
+                <div className="flex-1 border px-4 py-2 font-semibold">
+                  평균 연봉
+                </div>
+                <div className="flex-1 border px-4 py-2 font-semibold">
+                  총합 연봉
+                </div>
+              </div>
+              <div className="flex text-center">
+                <div className="flex-1 border px-4 py-2"></div>
+                <div className="flex-1 border px-4 py-2"></div>
+              </div>
+            </div> */}
             <Image
               src="/images/players/rb.png"
               alt="Player Image"
@@ -214,12 +272,12 @@ export default function CustomSquad() {
                   {position.status.playerPrvwImg ? (
                     <Image
                       src={position.status.playerPrvwImg}
-                      alt={position.status.playerName}
+                      alt={position.status.position}
                       className="h-full w-full rounded-lg object-cover"
                       fill
                     />
                   ) : (
-                    position.status.playerName
+                    position.status.position
                   )}
                 </div>
               ))}
