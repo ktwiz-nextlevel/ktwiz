@@ -1,4 +1,5 @@
 import MainGallery from '@/components/main/main-gallery'
+import MainSchedule from '@/components/main/main-schedule'
 import MainVideo from '@/components/main/main-video'
 import { getMainPhotoList, getMainVideoList } from '@/services/media-service'
 import Link from 'next/link'
@@ -32,6 +33,7 @@ export default async function Page() {
           </div>
         </div>
       </div>
+      <MainSchedule />
       <MainVideo videos={videoData} />
       <MainGallery photoList={photoData} />
     </div>
