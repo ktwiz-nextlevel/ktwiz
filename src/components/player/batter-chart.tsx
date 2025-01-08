@@ -44,20 +44,7 @@ export default function PlayerChart({ data }: PlayerChartProps) {
 
   return (
     <div className="flex w-full flex-col items-stretch justify-center space-y-4 lg:flex-row lg:items-center lg:space-x-4 lg:space-y-0">
-      <div className="w-full rounded-lg border border-gray-200 bg-gray-50 p-6 shadow-md lg:w-1/2">
-        <h3 className="mb-4 text-center text-xl font-bold text-gray-800">
-          2023 히트스프레이
-        </h3>
-        <p className="mb-4 text-center text-sm text-gray-600">
-          그래프의 빨간 점 위에 마우스를 올리면 해당 데이터에 대한 자세한 정보를
-          확인할 수 있습니다.
-        </p>
-
-        <div className="h-[600px] w-full overflow-auto rounded-lg border border-gray-100 bg-white shadow-inner">
-          <ChartScatter scatterData={processedData} />
-        </div>
-      </div>
-      <div className="w-full rounded-lg border border-gray-200 bg-gray-50 p-6 shadow-md lg:w-1/2">
+      <div className="lg:w-1/1 w-full rounded-lg border border-gray-200 bg-gray-50 p-6 shadow-md">
         <h3 className="mb-4 text-center text-xl font-bold text-gray-800">
           2024 히트스프레이
         </h3>
@@ -66,7 +53,7 @@ export default function PlayerChart({ data }: PlayerChartProps) {
           확인할 수 있습니다.
         </p>
 
-        <div className="h-[600px] w-full overflow-auto rounded-lg border border-gray-100 bg-white p-4 shadow-inner">
+        <div className="h-[700px] w-full rounded-lg border border-gray-100 bg-white shadow-inner">
           <ChartScatter scatterData={processedData} />
         </div>
       </div>

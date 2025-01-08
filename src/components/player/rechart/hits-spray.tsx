@@ -26,7 +26,7 @@ export default function CustomScatter({ scatterData }: CustomScatterProps) {
   }
 
   return (
-    <div className="relative mx-auto h-[500px] w-[500px] bg-[url('/images/players/background.png')] bg-cover bg-center">
+    <div className="relative mx-auto h-[600px] w-[600px] bg-[url('/images/players/background.png')] bg-cover bg-center">
       {scatterData.map((point, index) => (
         <div
           key={index}
