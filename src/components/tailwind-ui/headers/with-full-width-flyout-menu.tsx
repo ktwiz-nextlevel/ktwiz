@@ -62,7 +62,7 @@ export function WithFullWidthFlyoutMenu({ initialUser }: HeaderProps) {
   return (
     <>
       <header
-        className="group relative isolate z-10 w-full bg-[--black-color-100] py-2 transition duration-300 ease-in-out hover:bg-white"
+        className="group sticky top-0 isolate z-50 w-full bg-[--black-color-100] py-2 transition duration-300 ease-in-out hover:bg-white"
         onMouseOver={handleMouseOver}
         onMouseOut={handleMouseOut}
       >
@@ -107,7 +107,7 @@ export function WithFullWidthFlyoutMenu({ initialUser }: HeaderProps) {
                 // GNB
                 <PopoverButton
                   key={menu.gnb + idx}
-                  className="box-border flex w-[70px] items-center gap-x-1 border-red-200 bg-[--black-color-100] text-center text-sm/4 font-semibold text-white outline-none transition duration-300 ease-in-out hover:text-gray-900 focus:outline-none active:outline-none active:ring-0 group-hover:border-white group-hover:bg-white group-hover:text-gray-900"
+                  className="box-border flex w-[75px] items-center justify-center gap-x-1 border-red-200 bg-[--black-color-100] text-center text-base font-semibold text-white outline-none transition duration-300 ease-in-out hover:text-gray-900 focus:outline-none active:outline-none active:ring-0 group-hover:border-white group-hover:bg-white group-hover:text-gray-900"
                 >
                   {menu.gnb}
                 </PopoverButton>
@@ -123,13 +123,13 @@ export function WithFullWidthFlyoutMenu({ initialUser }: HeaderProps) {
                         <div
                           key={idx + 'lnb'}
                           // className={`group relative ${getPaddingByIdx(idx)} w-[70px] text-sm/6`}
-                          className={`group relative w-[70px] text-sm/6`}
+                          className={`group relative w-[75px] text-sm/6`}
                         >
                           {menu?.map((lnb, idx) => (
                             <Link
                               key={lnb.name + idx}
                               href={lnb.href}
-                              className="mb-3 block text-xs font-normal text-gray-900 hover:font-bold hover:text-black"
+                              className="mb-3 block text-sm font-normal text-gray-900 hover:font-bold hover:text-black"
                             >
                               {lnb.name}
                             </Link>

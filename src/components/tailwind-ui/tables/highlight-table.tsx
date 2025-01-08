@@ -1,6 +1,6 @@
 import { cn } from '@/utils'
 
-export function WithVerticalLines<T extends Record<string, any>>({
+export function HighlightTable<T extends Record<string, any>>({
   data,
   thKey,
   highlightRowKey,
@@ -24,7 +24,7 @@ export function WithVerticalLines<T extends Record<string, any>>({
     return idx % 2 === 0 ? 'bg-gray-50' : 'bg-white' // 기본 줄무늬 (짝수는 연한 핑크색, 홀수는 흰색)
   }
   const getHighlightStyle = (idx: number) => {
-    return higlightColumIndex === idx ? 'bg-red-50' : 'bg-white'
+    return higlightColumIndex === idx ? 'bg-red-50' : ''
   }
   const higlightColumIndex = highlightColumnKey
     ? thKey.findIndex((th) => th.key === highlightColumnKey)
@@ -55,7 +55,6 @@ export function WithVerticalLines<T extends Record<string, any>>({
                   const rowStyle = highlightRowKey
                     ? getRowStyle(idx, player)
                     : getStripeStyle(idx)
-                  //[{'bg-gray-50',"",""}]
 
                   return (
                     <tr
@@ -64,14 +63,17 @@ export function WithVerticalLines<T extends Record<string, any>>({
                     >
                       {thKey.map((th, index) => {
                         // const isSameKey = !player[th.key as keyof T]
+                        const columStyle = getHighlightStyle(index)
                         return (
                           <td
                             key={index + 'key'}
                             className={cn(
-                              `${index === 0 ? `pl-3 text-start` : `px-4 text-center`} whitespace-nowrap border-none py-4 text-xs font-normal`,
+                              `${index === 0 ? `pl-3 text-start` : `px-4 text-center`} whitespace-nowrap border-none py-4 text-xs font-normal ${columStyle}`,
                             )}
                           >
-                            {player[th.key as keyof T]}
+                            {player[th.key as keyof T]
+                              ? player[th.key as keyof T]
+                              : '-'}
                           </td>
                         )
                       })}
