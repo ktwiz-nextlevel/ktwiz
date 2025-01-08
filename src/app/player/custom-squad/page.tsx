@@ -17,6 +17,7 @@ import OverlayGuide from '@/components/player/overlay-guide'
 import PlayerList from '@/components/player/custom-squad/player-list'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 import CustomSquadTable from '@/components/player/custom-squad/player-table'
+import { toPng } from 'html-to-image'
 
 interface PlayerCard {
   pcode: PlayerCode
@@ -170,29 +171,51 @@ export default function CustomSquad() {
 
   const handleCloseGuide = () => setShowGuide(false)
 
+  // const handleCapture = async () => {
+  //   if (captureRef.current) {
+  //     try {
+  //       const canvas = await html2canvas(captureRef.current, {
+  //         useCORS: true, // 이미지 CORS 이슈 방지
+  //         backgroundColor: null, // 배경색 투명하게
+  //         allowTaint: false, // 이미지 taint 문제 해결
+  //         scale: 2, // 고해상도 이미지 캡처
+  //         logging: true, // 디버깅 로그
+  //       })
+
+  //       const image = canvas.toDataURL('image/png')
+
+  //       // 이미지 다운로드
+  //       const link = document.createElement('a')
+  //       link.href = image
+  //       link.download = 'custom_squad.png'
+  //       link.click()
+  //     } catch (error) {
+  //       console.error('이미지 캡처 중 오류 발생:', error)
+  //     }
+  //   } else {
+  //     console.error('캡처할 요소를 찾을 수 없습니다.')
+  //   }
+  // }
+
   const handleCapture = async () => {
     if (captureRef.current) {
       try {
-        const canvas = await html2canvas(captureRef.current, {
-          useCORS: true, // 이미지 CORS 이슈 방지
-          backgroundColor: null, // 배경색 투명하게
-          allowTaint: false, // 이미지 taint 문제 해결
-          scale: 2, // 고해상도 이미지 캡처
-          logging: true, // 디버깅 로그
+        // DOM을 PNG 이미지로 변환
+        const dataUrl = await toPng(captureRef.current, {
+          backgroundColor: 'white',
+          pixelRatio: window.devicePixelRatio || 2, // 고해상도 설정
         })
-
-        const image = canvas.toDataURL('image/png')
 
         // 이미지 다운로드
         const link = document.createElement('a')
-        link.href = image
+        link.href = dataUrl
         link.download = 'custom_squad.png'
         link.click()
       } catch (error) {
-        console.error('이미지 캡처 중 오류 발생:', error)
+        console.error('이미지 내보내기 중 오류 발생:', error)
       }
     } else {
-      console.error('캡처할 요소를 찾을 수 없습니다.')
+      console.error('내보낼 요소를 찾을 수 없습니다.')
     }
   }
 
@@ -214,9 +237,9 @@ export default function CustomSquad() {
           </button>
           <button
             onClick={handleCapture}
-            className="rounded-lg bg-black px-4 py-2 text-white hover:bg-black"
+            className="rounded-lg bg-black px-4 py-2 text-white shadow-md hover:bg-black"
           >
-            이미지 캡처
+            이미지 내보내기
           </button>
         </div>
 
