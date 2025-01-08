@@ -42,10 +42,12 @@ export default function Pitcher() {
         const playerDetail = await getPitcherPlayerDetail(playerPcode)
         const records = playerDetail.data.yearrecordlist
 
+        console.log('records : ', records)
+
         // 필요한 속성만 추출하는 함수
         const extractRelevantData = (record) => {
-          const { bb, bf, er, hit, hold, hp, hr, kk } = record
-          return { bb, bf, er, hit, hold, hp, hr, kk }
+          const { bb, er, hit, hold, hp, hr, kk } = record
+          return { bb, er, hit, hold, hp, hr, kk }
         }
 
         // 첫 번째와 두 번째 기록에서 필요한 데이터만 추출
