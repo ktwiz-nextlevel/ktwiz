@@ -50,10 +50,16 @@ export default function PostDetailBox({ post, userData }: PostDetailBoxProps) {
   const {
     register: editRegister,
     handleSubmit: handleEditSubmit,
+    setValue: setEditValue,
     formState: { errors: editErrors },
   } = useForm<CommentFormValues>({
     resolver: zodResolver(commentSchema),
   })
+
+  const handleEditButtonClick = (comment: { id: number; content: string }) => {
+    setEditingCommentId(comment.id)
+    setEditValue('content', comment.content)
+  }
 
   const onCreateSubmit = async (data: CommentFormValues) => {
     if (!userData) {
@@ -120,20 +126,20 @@ export default function PostDetailBox({ post, userData }: PostDetailBoxProps) {
       <div className="w-full pt-6">
         <div className="flex items-center justify-between rounded-lg border-t-2 border-[--main-red-color] bg-[--white-color-200] p-4">
           <div>
-            <p>{post.title}</p>
+            <p className="line-clamp-1">{post.title}</p>
           </div>
           <div className="flex items-center gap-4 text-xs text-[--gray-color-100]">
             <div className="flex items-center gap-1">
               <UserIcon className="h-4 w-4" />
-              <p>{post.author}</p>
+              <p className="whitespace-nowrap">{post.author}</p>
             </div>
             <div className="flex items-center gap-1">
               <CalendarDaysIcon className="h-4 w-4" />
-              <p>{post.createdAt}</p>
+              <p className="whitespace-nowrap">{post.createdAt}</p>
             </div>
             <div className="flex items-center gap-1">
               <CheckCircleIcon className="h-4 w-4" />
-              <p>{post.viewCount}</p>
+              <p className="whitespace-nowrap">{post.viewCount}</p>
             </div>
           </div>
         </div>
@@ -216,7 +222,6 @@ export default function PostDetailBox({ post, userData }: PostDetailBoxProps) {
                             {...editRegister('content')}
                             rows={3}
                             className="block w-full resize-none border p-2 text-sm"
-                            defaultValue={comment.content}
                           />
                           {editErrors.content && (
                             <p className="mt-2 text-sm text-red-500">
@@ -245,7 +250,7 @@ export default function PostDetailBox({ post, userData }: PostDetailBoxProps) {
                         editingCommentId !== comment.id && (
                           <div className="flex items-center gap-2">
                             <button
-                              onClick={() => setEditingCommentId(comment.id)}
+                              onClick={() => handleEditButtonClick(comment)}
                               className="text-sm"
                             >
                               수정

@@ -46,24 +46,22 @@ export default async function PhotoPage({
           <TabMenu tabs={MEDIA_BANNER_DATA['/photos'].tabs} />
         )}
       </Banner>
-      <div className="flex w-full px-10 pb-16">
-        <div className="mx-auto max-w-[1100px] flex-1">
-          <div className="mt-[50px] flex w-full justify-between">
-            <PhotoSearchBar />
-            <Breadcrumbs pages={['HOME', 'MEDIA', 'wiz 포토']} />
-          </div>
-          {initialPhotos.length > 0 ? (
-            <PhotoList
-              initialPhotos={initialPhotos}
-              category={photoCategory}
-              query={query}
-              startDate={startDate}
-              endDate={endDate}
-            />
-          ) : (
-            <NoDataList />
-          )}
+      <div className="page px-10 pb-16">
+        <div className="mt-[50px] w-full justify-between space-y-4 lg:flex">
+          <PhotoSearchBar />
+          <Breadcrumbs pages={['HOME', 'MEDIA', 'wiz 포토']} />
         </div>
+        {initialPhotos.length > 0 ? (
+          <PhotoList
+            initialPhotos={initialPhotos}
+            category={photoCategory}
+            query={query}
+            startDate={startDate}
+            endDate={endDate}
+          />
+        ) : (
+          <NoDataList />
+        )}
       </div>
     </div>
   )

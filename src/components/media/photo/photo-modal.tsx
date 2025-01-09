@@ -116,14 +116,8 @@ export default function PhotoModal({
   if (!photoList[currentIndex]) return null
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black"
-      onClick={onClose}
-    >
-      <div
-        className="relative h-full w-full max-w-full"
-        onClick={(e) => e.stopPropagation()}
-      >
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black">
+      <div className="relative h-full w-full max-w-full">
         <div className="absolute left-0 top-0 z-20 flex w-full items-center justify-between bg-black bg-opacity-75 p-4 text-white">
           <p className="pl-4 text-sm">{`${currentIndex + 1} / ${photoList.length}`}</p>
           <div className="flex flex-col items-center justify-center space-y-1">
@@ -181,7 +175,7 @@ export default function PhotoModal({
             {'<'}
           </button>
           <div
-            className="flex transition-transform duration-300"
+            className="flex transition-transform duration-700 ease-in-out"
             style={{
               transform: `translateX(-${currentIndex * 100}%)`,
             }}
@@ -194,7 +188,7 @@ export default function PhotoModal({
                 <img
                   src={photo.imgFilePath}
                   alt={photo.artcTitle}
-                  className="max-h-[1000px] max-w-[1600px] object-contain"
+                  className="max-h-[80vh] max-w-[95vw] object-contain md:max-h-[1000px] md:max-w-[1600px]"
                   draggable={false}
                   style={{
                     transform: `scale(${scale})`,

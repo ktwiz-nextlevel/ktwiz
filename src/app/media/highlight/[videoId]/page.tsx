@@ -66,50 +66,47 @@ export default async function VideoDetailPage({
   const isBookmarked = await checkBookmarked(videoId)
 
   return (
-    <div className="h-full w-full px-12 py-10">
-      <div className="flex w-full justify-end">
+    <div className="page-large px-10">
+      <div className="mb-10 mt-[50px] flex w-full justify-end">
         <Breadcrumbs pages={['HOME', 'MEDIA', '하이라이트']} />
       </div>
-      <div className="flex w-full space-x-10 py-10">
-        <div>
+      <div className="lg:flex lg:space-x-4">
+        <div className="flex-1">
           <VideoEmbed embedUrl={embedUrl} />
+          <div className="mt-4 flex items-center justify-between space-x-4 bg-[--white-color-200] px-4 py-3">
+            <p className="line-clamp-1 text-xs md:text-sm">
+              {result.artcTitle}
+            </p>
+            <div className="flex items-center gap-4 text-xs text-[--gray-color-100]">
+              <div className="flex items-center gap-1">
+                <CalendarDaysIcon className="h-4 w-4" />
+                <p className="whitespace-nowrap">
+                  {new Date(result.regDttm).toLocaleDateString()}
+                </p>
+              </div>
+              <div className="flex items-center gap-1">
+                <CheckCircleIcon className="h-4 w-4" />
+                <p>{result.viewCnt}</p>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col">
-          <p className="mb-4 font-semibold">하이라이트 영상 목록</p>
-          <RelatedVideoList videos={adjacentVideos} />
-        </div>
+        <RelatedVideoList videos={adjacentVideos} />
       </div>
-      <div className="flex justify-between space-x-28">
-        <div className="flex flex-1 items-center justify-between bg-[--white-color-200] px-7 py-3">
-          <div>
-            <p>{result.artcTitle}</p>
-          </div>
-          <div className="flex items-center gap-4 text-xs text-[--gray-color-100]">
-            <div className="flex items-center gap-1">
-              <CalendarDaysIcon className="h-4 w-4" />
-              <p>{new Date(result.regDttm).toLocaleDateString()}</p>
-            </div>
-            <div className="flex items-center gap-1">
-              <CheckCircleIcon className="h-4 w-4" />
-              <p>{result.viewCnt}</p>
-            </div>
-          </div>
-        </div>
-        <div className="flex items-center space-x-4">
-          <BookmarkButton
-            videoId={result.artcSeq}
-            videoTitle={result.artcTitle}
-            videoThumbnail={result.imgFilePath}
-            videoReg={result.regDttm}
-            isBookmarked={isBookmarked}
-          />
-          <Link
-            href="/media/highlight"
-            className="bg-[--black-color-600] px-4 py-2 text-sm text-white hover:bg-gray-500"
-          >
-            목록보기
-          </Link>
-        </div>
+      <div className="mt-4 flex items-center justify-end space-x-4">
+        <BookmarkButton
+          videoId={result.artcSeq}
+          videoTitle={result.artcTitle}
+          videoThumbnail={result.imgFilePath}
+          videoReg={result.regDttm}
+          isBookmarked={isBookmarked}
+        />
+        <Link
+          href="/media/highlight"
+          className="bg-[--black-color-600] px-4 py-2 text-xs text-white hover:bg-gray-500 lg:text-sm"
+        >
+          목록보기
+        </Link>
       </div>
     </div>
   )

@@ -26,7 +26,7 @@ export default function LiveTalk({
 
   useEffect(() => {
     const fetchMessages = async () => {
-      setIsFetching(true) // 로딩 시작
+      setIsFetching(true)
       const { data, error } = await supabase
         .from('messages')
         .select('*')
@@ -36,7 +36,7 @@ export default function LiveTalk({
         setMessages(data as MessageEntity[])
       }
       if (error) console.error('Error fetching messages:', error.message)
-      setIsFetching(false) // 로딩 종료
+      setIsFetching(false)
     }
 
     fetchMessages()
@@ -60,7 +60,7 @@ export default function LiveTalk({
         )
         .subscribe((status) => {
           if (status === 'SUBSCRIBED') {
-            setIsSubscribed(true) // 구독 성공 시 상태 업데이트
+            setIsSubscribed(true)
           }
         })
     }
@@ -68,7 +68,7 @@ export default function LiveTalk({
     return () => {
       if (channel) {
         supabase.removeChannel(channel)
-        setIsSubscribed(false) // 구독 해제 시 상태 초기화
+        setIsSubscribed(false)
       }
     }
   }, [isAutoUpdate])
@@ -129,7 +129,7 @@ export default function LiveTalk({
   ))
 
   return (
-    <div className="mt-[50px] flex h-[630px] w-[350px] flex-col rounded-xl border bg-white p-2">
+    <div className="mt-[50px] flex max-h-[660px] max-w-[500px] flex-col rounded-xl border bg-white p-2">
       <div className="p-4 pb-1 font-extrabold">응원 오픈톡</div>
       <div className="flex items-center justify-end px-2">
         <span className="text-xs">자동 업데이트</span>
@@ -148,9 +148,12 @@ export default function LiveTalk({
             className="h-24 flex-1 resize-none rounded-xl border px-4 py-3 text-sm focus:outline-none"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onKeyUp={(e) =>
-              e.key === 'Enter' && !e.shiftKey && handleSendMessage()
-            }
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                if (e.nativeEvent.isComposing) return
+                handleSendMessage()
+              }
+            }}
             disabled={!isSubscribed} // 구독 상태가 아니면 입력 비활성화
             placeholder={isSubscribed ? '메시지를 입력하세요...' : ''}
           />

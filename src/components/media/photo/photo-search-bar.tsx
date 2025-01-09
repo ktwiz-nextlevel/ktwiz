@@ -46,7 +46,7 @@ export default function PhotoSearchBar() {
   }
 
   return (
-    <div className="flex space-x-4">
+    <div className="space-y-2 lg:flex lg:space-x-4">
       <TextSearchBar
         query={query}
         setQuery={setQuery}

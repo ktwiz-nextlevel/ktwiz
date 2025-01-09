@@ -23,6 +23,7 @@ export default function BookmarkButton({
       const removeResult = await removeBookmark(videoId)
       if (removeResult && removeResult.message) {
         alert(removeResult.message)
+        return
       }
       alert('북마크에서 삭제되었습니다.')
     } else {
@@ -34,6 +35,7 @@ export default function BookmarkButton({
       )
       if (result && result.message) {
         alert(result.message)
+        return
       }
       alert('북마크에 저장되었습니다.')
     }
@@ -43,10 +45,10 @@ export default function BookmarkButton({
     <button
       onClick={handleClick}
       className={clsx(
-        'flex w-44 items-center justify-center px-4 py-2 text-sm text-white',
+        'flex w-44 items-center justify-center px-4 py-2 text-xs text-white lg:text-sm',
         {
-          'bg-[--main-red-color] hover:bg-[--black-color-600]': isBookmarked,
-          'bg-[--black-color-600] hover:bg-[--main-red-color]': !isBookmarked,
+          'bg-[--main-red-color] hover:bg-red-800': isBookmarked,
+          'bg-[--black-color-600] hover:bg-gray-500': !isBookmarked,
         },
       )}
     >

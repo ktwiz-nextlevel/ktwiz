@@ -1,5 +1,6 @@
 'use client'
 import { ProfileDetail } from '@/types'
+import { PencilIcon } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/navigation'
 
 export function CreatePost({ userData }: { userData: ProfileDetail | null }) {
@@ -16,9 +17,10 @@ export function CreatePost({ userData }: { userData: ProfileDetail | null }) {
   return (
     <button
       onClick={handleClick}
-      className="flex h-10 items-center rounded-lg bg-[--black-color-500] px-4 text-sm text-white"
+      className="h-10 items-center rounded-lg bg-[--black-color-500] px-4 text-sm text-white"
     >
-      <span className="hidden md:block">작성하기</span>{' '}
+      <span className="hidden lg:block">작성하기</span>{' '}
+      <PencilIcon className="h-4 w-4 lg:hidden" />
     </button>
   )
 }
