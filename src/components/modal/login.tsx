@@ -2,46 +2,45 @@
 import Image from 'next/image'
 import Modal from '../common/modal'
 import { createClient } from '@/utils/supabase/client'
-import { redirect } from 'next/navigation'
+import { redirect, usePathname } from 'next/navigation'
 
 interface ModalProps {
   onClose: () => void
 }
-const currentUrl = window.location.pathname
-
-async function signInWithKakao() {
-  const supabase = await createClient()
-
-  // 현재 페이지 URL을 next 파라미터에 포함
-
-  // 카카오 로그인
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: 'kakao',
-    options: {
-      redirectTo: `${process.env.BASE_URL ?? 'http://localhost:3000'}/auth/callback?next=${encodeURIComponent(currentUrl)}`,
-    },
-  })
-  if (error) {
-    redirect('/error')
-  }
-}
-
-async function signInWithGoogle() {
-  const supabase = await createClient()
-
-  // 구글 로그인
-  const { data, error } = await supabase.auth.signInWithOAuth({
-    provider: 'google',
-    options: {
-      redirectTo: `${process.env.BASE_URL ?? 'http://localhost:3000'}/auth/callback?next=${encodeURIComponent(currentUrl)}`,
-    },
-  })
-  if (error) {
-    redirect('/error')
-  }
-}
 
 export default function LoginModal({ onClose }: ModalProps) {
+  // 현재 페이지 URL을 next 파라미터에 포함
+  const currentUrl = usePathname()
+
+  async function signInWithKakao() {
+    const supabase = await createClient()
+
+    // 카카오 로그인
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'kakao',
+      options: {
+        redirectTo: `${process.env.BASE_URL ?? 'http://localhost:3000'}/auth/callback?next=${encodeURIComponent(currentUrl)}`,
+      },
+    })
+    if (error) {
+      redirect('/error')
+    }
+  }
+
+  async function signInWithGoogle() {
+    const supabase = await createClient()
+
+    // 구글 로그인
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${process.env.BASE_URL ?? 'http://localhost:3000'}/auth/callback?next=${encodeURIComponent(currentUrl)}`,
+      },
+    })
+    if (error) {
+      redirect('/error')
+    }
+  }
   return (
     <>
       <Modal onClose={onClose}>
