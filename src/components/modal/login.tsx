@@ -7,17 +7,18 @@ import { redirect } from 'next/navigation'
 interface ModalProps {
   onClose: () => void
 }
+const currentUrl = window.location.pathname
 
 async function signInWithKakao() {
   const supabase = await createClient()
+
+  // 현재 페이지 URL을 next 파라미터에 포함
 
   // 카카오 로그인
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'kakao',
     options: {
-      redirectTo: process.env.BASE_URL
-        ? `https://${process.env.BASE_URL}/auth/callback`
-        : 'http://localhost:3000/auth/callback',
+      redirectTo: `${process.env.BASE_URL ?? 'http://localhost:3000'}/auth/callback?next=${encodeURIComponent(currentUrl)}`,
     },
   })
   if (error) {
@@ -32,9 +33,7 @@ async function signInWithGoogle() {
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: process.env.BASE_URL
-        ? `https://${process.env.BASE_URL}/auth/callback`
-        : 'http://localhost:3000/auth/callback',
+      redirectTo: `${process.env.BASE_URL ?? 'http://localhost:3000'}/auth/callback?next=${encodeURIComponent(currentUrl)}`,
     },
   })
   if (error) {
