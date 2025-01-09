@@ -21,7 +21,6 @@ async function BoxscorePage({ params }: { params: Promise<{ id: string[] }> }) {
   const gmkey = id ? id[1] : '33331008LGKT0'
 
   try {
-    // 두 API 요청을 동시에 진행
     const [response, watchPointData] = await Promise.all([
       fetch(
         `${process.env.NEXT_PUBLIC_API_SERVER_URL}/game/boxscore?gameDate=${gameDate}&gmkey=${gmkey}`,
