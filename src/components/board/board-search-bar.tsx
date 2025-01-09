@@ -35,7 +35,7 @@ export default function BoardSearchBar() {
   }
 
   return (
-    <div className="flex gap-[5px] align-middle text-[12px]">
+    <div className="flex items-center space-x-2 text-[12px]">
       <CustomSelectBox
         options={options}
         selected={type}

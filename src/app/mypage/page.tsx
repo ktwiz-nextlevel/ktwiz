@@ -37,25 +37,25 @@ export default async function MyPage({
           title={MYPAGE_BANNER_DATA['/'].title}
           subtitle={MYPAGE_BANNER_DATA['/'].description}
         />
-        <TabMenu tabs={MYPAGE_BANNER_DATA['/'].tabs} />
+        {MYPAGE_BANNER_DATA['/'].tabs && (
+          <TabMenu tabs={MYPAGE_BANNER_DATA['/'].tabs} />
+        )}
       </Banner>
-      <div className="flex w-full space-x-8 px-10 pb-16">
-        <div className="mx-auto max-w-[1100px] flex-1">
-          <div className="mt-[50px] flex w-full justify-end pb-6">
-            <Breadcrumbs pages={['HOME', 'MYPAGE']} />
-          </div>
-          <div className="border p-10">
-            <p className="pb-12 font-semibold">내 정보</p>
-            <UserInfo userData={userData} />
-            {bookmarks && (
-              <div className="mt-6">
-                <p className="text-sm font-bold">북마크한 영상 목록</p>
-                <BookmarkList bookmarks={bookmarks} />
-              </div>
-            )}
-            <div className="mt-8 flex justify-center">
-              {totalPages && <Pagination totalPages={totalPages} />}
+      <div className="page px-10">
+        <div className="mb-10 mt-[50px] flex w-full justify-end">
+          <Breadcrumbs pages={['HOME', 'MYPAGE']} />
+        </div>
+        <div className="border p-10">
+          <p className="pb-12 font-semibold">내 정보</p>
+          <UserInfo userData={userData} />
+          {bookmarks && (
+            <div className="mt-6">
+              <p className="text-sm font-bold">북마크한 영상 목록</p>
+              <BookmarkList bookmarks={bookmarks} />
             </div>
+          )}
+          <div className="mt-8 flex justify-center">
+            {totalPages && <Pagination totalPages={totalPages} />}
           </div>
         </div>
       </div>

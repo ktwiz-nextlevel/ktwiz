@@ -26,22 +26,26 @@ export default async function FanBoardPage({
   ])
 
   return (
-    <div className="flex w-full space-x-4 px-10 pb-16 lg:pl-20 xl:pl-52">
-      <div className="max-w-[1100px] flex-1">
-        <div className="mt-[50px] flex w-full justify-between">
-          <BoardSearchBar />
-          <Breadcrumbs pages={['HOME', 'FAN', '팬 소통공간']} />
-        </div>
-        <PostCard posts={postData} />
-        <div className="mt-4 flex items-center justify-between">
-          <div className="mx-auto flex justify-center">
-            {totalPages && <Pagination totalPages={totalPages} />}
+    <div className="page-large px-10">
+      <div className="flex justify-between space-x-16">
+        <div className="page">
+          <div className="mb-10 mt-[50px] flex w-full justify-between pl-4">
+            <BoardSearchBar />
+            <div className="hidden xl:block">
+              <Breadcrumbs pages={['HOME', 'FAN', '팬 소통공간']} />
+            </div>
           </div>
-          <CreatePost userData={userData} />
+          <PostCard posts={postData} />
+          <div className="flex items-center justify-between px-2 py-4">
+            <div className="mx-auto">
+              {totalPages && <Pagination totalPages={totalPages} />}
+            </div>
+            <CreatePost userData={userData} />
+          </div>
         </div>
-      </div>
-      <div className="hidden pl-4 lg:block">
-        <LiveTalk userData={userData} />
+        <div className="hidden lg:block">
+          <LiveTalk userData={userData} />
+        </div>
       </div>
     </div>
   )

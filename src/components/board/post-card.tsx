@@ -9,11 +9,11 @@ export default function PostCard({ posts }: PostCardProps) {
   const router = useRouter()
 
   return (
-    <div className="min-h-[580px] px-4 sm:px-6 lg:px-8">
-      <div className="mt-8 flow-root">
-        <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div className="inline-block min-w-full py-2 align-middle">
-            <table className="min-w-full table-fixed divide-y divide-gray-300">
+    <div className="min-h-[580px]">
+      <div className="flow-root">
+        <div className="p-2">
+          <div className="inline-block w-full py-2 align-middle">
+            <table className="w-full table-fixed divide-y divide-gray-300">
               <thead>
                 <tr>
                   <th
@@ -24,25 +24,25 @@ export default function PostCard({ posts }: PostCardProps) {
                   </th>
                   <th
                     scope="col"
-                    className="w-5/12 px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
+                    className="w-1/2 px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
                   >
                     제목
                   </th>
                   <th
                     scope="col"
-                    className="w-2/12 px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
+                    className="w-1/6 px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
                   >
                     작성자
                   </th>
                   <th
                     scope="col"
-                    className="w-2/12 px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
+                    className="hidden w-1/6 px-3 py-3.5 text-center text-sm font-semibold text-gray-900 lg:table-cell"
                   >
                     작성일
                   </th>
                   <th
                     scope="col"
-                    className="w-2/12 px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
+                    className="hidden w-1/12 px-3 py-3.5 text-center text-sm font-semibold text-gray-900 lg:table-cell"
                   >
                     조회수
                   </th>
@@ -56,20 +56,21 @@ export default function PostCard({ posts }: PostCardProps) {
                       onClick={() => {
                         router.push(`/fan/board/${post.id}`)
                       }}
+                      className="cursor-pointer hover:bg-gray-50"
                     >
-                      <td className="whitespace-nowrap py-4 pl-4 pr-3 text-center text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
+                      <td className="py-4 pl-4 pr-3 text-center text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8">
                         {post.id}
                       </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-center text-sm text-gray-500">
+                      <td className="truncate px-3 py-4 text-center text-sm text-gray-500">
                         {post.title}
                       </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-center text-sm text-gray-500">
+                      <td className="truncate px-3 py-4 text-center text-sm text-gray-500">
                         {post.author}
                       </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-center text-sm text-gray-500">
+                      <td className="hidden truncate px-3 py-4 text-center text-sm text-gray-500 lg:table-cell">
                         {post.createdAt}
                       </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-center text-sm text-gray-500">
+                      <td className="hidden truncate px-3 py-4 text-center text-sm text-gray-500 lg:table-cell">
                         {post.viewCount}
                       </td>
                     </tr>

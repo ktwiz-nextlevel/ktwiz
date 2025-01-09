@@ -11,8 +11,8 @@ export default function BookmarkList({ bookmarks }: BookmarkListProps) {
   const router = useRouter()
 
   return (
-    <div className="container mx-auto mt-6">
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="py-7">
+      <div className="grid min-h-[480px] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {bookmarks.map((bookmark: BookmarkListItem) => (
           <div
             key={bookmark.id}
