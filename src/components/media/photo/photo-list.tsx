@@ -112,7 +112,7 @@ export default function PhotoList({
   }
 
   return (
-    <div className="container mx-auto mt-10">
+    <div className="py-10">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {photoList.map((photo: Photo, index: number) => (
           <div
@@ -129,8 +129,9 @@ export default function PhotoList({
                 }
                 alt={`post-image-${photo.artcTitle}`}
                 fallbackSrc="/images/fallback-img.png"
-                className="absolute left-0 top-0 h-full w-full rounded-xl object-cover"
-                loading="lazy"
+                fill
+                className="rounded-xl object-cover"
+                unoptimized
               />
             </div>
             <div className="p-4">
@@ -160,7 +161,7 @@ export default function PhotoList({
           onClose={() => setSelectedPhotoIndex(null)}
         />
       )}
-      {showScrollToTop && (
+      {showScrollToTop && selectedPhotoIndex === null && (
         <button
           onClick={scrollToTop}
           className="fixed bottom-8 right-8 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-[--main-red-color] text-white shadow-lg hover:bg-red-600"

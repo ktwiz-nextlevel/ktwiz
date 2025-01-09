@@ -5,6 +5,7 @@ import { Video } from '@/types/media'
 import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { ArrowUpIcon } from '@heroicons/react/24/outline'
+import ClientImageFallback from '../common/client-image-fallback'
 
 interface VideoListProps {
   initialVideos: Video[]
@@ -97,7 +98,7 @@ export default function VideoList({ initialVideos, query }: VideoListProps) {
   }
 
   return (
-    <div className="container mx-auto mt-10">
+    <div className="py-10">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {photoList.map((photo: Video, index: number) => (
           <div
@@ -106,11 +107,17 @@ export default function VideoList({ initialVideos, query }: VideoListProps) {
             onClick={() => router.push(`/media/highlight/${photo.artcSeq}`)}
           >
             <div className="relative pt-[56.25%]">
-              <img
-                src={photo.imgFilePath}
-                alt={`post-image-${photo.artcSeq}`}
-                className="absolute left-0 top-0 h-full w-full rounded-xl object-cover"
-                loading="lazy"
+              <ClientImageFallback
+                src={
+                  photo.imgFilePath
+                    ? photo.imgFilePath
+                    : '/images/fallback-img.png'
+                }
+                alt={`post-image-${photo.artcTitle}`}
+                fallbackSrc="/images/fallback-img.png"
+                fill
+                className="rounded-xl object-cover"
+                unoptimized
               />
             </div>
             <div className="p-2">

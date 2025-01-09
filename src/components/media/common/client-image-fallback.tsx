@@ -1,8 +1,8 @@
 'use client'
+import Image, { ImageProps } from 'next/image'
 import { useEffect, useState } from 'react'
 
-interface ClientImageFallbackProps
-  extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src'> {
+interface ClientImageFallbackProps extends Omit<ImageProps, 'src'> {
   src: string
   fallbackSrc: string
 }
@@ -19,7 +19,7 @@ export default function ClientImageFallback({
   }, [src])
 
   return (
-    <img
+    <Image
       src={error ? fallbackSrc : src}
       alt={alt}
       onError={() => setError(true)}
