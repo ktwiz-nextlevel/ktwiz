@@ -1,5 +1,12 @@
-const CustomSquadTable = ({ player }) => {
-  console.log(player)
+interface CustomSquadTableProps {
+  player: string[]
+}
+
+const CustomSquadTable = ({ player }: CustomSquadTableProps) => {
+  const playerPosition = player.map((position) =>
+    position.trim() === '' ? '' : position,
+  )
+
   return (
     <>
       <div className="flex bg-gray-100 text-center">
@@ -14,15 +21,15 @@ const CustomSquadTable = ({ player }) => {
         <div className="flex-1 border px-4 py-2 font-semibold">내야수</div>
       </div>
       <div className="flex text-center">
-        <div className="flex-1 border px-4 py-2">{player[4]}</div>
-        <div className="flex-1 border px-4 py-2">{player[0]}</div>
-        <div className="flex-1 border px-4 py-2">{player[1]}</div>
-        <div className="flex-1 border px-4 py-2">{player[2]}</div>
-        <div className="flex-1 border px-4 py-2">{player[3]}</div>
-        <div className="flex-1 border px-4 py-2">{player[5]}</div>
-        <div className="flex-1 border px-4 py-2">{player[6]}</div>
-        <div className="flex-1 border px-4 py-2">{player[7]}</div>
-        <div className="flex-1 border px-4 py-2">{player[8]}</div>
+        <div className="flex-1 border px-4 py-2">{playerPosition[4]}</div>
+        <div className="flex-1 border px-4 py-2">{playerPosition[0]}</div>
+        <div className="flex-1 border px-4 py-2">{playerPosition[1]}</div>
+        <div className="flex-1 border px-4 py-2">{playerPosition[2]}</div>
+        <div className="flex-1 border px-4 py-2">{playerPosition[3]}</div>
+        <div className="flex-1 border px-4 py-2">{playerPosition[5]}</div>
+        <div className="flex-1 border px-4 py-2">{playerPosition[6]}</div>
+        <div className="flex-1 border px-4 py-2">{playerPosition[7]}</div>
+        <div className="flex-1 border px-4 py-2">{playerPosition[8]}</div>
       </div>
     </>
   )

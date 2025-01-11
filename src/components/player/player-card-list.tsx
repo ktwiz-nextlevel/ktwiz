@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { PlayerCode } from '@/types'
 
 interface PlayerCard {
@@ -18,6 +19,13 @@ export default function PlayerCardList({
   onCardClick,
   cards,
 }: PlayerCardListProps) {
+  const [selectedCard, setSelectedCard] = useState<PlayerCode | null>(null)
+
+  const handleCardClick = (pcode: PlayerCode) => {
+    setSelectedCard(pcode)
+    onCardClick(pcode)
+  }
+
   return (
     <div className="h-[32rem] overflow-y-auto p-2">
       <div className="flex flex-col gap-4">
@@ -25,15 +33,25 @@ export default function PlayerCardList({
           <div
             key={card.pcode}
             role="button"
-            className="group relative flex h-60 w-full cursor-pointer items-center justify-center rounded-lg bg-gray-200 transition-all duration-300 hover:bg-gray-300 hover:shadow-md active:scale-95"
-            onClick={() => onCardClick(card.pcode)}
+            className={`group relative flex h-60 w-full cursor-pointer items-center justify-center rounded-lg transition-all duration-300 ${
+              selectedCard === card.pcode
+                ? 'bg-blue-300 shadow-lg'
+                : 'bg-gray-200 hover:bg-gray-300 hover:shadow-md'
+            } active:scale-95`}
+            onClick={() => handleCardClick(card.pcode)}
           >
             <img
               src={card.playerPrvwImg || '/images/ktwiz-basic-img.png'}
               alt={card.playerName}
               className="h-full w-full rounded-lg object-cover"
             />
-            <div className="absolute inset-0 flex flex-col items-center justify-center rounded-lg bg-black bg-opacity-50 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <div
+              className={`absolute inset-0 flex flex-col items-center justify-center rounded-lg text-white transition-opacity duration-300 ${
+                selectedCard === card.pcode
+                  ? 'bg-black bg-opacity-60 opacity-100'
+                  : 'bg-black bg-opacity-50 opacity-0 group-hover:opacity-100'
+              }`}
+            >
               <div className="text-lg font-bold">{card.playerName}</div>
               {card.position && (
                 <div className="mt-1 text-sm text-gray-300">

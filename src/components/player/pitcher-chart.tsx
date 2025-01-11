@@ -13,15 +13,41 @@ interface ChartItem {
 interface PlayerChartProps {
   pitchingRatioChart?: { [key: string]: number }
   pitchingValueChart?: { [key: string]: number }
-  thisYearChart?: { [key: string]: number }
-  lastYearChart?: { [key: string]: number }
+  thisYearChart?: ChartData
+  lastYearChart?: ChartData
+}
+
+interface ChartData {
+  bb_val: number
+  er_val: number
+  hit_val: number
+  hold_val: number
+  hp_val: number
+  hr_val: number
+  kk_val: number
 }
 
 export default function PlayerChart({
   pitchingRatioChart = {},
   pitchingValueChart = {},
-  thisYearChart = {},
-  lastYearChart = {},
+  thisYearChart = {
+    bb_val: 0,
+    er_val: 0,
+    hit_val: 0,
+    hold_val: 0,
+    hp_val: 0,
+    hr_val: 0,
+    kk_val: 0,
+  },
+  lastYearChart = {
+    bb_val: 0,
+    er_val: 0,
+    hit_val: 0,
+    hold_val: 0,
+    hp_val: 0,
+    hr_val: 0,
+    kk_val: 0,
+  },
 }: PlayerChartProps) {
   const data1: ChartItem[] = Object.keys({
     ...pitchingRatioChart,
@@ -33,13 +59,10 @@ export default function PlayerChart({
     fullMark: 100,
   }))
 
-  const data2: ChartItem[] = Object.keys({
-    ...thisYearChart,
-    ...lastYearChart,
-  }).map((key) => ({
+  const data2: ChartItem[] = Object.keys(thisYearChart).map((key) => ({
     subject: key,
-    A: thisYearChart[key] ?? 0,
-    B: lastYearChart[key] ?? 0,
+    A: thisYearChart[key as keyof ChartData] ?? 0,
+    B: lastYearChart[key as keyof ChartData] ?? 0,
     fullMark: 100,
   }))
 
