@@ -17,6 +17,7 @@ import PlayerList from '@/components/player/custom-squad/player-list'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 import CustomSquadTable from '@/components/player/custom-squad/player-table'
 import { toPng } from 'html-to-image'
+import Title from '@/components/common/title/title'
 
 interface PlayerCard {
   pcode: PlayerCode
@@ -218,9 +219,9 @@ export default function CustomSquad() {
 
         <div className="flex h-screen flex-col gap-6 md:flex-row">
           <div className="mt-4">
-            <h2 className="mb-4 text-center text-xl font-bold text-gray-700">
-              선수 목록
-            </h2>
+            <div className="mb-5">
+              <Title text="선수 목록" />
+            </div>
             <PlayerList
               cards={cards}
               draggedCard={draggedCard}
