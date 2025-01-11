@@ -12,13 +12,11 @@ import {
   getOutfielderPlayerList,
   getPitcherPlayerList,
 } from '@/app/api/player/api'
-import html2canvas from 'html2canvas'
 import OverlayGuide from '@/components/player/overlay-guide'
 import PlayerList from '@/components/player/custom-squad/player-list'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 import CustomSquadTable from '@/components/player/custom-squad/player-table'
 import { toPng } from 'html-to-image'
-import Title from '@/components/common/title/title'
 
 interface PlayerCard {
   pcode: PlayerCode
@@ -172,32 +170,6 @@ export default function CustomSquad() {
 
   const handleCloseGuide = () => setShowGuide(false)
 
-  // const handleCapture = async () => {
-  //   if (captureRef.current) {
-  //     try {
-  //       const canvas = await html2canvas(captureRef.current, {
-  //         useCORS: true, // 이미지 CORS 이슈 방지
-  //         backgroundColor: null, // 배경색 투명하게
-  //         allowTaint: false, // 이미지 taint 문제 해결
-  //         scale: 2, // 고해상도 이미지 캡처
-  //         logging: true, // 디버깅 로그
-  //       })
-
-  //       const image = canvas.toDataURL('image/png')
-
-  //       // 이미지 다운로드
-  //       const link = document.createElement('a')
-  //       link.href = image
-  //       link.download = 'custom_squad.png'
-  //       link.click()
-  //     } catch (error) {
-  //       console.error('이미지 캡처 중 오류 발생:', error)
-  //     }
-  //   } else {
-  //     console.error('캡처할 요소를 찾을 수 없습니다.')
-  //   }
-  // }
-
   const handleCapture = async () => {
     if (captureRef.current) {
       try {
@@ -245,12 +217,17 @@ export default function CustomSquad() {
         </div>
 
         <div className="flex h-screen flex-col gap-6 md:flex-row">
-          <PlayerList
-            cards={cards}
-            draggedCard={draggedCard}
-            handleDrag={handleDrag}
-            handleDragEnd={handleDragEnd}
-          />
+          <div className="mt-4">
+            <h2 className="mb-4 text-center text-xl font-bold text-gray-700">
+              선수 목록
+            </h2>
+            <PlayerList
+              cards={cards}
+              draggedCard={draggedCard}
+              handleDrag={handleDrag}
+              handleDragEnd={handleDragEnd}
+            />
+          </div>
 
           <div
             ref={captureRef}

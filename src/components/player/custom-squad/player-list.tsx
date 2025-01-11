@@ -22,7 +22,7 @@ const PlayerList = ({
 }: PlayerListProps) => {
   return (
     <>
-      <div className="w-full flex-shrink-0 rounded-lg p-4 shadow-md md:w-1/6">
+      <div className="w-full flex-shrink-0 rounded-lg p-4 shadow-md">
         <div className="flex max-h-screen flex-col gap-4 overflow-y-auto">
           {cards.map((card, index) => (
             <div
