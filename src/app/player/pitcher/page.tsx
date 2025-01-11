@@ -22,6 +22,16 @@ interface PlayerCard {
   playerPrvwImg?: string
 }
 
+interface ChartData {
+  bb_val: number
+  er_val: number
+  hit_val: number
+  hold_val: number
+  hp_val: number
+  hr_val: number
+  kk_val: number
+}
+
 export default function Pitcher() {
   const [playerPcode, setPlayerPcode] = useState<PlayerCode>(53006)
   const [playerName, setPlayerName] = useState('강건')
@@ -29,11 +39,15 @@ export default function Pitcher() {
   const [detailData, setDetailData] = useState()
   const [seasonData, setSeasonData] = useState()
   const [playerImg, setPlayerImg] = useState()
-  const [thisYearChart, setThisYearChart] = useState()
-  const [lastYearChart, setLastYearChart] = useState()
+  const [thisYearChart, setThisYearChart] = useState<ChartData | undefined>(
+    undefined,
+  )
+  const [lastYearChart, setLastYearChart] = useState<ChartData | undefined>(
+    undefined,
+  )
+
   const [pitchingRatioChart, setPitchingRatioChart] = useState()
   const [pitchingValueChart, setPitchingValueChart] = useState()
-
   useEffect(() => {
     const fetchPitcherData = async () => {
       try {
@@ -41,7 +55,6 @@ export default function Pitcher() {
         setCards(playerList)
 
         const playerDetail = await getPitcherPlayerDetail(playerPcode)
-        console.log('playerDetail : ', playerDetail)
 
         setDetailData(playerDetail.data.gameplayer)
         setPlayerImg(playerDetail.data.gameplayer.playerPrvwImg1)
@@ -53,11 +66,11 @@ export default function Pitcher() {
 
         const valData1 = Object.fromEntries(
           Object.entries(record1).filter(([key]) => key.endsWith('_val')),
-        )
+        ) as unknown as ChartData
 
         const valData2 = Object.fromEntries(
           Object.entries(record2).filter(([key]) => key.endsWith('_val')),
-        )
+        ) as unknown as ChartData
 
         setThisYearChart(valData1)
         setLastYearChart(valData2)
