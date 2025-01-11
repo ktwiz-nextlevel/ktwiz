@@ -24,13 +24,13 @@ interface PlayerCard {
   pcode: PlayerCode
   playerName: string
   playerPrvwImg?: string
-  position?: string
+  position?: string | undefined
 }
 
 interface SquareStatus {
   playerName: string
   playerPrvwImg?: string
-  position: string
+  position?: string | undefined
   isDrop?: boolean
 }
 
@@ -293,7 +293,9 @@ export default function CustomSquad() {
                   {position.status.playerPrvwImg ? (
                     <Image
                       src={position.status.playerPrvwImg}
-                      alt={position.status.position}
+                      alt={
+                        position.status.position || position.status.playerName
+                      }
                       className="h-full w-full rounded-lg object-cover"
                       fill
                     />
