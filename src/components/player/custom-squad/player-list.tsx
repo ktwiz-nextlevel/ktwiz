@@ -1,4 +1,25 @@
-const PlayerList = ({ cards, handleDrag, handleDragEnd, draggedCard }) => {
+import { PlayerCode } from '@/types'
+
+interface PlayerCard {
+  pcode: PlayerCode
+  playerName: string
+  playerPrvwImg?: string
+  position?: string | undefined
+}
+
+interface PlayerListProps {
+  cards: PlayerCard[]
+  handleDrag: (card: PlayerCard, e: React.DragEvent<HTMLDivElement>) => void
+  handleDragEnd: () => void
+  draggedCard: PlayerCard | null
+}
+
+const PlayerList = ({
+  cards,
+  handleDrag,
+  handleDragEnd,
+  draggedCard,
+}: PlayerListProps) => {
   return (
     <>
       <div className="w-full flex-shrink-0 rounded-lg p-4 shadow-md md:w-1/6">

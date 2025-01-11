@@ -1,5 +1,5 @@
 const CustomSquadTable = ({ player }) => {
-  console.log(player)
+  console.log('player : ', player)
   return (
     <>
       <div className="flex bg-gray-100 text-center">
