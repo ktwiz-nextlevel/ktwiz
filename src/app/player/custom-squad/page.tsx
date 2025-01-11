@@ -44,7 +44,7 @@ export default function CustomSquad() {
   const [draggedCard, setDraggedCard] = useState<PlayerCard | null>(null)
   const dragImageRef = useRef<HTMLDivElement | null>(null)
   const captureRef = useRef<HTMLDivElement | null>(null)
-  const [showGuide, setShowGuide] = useState(true)
+  const [showGuide, setShowGuide] = useState(false)
 
   const [squareStates, setSquareStates] = useState<SquarePosition[]>([
     {
@@ -93,6 +93,29 @@ export default function CustomSquad() {
       status: { playerName: '', position: '내야수' },
     },
   ])
+
+  useEffect(() => {
+    const now = new Date().getTime()
+    const guideTime = localStorage.getItem('guideTime')
+
+    // 10분이 계산해서 불리언값 반환
+    if (!guideTime || now - parseInt(guideTime, 10) > 10 * 60 * 1000) {
+      setShowGuide(true)
+    }
+  }, [])
+
+  const handleCloseGuide = () => {
+    setShowGuide(false)
+
+    // 현재 시간을 스토리지에 저장
+    const now = new Date().getTime()
+    localStorage.setItem('guideTime', now.toString())
+  }
+
+  // 초기화 버튼
+  const handleRefresh = () => {
+    window.location.reload()
+  }
 
   // 선수 리스트 호출
   useEffect(() => {
@@ -167,10 +190,6 @@ export default function CustomSquad() {
 
   const handleDragOver = (e: React.DragEvent) => e.preventDefault()
 
-  const handleRefresh = () => window.location.reload()
-
-  const handleCloseGuide = () => setShowGuide(false)
-
   const handleCapture = async () => {
     if (captureRef.current) {
       try {
@@ -197,7 +216,6 @@ export default function CustomSquad() {
     <>
       <BannerTest />
       {showGuide && <OverlayGuide onClose={handleCloseGuide} />}
-
       <div className="page-large">
         <div className="mb-7 mt-[50px] flex w-full justify-end">
           <Breadcrumbs pages={['HOME', 'Player', '커스텀 스쿼드']} />
