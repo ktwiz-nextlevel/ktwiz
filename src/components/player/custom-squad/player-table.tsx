@@ -4,7 +4,7 @@ interface CustomSquadTableProps {
 
 const CustomSquadTable = ({ player }: CustomSquadTableProps) => {
   const playerPosition = player.map((position) =>
-    position.trim() === '' ? '미지정' : position,
+    position.trim() === '' ? '' : position,
   )
 
   return (
