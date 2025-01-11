@@ -31,13 +31,15 @@ interface HitSprayItem {
 }
 
 export default function Batter() {
-  const [playerPcode, setPlayerPcode] = useState<PlayerCode>(50066)
-  const [playerName, setPlayerName] = useState('강현우')
+  const [playerPcode, setPlayerPcode] = useState<PlayerCode>(51005)
+  const [playerName, setPlayerName] = useState('김건형')
   const [cards, setCards] = useState<PlayerCard[]>([])
   const [detailData, setDetailData] = useState()
   const [seasonData, setSeasonData] = useState()
   const [playerImg, setPlayerImg] = useState()
   const [hitSprayData, setHitSprayData] = useState<HitSprayItem[]>([])
+
+  console.log(playerPcode)
 
   useEffect(() => {
     const fetchBatterList = async () => {
