@@ -1,11 +1,12 @@
-import { TabMenuProps } from '../(lib)/tabmenu.type'
+import { TabMenuProps } from '../../pitcher/(lib)/tabmenu.type'
+
 export function TabMenu({
   activeTab,
   setActiveTab,
   tabs,
 }: {
   activeTab: TabMenuProps
-  setActiveTab: any
+  setActiveTab: (tab: TabMenuProps) => void
   tabs: TabMenuProps[]
 }) {
   return (

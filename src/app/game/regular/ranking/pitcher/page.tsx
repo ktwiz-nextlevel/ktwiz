@@ -16,7 +16,7 @@ async function Page() {
     <div className="mb-[250px] w-full">
       <TabMenu tabs={TABS} activeTab={TABS[1]} />
 
-      <section className="pitcher-board mt-10 flex justify-between gap-10">
+      <section className="pitcher-board mt-10 flex flex-wrap justify-between gap-10">
         <div className="best-players flex items-center gap-2 rounded-lg bg-gray-100 p-6">
           <Top3PitcherEras />
           <Top3PitcherWins />

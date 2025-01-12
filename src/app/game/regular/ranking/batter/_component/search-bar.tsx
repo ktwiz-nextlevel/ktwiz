@@ -1,6 +1,5 @@
 'use client'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useState } from 'react'
 
 export default function SearchBar({
   query,

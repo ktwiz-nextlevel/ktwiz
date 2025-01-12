@@ -46,18 +46,16 @@ export function WithFullWidthFlyoutMenu({ initialUser }: HeaderProps) {
     setIsOpend(false)
   }
 
-  // const getPaddingByIdx = useCallback((idx: number) => {
-  //   const classes: Record<number, string> = {
-  //     2: 'left-8',
-  //     3: 'left-9',
-  //     4: 'left-11',
-  //     5: 'left-12',
-  //     6: 'left-6',
-  //     7: 'left-12',
-  //     8: 'left-12',
-  //   }
-  //   return classes[idx] || 'left-3'
-  // }, [])
+  const getPaddingByIdx = useCallback((idx: number) => {
+    const classes: Record<number, string> = {
+      0: 'left-[-10px]',
+      1: 'left-[6px]',
+      2: 'left-[12px]',
+      3: 'left-[12px]',
+      4: 'left-[40px]',
+    }
+    return classes[idx] || 'left-2'
+  }, [])
 
   return (
     <>
@@ -122,14 +120,14 @@ export function WithFullWidthFlyoutMenu({ initialUser }: HeaderProps) {
                       return (
                         <div
                           key={idx + 'lnb'}
-                          // className={`group relative ${getPaddingByIdx(idx)} w-[70px] text-sm/6`}
-                          className={`group relative w-[75px] text-sm/6`}
+                          className={`group relative ${getPaddingByIdx(idx)} w-[70px] text-sm/6`}
+                          // className={`group relative left-2 w-[75px] text-sm/6`}
                         >
                           {menu?.map((lnb, idx) => (
                             <Link
                               key={lnb.name + idx}
                               href={lnb.href}
-                              className="mb-3 block text-sm font-normal text-gray-900 hover:font-bold hover:text-black"
+                              className="hover:text-blackborder mb-3 block text-sm font-normal text-gray-900 hover:font-bold"
                             >
                               {lnb.name}
                             </Link>

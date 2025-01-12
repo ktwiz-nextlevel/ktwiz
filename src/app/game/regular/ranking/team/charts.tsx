@@ -1,85 +1,46 @@
 'use client'
 import { useState, useEffect } from 'react'
 import {
-  AreaChart,
-  Area,
   ResponsiveContainer,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   Legend,
-  TooltipProps,
   Line,
   LineChart,
 } from 'recharts'
 
-const data = [
-  {
-    date: '3월1일',
-    ranking: 3,
-  },
-  {
-    date: '4월1일',
-    ranking: 4,
-  },
-  {
-    date: '5월1일',
-    ranking: 2,
-  },
-  {
-    date: '6월1일',
-    ranking: 5,
-  },
-  {
-    date: '7월1일',
-    ranking: 4,
-    amt: 2181,
-  },
-  {
-    date: '8월1일',
+// 원본 데이터 타입 정의
+type RawData = {
+  date: string
+  rank: string
+}
+type RawDataType = RawData & Record<string, string | number | undefined>
 
-    ranking: 3,
-    amt: 2500,
-  },
-  {
-    date: '9월1일',
+// 변환된 데이터 타입 정의
+type AdaptedData = {
+  date: string // '3월 1일'과 같은 변환된 날짜
+  ranking: number // 변환된 순위
+}
 
-    ranking: 1,
-    amt: 2100,
-  },
-  {
-    date: '10월1일',
-
-    ranking: 2,
-    amt: 2100,
-  },
-  {
-    date: '11월1일',
-
-    ranking: 1,
-    amt: 2100,
-  },
-  {
-    date: '12월1일',
-    ranking: 1,
-    amt: 2100,
-  },
-]
-function adaptData(rawData: any) {
+// 날짜와 순위를 변환하는 함수
+function adaptData(rawData: RawDataType[]): AdaptedData[] {
   return rawData.map((item) => {
-    // 날짜를 x월 x일 형식으로 변환
-    const year = item.date.substring(0, 4) // 연도 (필요 시 사용)
     const month = parseInt(item.date.substring(4, 6), 10) // 월
     const day = parseInt(item.date.substring(6, 8), 10) // 일
 
     return {
       date: `${month}월 ${day}일`,
-      ranking: item.rank,
+      ranking: Number(item.rank), // 순위를 숫자로 변환
     }
   })
 }
-export async function fetchTeamRankData(): Promise<any> {
+
+// API 데이터를 가져오는 함수
+export async function fetchTeamRankData(): Promise<{
+  data: { list: RawDataType[] }
+}> {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/game/rank/periodteamrank`,
   )
@@ -89,14 +50,16 @@ export async function fetchTeamRankData(): Promise<any> {
   return response.json()
 }
 
+// LineChartComponent 컴포넌트
 export default function LineChartComponent() {
-  const [data, setTeamRankData] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [data, setTeamRankData] = useState<AdaptedData[] | null>(null) // 초기값과 타입 정의
+  const [loading, setLoading] = useState<boolean>(true)
 
   useEffect(() => {
     fetchTeamRankData()
-      .then((data) => {
-        setTeamRankData(adaptData(data.data.list))
+      .then((response) => {
+        const adapted = adaptData(response.data.list) // 데이터 변환
+        setTeamRankData(adapted) // 변환된 데이터 설정
         setLoading(false)
       })
       .catch((error) => {
@@ -108,6 +71,7 @@ export default function LineChartComponent() {
   if (loading) {
     return <p>Loading team rank data...</p>
   }
+
   return (
     <div className="mt-10 h-[500px] w-full border-2 border-gray-300 p-3">
       {data ? (
@@ -131,7 +95,7 @@ export default function LineChartComponent() {
               tick={{ fill: '#686868' }}
             />
             <YAxis
-              reversed={true}
+              reversed
               tickMargin={10}
               interval={0}
               tickLine={false}
@@ -148,7 +112,7 @@ export default function LineChartComponent() {
               dataKey="ranking"
               stroke={'#ea0101'}
               activeDot={{ r: 8 }}
-              isAnimationActive={true}
+              isAnimationActive
             />
           </LineChart>
         </ResponsiveContainer>

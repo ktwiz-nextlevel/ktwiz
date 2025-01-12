@@ -12,7 +12,10 @@ export function BestPlayersTop3({
 }: {
   isErrored: boolean
   playerPrvwImg: string
-  playerList: [BestPlayer, BestPlayer, BestPlayer]
+  playerList: {
+    playerName: string
+    data: string | number | undefined
+  }[]
   title: string
 }) {
   if (isErrored) {
