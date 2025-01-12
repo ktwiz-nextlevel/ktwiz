@@ -170,10 +170,6 @@ async function BoxscorePage({ params }: { params: Promise<{ id: string[] }> }) {
           </SectionWrapper>
           <SectionWrapper>
             <></>
-            {/* <Title text={`홈구장 날씨`} />
-            <p className="my-5 mt-2 font-thin text-gray-400">
-              경기 당일 날씨만 제공됩니다.
-            </p> */}
           </SectionWrapper>
         </div>
       </div>

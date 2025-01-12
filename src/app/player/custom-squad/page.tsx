@@ -1,5 +1,4 @@
 'use client'
-
 import { useEffect, useState, useRef } from 'react'
 import { PlayerCode } from '@/types'
 import Banner from '@/components/common/banner/banner'
@@ -93,12 +92,12 @@ export default function CustomSquad() {
       status: { playerName: '', position: '내야수' },
     },
   ])
+  const [bgSrc, setBgSrc] = useState('/images/players/rb.png')
 
   useEffect(() => {
     const now = new Date().getTime()
     const guideTime = localStorage.getItem('guideTime')
 
-    // 10분이 계산해서 불리언값 반환
     if (!guideTime || now - parseInt(guideTime, 10) > 10 * 60 * 1000) {
       setShowGuide(true)
     }
@@ -107,33 +106,34 @@ export default function CustomSquad() {
   const handleCloseGuide = () => {
     setShowGuide(false)
 
-    // 현재 시간을 스토리지에 저장
     const now = new Date().getTime()
     localStorage.setItem('guideTime', now.toString())
   }
 
-  // 초기화 버튼
   const handleRefresh = () => {
     window.location.reload()
   }
 
-  // 선수 리스트 호출
   useEffect(() => {
     const fetchPlayerList = async () => {
       try {
-        const [pitcherPlayer, infielderPlayer, catcherPlayer, outfiederPlayer] =
-          await Promise.all([
-            getOutfielderPlayerList(),
-            getInfielderPlayerList(),
-            getPitcherPlayerList(),
-            getCatcherPlayerList(),
-          ])
+        const [
+          pitcherPlayer,
+          infielderPlayer,
+          catcherPlayer,
+          outfielderPlayer,
+        ] = await Promise.all([
+          getOutfielderPlayerList(),
+          getInfielderPlayerList(),
+          getPitcherPlayerList(),
+          getCatcherPlayerList(),
+        ])
 
         setCards([
           ...pitcherPlayer,
           ...infielderPlayer,
           ...catcherPlayer,
-          ...outfiederPlayer,
+          ...outfielderPlayer,
         ])
       } catch (error) {
         console.error('fetchPlayerList 요청 실패:', error)
@@ -142,7 +142,6 @@ export default function CustomSquad() {
     fetchPlayerList()
   }, [])
 
-  // 드래그 시작
   const handleDrag = (card: PlayerCard, e: React.DragEvent) => {
     setDraggedCard(card)
     if (dragImageRef.current) {
@@ -152,7 +151,6 @@ export default function CustomSquad() {
     }
   }
 
-  // 드래그 종료
   const handleDragEnd = () => {
     setDraggedCard(null)
     if (dragImageRef.current) {
@@ -160,12 +158,10 @@ export default function CustomSquad() {
     }
   }
 
-  // 카드 드롭
   const handleDrop = (index: number) => {
     if (draggedCard) {
       const updatedSquares = [...squareStates]
 
-      // 이미 채워진 경우 드롭 불가
       if (updatedSquares[index].status.isDrop) {
         return
       }
@@ -179,7 +175,6 @@ export default function CustomSquad() {
 
       setSquareStates(updatedSquares)
 
-      // 카드 목록에서 드래그된 카드 제거
       setCards((prevCards) =>
         prevCards.filter((card) => card.pcode !== draggedCard.pcode),
       )
@@ -190,25 +185,23 @@ export default function CustomSquad() {
 
   const handleDragOver = (e: React.DragEvent) => e.preventDefault()
 
-  const handleCapture = async () => {
-    if (captureRef.current) {
-      try {
-        // DOM을 PNG 이미지로 변환
-        const dataUrl = await toPng(captureRef.current, {
-          backgroundColor: 'white',
-          pixelRatio: window.devicePixelRatio || 2, // 고해상도 설정
-        })
+  const handleCapture = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+    if (!captureRef.current) return
 
-        // 이미지 다운로드
-        const link = document.createElement('a')
-        link.href = dataUrl
-        link.download = 'custom_squad.png'
-        link.click()
-      } catch (error) {
-        console.error('이미지 내보내기 중 오류 발생:', error)
-      }
-    } else {
-      console.error('내보낼 요소를 찾을 수 없습니다.')
+    try {
+      const dataUrl = await toPng(captureRef.current, {
+        backgroundColor: 'white',
+        pixelRatio: window.devicePixelRatio || 2,
+        cacheBust: true,
+      })
+
+      const link = document.createElement('a')
+      link.download = 'custom_squad.png'
+      link.href = dataUrl
+      link.click()
+    } catch (error) {
+      console.error('이미지 내보내기 중 오류 발생:', error)
     }
   }
 
@@ -268,11 +261,14 @@ export default function CustomSquad() {
             </div>
 
             <Image
-              src="/images/players/rb.png"
+              src={bgSrc}
               alt="야구 필드"
               fill
-              objectFit="contain"
+              style={{ objectFit: 'contain' }}
               className="rounded-lg p-8"
+              onError={() => setBgSrc('/images/players/rb.png')}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority
             />
             <div className="absolute inset-0">
               {squareStates.map((position, index) => (
@@ -303,7 +299,6 @@ export default function CustomSquad() {
             </div>
           </div>
         </div>
-        {/* 드래그 이미지 */}
         <div
           ref={dragImageRef}
           className="pointer-events-none fixed h-[104px] w-[70px] overflow-hidden rounded-lg shadow-lg"
