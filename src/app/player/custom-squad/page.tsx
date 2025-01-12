@@ -269,9 +269,9 @@ export default function CustomSquad() {
 
             <Image
               src="/images/players/rb.png"
-              alt="Player Image"
+              alt="야구 필드"
               fill
-              objectFit="cover"
+              objectFit="contain"
               className="rounded-lg p-8"
             />
             <div className="absolute inset-0">
