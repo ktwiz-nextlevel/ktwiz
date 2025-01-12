@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 
 function PrevButton({
   gameDate,
@@ -10,13 +10,19 @@ function PrevButton({
   gmkey?: string
 }) {
   const router = useRouter()
+  const params = usePathname()
+  // const currentPath = router.pathname
   function handlePrevDate(e: React.MouseEvent<HTMLDivElement>) {
     e.preventDefault()
-
-    if (gameDate && gmkey) {
+    if (!gameDate || !gmkey) {
+      return
+    }
+    console.log(params.includes('/watchpoint'))
+    if (params.includes('/watchpoint')) {
+      router.push(`/game/regular/watchpoint/${gameDate}/${gmkey}`)
+    } else {
       router.push(`/game/regular/boxscore/${gameDate}/${gmkey}`)
     }
-    return
   }
   return (
     <div

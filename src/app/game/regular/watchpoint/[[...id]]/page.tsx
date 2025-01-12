@@ -52,14 +52,26 @@ async function BoxscorePage({ params }: { params: Promise<{ id: string[] }> }) {
       },
       {
         title: '무',
-        key: 'none',
+        key: 'drawn',
       },
       {
         title: '승률',
-        key: 'ballfour',
+        key: 'wra',
       },
     ]
     const value = [72, 70, 2, 0.507]
+    let visit = value.map(
+      (data, idx) => watchData.data.visitTeamRank[BOARD_INFO[idx].key],
+    )
+    let visitwinLose = value.map(
+      (data, idx) => watchData.data.visitTeamWinLose[BOARD_INFO[idx].key],
+    )
+    let home = value.map(
+      (data, idx) => watchData.data.homeTeamRank[BOARD_INFO[idx].key],
+    )
+    let homewinLose = value.map(
+      (data, idx) => watchData.data.homeTeamWinLose[BOARD_INFO[idx].key],
+    )
     return (
       <div className="w-full">
         <BreadCrumb />
@@ -80,22 +92,22 @@ async function BoxscorePage({ params }: { params: Promise<{ id: string[] }> }) {
                 ))}
               </div>
               <div className="flex">
-                {value.map((info, idx) => (
+                {visit.map((info, idx) => (
                   <span
                     key={info + 'game-info' + idx}
                     className={`ml-2 w-10 p-1 text-center text-gray-400 hover:text-gray-800`}
                   >
-                    {info}
+                    {info ? info : '-'}
                   </span>
                 ))}
               </div>
               <div className="flex">
-                {value.map((info, idx) => (
+                {visitwinLose.map((info, idx) => (
                   <span
                     key={info + 'game-info' + idx}
                     className={`ml-2 w-10 p-1 text-center text-gray-400 hover:text-gray-800`}
                   >
-                    {info}
+                    {info ? info : '-'}
                   </span>
                 ))}
               </div>
@@ -113,22 +125,22 @@ async function BoxscorePage({ params }: { params: Promise<{ id: string[] }> }) {
                 ))}
               </div>
               <div className="flex">
-                {value.map((info, idx) => (
+                {home.map((info, idx) => (
                   <span
                     key={info + 'game-info' + idx}
                     className={`ml-2 w-10 p-1 text-center text-gray-400 hover:text-gray-800`}
                   >
-                    {info}
+                    {info ? info : '-'}
                   </span>
                 ))}
               </div>
               <div className="flex">
-                {value.map((info, idx) => (
+                {homewinLose.map((info, idx) => (
                   <span
                     key={info + 'game-info' + idx}
                     className={`ml-2 w-10 p-1 text-center text-gray-400 hover:text-gray-800`}
                   >
-                    {info}
+                    {info ? info : '-'}
                   </span>
                 ))}
               </div>
@@ -191,5 +203,7 @@ function BreadCrumb() {
   )
 }
 function SectionWrapper({ children }: { children: React.ReactNode }) {
-  return <section className="mt-10 h-[700px] w-1/2">{children}</section>
+  return (
+    <section className="mt-10 h-[700px] w-full md:w-1/2">{children}</section>
+  )
 }
