@@ -16,7 +16,7 @@ function Layout({
           title={WIZ_PARK_BANNER_DATA['/location'].title}
           subtitle={WIZ_PARK_BANNER_DATA['/location'].description}
         />
-        <TabMenu tabs={WIZ_PARK_BANNER_DATA['/location'].tabs} />
+        <TabMenu tabs={WIZ_PARK_BANNER_DATA['/location'].tabs!} />
       </Banner>
       <WizparkContainer> {children}</WizparkContainer>
     </div>
