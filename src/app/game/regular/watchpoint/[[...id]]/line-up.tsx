@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import { LineUp as LinUpType } from './_lib/watch-point.type'
+import { Lineup as LinUpType } from './_lib/watch-point.type'
 
 function LineUp({
   home,
