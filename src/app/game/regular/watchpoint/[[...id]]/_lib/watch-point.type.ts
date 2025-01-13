@@ -45,7 +45,7 @@ interface GameScore {
   vscore: number
 }
 
-interface Lineup {
+export interface Lineup {
   backnum: string
   birth: string
   career: string

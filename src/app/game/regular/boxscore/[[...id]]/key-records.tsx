@@ -1,24 +1,23 @@
 import Title from '@/components/common/title/title'
-import { EtcGames } from '@/types'
+import { BoxScore, EtcGames } from '@/types'
 import PlayerImage from '../_component/player-img'
 
-async function KeyRecords({
-  gameDate = '20241008',
-  gmkey = '33331008LGKT0',
-}: {
-  gameDate: string
-  gmkey: string
-}) {
-  console.log(gameDate, gmkey)
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/game/boxscore?gameDate=${gameDate}&gmkey=${gmkey}`,
-  )
-  const data = await res.json()
+async function KeyRecords({ data }: { data?: BoxScore }) {
+  if (!data) {
+    return (
+      <section className="gray-red-400 w-full pt-3">
+        <Title text={`주요 기록 `} />
+        <div className="flex w-full flex-wrap">
+          주요기록 데이터조회를 실패했습니다.
+        </div>
+      </section>
+    )
+  }
 
-  const etcgames: EtcGames[] = data.data?.etcgames || []
-  console.log(etcgames)
-  const homeKey = data.data.schedule.current.homeKey
-  const visitKey = data.data.schedule.current.visitKey
+  const etcgames: EtcGames[] = data?.etcgames || []
+
+  const homeKey = data.schedule.current.homeKey
+  const visitKey = data.schedule.current.visitKey
 
   const infoPromises = etcgames.map(async (game) => {
     const parsedData = parsePlayerDescriptions(game.result)

@@ -1,5 +1,5 @@
 'use client'
-import React, { PureComponent, useEffect, useState } from 'react'
+import React from 'react'
 
 import {
   Radar,
@@ -63,40 +63,9 @@ function creatChartData(res: WatchPointData | null) {
     })
   }
 }
-export function RadarChartComponent({
-  gameDate = '20241008',
-  gmkey = '33331008LGKT0',
-}: {
-  gameDate: string
-  gmkey: string
-}) {
-  const [data, setData] = useState<null | WatchPointData>(null)
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<null | string>(null)
+export function RadarChartComponent({ data }: { data: WatchPointData }) {
   let chartData = creatChartData(data)
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_SERVER_URL}/game/watchpoint?gameDate=${gameDate}&gmkey=${gmkey}`,
-        )
-        if (!res.ok) {
-          throw new Error('Failed to fetch data')
-        }
-        const result = await res.json()
-        setData(result.data)
-      } catch (err) {
-        setError('error')
-      } finally {
-        setLoading(false)
-      }
-    }
 
-    fetchData()
-  }, [gameDate, gmkey])
-
-  if (loading) return <div>Loading...</div>
-  if (error) return <div>Error: {error}</div>
   return (
     <ResponsiveContainer width="80%" height="80%">
       <RadarChart cx="50%" cy="50%" outerRadius="80%" data={chartData}>

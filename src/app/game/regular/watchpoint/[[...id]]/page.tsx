@@ -10,6 +10,7 @@ import { http } from '@/http'
 import { BoxscoreData } from '@/types'
 import { WatchPointData } from './_lib/watch-point.type'
 import { TeamRank } from '@/types/team-rank'
+import { Suspense } from 'react'
 
 const TABS = [
   { title: '박스스코어', href: '/game/regular/boxscore', path: 'boxscore' },
@@ -171,7 +172,9 @@ async function BoxscorePage({ params }: { params: Promise<{ id: string[] }> }) {
           <p className="my-5 mt-2 font-thin text-gray-500">
             각 팀의 선발 투수의 데이터입니다. 마우스를 호버해보세요
           </p>
-          <Chart gameDate={gameDate} gmkey={gmkey} />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Chart data={watchData} />
+          </Suspense>
         </SectionWrapper>
         {/* 라인업 */}
         <SectionWrapper>

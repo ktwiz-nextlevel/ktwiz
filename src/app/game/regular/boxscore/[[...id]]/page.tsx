@@ -6,30 +6,11 @@ import BatterRecords from './batter-records'
 import PitcherRecords from './pitcher-records'
 import { ScoreBoard } from './score-board'
 import { http } from '@/http'
-import { BoxScore, BoxscoreData } from '@/types'
+import { BoxscoreData } from '@/types'
+import { Suspense } from 'react'
+import { BoxscorePageProps } from '../_lib/records.type'
+import { TABS } from '../_lib/constants'
 
-// 탭 정의 타입
-interface Tab {
-  title: string
-  href: string
-  path: string
-}
-
-const TABS: Tab[] = [
-  { title: '박스스코어', href: '/game/regular/boxscore', path: 'boxscore' },
-  {
-    title: '관전 포인트',
-    href: '/game/regular/watchpoint',
-    path: 'watchpoint',
-  },
-]
-
-// 페이지 컴포넌트 타입
-interface BoxscorePageProps {
-  params: Promise<{ id: string[] }>
-}
-
-// 메인 페이지 컴포넌트
 async function BoxscorePage({ params }: BoxscorePageProps) {
   const { id } = await params
   const gameDate = id ? id[0] : '20241008'
@@ -49,24 +30,29 @@ async function BoxscorePage({ params }: BoxscorePageProps) {
       </div>
     )
   }
-  // console.log("",data)
   return (
     <div className="w-full">
       <BreadCrumb />
-      <ScoreBoard data={data.data} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <ScoreBoard data={data.data} />
+      </Suspense>
       <TabNavigation tabs={TABS} activeTab={TABS[0]} />
       <br />
-      <KeyRecords gameDate={gameDate} gmkey={gmkey} />
-      <BatterRecords
-        data={data.data}
-        home={data.data.schedule.current.home}
-        visit={data.data.schedule.current.visit}
-      />
-      <PitcherRecords
-        data={data.data}
-        home={data.data.schedule.current.home}
-        visit={data.data.schedule.current.visit}
-      />
+      <KeyRecords data={data.data} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <BatterRecords
+          data={data.data}
+          home={data.data.schedule.current.home}
+          visit={data.data.schedule.current.visit}
+        />
+      </Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
+        <PitcherRecords
+          data={data.data}
+          home={data.data.schedule.current.home}
+          visit={data.data.schedule.current.visit}
+        />
+      </Suspense>
     </div>
   )
 }
