@@ -39,8 +39,6 @@ export default function Batter() {
   const [playerImg, setPlayerImg] = useState()
   const [hitSprayData, setHitSprayData] = useState<HitSprayItem[]>([])
 
-  console.log(playerPcode)
-
   useEffect(() => {
     const fetchBatterList = async () => {
       try {

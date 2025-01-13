@@ -105,7 +105,11 @@ export default function Pitcher() {
         </div>
         <div className="flex flex-col gap-6 md:flex-row">
           <div className="w-full flex-shrink-0 rounded-lg p-4 shadow-md md:w-1/5">
-            <PlayerCardList onCardClick={setPlayerPcode} cards={cards} />
+            <PlayerCardList
+              onCardClick={setPlayerPcode}
+              cards={cards}
+              pcode={playerPcode}
+            />
           </div>
 
           <div className="w-full flex-grow rounded-lg p-4 shadow-md md:w-4/5">

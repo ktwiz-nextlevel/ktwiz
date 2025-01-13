@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { PlayerCode } from '@/types'
 
@@ -14,13 +14,15 @@ interface PlayerCard {
 interface PlayerCardListProps {
   onCardClick: (pcode: PlayerCode) => void
   cards: PlayerCard[]
+  pcode: PlayerCode
 }
 
 export default function PlayerCardList({
   onCardClick,
   cards,
+  pcode,
 }: PlayerCardListProps) {
-  const [selectedCard, setSelectedCard] = useState<PlayerCode | null>(null)
+  const [selectedCard, setSelectedCard] = useState<PlayerCode | null>(pcode)
 
   const handleCardClick = (pcode: PlayerCode) => {
     setSelectedCard(pcode)
