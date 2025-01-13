@@ -55,7 +55,9 @@ async function Page() {
           />
         </Suspense>
       </section>
-      <RankingTable />
+      <Suspense fallback={<div>Loading...</div>}>
+        <RankingTable />
+      </Suspense>
     </div>
   )
 }

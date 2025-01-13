@@ -49,7 +49,9 @@ async function RankBatterPage() {
           />
         </Suspense>
       </section>
-      <RankingTable />
+      <Suspense fallback={<div>Loading...</div>}>
+        <RankingTable />
+      </Suspense>
     </div>
   )
 }
