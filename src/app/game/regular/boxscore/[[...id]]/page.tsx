@@ -6,7 +6,7 @@ import BatterRecords from './batter-records'
 import PitcherRecords from './pitcher-records'
 import { ScoreBoard } from './score-board'
 import { http } from '@/http'
-import { BoxScore } from '@/types'
+import { BoxScore, BoxscoreData } from '@/types'
 
 // 탭 정의 타입
 interface Tab {
@@ -24,27 +24,6 @@ const TABS: Tab[] = [
   },
 ]
 
-// Boxscore 데이터 타입 정의
-interface BoxscoreData {
-  data: BoxScore
-}
-
-// 데이터 fetch 함수
-async function fetchBoxscoreData(
-  gameDate: string,
-  gmkey: string,
-): Promise<BoxscoreData> {
-  try {
-    const response = await http.get<BoxscoreData>(`/game/boxscore`, {
-      searchParams: { gameDate, gmkey },
-    })
-    return response.data
-  } catch (error) {
-    console.error('데이터를 가져오는 중 오류가 발생했습니다:', error)
-    throw error
-  }
-}
-
 // 페이지 컴포넌트 타입
 interface BoxscorePageProps {
   params: Promise<{ id: string[] }>
@@ -58,7 +37,10 @@ async function BoxscorePage({ params }: BoxscorePageProps) {
 
   let data: BoxscoreData
   try {
-    data = await fetchBoxscoreData(gameDate, gmkey)
+    const response = await http.get<BoxscoreData>(`/game/boxscore`, {
+      searchParams: { gameDate, gmkey },
+    })
+    data = response.data
   } catch {
     return (
       <div>

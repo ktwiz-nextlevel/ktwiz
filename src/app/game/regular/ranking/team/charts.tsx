@@ -10,21 +10,8 @@ import {
   Line,
   LineChart,
 } from 'recharts'
+import { AdaptedData, RawDataType } from './_lib/team.type'
 
-// 원본 데이터 타입 정의
-type RawData = {
-  date: string
-  rank: string
-}
-type RawDataType = RawData & Record<string, string | number | undefined>
-
-// 변환된 데이터 타입 정의
-type AdaptedData = {
-  date: string // '3월 1일'과 같은 변환된 날짜
-  ranking: number // 변환된 순위
-}
-
-// 날짜와 순위를 변환하는 함수
 function adaptData(rawData: RawDataType[]): AdaptedData[] {
   return rawData.map((item) => {
     const month = parseInt(item.date.substring(4, 6), 10) // 월

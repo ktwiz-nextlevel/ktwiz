@@ -1,12 +1,18 @@
-import { Player, Top3player, Top5player } from '@/types'
+import { Player, Top3player } from '@/types'
+import { ERAType } from '../../batter/_lib/type'
 
+export interface Top5player {
+  data: {
+    list: ERAType[]
+  }
+}
 export const getTop5PitcherEras = async () => {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API_SERVER_URL}/game/rank/pitcher/total/top5 `,
     )
     if (!response.ok) {
-      return '게임 평균자책점 top5 정보가 없습니다.'
+      throw new Error('error')
     }
     const {
       data: { list: list },

@@ -1,9 +1,9 @@
 'use client'
-import { getTop3PitcherEras } from './(lib)/api'
 import useYearStore from '@/store/useYearStore'
 import { useEffect, useState } from 'react'
 import { BestPlayersTop3 } from '../../../../../components/rank/best-players-Top3'
-import { createPlayerList } from './(lib)/adapter'
+import { createPlayerList } from './_lib/adapter'
+import { getTop3PitcherEras } from './_lib/api'
 
 export function Top3PitcherEras() {
   const { currentYear } = useYearStore()
