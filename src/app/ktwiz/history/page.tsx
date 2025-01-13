@@ -10,7 +10,7 @@ function HistoryPage() {
           title={KTWIZ_BANNER_DATA[''].title}
           subtitle={KTWIZ_BANNER_DATA[''].description}
         />
-        <TabMenu tabs={KTWIZ_BANNER_DATA[''].tabs} />
+        <TabMenu tabs={KTWIZ_BANNER_DATA[''].tabs!} />
       </Banner>
       {/* dfdf */}
       <div className="page">HistoryPage</div>
