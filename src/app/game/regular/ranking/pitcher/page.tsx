@@ -11,23 +11,10 @@ import {
   createTeamERAOverview,
   TeamERAOverview,
 } from '../batter/team-era-overview'
-import { ERAType } from '../batter/_lib/type'
 
 async function Page() {
-  let top5PitcherEras: ERAType[] | null = null
-  try {
-    top5PitcherEras = await getTop5PitcherEras()
-  } catch (err) {
-    return (
-      <div className="mb-[250px] w-full">
-        <TabMenu tabs={TABS} activeTab={TABS[1]} />
+  const top5PitcherEras = await getTop5PitcherEras()
 
-        <section className="pitcher-board mt-10 flex flex-wrap justify-between gap-10">
-          에러가 났습니다.
-        </section>
-      </div>
-    )
-  }
   return (
     <div className="mb-[250px] w-full">
       <TabMenu tabs={TABS} activeTab={TABS[1]} />
@@ -37,11 +24,9 @@ async function Page() {
           <Top3PitcherEras />
           <Top3PitcherWins />
         </div>
-        {top5PitcherEras && typeof top5PitcherEras !== 'string' && (
-          <TeamERAOverview
-            {...createTeamERAOverview(top5PitcherEras, '전체 투수 평균자책점')}
-          />
-        )}
+        <TeamERAOverview
+          {...createTeamERAOverview(top5PitcherEras, '전체 투수 평균자책점')}
+        />
       </section>
       <RankingTable />
     </div>
