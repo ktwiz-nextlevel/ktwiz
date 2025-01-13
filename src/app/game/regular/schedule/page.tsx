@@ -11,7 +11,7 @@ async function SchedulePage({ params }: { params: Promise<{ date: string }> }) {
       <div className="my-[50px] flex w-full justify-end">
         <Breadcrumbs pages={['HOME', '정규리그', '경기일정']} />
       </div>
-      {/* 최근 기기 */}
+      {/* 최근 경기 */}
       <ScoreCardGroup />
       {/* 게임 스케쥴 달력 */}
       <GameCalendar currentDate={currentDate} />
