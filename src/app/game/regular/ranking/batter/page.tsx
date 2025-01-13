@@ -3,14 +3,34 @@ import React, { Suspense } from 'react'
 
 import { createTeamERAOverview, TeamERAOverview } from './team-era-overview'
 import RankingTable from './ranking-table'
-import { getTop5battertotal } from './_lib/api'
+
 import { TABS } from '../team/_lib/constants'
 import { Top3BatterHra } from './top3-batter-hra'
 import { Top3BatterHr } from './top3-batter-hr'
+import { http } from '@/http'
+import { ApiResponse, Playerbatter } from './_lib/type'
 
 async function RankBatterPage() {
-  const top5total = await getTop5battertotal()
-  // console.log(top5total)
+  let top5total: Playerbatter[]
+  try {
+    const response = await http.get<ApiResponse>(
+      `/game/rank/batter/total/top5`,
+      {
+        cache: 'force-cache',
+      },
+    )
+    top5total = response.data.data.list
+  } catch {
+    return (
+      <div className="mb-[250px] w-full">
+        <TabNavigation tabs={TABS} activeTab={TABS[2]} />
+        <section className="pitcher-board mt-10 flex flex-wrap justify-between gap-10">
+          정보가 없습니다.
+        </section>
+      </div>
+    )
+  }
+
   return (
     <div className="mb-[250px] w-full">
       <TabNavigation tabs={TABS} activeTab={TABS[2]} />
@@ -29,7 +49,9 @@ async function RankBatterPage() {
           />
         </Suspense>
       </section>
-      <RankingTable />
+      <Suspense fallback={<div>Loading...</div>}>
+        <RankingTable />
+      </Suspense>
     </div>
   )
 }
