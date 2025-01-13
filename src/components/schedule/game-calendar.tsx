@@ -1,21 +1,34 @@
 import { http } from '@/http'
 import Calendar from './calendar'
+import { GameScheduleData } from '@/types'
 
 interface GameCalendarProps {
   currentDate: string
 }
 
+interface GameScheduleResponse {
+  data: {
+    list: GameScheduleData[]
+  }
+}
+
 export default async function GameCalendar({ currentDate }: GameCalendarProps) {
   try {
     // kt 월 스케쥴 API 호출
-    const { data: ktData } = await http.get('/game/monthschedule', {
-      searchParams: { yearMonth: currentDate },
-    })
+    const { data: ktData } = await http.get<GameScheduleResponse>(
+      '/game/monthschedule',
+      {
+        searchParams: { yearMonth: currentDate },
+      },
+    )
 
     // 전체 경기 월 스케쥴 API 호출
-    const { data: allData } = await http.get('/game/allgameschedule', {
-      searchParams: { yearMonth: currentDate },
-    })
+    const { data: allData } = await http.get<GameScheduleResponse>(
+      '/game/allgameschedule',
+      {
+        searchParams: { yearMonth: currentDate },
+      },
+    )
 
     // 데이터가 없을 경우
     if (!ktData || !allData) {

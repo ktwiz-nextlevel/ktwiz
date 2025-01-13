@@ -2,6 +2,7 @@
 
 import { Video } from '@/types/media'
 import Link from 'next/link'
+import ClientImageFallback from '../common/client-image-fallback'
 
 interface RelatedVideoListProps {
   videos: Video[]
@@ -20,11 +21,14 @@ export default function RelatedVideoList({ videos }: RelatedVideoListProps) {
                 href={`/media/highlight/${video.artcSeq}`}
                 className="flex items-center space-x-4 py-2"
               >
-                <div className="h-24 w-44 flex-shrink-0">
-                  <img
-                    src={video.imgFilePath || '/images/placeholder-img.png'}
-                    alt={video.artcTitle}
-                    className="h-full w-full rounded-xl object-cover"
+                <div className="relative h-24 w-44 flex-shrink-0">
+                  <ClientImageFallback
+                    src={video.imgFilePath}
+                    alt={`post-image-${video.artcTitle}`}
+                    fallbackSrc="/images/fallback-img.png"
+                    fill
+                    className="rounded-xl object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                   />
                 </div>
                 <div className="space-y-4 pr-2">
