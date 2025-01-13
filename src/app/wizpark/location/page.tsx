@@ -14,7 +14,6 @@ export default function Page() {
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3173.8048142598!2d127.00709357666054!3d37.299759539379345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b5db07ba6e26f%3A0xf8d00419ae70fbb8!2z7IiY7JuQS1TsnITspojtjIztgaw!5e0!3m2!1sko!2skr!4v1735822826125!5m2!1sko!2skr"
           width="1100"
           height="662"
-          allowFullScreen=""
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
