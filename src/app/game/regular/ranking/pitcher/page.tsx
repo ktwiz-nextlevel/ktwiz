@@ -11,6 +11,7 @@ import {
   createTeamERAOverview,
   TeamERAOverview,
 } from '../batter/team-era-overview'
+import { Suspense } from 'react'
 
 async function Page() {
   const top5PitcherEras = await getTop5PitcherEras()
@@ -21,12 +22,18 @@ async function Page() {
 
       <section className="pitcher-board mt-10 flex flex-wrap justify-between gap-10">
         <div className="best-players flex items-center gap-2 rounded-lg bg-gray-100 p-6">
-          <Top3PitcherEras />
-          <Top3PitcherWins />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Top3PitcherEras />
+          </Suspense>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Top3PitcherWins />
+          </Suspense>
         </div>
-        <TeamERAOverview
-          {...createTeamERAOverview(top5PitcherEras, '전체 투수 평균자책점')}
-        />
+        <Suspense fallback={<div>Loading...</div>}>
+          <TeamERAOverview
+            {...createTeamERAOverview(top5PitcherEras, '전체 투수 평균자책점')}
+          />
+        </Suspense>
       </section>
       <RankingTable />
     </div>
