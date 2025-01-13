@@ -4,47 +4,39 @@ import PrevButton from './prev-button'
 import { Label } from './game-status-label'
 import NextButton from './next-button'
 import { HomeLabel } from './home-label'
-import { useRouter } from 'next/navigation'
 
-async function BoardHeader({
-  gameDate,
-  gmkey,
-}: {
-  gameDate: string
-  gmkey: string
-}) {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/game/boxscore?gameDate=${gameDate}&gmkey=${gmkey}`,
-  )
-  const data = await res.json()
-
-  const { current, prev, next }: ScheduleType = data.data.schedule
+async function BoardHeader({ schedule }: { schedule: ScheduleType }) {
+  const { current, prev, next }: ScheduleType = schedule
 
   return (
     <div className="flex flex-1">
+      {/* 이전버튼 */}
       <PrevButton gameDate={prev?.gameDate} gmkey={prev?.gmkey} />
-      <div className="w-fit">
-        <div className="flex flex-col items-center">
-          <Label data={current} />
-          <h1 className="mt-3 text-xl text-gray-700">{`${current.gyear}년 ${current.gmonth}월 ${current.gday}일`}</h1>
-          <p className="mt-1 text-xs text-gray-400">{`${current.gmonth}.${current.gday} ${current.gtime} | ${current.stadium}`}</p>
-        </div>
+      {current && (
+        <div className="w-fit">
+          <div className="flex flex-col items-center">
+            <Label data={current} />
+            <h1 className="mt-3 text-xl text-gray-700">{`${current.gyear}년 ${current.gmonth}월 ${current.gday}일`}</h1>
+            <p className="mt-1 text-xs text-gray-400">{`${current.gmonth}.${current.gday} ${current.gtime} | ${current.stadium}`}</p>
+          </div>
 
-        <div className="mt-2 flex justify-center gap-5">
-          <LeftVisitTeam
-            teamName={current.visit}
-            teamLogo={current.visitLogo}
-            isWin={current.vscore > current.hscore && current.endFlag === '1'}
-          />
-          <Score vscore={current.vscore} hscore={current.hscore} />
-          <RightHomeTeam
-            teamName={current.home}
-            teamLogo={current.homeLogo}
-            isWin={current.vscore < current.hscore && current.endFlag === '1'}
-          />
+          <div className="mt-2 flex justify-center gap-5">
+            {/* 좌측 원정팀 */}
+            <LeftVisitTeam
+              teamName={current.visit}
+              teamLogo={current.visitLogo}
+              isWin={current.vscore > current.hscore && current.endFlag === '1'}
+            />
+            <Score vscore={current.vscore} hscore={current.hscore} />
+            {/* 우측 홈구장팀 */}
+            <RightHomeTeam
+              teamName={current.home}
+              teamLogo={current.homeLogo}
+              isWin={current.vscore < current.hscore && current.endFlag === '1'}
+            />
+          </div>
         </div>
-      </div>
-
+      )}
       <NextButton gameDate={next?.gameDate} gmkey={next?.gmkey} />
     </div>
   )

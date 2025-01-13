@@ -1,35 +1,51 @@
+import { http } from '@/http'
 import Calendar from './calendar'
+import { GameScheduleData } from '@/types'
 
 interface GameCalendarProps {
   currentDate: string
 }
 
-export default async function GameCalendar({ currentDate }: GameCalendarProps) {
-  // kt 월 스케쥴 api
-  const ktRes = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/game/monthschedule?yearMonth=${currentDate}`,
-  )
-
-  // 전체 경기 월 스케쥴 api
-  const allRes = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/game/allgameschedule?yearMonth=${currentDate}`,
-  )
-
-  if (!ktRes.ok || !allRes.ok) {
-    return <div>게임 정보가 없습니다.</div>
+interface GameScheduleResponse {
+  data: {
+    list: GameScheduleData[]
   }
+}
 
-  const { data: ktData } = await ktRes.json()
-  const { data: allData } = await allRes.json()
-  return (
-    <div>
-      {ktData && (
+export default async function GameCalendar({ currentDate }: GameCalendarProps) {
+  try {
+    // kt 월 스케쥴 API 호출
+    const { data: ktData } = await http.get<GameScheduleResponse>(
+      '/game/monthschedule',
+      {
+        searchParams: { yearMonth: currentDate },
+      },
+    )
+
+    // 전체 경기 월 스케쥴 API 호출
+    const { data: allData } = await http.get<GameScheduleResponse>(
+      '/game/allgameschedule',
+      {
+        searchParams: { yearMonth: currentDate },
+      },
+    )
+
+    // 데이터가 없을 경우
+    if (!ktData || !allData) {
+      return <div>게임 정보가 없습니다.</div>
+    }
+
+    return (
+      <div>
         <Calendar
-          ktGameData={ktData.list}
-          allGameData={allData.list}
+          ktGameData={ktData.data.list}
+          allGameData={allData.data.list}
           currentDate={currentDate}
         />
-      )}
-    </div>
-  )
+      </div>
+    )
+  } catch (error) {
+    console.error('Error fetching game schedules:', error)
+    return <div>게임 정보를 불러오는 중 오류가 발생했습니다.</div>
+  }
 }

@@ -8,6 +8,7 @@ import {
   PauseIcon,
 } from '@heroicons/react/20/solid'
 import { useState, useEffect } from 'react'
+import ClientImageFallback from '../common/client-image-fallback'
 
 interface PhotoModalProps {
   photoList: Photo[]
@@ -185,16 +186,21 @@ export default function PhotoModal({
                 key={index}
                 className="flex w-full flex-shrink-0 items-center justify-center"
               >
-                <img
-                  src={photo.imgFilePath}
-                  alt={photo.artcTitle}
-                  className="max-h-[80vh] max-w-[95vw] object-contain md:max-h-[1000px] md:max-w-[1600px]"
-                  draggable={false}
-                  style={{
-                    transform: `scale(${scale})`,
-                    transition: 'transform 0.3s ease-in-out',
-                  }}
-                />
+                <div className="relative h-[60vh] w-[90vw]">
+                  <ClientImageFallback
+                    src={photo.imgFilePath}
+                    alt={`post-image-${photo.artcTitle}`}
+                    fallbackSrc="/images/fallback-img.png"
+                    fill
+                    className="object-contain"
+                    draggable={false}
+                    style={{
+                      transform: `scale(${scale})`,
+                      transition: 'transform 0.3s ease-in-out',
+                    }}
+                    sizes="(max-width: 768px) 50vw, 100vw"
+                  />
+                </div>
               </div>
             ))}
           </div>

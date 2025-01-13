@@ -96,6 +96,7 @@ export default function CreatePostForm() {
             </label>
             <div className="flex whitespace-nowrap border-b">
               <input
+                id="title"
                 type="text"
                 placeholder="제목"
                 className="block w-full p-5 font-medium text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0"
@@ -111,6 +112,7 @@ export default function CreatePostForm() {
               Content
             </label>
             <textarea
+              id="content"
               rows={10}
               placeholder="내용을 입력하세요"
               className="block w-full resize-none p-5 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
@@ -138,8 +140,8 @@ export default function CreatePostForm() {
                   <Image
                     src={img.preview}
                     alt="미리보기"
-                    width={128}
-                    height={128}
+                    width={200}
+                    height={200}
                     className="rounded object-cover"
                     unoptimized // 로컬 파일 URL 최적화 방지
                   />

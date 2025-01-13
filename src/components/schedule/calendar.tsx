@@ -82,7 +82,7 @@ const Calendar = ({ ktGameData, currentDate, allGameData }: CalendarProps) => {
 
         {/* 경기 전환 */}
         <div
-          className={`relative rounded-full border border-gray-200 px-4 leading-8 ${activatedData === ktGameData ? 'pl-28' : 'pr-28'}`}
+          className={`relative hidden rounded-full border border-gray-200 px-4 leading-8 md:block ${activatedData === ktGameData ? 'pl-28' : 'pr-28'}`}
         >
           <button
             className={`${activatedData === ktGameData && 'absolute left-0 w-24 rounded-full bg-red-500 text-white'}`}
@@ -142,14 +142,16 @@ const Calendar = ({ ktGameData, currentDate, allGameData }: CalendarProps) => {
         days.push(
           <div
             key={day.toString()}
-            className={`relative flex h-32 flex-col rounded-md border border-gray-200 pl-2 pt-1 ${
+            className={`relative flex flex-col rounded-md border border-gray-200 pb-[100%] overflow-hidden${
               !isSameMonth(day, monthStart)
                 ? 'bg-gray-100 text-gray-400'
                 : 'text-gray-700'
             } cursor-pointer`}
           >
             {/* 날짜 */}
-            <span className="absolute text-base">{format(day, 'd')}</span>
+            <span className="absolute left-1.5 top-1 z-10 text-base">
+              {format(day, 'd')}
+            </span>
 
             {/* KT 게임 데이터 렌더링 */}
             {activatedData === ktGameData && dailyGames.length > 0 && (
@@ -157,7 +159,7 @@ const Calendar = ({ ktGameData, currentDate, allGameData }: CalendarProps) => {
             )}
 
             {/* 전체 게임 데이터 렌더링 */}
-            {activatedData === allGameData && dailyGames.length > 0 && (
+            {activatedData === allGameData && (
               <AllCalendarCell cellData={dailyGames} />
             )}
           </div>,

@@ -108,16 +108,12 @@ export default function VideoList({ initialVideos, query }: VideoListProps) {
           >
             <div className="relative pt-[56.25%]">
               <ClientImageFallback
-                src={
-                  photo.imgFilePath
-                    ? photo.imgFilePath
-                    : '/images/fallback-img.png'
-                }
+                src={photo.imgFilePath}
                 alt={`post-image-${photo.artcTitle}`}
                 fallbackSrc="/images/fallback-img.png"
                 fill
                 className="rounded-xl object-cover"
-                unoptimized
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
               />
             </div>
             <div className="p-2">

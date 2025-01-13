@@ -151,8 +151,8 @@ export default function EditPostForm({ post }: EditPostFormProps) {
                   <Image
                     src={img.preview}
                     alt="미리보기"
-                    width={128}
-                    height={128}
+                    width={200}
+                    height={200}
                     className="rounded object-cover"
                     unoptimized
                   />

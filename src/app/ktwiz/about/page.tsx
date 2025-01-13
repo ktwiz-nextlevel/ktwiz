@@ -10,7 +10,7 @@ function KtwizAboutPage() {
           title={KTWIZ_BANNER_DATA[''].title}
           subtitle={KTWIZ_BANNER_DATA[''].description}
         />
-        <TabMenu tabs={KTWIZ_BANNER_DATA[''].tabs} />
+        <TabMenu tabs={KTWIZ_BANNER_DATA[''].tabs!} />
       </Banner>
 
       <div className="page">KtwizPage</div>

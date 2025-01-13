@@ -1,34 +1,30 @@
-import { Scoreboard, ScoreboardList } from '@/types'
+import { BoxScore, BoxscoreData, Scoreboard, ScoreboardList } from '@/types'
 
 import Board from '@/components/common/board/board'
 import BoardHeader from '@/components/boxscore/score-board/board-header'
 
-export async function ScoreBoard({
-  gameDate,
-  gmkey,
-}: {
-  gameDate: string
-  gmkey: string
-}) {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/game/boxscore?gameDate=${gameDate}&gmkey=${gmkey} `,
-  )
-  if (!response.ok) {
-    return <Board>스코어보드 정보가 없습니다.</Board>
+export async function ScoreBoard({ data }: { data?: BoxScore }) {
+  if (!data) {
+    return (
+      <Board>
+        <Board.li style="w-full flex justify-center">
+          데이터가 없습니다.
+        </Board.li>
+      </Board>
+    )
   }
-  const data = await response.json()
-  const scoreboard: ScoreboardList = data.data.scoreboard
+  const scoreboard: ScoreboardList = data.scoreboard
   const visitBoard: Scoreboard = scoreboard.filter(
     (score) => score.bhome === 0,
   )[0]
   const homeBoard: Scoreboard = scoreboard.filter(
     (score) => score.bhome === 1,
   )[0]
-
+  console.log(data.schedule)
   return (
     <Board>
       <Board.li style="w-full flex justify-center">
-        <BoardHeader gameDate={gameDate} gmkey={gmkey} />
+        <BoardHeader schedule={data.schedule} />
       </Board.li>
       <Board.li>
         <BoardTH />
