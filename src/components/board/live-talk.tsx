@@ -129,7 +129,7 @@ export default function LiveTalk({
   ))
 
   return (
-    <div className="mt-[50px] flex max-h-[660px] max-w-[500px] flex-col rounded-xl border bg-white p-2">
+    <div className="mt-[50px] flex h-[660px] w-[400px] flex-col rounded-xl border bg-white p-2">
       <div className="p-4 pb-1 font-extrabold">응원 오픈톡</div>
       <div className="flex items-center justify-end px-2">
         <span className="text-xs">자동 업데이트</span>
