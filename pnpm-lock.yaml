@@ -40,6 +40,9 @@ importers:
       html2canvas-proxy:
         specifier: ^1.0.1
         version: 1.0.1(express@4.21.2)
+      ky:
+        specifier: ^1.7.4
+        version: 1.7.4
       next:
         specifier: 14.2.18
         version: 14.2.18(@babel/core@7.26.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -4310,6 +4313,13 @@ packages:
         integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==,
       }
     engines: { node: '>=6' }
+
+  ky@1.7.4:
+    resolution:
+      {
+        integrity: sha512-zYEr/gh7uLW2l4su11bmQ2M9xLgQLjyvx58UyNM/6nuqyWFHPX5ktMjvpev3F8QWdjSsHUpnWew4PBCswBNuMQ==,
+      }
+    engines: { node: '>=18' }
 
   language-subtag-registry@0.3.23:
     resolution:
@@ -9571,6 +9581,8 @@ snapshots:
       json-buffer: 3.0.1
 
   kleur@3.0.3: {}
+
+  ky@1.7.4: {}
 
   language-subtag-registry@0.3.23: {}
 

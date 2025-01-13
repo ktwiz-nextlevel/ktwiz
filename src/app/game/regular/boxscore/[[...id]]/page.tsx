@@ -5,8 +5,17 @@ import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevro
 import BatterRecords from './batter-records'
 import PitcherRecords from './pitcher-records'
 import { ScoreBoard } from './score-board'
+import { http } from '@/http'
+import { BoxScore, BoxscoreData } from '@/types'
 
-const TABS = [
+// 탭 정의 타입
+interface Tab {
+  title: string
+  href: string
+  path: string
+}
+
+const TABS: Tab[] = [
   { title: '박스스코어', href: '/game/regular/boxscore', path: 'boxscore' },
   {
     title: '관전 포인트',
@@ -14,24 +23,32 @@ const TABS = [
     path: 'watchpoint',
   },
 ]
-async function BoxscorePage({ params }: { params: Promise<{ id: string[] }> }) {
+
+// 페이지 컴포넌트 타입
+interface BoxscorePageProps {
+  params: Promise<{ id: string[] }>
+}
+
+// 메인 페이지 컴포넌트
+async function BoxscorePage({ params }: BoxscorePageProps) {
   const { id } = await params
   const gameDate = id ? id[0] : '20241008'
   const gmkey = id ? id[1] : '33331008LGKT0'
 
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/game/boxscore?gameDate=${gameDate}&gmkey=${gmkey} `,
-  )
-
-  if (!response.ok) {
+  let data: BoxscoreData
+  try {
+    const response = await http.get<BoxscoreData>(`/game/boxscore`, {
+      searchParams: { gameDate, gmkey },
+    })
+    data = response.data
+  } catch {
     return (
       <div>
         <BreadCrumb />
-        게임 정보가 없습니다.
+        <div>게임 정보를 불러올 수 없습니다.</div>
       </div>
     )
   }
-  const data = await response.json()
 
   return (
     <div className="w-full">
@@ -56,6 +73,7 @@ async function BoxscorePage({ params }: { params: Promise<{ id: string[] }> }) {
 
 export default BoxscorePage
 
+// Breadcrumb 컴포넌트
 function BreadCrumb() {
   return (
     <div className="mt-[50px] flex w-full justify-end">

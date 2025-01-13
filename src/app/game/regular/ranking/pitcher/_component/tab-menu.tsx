@@ -1,4 +1,5 @@
-import { TabMenuProps } from '../(lib)/tabmenu.type'
+import { TabMenuProps } from '../_lib/tabmenu.type'
+
 export function TabMenu({
   activeTab,
   setActiveTab,

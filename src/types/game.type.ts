@@ -1,3 +1,6 @@
+export interface BoxscoreData {
+  data: BoxScore
+}
 export interface BoxScore {
   etcgames: EtcGames[]
   gameFlag: '0' | '1'
