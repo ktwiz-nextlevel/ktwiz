@@ -48,3 +48,13 @@ export const TABLE_TITLE_KEY_PITCHER: {
   { title: '자책', key: 'er' },
   { title: '평균 자책점', key: 'era' },
 ]
+
+export interface BoxscorePageProps {
+  params: Promise<{ id: string[] }>
+}
+
+export interface Tab {
+  title: string
+  href: string
+  path: string
+}
