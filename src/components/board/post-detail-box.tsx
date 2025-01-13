@@ -152,7 +152,6 @@ export default function PostDetailBox({ post, userData }: PostDetailBoxProps) {
                 alt={`post-image-${index}`}
                 width={800}
                 height={600}
-                unoptimized
               />
             </div>
           ))}
