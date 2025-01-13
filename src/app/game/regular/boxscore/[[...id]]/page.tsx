@@ -49,11 +49,11 @@ async function BoxscorePage({ params }: BoxscorePageProps) {
       </div>
     )
   }
-
+  // console.log("",data)
   return (
     <div className="w-full">
       <BreadCrumb />
-      <ScoreBoard gameDate={gameDate} gmkey={gmkey} />
+      <ScoreBoard data={data.data} />
       <TabNavigation tabs={TABS} activeTab={TABS[0]} />
       <br />
       <KeyRecords gameDate={gameDate} gmkey={gmkey} />
