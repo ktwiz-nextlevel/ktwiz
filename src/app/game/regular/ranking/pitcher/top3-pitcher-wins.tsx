@@ -1,10 +1,9 @@
 'use client'
 import useYearStore from '@/store/useYearStore'
-import { Player, Top3player } from '@/types'
-import { ReactNode, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { BestPlayersTop3 } from '../../../../../components/rank/best-players-Top3'
-import { getTop3PitcherWins } from './(lib)/api'
-import { createPlayerList } from './(lib)/adapter'
+import { getTop3PitcherWins } from './_lib/api'
+import { createPlayerList } from './_lib/adapter'
 
 export function Top3PitcherWins() {
   const { currentYear } = useYearStore()
