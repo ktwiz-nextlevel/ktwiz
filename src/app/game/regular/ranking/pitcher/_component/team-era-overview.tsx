@@ -28,7 +28,7 @@ export async function TeamERAOverview({
   }
 
   return (
-    <div className="flex flex-1 flex-col justify-start gap-3">
+    <div className="flex min-w-[300px] max-w-[700px] flex-1 flex-col justify-start gap-3 p-6 md:p-6 lg:p-0">
       <ERATitle title={title} />
 
       <ol className="self-stretch">

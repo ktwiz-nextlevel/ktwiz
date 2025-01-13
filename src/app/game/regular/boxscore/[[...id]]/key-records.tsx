@@ -63,7 +63,7 @@ async function KeyRecords({
 
           return (
             <div
-              className={`${idx % 2 === 0 ? 'pr-6' : 'border-l-2 pl-6'} w-1/2 py-6`}
+              className={`${idx % 2 === 0 ? 'pr-6' : 'border-l-2 pl-6'} w-full py-6 md:w-1/2`}
               key={`${game.how}-${idx}`}
             >
               <h2 className="text-gray-600">

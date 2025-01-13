@@ -1,15 +1,14 @@
 'use client'
-
-import { TabMenu } from './(component)/tab-menu'
-import SearchBar from './(component)/search-bar'
-import { useSelection } from './(lib)/use-selection'
-import { TabMenuProps } from './(lib)/tabmenu.type'
-import SelectBox from './(component)/select-box'
-import { WithVerticalLines as Table } from '@/components/tailwind-ui/tables/with-vertical-lines'
 import { useEffect, useState } from 'react'
-import { getKTPitcherRankings, getPitcherRankings } from './(lib)/api'
+
 import { useSearchParams } from 'next/navigation'
 import { TableWhithHoverPopup } from '@/components/tailwind-ui/tables/hover-popup-table'
+import { useSelection } from './_lib/use-selection'
+import { TabMenuProps } from './_lib/tabmenu.type'
+import { TabMenu } from './_component/tab-menu'
+import SearchBar from './_component/search-bar'
+import SelectBox from './_component/select-box'
+import { getKTPitcherRankings, getPitcherRankings } from './_lib/api'
 const TH_KEY = [
   { title: '선수명', key: 'playerName' },
   { title: '팀명', key: 'teamName' },

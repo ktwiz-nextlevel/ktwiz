@@ -1,7 +1,5 @@
 'use client'
 
-import SelectBox from '../pitcher/(component)/select-box'
-import { WithVerticalLines as Table } from '@/components/tailwind-ui/tables/with-vertical-lines'
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useSelection } from './_lib/use-selection'
@@ -9,6 +7,7 @@ import { getbatterRankings, getKTBatterRankings } from './_lib/api'
 import { TabMenu } from './_component/tab-menu'
 import SearchBar from './_component/search-bar'
 import { TableWhithHoverPopup } from '@/components/tailwind-ui/tables/hover-popup-table'
+import SelectBox from './_component/select-box'
 
 const TH_KEY = [
   { title: '선수명', key: 'playerName' },
@@ -47,7 +46,7 @@ function RankingTable() {
 
   const [data, setData] = useState<any[]>([])
   const [searchValue, setSearch] = useState(searchParams.get('pname') || '')
-  console.log(data)
+  // console.log(data)
   const fetchRankings = async () => {
     try {
       const rankings =

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 async function getPlayerImg(name: string, keyName: string) {
   try {
     const res = await fetch(
-      `http://54.180.228.165/api/player_img?team=${keyName}&name=${name}`,
+      `${process.env.NEXT_PUBLIC_API_SERVER_URL}/player_img?team=${keyName}&name=${name}`,
     )
     if (!res.ok) {
       throw new Error('error')
@@ -19,9 +19,9 @@ function PopupImg({
   name,
   keyName,
 }: {
+  name: string
+  keyName: string
   position?: string
-  name?: string
-  keyName?: string
 }) {
   const [data, setData] = useState<string | any>('')
   const [hasError, setHasError] = useState<boolean>(false)

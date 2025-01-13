@@ -1,8 +1,33 @@
-export const createTeamERAOverview = (top5PitcherEras: any, title: string) => {
+// type PitcherERA = {
+//   playerName: string
+//   teamName: string
+//   hra: number // 홈런 허용 평균 (예시)
+// }
+// type ERAType = PitcherERA & Record<string, string | number | undefined>
+// type TeamERAOverviewProps = {
+//   isError: boolean
+//   title: string
+//   list?: PitcherERA[]
+
+import { ERAType, PitcherERA, TeamERAOverviewProps } from './_lib/type'
+
+// }
+export const createTeamERAOverview = (
+  top5PitcherEras: ERAType[],
+  title: string,
+): TeamERAOverviewProps => {
+  const eralist: PitcherERA[] = top5PitcherEras.map((player, idx) => {
+    return {
+      playerName: player.playerName,
+      teamName: player.playerName,
+      hra: player.hra,
+    }
+  })
+
   return {
     isError: typeof top5PitcherEras === 'string',
     title: title,
-    list: typeof top5PitcherEras !== 'string' ? top5PitcherEras : undefined,
+    list: typeof top5PitcherEras !== 'string' ? eralist : undefined,
   } as const
 }
 
@@ -10,11 +35,7 @@ export async function TeamERAOverview({
   isError,
   title,
   list,
-}: {
-  isError: boolean
-  title: string
-  list?: any
-}) {
+}: TeamERAOverviewProps) {
   if (isError) {
     return (
       <div className="flex-1">
@@ -25,7 +46,7 @@ export async function TeamERAOverview({
   }
 
   return (
-    <div className="flex flex-1 flex-col justify-start gap-3">
+    <div className="flex min-w-[300px] max-w-[700px] flex-1 flex-col justify-start gap-3 p-6 md:p-6 lg:p-0">
       <ERATitle title={title} />
 
       <ol className="self-stretch">
