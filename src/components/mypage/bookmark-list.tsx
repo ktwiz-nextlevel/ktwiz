@@ -2,6 +2,7 @@
 
 import { BookmarkListItem } from '@/types/media'
 import { useRouter } from 'next/navigation'
+import ClientImageFallback from '../media/common/client-image-fallback'
 
 interface BookmarkListProps {
   bookmarks: BookmarkListItem[]
@@ -20,11 +21,13 @@ export default function BookmarkList({ bookmarks }: BookmarkListProps) {
             onClick={() => router.push(`/media/highlight/${bookmark.videoId}`)}
           >
             <div className="relative pt-[56.25%]">
-              <img
-                src={bookmark.videoThumbnail || '/images/placeholder-img.png'}
+              <ClientImageFallback
+                src={bookmark.videoThumbnail}
                 alt={`post-image-${bookmark.id}`}
-                className="absolute left-0 top-0 h-full w-full rounded-xl object-cover"
-                loading="lazy"
+                fallbackSrc="/images/fallback-img.png"
+                fill
+                className="rounded-xl object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
               />
             </div>
             <div className="p-2">
