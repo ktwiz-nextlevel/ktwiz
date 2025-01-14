@@ -2,12 +2,14 @@ import MainGallery from '@/components/main/main-gallery'
 import MainSchedule from '@/components/main/main-schedule'
 import MainVideo from '@/components/main/main-video'
 import { getMainPhotoList, getMainVideoList } from '@/services/media-service'
+import { getSchedule } from '@/services/schedule-service'
 import Link from 'next/link'
 
 export default async function Page() {
-  const [videoData, photoData] = await Promise.all([
+  const [videoData, photoData, scheduleData] = await Promise.all([
     getMainVideoList(),
     getMainPhotoList(),
+    getSchedule(),
   ])
   return (
     <div className="">
@@ -33,7 +35,7 @@ export default async function Page() {
           </div>
         </div>
       </div>
-      <MainSchedule />
+      <MainSchedule video={videoData[0]} scheduleData={scheduleData} />
       <MainVideo videos={videoData} />
       <MainGallery photoList={photoData} />
     </div>
