@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+
 import {
   ResponsiveContainer,
   XAxis,
@@ -10,10 +10,9 @@ import {
   Line,
   LineChart,
 } from 'recharts'
-import { AdaptedData, RawDataType } from './_lib/team.type'
-import { http } from '@/http'
+import { AdaptedData, RawData } from './_lib/team.type'
 
-function adaptData(rawData: RawDataType[]): AdaptedData[] {
+function adaptData(rawData: RawData[]): AdaptedData[] {
   return rawData.map((item) => {
     const month = parseInt(item.date.substring(4, 6), 10) // 월
     const day = parseInt(item.date.substring(6, 8), 10) // 일
@@ -25,38 +24,8 @@ function adaptData(rawData: RawDataType[]): AdaptedData[] {
   })
 }
 
-// API 데이터를 가져오는 함수
-export async function fetchTeamRankData(): Promise<{
-  data: { list: RawDataType[] }
-}> {
-  const response = await http.get<{
-    data: { list: RawDataType[] }
-  }>('/game/rank/periodteamrank')
-
-  return response.data
-}
-
-// LineChartComponent 컴포넌트
-export default function LineChartComponent() {
-  const [data, setTeamRankData] = useState<AdaptedData[] | null>(null) // 초기값과 타입 정의
-  const [loading, setLoading] = useState<boolean>(true)
-
-  useEffect(() => {
-    fetchTeamRankData()
-      .then((response) => {
-        const adapted = adaptData(response.data.list) // 데이터 변환
-        setTeamRankData(adapted) // 변환된 데이터 설정
-        setLoading(false)
-      })
-      .catch((error) => {
-        console.error('Error fetching team rank data:', error)
-        setLoading(false)
-      })
-  }, [])
-
-  if (loading) {
-    return <p>Loading team rank data...</p>
-  }
+export default function LineChartComponent({ datas }: { datas: RawData[] }) {
+  const data = adaptData(datas)
 
   return (
     <div className="mt-10 h-[500px] w-full border-2 border-gray-300 p-3">

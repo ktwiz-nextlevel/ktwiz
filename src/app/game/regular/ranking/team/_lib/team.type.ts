@@ -32,7 +32,7 @@ export type TeamDataArray = PartialVsTeamTableData[]
 
 export type RawData = {
   date: string
-  rank: string
+  rank: number
 }
 export type RawDataType = RawData & Record<string, string | number | undefined>
 

@@ -19,7 +19,6 @@ export function Top3BatterHra() {
     <div>
       {data.length !== 0 && (
         <BestPlayersTop3
-          isErrored={data === '' || data.length === 0}
           playerPrvwImg={data[0]?.playerPrvwImg}
           playerList={createPlayerList(data, 'hra')}
           title="타율"

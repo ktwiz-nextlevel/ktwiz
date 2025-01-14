@@ -20,7 +20,6 @@ export function Top3BatterHr() {
     <div>
       {data.length !== 0 && (
         <BestPlayersTop3
-          isErrored={data === '' || data.length === 0}
           playerPrvwImg={data[0]?.playerPrvwImg}
           playerList={createPlayerList(data, 'hr')}
           title="홈런"
