@@ -2,10 +2,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { NUMBER_OF_PHOTOS_TO_FETCH } from '@/contants/media'
 import { Photo } from '@/types/media'
-import { getPhotoList } from '@/services/media-action'
 import PhotoModal from './photo-modal'
 import { ArrowUpIcon } from '@heroicons/react/24/outline'
 import ClientImageFallback from '../common/client-image-fallback'
+import { getPhotoList } from '@/services/media-service'
 
 interface PhotoListProps {
   initialPhotos: Photo[]

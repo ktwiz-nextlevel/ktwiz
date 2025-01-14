@@ -1,3 +1,22 @@
+export interface PhotoResponse {
+  data: {
+    list: Photo[]
+  }
+}
+export interface VideoResponse {
+  data: {
+    list: Video[]
+  }
+}
+export interface PopularVideoResponse {
+  top3: Video[]
+}
+
+export interface VideoDetailResponse {
+  data: {
+    article: Video
+  }
+}
 export interface Photo {
   artcNextSeq: number
   artcPrevSeq: number
@@ -20,7 +39,6 @@ export interface Photo {
   useYn: string
   viewCnt: number
 }
-
 export interface Video {
   artcNextSeq: number
   artcPrevSeq: number
@@ -42,6 +60,7 @@ export interface Video {
   videoLink: string
   viewCnt: number
 }
+
 export interface BookmarkEntity {
   id: number
   user_id: string
