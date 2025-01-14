@@ -72,6 +72,7 @@ export const getTop3BatterHra = async (year: number) => {
   try {
     const response = await http.get<Top3player>('/game/rank/batter/hra/top3', {
       searchParams: { gyear: year },
+      cache: 'force-cache',
     })
 
     const {
@@ -89,6 +90,7 @@ export const getTop3BatterHr = async (
   try {
     const response = await http.get<Top3player>('/game/rank/batter/hr/top3', {
       searchParams: { gyear: year },
+      cache: 'force-cache',
     })
 
     const {
