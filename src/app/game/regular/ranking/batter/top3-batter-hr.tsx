@@ -3,14 +3,14 @@ import { BestPlayersTop3 } from '@/components/rank/best-players-Top3'
 import useYearStore from '@/store/useYearStore'
 import React, { useEffect, useState } from 'react'
 
-import { getTop3batterHr } from './_lib/api'
 import { createPlayerList } from '../pitcher/_lib/adapter'
+import { getTop3BatterHr } from './_lib/api'
 
 export function Top3BatterHr() {
   const { currentYear } = useYearStore()
   const [data, setData] = useState<string | any>('')
   const fetchData = async () => {
-    const res = await getTop3batterHr(currentYear)
+    const res = await getTop3BatterHr(currentYear)
     setData(res)
   }
   useEffect(() => {

@@ -62,6 +62,12 @@ function LeftVisitTeam({
         <WinLossStats isWin={isWin} />
       </div>
       <Image src={teamLogo} alt="teamLogo" width={64} height={64} />
+      {/* <Image
+        src="http://54.180.228.165/api/static/KT.png"
+        alt="KT Logo"
+        width={64}
+        height={64}
+      /> */}
     </div>
   )
 }
