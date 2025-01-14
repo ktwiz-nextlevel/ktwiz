@@ -9,7 +9,7 @@ export default function PostCard({ posts }: PostCardProps) {
   const router = useRouter()
 
   return (
-    <div className="min-h-[580px]">
+    <div className="min-h-[615px]">
       <div className="flow-root">
         <div className="p-2">
           <div className="inline-block w-full py-2 align-middle">
