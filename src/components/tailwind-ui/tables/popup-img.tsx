@@ -15,6 +15,7 @@ async function getPlayerImg(name: string, keyName: string) {
     throw new Error('error')
   }
 }
+
 function PopupImg({
   position,
   name,

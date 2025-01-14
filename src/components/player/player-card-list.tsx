@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import Image from 'next/image'
 import { PlayerCode } from '@/types'
 
 interface PlayerCard {
@@ -13,13 +14,15 @@ interface PlayerCard {
 interface PlayerCardListProps {
   onCardClick: (pcode: PlayerCode) => void
   cards: PlayerCard[]
+  pcode: PlayerCode
 }
 
 export default function PlayerCardList({
   onCardClick,
   cards,
+  pcode,
 }: PlayerCardListProps) {
-  const [selectedCard, setSelectedCard] = useState<PlayerCode | null>(null)
+  const [selectedCard, setSelectedCard] = useState<PlayerCode | null>(pcode)
 
   const handleCardClick = (pcode: PlayerCode) => {
     setSelectedCard(pcode)
@@ -40,10 +43,12 @@ export default function PlayerCardList({
             } active:scale-95`}
             onClick={() => handleCardClick(card.pcode)}
           >
-            <img
+            <Image
               src={card.playerPrvwImg || '/images/ktwiz-basic-img.png'}
               alt={card.playerName}
               className="h-full w-full rounded-lg object-cover"
+              layout="fill"
+              objectFit="cover"
             />
             <div
               className={`absolute inset-0 flex flex-col items-center justify-center rounded-lg text-white transition-opacity duration-300 ${

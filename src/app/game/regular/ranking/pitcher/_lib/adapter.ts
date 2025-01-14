@@ -12,7 +12,7 @@ export const createTeamERAOverview = (
 }
 type PlayerData = {
   playerName: string
-  data: string
+  data?: string
 } & Record<string, string | number | undefined>
 
 export function createPlayerList(list: PlayerData[], key: string) {

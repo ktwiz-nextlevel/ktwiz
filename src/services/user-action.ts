@@ -2,14 +2,7 @@
 
 import { redirect } from 'next/navigation'
 import { createClient } from '@/utils/supabase/server'
-import { z } from 'zod'
-
-const nicknameSchema = z.object({
-  nickname: z
-    .string()
-    .min(2, '닉네임을 2글자 이상 입력하세요')
-    .max(15, '닉네임은 15자 이내여야 합니다.'),
-})
+import { nicknameSchema } from '@/schemas/nicknameSchema'
 
 export async function updateNickname(formData: FormData) {
   const validateFields = nicknameSchema.safeParse({

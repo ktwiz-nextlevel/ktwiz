@@ -26,7 +26,7 @@ export default async function FanBoardPage({
   ])
 
   return (
-    <div className="page-large px-10">
+    <div className="page-large lg:px-10">
       <div className="flex justify-between space-x-16">
         <div className="page">
           <div className="mb-10 mt-[50px] flex w-full justify-between pl-4">

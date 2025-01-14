@@ -7,7 +7,14 @@ import { useState, useEffect } from 'react'
 import Banner from '@/components/common/banner/banner'
 import { PLAYER_BANNER_DATA } from '@/contants/player'
 import TabMenu from '@/components/common/tab-menu/tab-menu'
-import { PlayerCode, PlayerData } from '@/types'
+import {
+  ChartData2,
+  PitchingRatio,
+  PitchingValue,
+  PlayerCode,
+  PlayerDetailDataList,
+  SeasonData,
+} from '@/types'
 import {
   getPitcherPlayerList,
   getPitcherPlayerDetail,
@@ -34,11 +41,12 @@ interface ChartData {
 
 export default function Pitcher() {
   const [playerPcode, setPlayerPcode] = useState<PlayerCode>(53006)
-  const [playerName, setPlayerName] = useState('강건')
+  const [playerName, setPlayerName] = useState<string | undefined>('강건')
   const [cards, setCards] = useState<PlayerCard[]>([])
-  const [detailData, setDetailData] = useState()
-  const [seasonData, setSeasonData] = useState()
-  const [playerImg, setPlayerImg] = useState()
+  const [detailData, setDetailData] = useState<PlayerDetailDataList>()
+  const [seasonData, setSeasonData] = useState<SeasonData | undefined>()
+  const [playerImg, setPlayerImg] = useState<string | undefined>()
+
   const [thisYearChart, setThisYearChart] = useState<ChartData | undefined>(
     undefined,
   )
@@ -46,15 +54,22 @@ export default function Pitcher() {
     undefined,
   )
 
-  const [pitchingRatioChart, setPitchingRatioChart] = useState()
-  const [pitchingValueChart, setPitchingValueChart] = useState()
+  const [pitchingRatioChart, setPitchingRatioChart] = useState<
+    PitchingRatio | undefined
+  >()
+  const [pitchingValueChart, setPitchingValueChart] = useState<
+    PitchingValue | undefined
+  >()
+
   useEffect(() => {
     const fetchPitcherData = async () => {
       try {
         const playerList = await getPitcherPlayerList()
-        setCards(playerList)
+        setCards(playerList as PlayerCard[])
 
         const playerDetail = await getPitcherPlayerDetail(playerPcode)
+
+        console.log('playerDetail : ', playerDetail)
 
         setDetailData(playerDetail.data.gameplayer)
         setPlayerImg(playerDetail.data.gameplayer.playerPrvwImg1)
@@ -86,7 +101,8 @@ export default function Pitcher() {
   useEffect(() => {
     const fetchPitcherChart = async () => {
       try {
-        const data = await getPlayerChart(playerName)
+        const data = (await getPlayerChart(playerName)) as ChartData2
+        console.log('fetchPitcherChart : ', data)
         setPitchingRatioChart(data.pitchingRatio)
         setPitchingValueChart(data.pitchingValue)
       } catch (error) {
@@ -105,7 +121,11 @@ export default function Pitcher() {
         </div>
         <div className="flex flex-col gap-6 md:flex-row">
           <div className="w-full flex-shrink-0 rounded-lg p-4 shadow-md md:w-1/5">
-            <PlayerCardList onCardClick={setPlayerPcode} cards={cards} />
+            <PlayerCardList
+              onCardClick={setPlayerPcode}
+              cards={cards}
+              pcode={playerPcode}
+            />
           </div>
 
           <div className="w-full flex-grow rounded-lg p-4 shadow-md md:w-4/5">
