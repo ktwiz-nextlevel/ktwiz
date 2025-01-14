@@ -5,6 +5,7 @@ import { Label } from './game-status-label'
 import NextButton from './next-button'
 import { HomeLabel } from './home-label'
 import Image from 'next/image'
+import ClientImageFallback from '@/components/media/common/client-image-fallback'
 
 async function BoardHeader({ schedule }: { schedule: ScheduleType }) {
   const { current, prev, next }: ScheduleType = schedule
@@ -65,6 +66,15 @@ function LeftVisitTeam({
       {/* <Image
         src="http://54.180.228.165/api/static/KT.png"
         alt="KT Logo"
+        width={64}
+        height={64}
+      /> */}
+      {/* <ClientImageFallback
+        src={teamLogo}
+        alt={`post-image-teamLogo`}
+        fallbackSrc="/images/fallback-img.png"
+        fill
+        className="rounded-xl object-cover"
         width={64}
         height={64}
       /> */}
