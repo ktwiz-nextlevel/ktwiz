@@ -19,7 +19,7 @@ export default function LoginModal({ onClose }: ModalProps) {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'kakao',
       options: {
-        redirectTo: `${process.env.BASE_URL ?? 'http://localhost:3000'}/auth/callback?next=${encodeURIComponent(currentUrl)}`,
+        redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000'}/auth/callback?next=${encodeURIComponent(currentUrl)}`,
       },
     })
     if (error) {
@@ -34,7 +34,7 @@ export default function LoginModal({ onClose }: ModalProps) {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: `${process.env.BASE_URL ?? 'http://localhost:3000'}/auth/callback?next=${encodeURIComponent(currentUrl)}`,
+        redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL ?? 'http://localhost:3000'}/auth/callback?next=${encodeURIComponent(currentUrl)}`,
       },
     })
     if (error) {
@@ -47,7 +47,7 @@ export default function LoginModal({ onClose }: ModalProps) {
         {/* 로고 + 타이틀 */}
         <div className="py-[20px]">
           <Image
-            src="/images/KtLogo.png"
+            src="/images/kt-logo.png"
             width={100}
             height={100}
             alt="kt 로고"

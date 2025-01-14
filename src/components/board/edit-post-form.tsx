@@ -8,20 +8,11 @@ import { updatePost } from '@/services/post-action'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { postSchema } from '@/schemas/postSchema'
 
 interface EditPostFormProps {
   post: PostDetail
 }
-const postSchema = z.object({
-  title: z
-    .string()
-    .min(2, '제목을 2글자 이상 입력하세요')
-    .max(100, '제목은 100자 이내여야 합니다.'),
-  content: z
-    .string()
-    .min(2, '내용을 2글자 이상 입력하세요')
-    .max(1000, '내용은 1000자 이내여야 합니다.'),
-})
 
 type PostFormValues = z.infer<typeof postSchema>
 

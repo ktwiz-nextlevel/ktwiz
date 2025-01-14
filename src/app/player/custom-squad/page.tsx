@@ -15,7 +15,8 @@ import OverlayGuide from '@/components/player/overlay-guide'
 import PlayerList from '@/components/player/custom-squad/player-list'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 import CustomSquadTable from '@/components/player/custom-squad/player-table'
-import { toPng } from 'html-to-image'
+import { toPng, toJpeg } from 'html-to-image'
+
 import Title from '@/components/common/title/title'
 
 interface PlayerCard {
@@ -130,10 +131,10 @@ export default function CustomSquad() {
         ])
 
         setCards([
-          ...pitcherPlayer,
-          ...infielderPlayer,
-          ...catcherPlayer,
-          ...outfielderPlayer,
+          ...(pitcherPlayer as PlayerCard[]),
+          ...(infielderPlayer as PlayerCard[]),
+          ...(catcherPlayer as PlayerCard[]),
+          ...(outfielderPlayer as PlayerCard[]),
         ])
       } catch (error) {
         console.error('fetchPlayerList 요청 실패:', error)
@@ -154,6 +155,7 @@ export default function CustomSquad() {
   const handleDragEnd = () => {
     setDraggedCard(null)
     if (dragImageRef.current) {
+      console.log('상태 종료 : ', dragImageRef.current)
       dragImageRef.current.style.display = 'none'
     }
   }
@@ -185,23 +187,26 @@ export default function CustomSquad() {
 
   const handleDragOver = (e: React.DragEvent) => e.preventDefault()
 
-  const handleCapture = async (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault()
-    if (!captureRef.current) return
+  const handleCapture = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    if (captureRef.current) {
+      try {
+        // DOM을 PNG 이미지로 변환
+        const dataUrl = await toJpeg(captureRef.current, {
+          backgroundColor: 'white',
+          pixelRatio: window.devicePixelRatio || 2, // 고해상도 설정
+        })
 
-    try {
-      const dataUrl = await toPng(captureRef.current, {
-        backgroundColor: 'white',
-        pixelRatio: window.devicePixelRatio || 2,
-        cacheBust: true,
-      })
-
-      const link = document.createElement('a')
-      link.download = 'custom_squad.png'
-      link.href = dataUrl
-      link.click()
-    } catch (error) {
-      console.error('이미지 내보내기 중 오류 발생:', error)
+        // 이미지 다운로드
+        const link = document.createElement('a')
+        link.href = dataUrl
+        link.download = 'custom_squad.jpeg'
+        link.click()
+      } catch (error) {
+        console.error('이미지 내보내기 중 오류 발생:', error)
+      }
+    } else {
+      console.error('내보낼 요소를 찾을 수 없습니다.')
     }
   }
 
@@ -265,10 +270,11 @@ export default function CustomSquad() {
               alt="야구 필드"
               fill
               style={{ objectFit: 'contain' }}
-              className="rounded-lg p-8"
-              onError={() => setBgSrc('/images/players/rb.png')}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              priority
+              loading="lazy"
+              // width={2530}
+              // height={1080}
+              // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="p-8"
             />
             <div className="absolute inset-0">
               {squareStates.map((position, index) => (
