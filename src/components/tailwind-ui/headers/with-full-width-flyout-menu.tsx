@@ -110,35 +110,33 @@ export function WithFullWidthFlyoutMenu({ initialUser }: HeaderProps) {
                   {menu.gnb}
                 </PopoverButton>
               ))}
-              {isOpened && (
-                <PopoverPanel
-                  className={`fixed left-0 top-[50px] -z-10 w-screen translate-x-[-41%] bg-white pt-14 shadow-lg ring-1 ring-gray-900/5 transition data-[closed]:-translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in ${isOpened ? 'data-[enter]:duration-200 data-[enter]:ease-out' : 'data-[leave]:ease-in'} `}
-                  transition
-                >
-                  {/* translate-x-[-45%] */}
-                  <div className="relative mx-auto flex max-w-7xl justify-center gap-x-4 px-6 pb-10 lg:px-8 xl:gap-x-4">
-                    {LNB_LIST?.map((menu, idx) => {
-                      return (
-                        <div
-                          key={idx + 'lnb'}
-                          className={`group relative ${getPaddingByIdx(idx)} w-[80px] text-sm/6`}
-                          // className={`group relative left-2 w-[75px] text-sm/6`}
-                        >
-                          {menu?.map((lnb, idx) => (
-                            <Link
-                              key={lnb.name + idx}
-                              href={lnb.href}
-                              className="hover:text-blackborder mb-3 block text-sm font-normal text-gray-900 hover:font-bold"
-                            >
-                              {lnb.name}
-                            </Link>
-                          ))}
-                        </div>
-                      )
-                    })}
-                  </div>
-                </PopoverPanel>
-              )}
+
+              <PopoverPanel
+                className={`${isOpened ? 'block' : 'hidden'} fixed left-1/2 top-[50px] -z-10 w-screen -translate-x-1/2 bg-white pt-14 shadow-lg ring-1 ring-gray-900/5 transition data-[closed]:-translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in ${isOpened ? 'data-[enter]:duration-200 data-[enter]:ease-out' : 'data-[leave]:ease-in'} `}
+                transition
+              >
+                <div className="relative mx-auto flex max-w-7xl justify-center gap-x-4 px-6 pb-10 lg:px-8 xl:gap-x-4">
+                  {LNB_LIST?.map((menu, idx) => {
+                    return (
+                      <div
+                        key={idx + 'lnb'}
+                        className={`group relative ${getPaddingByIdx(idx)} w-[80px] text-sm/6`}
+                        // className={`group relative left-2 w-[75px] text-sm/6`}
+                      >
+                        {menu?.map((lnb, idx) => (
+                          <Link
+                            key={lnb.name + idx}
+                            href={lnb.href}
+                            className="hover:text-blackborder mb-3 block text-sm font-normal text-gray-900 hover:font-bold"
+                          >
+                            {lnb.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )
+                  })}
+                </div>
+              </PopoverPanel>
             </Popover>
           </PopoverGroup>
           {/* login & signup*/}
