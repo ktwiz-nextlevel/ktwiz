@@ -75,6 +75,7 @@ function RankingTable({ rankingData }: { rankingData: any[] }) {
   const [searchValue, setSearch] = useState(searchParams.get('pname') || '')
 
   const fetchServer = async () => {
+    console.log('동작합니다.')
     const res = await fetchRankings({
       playerType: playerType,
       gyear: gyear,
