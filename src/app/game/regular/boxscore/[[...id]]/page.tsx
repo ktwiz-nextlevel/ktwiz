@@ -30,6 +30,12 @@ async function BoxscorePage({ params }: BoxscorePageProps) {
       </div>
     )
   }
+  // try {
+  //   const imgHome = await http.get<{ url: string }>(`/api/player_img`, {
+  //     searchParams: { team: 'KT', name: '강백호' },
+  //   })
+  //   console.log(imgHome)
+  // } catch (e) {}
   return (
     <div className="w-full">
       <BreadCrumb />
