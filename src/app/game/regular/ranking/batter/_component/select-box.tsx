@@ -10,7 +10,7 @@ import { CheckIcon } from '@heroicons/react/20/solid'
 
 type OptionType = {
   name: string
-  displayString: string
+  id: string
 }
 
 export default function SelectBox({
@@ -27,7 +27,7 @@ export default function SelectBox({
       <div className="relative">
         <ListboxButton className="grid w-full cursor-default grid-cols-1 rounded-md bg-white py-1.5 pl-3 pr-2 text-left text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-[--gray-color-100]">
           <span className="col-start-1 row-start-1 whitespace-nowrap pr-6 text-sm">
-            {selected.displayString}
+            {selected.name}
           </span>
           <ChevronUpDownIcon
             aria-hidden="true"
@@ -40,12 +40,12 @@ export default function SelectBox({
         >
           {options.map((option) => (
             <ListboxOption
-              key={option.name}
+              key={option.id}
               value={option}
               className="group relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900 data-[focus]:bg-[--gray-color-100] data-[focus]:text-white data-[focus]:outline-none"
             >
               <span className="block whitespace-nowrap text-sm group-data-[selected]:font-semibold">
-                {option.displayString}
+                {option.name}
               </span>
 
               <span className="absolute inset-y-0 right-0 flex items-center pr-4 text-[--gray-color-100] group-[&:not([data-selected])]:hidden group-data-[focus]:text-white">

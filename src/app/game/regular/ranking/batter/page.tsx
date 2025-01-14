@@ -10,8 +10,17 @@ import { Top3BatterHr } from './top3-batter-hr'
 import { http } from '@/http'
 import { ApiResponse, Playerbatter } from './_lib/type'
 import { Player, Top3player } from '@/types'
+import { fetchRankings } from '@/services/table-action'
 
-async function RankBatterPage() {
+async function RankBatterPage({
+  searchParams,
+}: {
+  searchParams: {
+    pname?: string
+    gyear?: string
+    playerType?: string
+  }
+}) {
   const currentYear = 2024
   let top5total: Playerbatter[]
   let top3Hra: [Player, Player, Player]
@@ -55,6 +64,11 @@ async function RankBatterPage() {
     return <div> 데이터가 없습니다.</div>
   }
 
+  const rankingdata = await fetchRankings({
+    playerType: searchParams.playerType,
+    gyear: searchParams.gyear,
+    pname: searchParams.pname,
+  })
   return (
     <div className="mb-[250px] w-full">
       <TabNavigation tabs={TABS} activeTab={TABS[2]} />
@@ -74,7 +88,7 @@ async function RankBatterPage() {
         </Suspense>
       </section>
       <Suspense fallback={<div>Loading...</div>}>
-        <RankingTable />
+        {rankingdata && <RankingTable rankingData={rankingdata} />}
       </Suspense>
     </div>
   )

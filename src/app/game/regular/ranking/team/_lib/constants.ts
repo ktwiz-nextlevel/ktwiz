@@ -10,7 +10,7 @@ export const TABS = [
   },
   {
     title: '타자순위',
-    href: '/game/regular/ranking/batter',
+    href: '/game/regular/ranking/batter?gyear=2024&playerType=ktwizbatter',
     path: 'batter',
   },
 ]
