@@ -57,6 +57,7 @@ async function Page() {
   try {
     const response = await http.get<Top3player>(`/game/rank/pitcher/era/top3`, {
       searchParams: { gyear: currentYear },
+      cache: 'force-cache',
     })
     top3Eras = response.data.data.list
   } catch {
@@ -66,6 +67,8 @@ async function Page() {
   try {
     const response = await http.get<Top3player>(`/game/rank/pitcher/win/top3`, {
       searchParams: { gyear: currentYear },
+
+      cache: 'force-cache',
     })
 
     top3Wins = response.data.data.list
