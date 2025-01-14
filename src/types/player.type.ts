@@ -1,8 +1,25 @@
 export type PlayerCode = number | string
 
-export type PlayerChart = string
+export type PlayerChart = string | any
 export interface PlayerImage {
   img: string | undefined
+}
+
+export interface PlayerDetail {
+  data: {
+    gameplayer: PlayerDetailDataList
+    yearrecordlist: SeasonData[]
+  }
+}
+export interface CourseItem {
+  info: string
+  style: string
+}
+export interface BatterChartData {
+  'course double': CourseItem[]
+  'course home_run': CourseItem[]
+  'course single': CourseItem[]
+  'course triple': CourseItem[]
 }
 
 export interface PlayerDetailDataList {
@@ -50,7 +67,6 @@ export interface SeasonData {
   w?: number // 승리 수 (Wins)
   l?: number // 패배 수 (Losses)
   sv?: number // 세이브 (Saves)
-
   hra?: number //타율
   bra?: number //출루율
   hr?: number //홈런
@@ -62,28 +78,35 @@ export interface PlayerSeasonDataProps {
 
 /**투구 비율 */
 export interface PitchingRatio {
-  '2-seam Fastball': number
-  '4-seam Fastball': number
-  ChangeUp: number
-  Curve: number
-  Cutter: number
-  Forkball: number
-  Sinker: number
-  Slider: number
+  '2-seam Fastball'?: number
+  '4-seam Fastball'?: number
+  ChangeUp?: number
+  Curve?: number
+  Cutter?: number
+  Forkball?: number
+  Sinker?: number
+  Slider?: number
 }
 /**피칭 값 */
 export interface PitchingValue {
-  '2-seam Fastball': number
-  '4-seam Fastball': number
-  ChangeUp: number
-  Curve: number
-  Cutter: number
-  Forkball: number
-  Sinker: number
-  Slider: number
+  '2-seam Fastball'?: number
+  '4-seam Fastball'?: number
+  ChangeUp?: number
+  Curve?: number
+  Cutter?: number
+  Forkball?: number
+  Sinker?: number
+  Slider?: number
 }
 
 export interface ChartData {
-  pitchingRatio: PitchingRatio
-  pitchingValue: PitchingValue
+  pitchingRatio?: PitchingRatio
+  pitchingValue?: PitchingValue
+}
+
+export interface ChartData2 {
+  data: {
+    pitchingRatio?: PitchingRatio
+    pitchingValue?: PitchingValue
+  }
 }

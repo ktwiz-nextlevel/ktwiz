@@ -7,7 +7,14 @@ import { useState, useEffect } from 'react'
 import Banner from '@/components/common/banner/banner'
 import { PLAYER_BANNER_DATA } from '@/contants/player'
 import TabMenu from '@/components/common/tab-menu/tab-menu'
-import { PlayerCode, PlayerData } from '@/types'
+import {
+  ChartData2,
+  PitchingRatio,
+  PitchingValue,
+  PlayerCode,
+  PlayerDetailDataList,
+  SeasonData,
+} from '@/types'
 import {
   getPitcherPlayerList,
   getPitcherPlayerDetail,
@@ -34,11 +41,12 @@ interface ChartData {
 
 export default function Pitcher() {
   const [playerPcode, setPlayerPcode] = useState<PlayerCode>(53006)
-  const [playerName, setPlayerName] = useState('강건')
+  const [playerName, setPlayerName] = useState<string | undefined>('강건')
   const [cards, setCards] = useState<PlayerCard[]>([])
-  const [detailData, setDetailData] = useState()
-  const [seasonData, setSeasonData] = useState()
-  const [playerImg, setPlayerImg] = useState()
+  const [detailData, setDetailData] = useState<PlayerDetailDataList>()
+  const [seasonData, setSeasonData] = useState<SeasonData | undefined>()
+  const [playerImg, setPlayerImg] = useState<string | undefined>()
+
   const [thisYearChart, setThisYearChart] = useState<ChartData | undefined>(
     undefined,
   )
@@ -48,13 +56,19 @@ export default function Pitcher() {
 
   const [pitchingRatioChart, setPitchingRatioChart] = useState()
   const [pitchingValueChart, setPitchingValueChart] = useState()
+
+  console.log('pitchingRatioChart : ', pitchingRatioChart)
+  console.log('pitchingValueChart : ', pitchingValueChart)
+
   useEffect(() => {
     const fetchPitcherData = async () => {
       try {
         const playerList = await getPitcherPlayerList()
-        setCards(playerList)
+        setCards(playerList as PlayerCard[])
 
         const playerDetail = await getPitcherPlayerDetail(playerPcode)
+
+        console.log('playerDetail : ', playerDetail)
 
         setDetailData(playerDetail.data.gameplayer)
         setPlayerImg(playerDetail.data.gameplayer.playerPrvwImg1)
@@ -86,8 +100,11 @@ export default function Pitcher() {
   useEffect(() => {
     const fetchPitcherChart = async () => {
       try {
-        const data = await getPlayerChart(playerName)
+        const data = (await getPlayerChart(playerName)) as ChartData2
+        console.log('fetchPitcherChart : ', data)
+        // @ts-ignore: type error
         setPitchingRatioChart(data.pitchingRatio)
+        // @ts-ignore: type error
         setPitchingValueChart(data.pitchingValue)
       } catch (error) {
         console.error('fetchPitcherChart 요청 실패:', error)

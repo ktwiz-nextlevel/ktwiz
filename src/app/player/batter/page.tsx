@@ -6,7 +6,12 @@ import { useState, useEffect } from 'react'
 import Banner from '@/components/common/banner/banner'
 import { PLAYER_BANNER_DATA } from '@/contants/player'
 import TabMenu from '@/components/common/tab-menu/tab-menu'
-import { PlayerCode } from '@/types'
+import {
+  BatterChartData,
+  PlayerCode,
+  PlayerDetailDataList,
+  SeasonData,
+} from '@/types'
 import {
   getInfielderPlayerList,
   getCatcherPlayerList,
@@ -32,11 +37,11 @@ interface HitSprayItem {
 
 export default function Batter() {
   const [playerPcode, setPlayerPcode] = useState<PlayerCode>(51005)
-  const [playerName, setPlayerName] = useState('김건형')
+  const [playerName, setPlayerName] = useState<string | undefined>('김건형')
   const [cards, setCards] = useState<PlayerCard[]>([])
-  const [detailData, setDetailData] = useState()
-  const [seasonData, setSeasonData] = useState()
-  const [playerImg, setPlayerImg] = useState()
+  const [detailData, setDetailData] = useState<PlayerDetailDataList>()
+  const [seasonData, setSeasonData] = useState<SeasonData | undefined>()
+  const [playerImg, setPlayerImg] = useState<string | undefined>()
   const [hitSprayData, setHitSprayData] = useState<HitSprayItem[]>([])
 
   useEffect(() => {
@@ -48,11 +53,12 @@ export default function Batter() {
             getInfielderPlayerList(),
             getCatcherPlayerList(),
           ])
+        console.log('infielderPlayerList : ', infielderPlayerList)
 
         setCards([
-          ...infielderPlayerList,
-          ...catcherPlayerList,
-          ...outfielderPlayerList,
+          ...(infielderPlayerList as PlayerCard[]),
+          ...(catcherPlayerList as PlayerCard[]),
+          ...(outfielderPlayerList as PlayerCard[]),
         ])
       } catch (error) {
         console.error('타자데이터 요청 실패:', error)
@@ -64,7 +70,6 @@ export default function Batter() {
   useEffect(() => {
     const fetchBatterData = async () => {
       try {
-        //이게 왜 되면 안되는건데 돌아가네...
         const [batterData] = await Promise.all([
           getInfielderPlayerDetail(playerPcode),
           getCatcherPlayerDetail(playerPcode),
@@ -85,7 +90,7 @@ export default function Batter() {
   useEffect(() => {
     const fetchHitSprayData = async () => {
       try {
-        const data = await getPlayerChart(playerName)
+        const data = (await getPlayerChart(playerName)) as BatterChartData
 
         const addData = []
 
@@ -112,7 +117,11 @@ export default function Batter() {
         </div>
         <div className="flex flex-col gap-6 md:flex-row">
           <div className="w-full flex-shrink-0 rounded-lg p-4 shadow-md md:w-1/5">
-            <PlayerCardList onCardClick={setPlayerPcode} cards={cards} />
+            <PlayerCardList
+              onCardClick={setPlayerPcode}
+              cards={cards}
+              pcode={playerPcode}
+            />
           </div>
 
           <div className="w-full flex-grow rounded-lg p-4 shadow-md md:w-4/5">

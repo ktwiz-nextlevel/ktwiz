@@ -131,10 +131,10 @@ export default function CustomSquad() {
         ])
 
         setCards([
-          ...pitcherPlayer,
-          ...infielderPlayer,
-          ...catcherPlayer,
-          ...outfielderPlayer,
+          ...(pitcherPlayer as PlayerCard[]),
+          ...(infielderPlayer as PlayerCard[]),
+          ...(catcherPlayer as PlayerCard[]),
+          ...(outfielderPlayer as PlayerCard[]),
         ])
       } catch (error) {
         console.error('fetchPlayerList 요청 실패:', error)
