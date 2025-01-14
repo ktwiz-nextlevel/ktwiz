@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { ArrowUpIcon } from '@heroicons/react/24/outline'
 import ClientImageFallback from '../common/client-image-fallback'
-import { getVideoList } from '@/services/media-service'
+import { getVideoList } from '@/services/media-action'
 
 interface VideoListProps {
   initialVideos: Video[]

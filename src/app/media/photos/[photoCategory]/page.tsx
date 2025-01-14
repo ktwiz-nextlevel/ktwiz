@@ -6,7 +6,7 @@ import PhotoSearchBar from '@/components/media/photo/photo-search-bar'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 import { MEDIA_BANNER_DATA } from '@/contants'
 import { NUMBER_OF_PHOTOS_TO_FETCH } from '@/contants/media'
-import { getPhotoList } from '@/services/media-service'
+import { getPhotoList } from '@/services/media-action'
 
 export default async function PhotoPage({
   params,

@@ -5,7 +5,7 @@ import { Photo } from '@/types/media'
 import PhotoModal from './photo-modal'
 import { ArrowUpIcon } from '@heroicons/react/24/outline'
 import ClientImageFallback from '../common/client-image-fallback'
-import { getPhotoList } from '@/services/media-service'
+import { getPhotoList } from '@/services/media-action'
 
 interface PhotoListProps {
   initialPhotos: Photo[]
