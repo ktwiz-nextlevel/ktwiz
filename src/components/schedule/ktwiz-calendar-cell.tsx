@@ -1,4 +1,5 @@
 import { GameScheduleData } from '@/types'
+import Image from 'next/image'
 import Link from 'next/link'
 
 interface CalendarCellProps {
@@ -16,10 +17,12 @@ export default function KtwizCalendarCell({
       href={`/game/regular/boxscore/${cellData.gameDate}/${cellData.gmkey}`}
     >
       <div className="absolute left-1/2 top-1/2 w-full -translate-x-1/2 -translate-y-1/2 text-center opacity-60 md:opacity-100">
-        <img
+        <Image
           src={cellData.visit === 'KT' ? cellData.homeLogo : cellData.visitLogo}
           alt={`KT logo`}
           className="mx-auto w-16"
+          width={100}
+          height={100}
         />
         <span className="hidden md:block">
           {cellData.gtime} {cellData.stadium} / {cellData.broadcast}

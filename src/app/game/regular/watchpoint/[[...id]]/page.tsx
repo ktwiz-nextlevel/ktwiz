@@ -11,6 +11,7 @@ import { BoxscoreData } from '@/types'
 import { WatchPointData } from './_lib/watch-point.type'
 import { TeamRank } from '@/types/team-rank'
 import { Suspense } from 'react'
+import Image from 'next/image'
 
 const TABS = [
   { title: '박스스코어', href: '/game/regular/boxscore', path: 'boxscore' },
@@ -129,7 +130,7 @@ async function BoxscorePage({ params }: { params: Promise<{ id: string[] }> }) {
               ))}
             </div>
           </div>
-          <img src={'/images/vs.svg'} alt="vs" />
+          <Image src={'/images/vs.svg'} alt="vs" width={64} height={64} />
           <div>
             <div className="flex">
               {BOARD_INFO.map((info, idx) => (

@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useEffect, useState } from 'react'
 async function getPlayerImg(name: string, keyName: string) {
   try {
@@ -14,6 +15,7 @@ async function getPlayerImg(name: string, keyName: string) {
     throw new Error('error')
   }
 }
+
 function PopupImg({
   position,
   name,
@@ -43,9 +45,11 @@ function PopupImg({
     <div
       className={`absolute z-20 h-[130px] w-[100px] rounded-md border border-[--main-red-color] ${position} bg-white`}
     >
-      {/* {name} {keyName} */}
-      <img
+      <Image
         src={hasError ? '/images/players/player.png' : data}
+        alt="player"
+        width={500}
+        height={500}
         className="h-full w-full"
       />
     </div>

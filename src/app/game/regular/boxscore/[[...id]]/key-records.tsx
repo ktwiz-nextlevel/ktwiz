@@ -1,3 +1,4 @@
+'use client'
 import Title from '@/components/common/title/title'
 import { BoxScore, EtcGames } from '@/types'
 import PlayerImage from '../_component/player-img'
@@ -26,10 +27,11 @@ async function KeyRecords({ data }: { data?: BoxScore }) {
         try {
           const [imgResponseHome, imgResponseVisit] = await Promise.all([
             fetch(
-              `http://54.180.228.165/api/player_img?team=${homeKey}&name=${player.name}`,
+              `${process.env.NEXT_PUBLIC_API_SERVER_URL}/player_img?team=${homeKey}&name=${player.name}`,
             ),
+
             fetch(
-              `http://54.180.228.165/api/player_img?team=${visitKey}&name=${player.name}`,
+              `${process.env.NEXT_PUBLIC_API_SERVER_URL}/player_img?team=${visitKey}&name=${player.name}`,
             ),
           ])
 
@@ -115,3 +117,130 @@ function parsePlayerDescriptions(input: string): PlayerDescription[] {
     return { name: item.trim(), des: null } // 괄호가 없으면 des는 null
   })
 }
+
+// import Title from '@/components/common/title/title'
+// import { BoxScore, EtcGames } from '@/types'
+// import PlayerImage from '../_component/player-img'
+// import { http } from '@/http'
+// // Ensure you have an HTTP utility module for consistent API requests
+
+// async function KeyRecords({ data }: { data?: BoxScore }) {
+//   if (!data) {
+//     return (
+//       <section className="gray-red-400 w-full pt-3">
+//         <Title text={`주요 기록 `} />
+//         <div className="flex w-full flex-wrap">
+//           주요기록 데이터조회를 실패했습니다.
+//         </div>
+//       </section>
+//     )
+//   }
+
+//   const etcgames: EtcGames[] = data?.etcgames || []
+//   const homeKey = data.schedule.current.homeKey
+//   const visitKey = data.schedule.current.visitKey
+
+//   const infoPromises = etcgames.map(async (game) => {
+//     const parsedData = parsePlayerDescriptions(game.result)
+//     const playerImgResponses = await Promise.all(
+//       parsedData.map(async (player) => {
+//         let imgResponseHome
+//         let imgResponseVisit
+
+//         try {
+//           const [imgHome, imgVisit] = await Promise.all([
+//             http.get<{ url: string }>(`/api/player_img`, {
+//               searchParams: { team: homeKey, name: player.name },
+//             }),
+//             http.get<{ url: string }>(`/api/player_img`, {
+//               searchParams: { team: visitKey, name: player.name },
+//             }),
+//           ])
+//           imgResponseHome = imgHome
+//           imgResponseVisit = imgVisit
+//           return {
+//             ...player,
+//             playerImg:
+//               imgResponseHome.data.url ||
+//               imgResponseVisit.data.url ||
+//               '/images/players/player.png',
+//           }
+//         } catch (e) {
+//           // console.log(imgResponseHome?.data.url)
+//           return {
+//             ...player,
+//             playerImg:
+//               imgResponseHome?.data.url ||
+//               imgResponseVisit?.data.url ||
+//               '/images/players/player.png',
+//           }
+//         }
+//       }),
+//     )
+//     return playerImgResponses
+//   })
+
+//   const info = await Promise.all(infoPromises)
+
+//   return (
+//     <section className="gray-red-400 w-full pt-3">
+//       <Title text={`주요 기록 `} />
+//       <div className="flex w-full flex-wrap">
+//         {etcgames.map((game, idx) => {
+//           const playerInfo = info[idx] || []
+
+//           return (
+//             <div
+//               className={`${idx % 2 === 0 ? 'pr-6' : 'border-l-2 pl-6'} w-full py-6 md:w-1/2`}
+//               key={`${game.how}-${idx}`}
+//             >
+//               <h2 className="text-gray-600">
+//                 {game.how} ({playerInfo.length})
+//               </h2>
+//               <div className="mt-3 flex justify-start overflow-auto">
+//                 {playerInfo.map((player, idx) => (
+//                   <PlayerImage key={`${player.name}-${idx}`} player={player} />
+//                 ))}
+//               </div>
+//             </div>
+//           )
+//         })}
+//       </div>
+//     </section>
+//   )
+// }
+
+// export default KeyRecords
+
+// interface PlayerDescription {
+//   name: string
+//   des: string | null
+// }
+
+// function splitPlayers(input: string): string[] {
+//   const regex = /\([^)]*\)/g
+//   const modifiedInput = input.replace(regex, (match) =>
+//     match.replace(/\s/g, '|'),
+//   )
+//   return modifiedInput
+//     .split(' ')
+//     .map((item) => (item.includes('|') ? item.replace(/\|/g, ' ') : item))
+//     .filter((item) => item.trim() !== '')
+// }
+
+// function parsePlayerDescriptions(input: string): PlayerDescription[] {
+//   const players = splitPlayers(input)
+
+//   return players.map((item) => {
+//     const nameDesRegex = /^([^\(]+)(\(([^)]+)\))?$/
+//     const match = item.match(nameDesRegex)
+
+//     if (match) {
+//       return {
+//         name: match[1].trim(),
+//         des: match[3]?.trim() || null,
+//       }
+//     }
+//     return { name: item.trim(), des: null }
+//   })
+// }

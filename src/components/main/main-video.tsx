@@ -1,5 +1,6 @@
 import { Video } from '@/types/media'
 import Link from 'next/link'
+import ClientImageFallback from '../media/common/client-image-fallback'
 
 interface MainVideoProps {
   videos: Video[]
@@ -15,10 +16,14 @@ export default function MainVideo({ videos }: MainVideoProps) {
     <div className="page pb-10 pt-20">
       <div className="relative h-full w-full py-16">
         <div className="absolute top-0 z-0 flex w-full justify-center">
-          <img
+          <ClientImageFallback
             src="/images/main/img-title-video.png"
-            alt="wiz gallery"
-            className="h-[150px] w-[700px] overflow-hidden"
+            alt="wiz video"
+            fallbackSrc="/images/fallback-img.png"
+            width={700}
+            height={150}
+            className="h-auto w-auto overflow-hidden"
+            priority
           />
         </div>
         <div className="relative z-10 h-full w-full pt-14">

@@ -33,6 +33,7 @@ export function TableWhithHoverPopup<T extends Record<string, any>>({
   const higlightColumIndex = highlightColumnKey
     ? thKey.findIndex((th) => th.key === highlightColumnKey)
     : -1
+
   return (
     <div className="">
       <div className="mt-2 flow-root">
@@ -55,6 +56,7 @@ export function TableWhithHoverPopup<T extends Record<string, any>>({
                 </tr>
               </thead>
               <tbody className="mb-[100px] divide-y divide-gray-200 bg-white">
+                {data.length === 0 && '데이터가 없습니다.'}
                 {data.map((player, idx) => {
                   const rowStyle = highlightRowKey
                     ? getRowStyle(idx, player)

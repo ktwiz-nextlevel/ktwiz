@@ -4,6 +4,8 @@ import PrevButton from './prev-button'
 import { Label } from './game-status-label'
 import NextButton from './next-button'
 import { HomeLabel } from './home-label'
+import Image from 'next/image'
+import ClientImageFallback from '@/components/media/common/client-image-fallback'
 
 async function BoardHeader({ schedule }: { schedule: ScheduleType }) {
   const { current, prev, next }: ScheduleType = schedule
@@ -60,7 +62,22 @@ function LeftVisitTeam({
         </span>
         <WinLossStats isWin={isWin} />
       </div>
-      <img src={teamLogo} alt="teamLogo" className="w-16" />
+      <Image src={teamLogo} alt="teamLogo" width={64} height={64} />
+      {/* <Image
+        src="http://54.180.228.165/api/static/KT.png"
+        alt="KT Logo"
+        width={64}
+        height={64}
+      /> */}
+      {/* <ClientImageFallback
+        src={teamLogo}
+        alt={`post-image-teamLogo`}
+        fallbackSrc="/images/fallback-img.png"
+        fill
+        className="rounded-xl object-cover"
+        width={64}
+        height={64}
+      /> */}
     </div>
   )
 }
@@ -75,7 +92,7 @@ function RightHomeTeam({
 }) {
   return (
     <div className="flex w-[150px] items-center justify-start gap-1">
-      <img src={teamLogo} alt="teamLogo" className="w-16" />
+      <Image src={teamLogo} alt="teamLogo" width={64} height={64} />
       <div className="hidden justify-start md:flex md:flex-col">
         <div className="flex gap-1">
           <HomeLabel />

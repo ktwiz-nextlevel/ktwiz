@@ -12,6 +12,7 @@ import {
 } from './_lib/constants'
 import { HighlightTable } from '@/components/tailwind-ui/tables/highlight-table'
 import {
+  RawData,
   RawDataType,
   TeamBattingResponse,
   TeampitchingResponse,
@@ -26,7 +27,7 @@ async function RankingPage() {
   let teamBattingRank = null
   let teamPitchingRank = null
   let teamRankVs = null
-
+  let periodteamRank = null
   const fetchData = async () => {
     try {
       const teamRankResponse = await http.get<TeamRankResponse>(
@@ -75,6 +76,40 @@ async function RankingPage() {
     } catch (error) {
       console.error('팀 간 승패표 데이터를 불러오는 데 실패했습니다:', error)
     }
+    try {
+      const teamPitchingRankResponse = await http.get<TeampitchingResponse>(
+        '/game/rank/pitching',
+        {
+          cache: 'force-cache',
+        },
+      )
+      teamPitchingRank = teamPitchingRankResponse.data.data.list
+    } catch (error) {
+      console.error('팀 투수 순위 데이터를 불러오는 데 실패했습니다:', error)
+    }
+
+    try {
+      const teamRankVsResponse = await http.get<TeamVSResponse>(
+        '/game/rank/teamvs',
+        {
+          cache: 'force-cache',
+        },
+      )
+      teamRankVs = teamRankVsResponse.data.data.list
+    } catch (error) {
+      console.error('팀 간 승패표 데이터를 불러오는 데 실패했습니다:', error)
+    }
+
+    try {
+      const response = await http.get<{
+        data: { list: RawData[] }
+      }>('/game/rank/periodteamrank')
+
+      periodteamRank = response.data.data.list
+      // teamRankVs = teamRankVsResponse.data.data.list
+    } catch (error) {
+      console.error('팀 간 승패표 데이터를 불러오는 데 실패했습니다:', error)
+    }
   }
 
   await fetchData()
@@ -88,7 +123,7 @@ async function RankingPage() {
         <p className="mt-2 font-thin text-gray-400">
           올해 kt wiz 순위를 살펴보세요.
         </p>
-        <LineChartComponent />
+        {periodteamRank && <LineChartComponent datas={periodteamRank} />}
       </SectionWrapper>
 
       {teamRankData && (

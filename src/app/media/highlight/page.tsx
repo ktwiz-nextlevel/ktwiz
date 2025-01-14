@@ -4,7 +4,8 @@ import VideoList from '@/components/media/video/video-list'
 import VideoSearchBar from '@/components/media/video/video-search-bar'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 import { NUMBER_OF_VIDEOS_TO_FETCH } from '@/contants/media'
-import { getPopularVideoList, getVideoList } from '@/services/media-action'
+import { getVideoList } from '@/services/media-action'
+import { getPopularVideoList } from '@/services/media-service'
 
 export default async function HighlightPage({
   searchParams,

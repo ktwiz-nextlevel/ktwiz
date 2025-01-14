@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import { Lineup as LinUpType } from './_lib/watch-point.type'
+import Image from 'next/image'
 
 function LineUp({
   home,
@@ -30,7 +31,12 @@ function LineUp({
   return (
     <div>
       <div className="relative">
-        <img src={'/images/watch-point/ground.png'} alt="lineup" />
+        <Image
+          src={'/images/watch-point/ground.png'}
+          alt="lineup"
+          width={400}
+          height={400}
+        />
         {data.map((info, idx) => (
           <NameTag
             key={info.playerName + idx}
@@ -44,15 +50,25 @@ function LineUp({
         className="mt-[50px] flex justify-center"
         onClick={() => setIsHomeCondition((pre) => !pre)}
       >
-        <img
+        <Image
           src={homeLogo}
           alt="homeLogo"
+          width={80}
+          height={80}
           className={`h-20 w-20 ${isHomeCondition ? '' : 'opacity-50'}`}
         />
-        <img src={'/images/vs.svg'} alt="lineup" className="h-25 w-25" />
-        <img
+        <Image
+          src={'/images/vs.svg'}
+          alt="lineup"
+          width={50}
+          height={50}
+          className="h-25 w-25"
+        />
+        <Image
           src={visitLogo}
-          alt="homeLogo"
+          alt="visitLogo"
+          width={80}
+          height={80}
           className={`h-20 w-20 ${isHomeCondition ? 'opacity-50' : ''}`}
         />
       </div>

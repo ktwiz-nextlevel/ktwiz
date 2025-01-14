@@ -3,11 +3,16 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useSelection } from './_lib/use-selection'
-import { getbatterRankings, getKTBatterRankings } from './_lib/api'
+
 import { TabMenu } from './_component/tab-menu'
 import SearchBar from './_component/search-bar'
 import { TableWhithHoverPopup } from '@/components/tailwind-ui/tables/hover-popup-table'
 import SelectBox from './_component/select-box'
+import {
+  fetchRankings,
+  getBatterRankings,
+  getKTBatterRankings,
+} from '@/services/table-action'
 
 const TH_KEY = [
   { title: '선수명', key: 'playerName' },
@@ -25,67 +30,85 @@ const TH_KEY = [
 
   { title: '출루율', key: 'ops' },
 ]
-
-function RankingTable() {
+type NamedItem = { id: string; name: string }
+const yearTab: NamedItem[] = [
+  { id: '2024', name: '2024 시즌' },
+  { id: '2023', name: '2023 시즌' },
+  { id: '2022', name: '2022 시즌' },
+  { id: '2021', name: '2021 시즌' },
+  { id: '2020', name: '2020 시즌' },
+]
+type PlayerType = { name: string; id: string }
+const playerTab: PlayerType[] = [
+  { name: 'kt wiz 타자', id: 'ktwizbatter' },
+  { name: '전체 타자 순위', id: 'allbatter' },
+]
+function RankingTable({ rankingData }: { rankingData: any[] }) {
   const searchParams = useSearchParams()
-  const { items, activeItem, handleSelect } = useSelection([
-    { name: 'kt wiz 타자', id: 'kt wiz batter' },
-    { name: '전체 타자 순위', id: 'all batter' },
-  ])
+
+  const gyear = searchParams.get('gyear') || '2024'
+
+  const matchingYear: NamedItem = yearTab.find((item) => item.id === gyear) || {
+    id: '2024',
+    name: '2024 시즌',
+  }
+
+  const playerType = searchParams.get('playerType') || 'ktwizbatter'
+
+  const matchingType: PlayerType = playerTab.find(
+    (item) => item.id === playerType,
+  ) || { name: 'kt wiz 타자', id: 'ktwizbatter' }
+
+  const { items, activeItem, handleSelect } = useSelection(
+    playerTab,
+    'playerType',
+    matchingType,
+  )
+
   const {
     items: selectItems,
     activeItem: activeSeason,
     handleSelect: handleSelectBox,
-  } = useSelection([
-    { name: '2024', displayString: '2024 시즌' },
-    { name: '2023', displayString: '2023 시즌' },
-    { name: '2022', displayString: '2022 시즌' },
-    { name: '2021', displayString: '2021 시즌' },
-    { name: '2020', displayString: '2020 시즌' },
-  ])
+  } = useSelection(yearTab, 'gyear', matchingYear)
 
-  const [data, setData] = useState<any[]>([])
+  const [data, setData] = useState<any[]>(rankingData)
   const [searchValue, setSearch] = useState(searchParams.get('pname') || '')
-  // console.log(data)
-  const fetchRankings = async () => {
-    try {
-      const rankings =
-        activeItem.id === 'kt wiz batter'
-          ? await getKTBatterRankings({
-              gyear: activeSeason.name,
-              pname: searchValue,
-            })
-          : await getbatterRankings({
-              gyear: activeSeason.name,
-              pname: searchValue,
-            })
-      setData(rankings)
-    } catch (error) {
-      console.error('Failed to fetch rankings:', error)
-      setData([])
+
+  const fetchServer = async () => {
+    const res = await fetchRankings({
+      playerType: playerType,
+      gyear: gyear,
+      pname: searchParams.get('pname') || '',
+    })
+    if (res) {
+      setData(res)
     }
   }
-
-  useEffect(() => {
-    fetchRankings()
-  }, [activeItem, activeSeason])
   return (
     <section className="mt-20">
       <div className="flex items-end justify-between border-y-2 border-gray-50 bg-[#dfdfd]">
         <TabMenu
           tabs={items}
           activeTab={activeItem}
-          setActiveTab={handleSelect}
+          setActiveTab={(item) => {
+            handleSelect(item)
+            fetchServer()
+          }}
         />
         <div className="flex gap-3 pb-3">
           <SearchBar
             query={searchValue}
             setQuery={setSearch}
-            onSearch={fetchRankings}
+            onSearch={() => {
+              fetchServer()
+            }}
           />
           <SelectBox
             options={selectItems}
-            onChange={handleSelectBox}
+            onChange={(item) => {
+              handleSelectBox(item)
+              fetchServer()
+            }}
             selected={activeSeason}
           />
         </div>
