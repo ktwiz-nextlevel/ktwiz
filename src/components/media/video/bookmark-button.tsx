@@ -1,6 +1,6 @@
 'use client'
 
-import { addBookmark, removeBookmark } from '@/services/media-action'
+import { addBookmark, removeBookmark } from '@/services/bookmark-action'
 import { BookmarkIcon as SolidBookmarkIcon } from '@heroicons/react/20/solid'
 import { BookmarkIcon as OutlineBookmarkIcon } from '@heroicons/react/24/outline'
 import clsx from 'clsx'
