@@ -7,8 +7,8 @@ import Footer from '@/components/common/footer'
 import { fetchProfile } from '@/services/user-service'
 
 export const metadata: Metadata = {
-  title: "kimpuro's next.js template",
-  description: "from kimpuro's github template",
+  title: 'KTWiz-NextLevel',
+  description: 'KT Wiz Next Level',
   icons: {
     icon: '/icons/favicon.ico',
   },
