@@ -8,7 +8,11 @@ import { TabMenuProps } from './_lib/tabmenu.type'
 import { TabMenu } from './_component/tab-menu'
 import SearchBar from './_component/search-bar'
 import SelectBox from './_component/select-box'
-import { getKTPitcherRankings, getPitcherRankings } from './_lib/api'
+import {
+  getKTPitcherRankings,
+  getPitcherRankings,
+} from '@/services/table-action'
+// import { getKTPitcherRankings, getPitcherRankings } from './_lib/api'
 const TH_KEY = [
   { title: '선수명', key: 'playerName' },
   { title: '팀명', key: 'teamName' },
@@ -49,7 +53,7 @@ function RankingTable() {
 
   const [data, setData] = useState<any[]>([])
   const [searchValue, setSearch] = useState(searchParams.get('pname') || '')
-  // console.log(data)
+
   const fetchRankings = async () => {
     try {
       const rankings =

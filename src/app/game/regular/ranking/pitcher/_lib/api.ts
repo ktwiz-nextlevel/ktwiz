@@ -21,55 +21,55 @@ export const getTop5PitcherEras = async () => {
   }
 }
 
-export const getKTPitcherRankings = async ({
-  gyear,
-  pname = '',
-  sortKey = 'ERA',
-}: {
-  gyear: string
-  pname: string
-  sortKey?: string
-}) => {
-  try {
-    const params = { gyear, sortKey, pname }
-    const response = await http.get<Top5player>('/game/rank/kt/pitcher', {
-      searchParams: params,
-    })
+// export const getKTPitcherRankings = async ({
+//   gyear,
+//   pname = '',
+//   sortKey = 'ERA',
+// }: {
+//   gyear: string
+//   pname: string
+//   sortKey?: string
+// }) => {
+//   try {
+//     const params = { gyear, sortKey, pname }
+//     const response = await http.get<Top5player>('/game/rank/kt/pitcher', {
+//       searchParams: params,
+//     })
 
-    const {
-      data: { list },
-    }: Top5player = response.data
-    return list
-  } catch (error) {
-    console.error('Error fetching KT pitcher rankings:', error)
-    return []
-  }
-}
+//     const {
+//       data: { list },
+//     }: Top5player = response.data
+//     return list
+//   } catch (error) {
+//     console.error('Error fetching KT pitcher rankings:', error)
+//     return []
+//   }
+// }
 
-export const getPitcherRankings = async ({
-  gyear,
-  pname = '',
-  sortKey = 'ERA',
-}: {
-  gyear: string
-  pname: string
-  sortKey?: string
-}) => {
-  try {
-    const params = { gyear, sortKey, pname }
-    const response = await http.get<Top5player>('/game/rank/total/pitcher', {
-      searchParams: params,
-    })
+// export const getPitcherRankings = async ({
+//   gyear,
+//   pname = '',
+//   sortKey = 'ERA',
+// }: {
+//   gyear: string
+//   pname: string
+//   sortKey?: string
+// }) => {
+//   try {
+//     const params = { gyear, sortKey, pname }
+//     const response = await http.get<Top5player>('/game/rank/total/pitcher', {
+//       searchParams: params,
+//     })
 
-    const {
-      data: { list },
-    }: Top5player = response.data
-    return list
-  } catch (error) {
-    console.error('Error fetching pitcher rankings:', error)
-    return []
-  }
-}
+//     const {
+//       data: { list },
+//     }: Top5player = response.data
+//     return list
+//   } catch (error) {
+//     console.error('Error fetching pitcher rankings:', error)
+//     return []
+//   }
+// }
 
 export const getTop3PitcherWins = async (
   year: number,
