@@ -67,8 +67,6 @@ export async function fetchFilteredPost(
         year: 'numeric',
         month: '2-digit',
         day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
       }),
       viewCount: post.view_count,
       author: post.author,
