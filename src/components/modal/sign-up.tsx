@@ -44,8 +44,8 @@ export default function SignupModal({ onClose }: ModalProps) {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: process.env.BASE_URL
-            ? `https://${process.env.BASE_URL}/auth/callback`
+          redirectTo: process.env.NEXT_PUBLIC_BASE_URL
+            ? `https://${process.env.NEXT_PUBLIC_BASE_URL}/auth/callback`
             : 'http://localhost:3000/auth/callback',
           queryParams: {
             prompt: 'select_account',
