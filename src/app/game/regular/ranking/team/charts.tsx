@@ -11,6 +11,7 @@ import {
   LineChart,
 } from 'recharts'
 import { AdaptedData, RawDataType } from './_lib/team.type'
+import { http } from '@/http'
 
 function adaptData(rawData: RawDataType[]): AdaptedData[] {
   return rawData.map((item) => {
@@ -28,13 +29,11 @@ function adaptData(rawData: RawDataType[]): AdaptedData[] {
 export async function fetchTeamRankData(): Promise<{
   data: { list: RawDataType[] }
 }> {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/game/rank/periodteamrank`,
-  )
-  if (!response.ok) {
-    throw new Error('Failed to fetch team rank data')
-  }
-  return response.json()
+  const response = await http.get<{
+    data: { list: RawDataType[] }
+  }>('/game/rank/periodteamrank')
+
+  return response.data
 }
 
 // LineChartComponent 컴포넌트

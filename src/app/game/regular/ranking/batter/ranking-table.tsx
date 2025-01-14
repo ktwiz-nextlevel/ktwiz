@@ -3,11 +3,12 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { useSelection } from './_lib/use-selection'
-import { getbatterRankings, getKTBatterRankings } from './_lib/api'
+
 import { TabMenu } from './_component/tab-menu'
 import SearchBar from './_component/search-bar'
 import { TableWhithHoverPopup } from '@/components/tailwind-ui/tables/hover-popup-table'
 import SelectBox from './_component/select-box'
+import { getBatterRankings, getKTBatterRankings } from './_lib/api'
 
 const TH_KEY = [
   { title: '선수명', key: 'playerName' },
@@ -55,7 +56,7 @@ function RankingTable() {
               gyear: activeSeason.name,
               pname: searchValue,
             })
-          : await getbatterRankings({
+          : await getBatterRankings({
               gyear: activeSeason.name,
               pname: searchValue,
             })

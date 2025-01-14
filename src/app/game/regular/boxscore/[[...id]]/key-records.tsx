@@ -166,7 +166,7 @@ function parsePlayerDescriptions(input: string): PlayerDescription[] {
 //               '/images/players/player.png',
 //           }
 //         } catch (e) {
-//           console.log(imgResponseHome?.data.url)
+//           // console.log(imgResponseHome?.data.url)
 //           return {
 //             ...player,
 //             playerImg:
@@ -218,21 +218,21 @@ function parsePlayerDescriptions(input: string): PlayerDescription[] {
 // }
 
 // function splitPlayers(input: string): string[] {
-//   const regex = /\([^)]*\)/g // Finds content within parentheses
+//   const regex = /\([^)]*\)/g
 //   const modifiedInput = input.replace(regex, (match) =>
 //     match.replace(/\s/g, '|'),
 //   )
 //   return modifiedInput
 //     .split(' ')
 //     .map((item) => (item.includes('|') ? item.replace(/\|/g, ' ') : item))
-//     .filter((item) => item.trim() !== '') // Removes empty strings
+//     .filter((item) => item.trim() !== '')
 // }
 
 // function parsePlayerDescriptions(input: string): PlayerDescription[] {
 //   const players = splitPlayers(input)
 
 //   return players.map((item) => {
-//     const nameDesRegex = /^([^\(]+)(\(([^)]+)\))?$/ // Extracts name and description
+//     const nameDesRegex = /^([^\(]+)(\(([^)]+)\))?$/
 //     const match = item.match(nameDesRegex)
 
 //     if (match) {
@@ -241,6 +241,6 @@ function parsePlayerDescriptions(input: string): PlayerDescription[] {
 //         des: match[3]?.trim() || null,
 //       }
 //     }
-//     return { name: item.trim(), des: null } // Defaults description to null
+//     return { name: item.trim(), des: null }
 //   })
 // }
