@@ -1,6 +1,7 @@
 'use client'
 import { Video } from '@/types/media'
 import { useRouter } from 'next/navigation'
+import ClientImageFallback from '../common/client-image-fallback'
 
 interface TopVideoListProps {
   videos: Video[]
@@ -18,11 +19,13 @@ export default function PopularVideoList({ videos }: TopVideoListProps) {
           onClick={() => router.push(`/media/highlight/${photo.artcSeq}`)}
         >
           <div className="relative pt-[56.25%]">
-            <img
+            <ClientImageFallback
               src={photo.imgFilePath}
-              alt={`post-image-${photo.artcSeq}`}
-              className="absolute left-0 top-0 h-full w-full rounded-xl object-cover"
-              loading="lazy"
+              alt={`post-image-${photo.artcTitle}`}
+              fallbackSrc="/images/fallback-img.png"
+              fill
+              className="rounded-xl object-cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
           <div className="p-2">

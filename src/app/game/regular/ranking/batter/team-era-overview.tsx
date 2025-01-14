@@ -1,16 +1,8 @@
-type PitcherERA = {
-  playerName: string
-  teamName: string
-  hra: number // 홈런 허용 평균 (예시)
-}
-type ERAType = PitcherERA & Record<string, string | number | undefined>
-type TeamERAOverviewProps = {
-  isError: boolean
-  title: string
-  list?: PitcherERA[]
-}
+import { PitcherERA, Playerbatter, TeamERAOverviewProps } from './_lib/type'
+
+// }
 export const createTeamERAOverview = (
-  top5PitcherEras: ERAType[],
+  top5PitcherEras: PitcherERA[],
   title: string,
 ): TeamERAOverviewProps => {
   const eralist: PitcherERA[] = top5PitcherEras.map((player, idx) => {
@@ -18,7 +10,7 @@ export const createTeamERAOverview = (
       playerName: player.playerName,
       teamName: player.playerName,
       hra: player.hra,
-    }
+    } as PitcherERA
   })
 
   return {

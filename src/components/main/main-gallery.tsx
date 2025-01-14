@@ -5,6 +5,7 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { useState } from 'react'
 import clsx from 'clsx'
+import ClientImageFallback from '../media/common/client-image-fallback'
 
 interface MainGalleryProps {
   photoList: Photo[]
@@ -57,10 +58,13 @@ export default function MainGallery({ photoList }: MainGalleryProps) {
     <div className="py-10">
       <div className="relative flex flex-col items-center justify-center py-16">
         <div className="absolute top-0 z-0 flex w-full justify-center">
-          <img
+          <ClientImageFallback
             src="/images/main/img-title-gallery.png"
             alt="wiz gallery"
-            className="h-[150px] w-[700px] overflow-hidden"
+            fallbackSrc="/images/fallback-img.png"
+            width={700}
+            height={150}
+            className="h-auto w-auto overflow-hidden"
           />
         </div>
 

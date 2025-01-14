@@ -2,10 +2,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { NUMBER_OF_PHOTOS_TO_FETCH } from '@/contants/media'
 import { Photo } from '@/types/media'
-import { getPhotoList } from '@/services/media-action'
 import PhotoModal from './photo-modal'
 import { ArrowUpIcon } from '@heroicons/react/24/outline'
 import ClientImageFallback from '../common/client-image-fallback'
+import { getPhotoList } from '@/services/media-service'
 
 interface PhotoListProps {
   initialPhotos: Photo[]
@@ -122,16 +122,12 @@ export default function PhotoList({
           >
             <div className="relative pt-[56.25%]">
               <ClientImageFallback
-                src={
-                  photo.imgFilePath
-                    ? photo.imgFilePath
-                    : '/images/fallback-img.png'
-                }
+                src={photo.imgFilePath}
                 alt={`post-image-${photo.artcTitle}`}
                 fallbackSrc="/images/fallback-img.png"
                 fill
                 className="rounded-xl object-cover"
-                unoptimized
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
               />
             </div>
             <div className="p-4">

@@ -1,4 +1,4 @@
-import { TabMenuProps } from '../../pitcher/(lib)/tabmenu.type'
+import { TabMenuProps } from '../../pitcher/_lib/tabmenu.type'
 
 export function TabMenu({
   activeTab,
