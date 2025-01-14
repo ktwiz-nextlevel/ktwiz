@@ -10,8 +10,12 @@ import { Suspense } from 'react'
 import { http } from '@/http'
 import { PitcherData, PitcherList } from './_lib/pitcher.type'
 import { PitcherERA, TeamERAOverviewProps } from '../batter/_lib/type'
-import { getTop3PitcherEras } from './_lib/api'
+
 import { Player, Top3player } from '@/types'
+export const metadata = {
+  title: 'KT Wiz - 투수 순위 및 기록',
+  description: 'KT Wiz의 투수순위, 투수 평균자책점 등을 확인하세요.',
+}
 const createTeamERAOverview = (
   top5PitcherEras: PitcherData[],
   title: string,

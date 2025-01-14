@@ -48,6 +48,20 @@ const value = [72, 70, 2, 0.507]
 interface WatchPonintResponse {
   data: WatchPointData
 }
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string[] }>
+}) {
+  const { id } = await params
+  const gameDate = id ? id[0] : '20241008'
+  const gmkey = id ? id[1] : '33331008LGKT0'
+
+  return {
+    title: `관전포인트 - ${gameDate} 경기`,
+    description: `${gmkey} 경기에 대한 관전포인트 정보를 제공합니다.`,
+  }
+}
 async function BoxscorePage({ params }: { params: Promise<{ id: string[] }> }) {
   const { id } = await params
   const gameDate = id ? id[0] : '20241008'
