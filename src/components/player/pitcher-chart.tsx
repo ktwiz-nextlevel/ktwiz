@@ -1,5 +1,6 @@
 'use client'
 
+import { PitchingRatio, PitchingValue } from '@/types'
 import ChartRadar from './rechart/radar-chart'
 import ChartRadar2 from './rechart/radar-chart2'
 
@@ -10,9 +11,9 @@ interface ChartItem {
   fullMark: number
 }
 
-interface PlayerChartProps {
-  pitchingRatioChart?: { [key: string]: number }
-  pitchingValueChart?: { [key: string]: number }
+export interface PlayerChartProps {
+  pitchingRatioChart?: PitchingRatio
+  pitchingValueChart?: PitchingValue
   thisYearChart?: ChartData
   lastYearChart?: ChartData
 }

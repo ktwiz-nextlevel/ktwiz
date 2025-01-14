@@ -78,25 +78,11 @@ export interface PlayerSeasonDataProps {
 
 /**투구 비율 */
 export interface PitchingRatio {
-  '2-seam Fastball'?: number
-  '4-seam Fastball'?: number
-  ChangeUp?: number
-  Curve?: number
-  Cutter?: number
-  Forkball?: number
-  Sinker?: number
-  Slider?: number
+  [key: string]: number
 }
 /**피칭 값 */
 export interface PitchingValue {
-  '2-seam Fastball'?: number
-  '4-seam Fastball'?: number
-  ChangeUp?: number
-  Curve?: number
-  Cutter?: number
-  Forkball?: number
-  Sinker?: number
-  Slider?: number
+  [key: string]: number
 }
 
 export interface ChartData {
@@ -105,8 +91,6 @@ export interface ChartData {
 }
 
 export interface ChartData2 {
-  data: {
-    pitchingRatio?: PitchingRatio
-    pitchingValue?: PitchingValue
-  }
+  pitchingRatio?: PitchingRatio
+  pitchingValue?: PitchingValue
 }

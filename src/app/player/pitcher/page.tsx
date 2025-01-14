@@ -54,11 +54,12 @@ export default function Pitcher() {
     undefined,
   )
 
-  const [pitchingRatioChart, setPitchingRatioChart] = useState()
-  const [pitchingValueChart, setPitchingValueChart] = useState()
-
-  console.log('pitchingRatioChart : ', pitchingRatioChart)
-  console.log('pitchingValueChart : ', pitchingValueChart)
+  const [pitchingRatioChart, setPitchingRatioChart] = useState<
+    PitchingRatio | undefined
+  >()
+  const [pitchingValueChart, setPitchingValueChart] = useState<
+    PitchingValue | undefined
+  >()
 
   useEffect(() => {
     const fetchPitcherData = async () => {
@@ -102,9 +103,7 @@ export default function Pitcher() {
       try {
         const data = (await getPlayerChart(playerName)) as ChartData2
         console.log('fetchPitcherChart : ', data)
-        // @ts-ignore: type error
         setPitchingRatioChart(data.pitchingRatio)
-        // @ts-ignore: type error
         setPitchingValueChart(data.pitchingValue)
       } catch (error) {
         console.error('fetchPitcherChart 요청 실패:', error)
