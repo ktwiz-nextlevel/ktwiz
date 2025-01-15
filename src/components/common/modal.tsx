@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 interface ModalProps {
   children: React.ReactNode
@@ -12,6 +12,14 @@ export default function Modal({ children, onClose }: ModalProps) {
       onClose()
     }
   }
+
+  // 모달이 열릴 때 body의 overflow를 hidden으로 설정
+  useEffect(() => {
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [])
 
   return (
     <div
