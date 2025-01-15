@@ -6,18 +6,374 @@ All notable changes to this project will be documented in this file.
 
 ### 🚀 Features
 
-- Add commitlint, husky
-- Add jest and example test
-- Add pull request template
-- Add jest
-- Setting up the basic directory structure
-- Add pre-commit commitlint
-- Set prettier
-- Add linting at pre-commit
+- Tailwind ui 컴포넌트 추가, 관련 라이브러리 설치
+- Headers 컴포넌트 구현
+- Banner tabmenu 구현
+- Banner 컴포넌트
+- Add tailwind-ui pagination
+- Tailwind-ui simple-with-chevrons 컴포넌트 추가
+- Selectbox 컴포넌트 추가
+- Select-box 컴포넌트에 상태 및 JSDoc 주석 추가
+- Select-box 예시 컴포넌트 추가
+- Footer 컴포넌트 추가
+- Footer에 kt 로고 추가
+- Ktwizfooter 컴포넌트 추가
+- Footer의 a 태그를 Link로 변경
+- ScoreBoard Header 구현
+- 경기상태 계산 로직
+- Scoreboard body 구현
+- Pagination 컴포넌트 추가
+- Tabmenu 컴포넌트 추가
+- TabMenu 컴포넌트 활용 예시 코드 추가
+- 게시판 목록 페이지 ui 구현
+- 게시물 타입 정의
+- Supabase 클라이언트 설정
+- 게시글 검색 및 페이지네이션 기능 추가
+- LiveTalk UI 및 실시간 채팅 기능 구현
+- 채팅 메시지 시간 표시
+- LiveTalk 숨기기 기능 추가
+- 테이블 구현
+- Pitchers table
+- Batter-records pitcher-records tailwind ui table 구현
+- Prev-button ui
+- Rank team page 내 rechart 적용
+- Boxscore res data 객체 타입 정의
+- Ranking team page 팀 기록 타자 기록 투수 기록 테이블 구현
+- 팀순위 팀간 승패표
+- Watchpoint ui 및 차트 적용
+- 관전 포인트 내 스코어보드 하드코딩
+- Breadcrumb components 생성
+- Title 컴포넌트 추가
+- Page.ts 생성
+- 게시글 저장 서버액션 함수 추가
+- 게시글 작성 폼 ui 구현 및 react-hook-form을 사용한 폼 유효성 검사 기능 추가
+- 사용자 정보 가져오는 함수 추가
+- 라이브톡 및 게시글 작성 기능 개선 및 사용자 권한 기반 동작 구현
+- 공통 레이아웃에 배너 통합
+- 게시글 상세 데이터 fetching 함수 및 댓글 paginaiton기능을 위한 함수 추가, 페이지별 아이템 수 상수화
+- 게시글 삭제 서버 액션 함수 추가
+- 댓글 기능 관련 서버 액션 함수 추가
+- 게시글 상세 컴포넌트 ui 구현 및 댓글 작성 및 수정 폼 유효성 검사 기능 추가
+- 게시글 상세 페이지 ui 구현 및 에러 처리 페이지 추가
+- 게시글 수정 서버 액션 함수 추가
+- 게시글 수정 폼 ui 및 기능 구현
+- Wizpark/guide 페이지 추가
+- Wizpark iframe과 css 추가
+- Wizpark 컨테이너와 css 추가
+- Wizpark section과 css 추가
+- Wizpark intro 페이지 추가
+- Wizpark 레이아웃 추가
+- PlayerDetail 컴포넌트 추가 (디자인O / 기능 X)
+- PlayerCardList 컴포넌트 추가
+- Recharts 이용해서 차트 랜더링
+- 선수카드 클릭시 id 값 PlayerDetail컴포넌트로 id 값 전달
+- Json 데이터로 api 요청, api 함수파일 관리, 카드리스트 실제데이터 적용
+- 선수 상세데이터 pcode를 파람값으로 같이 get요청후 데이터 요청
+- 데이터 연결 및 컴포넌트별 타입정의
+- 타입 분리 정리 및 dev -\> player 병합전 커밋
+- Header 사용하는 path 만 남기고 삭제
+- Media type 및 data fetching 함수 추가
+- Photo page ui 및 무한 스크롤 기능 구현
+- Search-bar 공통 컴포넌트 추가
+- Photo-search-bar 컴포넌트 추가
+- 하이라이트 영상 페이지 ui 및 무한 스크롤 기능 구현
+- 드래그 슬라이드 기능
+- 하이라이트 상세 페이지 구현
+- 북마크 crud 기능 추가
+- 닉네임 변경 서버 액션 함수 추가
+- 마이페이지 닉네임 변경 폼 및 영상 목록 구현
+- 헤더 컴포넌트에 마이페이지 이동 버튼 추가 및 로그아웃 기능 수정
+- Customsquad page ui 구성
+- 드래그 앤 드롭 기능 추가
+- 타자 페이지 추가 및 PlayerCardList 컴포넌트 api 호출부분 상위 컴포넌트로 분리
+- 외야, 내야, 포수 데이터 요청 한번에 타자페이지에서 같이 요청
+- 투수페이지 완료
+- Hitspraychart 추가, 및 불필요한코드 제거
+- 타자페이지 hitspary데이터 가공및 연동, 콘솔제거 및 불필요한코드 제거
+- Pitcher-board 내 best-player UI 구현
+- 평균자책점 Top3 와 승리 top3 api 연결
+- TeamERAOverview 구현
+- Search-bar selectbox UI 구현
+- 타자순위 page 구현
+- Wizpark description 컴포넌트 추가
+- Wizpark-description 컴포넌트를 페이지에 추가
+- 구장 안내도 페이지 추가
+- 찾아오기 페이지 추가
+- 익산야구장 페이지 구현
+- 타자 타입 추가, 시즌기록 era(방어율)로 비교하여 투수,타자 테이블 랜더링
+- 커스텀 스쿼드페이지 가이드오버레이 추가, 초기화버튼 추가, 카드 드래그앤드랍 이용시 배열에서 제거 (드래그앤 드랍 중복 예외처리)
+- Lineup 클릭이벤트
+- 게시글 작성 성공 알림창 추가
+- 북마크 저장 및 삭제시 알림창 추가
+- 검색 결과가 존재하지 않을 경우 표시될 UI 추가
+- 스크롤 최상단 이동 버튼 추가
+- 라이브톡 로딩 상태 추가 및 상태별 UI 적용
+- Fallback image 추가
+- Footer에 상단 패딩 추가, 항목 수정
+- 미디어 관련 데이터 페칭 함수 추가
+- 메인페이지 영상 및 갤러리 컴포넌트 추가
+- 메인페이지 배너
+- Ranking team 내 Type 정의
+- 메인페이지에 컴포넌트 추가 및 통합
+- Iframe 배너 추가
+- Top3-pitcher-eras 로딩상태일때 페이지보이기
+- 미디어 관련 데이터 페칭 함수 추가
+- 메인페이지 영상 및 갤러리 컴포넌트 추가
+- 메인페이지 배너
+- Ranking team 내 Type 정의
+- 메인페이지에 컴포넌트 추가 및 통합
+- Iframe 배너 추가
+- 투수 23/24 시즌 레이더차트 구현 완료
+- Html-to-image 라이브러리 추가
+- Html-to-image 로 적용
+- Popup-img table
+- 반응형 디자인 적용
+- PlayerCardList 컴포넌트 카드 클릭시 클릭상태 유지
+- CustomSquad페이지를 처음 방문하거나 마지막 표시 이후 10분이 경과했을 때만 OverlayGuide 랜더링 되도록 수정
+- Http 구현체 생성
+- Pre commit 단계의 타입 검사 추가
+- Api http 로 수정
+- Favicon 추가, 메타데이터 변경
+- [**breaking**] 새로운 api의 추가
+- 메타데이터 적용
+
+### 🐛 Bug Fixes
+
+- Gnb 목록 추가
+- Fan 페이지 내부 banner fix
+- 게시글 zod 스키마 수정
+- 게시글 이동 경로 수정
+- Wiz 포토 헤더 경로 수정
+- Banner tabmenu isActive 에 대한 customIsActiveCondition
+- 날짜 변경에 따른 Tabnavi 수정
+- 팀순위 api
+- Key record 선수 이미지 부르기
+- 박스스코어 내 타자기록 수정
+- 투수기록 평균자책점 및 결과 계산
+- Tabmenu 게임 스케줄 활성화 버그 픽스
+- 선발투수비교 api
+- TabMenu 렌더링 조건 추가
+- 타자순위 타율 홈런 Top3 2024년 버전
+- 타자순위 타율 홈런 Top3 2024년 버전
+- 맥북 onKeyUp 중복 이벤트 발생 버그 수정
+- 댓글 수정시 기본값 표시 오류 수정
+- 비로그인 회원이 북마크 저장 버튼을 클릭할시 나타나는 알림창 버그 수정
+- Popup-img 타입 수정
+- 폴더명 수정에 의한 경로 수정
+- Iksan page 타입 에러 수정
+- Location page 타입 에러 수정
+- Location layout 타입 에러 수정
+- Iksan page 타입 에러 수정
+- Suwon layout 타입 에러 수정
+- Ktwiz history 타입 에러 삭제
+- Ktwiz about 타입 에러 수정
+- Footer 타입 에러 수정
+- Pitcher 내 top3 서버 컴포넌트에서 호출
+- Batter 내 api 요청
+- 이미지 모달 열린 상태에서 무한 스크롤 방지
+- Middleware mypage경로 수정
+
+### 🚜 Refactor
+
+- 타입을 전용 파일로 분리
+- GetPaddingByIdx 함수 로직 분리
+- UseCallback 추가
+- Ktwiz 폴더구조 변환
+- FindMatchingData 함수 객체화
+- Tabmenu , banner 컴포넌트 분리 및 로직 분리
+- 코드 리뷰 요청 사항 반영
+- 상수데이터구조 변환
+- Game page 에 사용하는 type 분리
+- Types 폴더 index.ts import \* 로 변경
+- Label 로직 추상화
+- BoardTR 컴포넌트 분리
+- 폴더구조 변경
+- TabMenu 컴포넌트 구조 개선 및 확장성 강화
+- Url .env 로 분리
+- Footer 적용으로인한 css 수정
+- 가독성을 위한 board-header 컴포넌트 분리
+- 키, 벨류 대신 문자열 배열로 props 요청 가능하게 수정
+- 차트 컴포넌트 분리
+- PlayerDetail 컴포넌트 내부 상세컴포넌트로 분리
+- 핸들러 함수 삭제하고 상태값으로 바로 전달
+- CSS 개선 및 ReCharts Tooltip 추가
+- 게시판 검색바 컴포넌트에 search-bar 공통 컴포넌트 적용
+- 제목/내용 구분 없는 통합 검색 기능으로 변경
+- Best player 내 top3PitchersEras 와 top3PitcherWins 분리
+- Bestplayer ui 분리
+- 검색바 컴포넌트 상태 관리 분리 및 상태 로직 개선
+- 포토 및 하이라이트 페이지에 next/image 적용
+- 관전포인트 api http 함수로 변경
+- Batter pitcher 서스펜스 추가
+- Next/image 적용하여 최적화
+- Http batter pitcher 적용
+- 서스펜스 batter 내 랭킹테이블 추가
+- Image 태그로 변경
+- 메인 갤러리 및 영상 컴포넌트 next/image 적용
+- Api 요청 함수에 ky 라이브러리 적용
+- Vercel json 수정
+- 불필요한 try catch 제거
+- Fetch 함수 프록시 처리
+- 공통 스키마 분리
+
+### 📚 Documentation
+
+- Update README.md
+- 파일명 변경
+- 투수 json 파일 추가
+- Dev merge
+- Merge
+- 타입 삭제
+- Keyrecord 수정
+- 문서 버셀
+
+### 🎨 Styling
+
+- Red로 전체적 hover 스타일링
+- 전체적 css 조정
+- #3 전역 css 변수 설정
+- Css 변수 적용
+- 검은 배경색에 따른 css 수정
+- Page 스타일링
+- 기본 globals css 삭제
+- Page css 변경
+- ScroeBoard heaer ui 구현
+- Scoreboard header 반응형
+- Footer 스타일 수정
+- 작성하기 버튼 색상 변경
+- Keyrecord
+- Keyrecord 스크롤 ui 개선
+- Margin 조절
+- Boxscore style 수정
+- 하이라이트 style
+- Css 변경
+- .page border 삭제
+- Wiz-park-section의 flex-direction 수정
+- Footer의 top padding 삭제
+- 3d iframe 반응형 구현
+- Header lng 너비 수정
+- Player-img Text 스타일 수정
+- 검색바 포커스 색상 변경
+- 북마크 상태 조건 별로 버튼 색상 적용
+- 하이라이트 테이블 수정
+- Header 중앙정렬
+- Wizpark-description 아이콘 변경, 패딩 변경
+- Wizpark-section 패딩 수정
+- Wizpark section css 수정
+- Wizpark description 위치 변경
+- 하이라이트 테이블 수정
+- Header 중앙정렬
+- Wizpark-description 아이콘 변경, 패딩 변경
+- Wizpark-section 패딩 수정
+- Wizpark section css 수정
+- Wizpark description 위치 변경
+- Header 열 수정
+- 반응형
+- Live-talk 크기 고정
+- Header 중앙정렬
+- Post-card 고정 높이 적용, 작은 화면에서 좌우 여백 제거
+- 헤더 너비 수정
+- 팝업 및 로그인, 회원가입 모달 스타일 수정
+- 팝업 및 로그인, 회원가입 모달 스타일 수정
+
+### 🧪 Testing
+
+- 커밋테스트
 
 ### ⚙️ Miscellaneous Tasks
 
-- Add LICENSE.txt
-- Change the test code location
+- 이미지파일저장
+- 로고 파일 변경
+- 기타 주석
+- Constants banner 데이터 추가
+- 주석 정리
+- 기타
+- 기타
+- 기타
+- Select-box 컴포넌트 주석 수정
+- Dev pull
+- Pagination 컴포넌트 파일 위치 및 이름 변경
+- Merge 를 위한 tabmenu 분리
+- Pagination 컴포넌트 파일 위치 변경
+- Example searchbar 삭제
+- 스타일링을 위한 border 삭제
+- 안쓰는 import 삭제
+- Zod, uuid 라이브러리 설치
+- React-hook-form, @hookform/resolvers 설치
+- Title 중복 파일 삭제
+- Merge
+- Player page 셋팅
+- Dev 브랜치 pull 받기전 저장
+- Dev 브랜치 병합 과정
+- Dev -\> player pull
+- Dev -\> player 병합
+- 타입에러 해결
+- Api 연동
+- Tab-menu 경로 수정
+- 사용하지 않는 라이브러리 제거
+- 커스텀스퀘드 페이지 완료 [컴포넌트 분리 필요]
+- Api 내야,포수 추가
+- 페이지 첫 랜더링시 선수 상세데이터 안나오는 상황 해결 (타입 설정 미스)
+- 사용하지 않는 코드 삭제
+- 선수이미지 이름 수정
+- 사진 수정
+- Tabs crowd 삭제
+- Dev 브랜치 코드 병합
+- 이미지 경로 수정
+- 경로에 공백 수정
+- 배너 사용을 위한 폴더 구조 변경
+- 시즌 기록 예외 처리 및 useYearStore 사용으로 시즌년도 관리
+- PlayerCardList 에 position 추가
+- 툴팁 영역 나갈시 짤림현상 해결
+- PlayerList 컴포넌트로 분리
+- 외야 데이터 추가 및 적용
+- Css 변경중
+- 메뉴 데이터 변경 및 연결
+- Breadcrumbs 연결
+- 화면 캡처 기능 추가 (CORS 에러)
+- Merge
+- @/supabase/supabase-js 버전 업그레이드
+- 검색바 공통 컴포넌트 파일 위치 변경
+- Next/image 사용으로 cors 문제 해결
+- 안쓰는 데이터 삭제 table key 삭제
+- 커스텀페이지 선수테이블 추가, 타자페이지 히트스프레이 연도별 로 변경
+- 투수 페이지 차트데이터 변경
+- 안쓰는 데이터 삭제 table key 삭제
+- Dev 머지 전 커밋
+- 익산야구장 지도 주소 변경
+- 히트스프레이 24시즌 단독으로 변경
+- 머지전 커밋
+- 커스텀스쿼드 페이지 설명 추가
+- 탭에 팀소개 삭제
+- 타입 에러 수정
+- 투수페이지 타입에러 해결
+- 커스텀스쿼드페이지 타입에러
+- PlayerList 컴포넌트 타입 정의
+- CustomSquadTable 컴포넌트 타입정의
+- 테이블 빈문자열 예외처리 변경
+- 불필요한 코드 제거 및 선수목록 타이틀 추가
+- Title 컴포넌트로 변경
+- 커스텀 스쿼드페이지 필드 이미지 objectFit 속성 변경
+- 파일 () -\> \_ 변경 json 삭제
+- 기타
+- 탭 메뉴 타입
+- Select-box-example 컴포넌트 삭제
+- 사용하지 않는 컴포넌트 삭제
+- Player layout 사용하지 않는 import 삭제
+- Json 삭제
+- 기타
+- Batter 내 랭킹 테이블
+- 타입에러 해결, 캡처 라이브러리 불필요한 소스 제거
+- 이미지 태그 변경 next \<Image /\>
+- 타입에러 해결, 캡처 라이브러리 불필요한 소스 제거
+- 카드리스트 초기 선택값 설정
+- Ky 적용 및 타입정의
+- 타입에러 해결
+- Env 파일 설정 변경
+- 'use sever' api 파일 추가
+- 미들웨어 파일 위치 변경
+- 로고 이미지 파일명 수정
+- Keyrecord 데이터
+- 기타
 
 <!-- generated by git-cliff -->
