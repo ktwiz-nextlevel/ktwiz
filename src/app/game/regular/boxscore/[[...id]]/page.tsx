@@ -11,10 +11,10 @@ import { Suspense } from 'react'
 import { BoxscorePageProps } from '../_lib/records.type'
 import { TABS } from '../_lib/constants'
 
-export const metadata = {
-  title: '박스스코어 - KT Wiz',
-  description: 'KT Wiz 정규리그 경기 박스스코어 페이지입니다.',
-}
+// export const metadata = {
+//   title: '박스스코어 - KT Wiz',
+//   description: 'KT Wiz 정규리그 경기 박스스코어 페이지입니다.',
+// }
 export async function generateMetadata({ params }: BoxscorePageProps) {
   const { id } = await params
   const gameDate = id ? id[0] : '20241008'
