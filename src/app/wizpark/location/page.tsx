@@ -5,6 +5,11 @@ import WizparkSection from '@/components/wizpark/wizpark-section'
 import WizparkDescription from '@/components/wizpark/wizpark-description'
 import Image from 'next/image'
 
+export const metadata = {
+  title: 'KT Wiz / 구장 위치',
+  description:
+    '수원 kt wiz park 위치를 안내합니다. 구글 지도로 구장의 위치, 이동수단인 버스, 지하철 노선을 살펴보세요!',
+}
 export default function Page() {
   return (
     <>

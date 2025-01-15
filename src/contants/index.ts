@@ -212,7 +212,7 @@ export const WIZ_PARK_BANNER_DATA: BannerData = {
     title: 'Suwon kt wiz park',
     description: 'suwon kt wiz park를 소개합니다!',
     tabs: [
-      { title: '구단 소개', href: '/wizpark/intro', path: 'intro' },
+      { title: '구장 소개', href: '/wizpark/intro', path: 'intro' },
       { title: '구장 안내도', href: '/wizpark/guide', path: 'guide' },
     ],
   },

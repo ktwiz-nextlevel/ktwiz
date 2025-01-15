@@ -1,7 +1,11 @@
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 import WizparkSection from '@/components/wizpark/wizpark-section'
 import Image from 'next/image'
-
+export const metadata = {
+  title: 'KT Wiz 둥지, 익산 야구장',
+  description:
+    'kt wiz의 둥지 익산야구장을 소개합니다. 구글 지도로 야구장의 위치, 이동수단인 버스 노선을 살펴보세요!',
+}
 export default function Page() {
   return (
     <>
