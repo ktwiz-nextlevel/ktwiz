@@ -7,7 +7,29 @@ import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevro
 import { MEDIA_BANNER_DATA } from '@/contants'
 import { NUMBER_OF_PHOTOS_TO_FETCH } from '@/contants/media'
 import { getPhotoList } from '@/services/media-action'
-
+export async function generateMetadata({
+  params,
+  searchParams,
+}: {
+  params: {
+    photoCategory: number
+  }
+  searchParams: {
+    query?: string
+    type?: 'title' | 'content' | 'player'
+    startDate?: string
+    endDate?: string
+  }
+}) {
+  const { photoCategory } = params
+  const query = searchParams?.query || ''
+  const startDate = searchParams?.startDate || ''
+  const endDate = searchParams?.endDate || ''
+  return {
+    title: `wiz 포토 - ${photoCategory} 이미지`,
+    description: `wiz 포토  ${photoCategory} 검색어 ${query}와 관련되어 있고, 작성일자가 ${startDate}날짜와 ${endDate}날짜 사이의 관련 데이터를 조회합니다.`,
+  }
+}
 export default async function PhotoPage({
   params,
   searchParams,

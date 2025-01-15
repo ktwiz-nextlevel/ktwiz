@@ -6,7 +6,20 @@ import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevro
 import { NUMBER_OF_VIDEOS_TO_FETCH } from '@/contants/media'
 import { getVideoList } from '@/services/media-action'
 import { getPopularVideoList } from '@/services/media-service'
+export async function generateMetadata({
+  searchParams,
+}: {
+  searchParams: {
+    query?: string
+  }
+}) {
+  const query = searchParams?.query || ''
 
+  return {
+    title: `하이라이트  ${query} 관련 영상 `,
+    description: `하이라이트 ${query} 영상 목록입니다. 인기 영상 Top3를 살펴보고 영상을 시청해보세요!`,
+  }
+}
 export default async function HighlightPage({
   searchParams,
 }: {

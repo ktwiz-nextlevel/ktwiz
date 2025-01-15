@@ -7,7 +7,11 @@ import { getVideoDetail } from '@/services/media-service'
 import { Video } from '@/types/media'
 import { CalendarDaysIcon, CheckCircleIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
-
+export const metadata = {
+  // 확인 필요
+  title: '경기 하이라이트 세부 정보',
+  description: 'kt wiz의 생생한 경기 하이라이트 영상을 담았습니다. ',
+}
 async function fetchAdjacentVideos(
   startId: number | null,
   count: number,
