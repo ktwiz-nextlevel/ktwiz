@@ -75,12 +75,13 @@ export default function SignupModal({ onClose }: ModalProps) {
             alt="kt 로고"
             className="mx-auto"
           />
-          <p className="mt-[10px] text-center text-[20px] font-bold">
-            회원가입
+          <p className="mt-8 text-center text-xl font-bold">회원가입</p>
+          <p className="mb-6 mt-4 text-center text-xs text-gray-400">
+            SNS 계정으로 간편하게 회원가입하기
           </p>
         </div>
         {/* 소셜 로그인 목록 */}
-        <div className="flex flex-col gap-2.5">
+        <div className="flex flex-col gap-2.5 px-10">
           {/* refactor: 로그인 버튼 컴포넌트로 뺴기 */}
           <button
             className="h-[40px] w-full rounded-[8px] bg-[#ffe900]"
