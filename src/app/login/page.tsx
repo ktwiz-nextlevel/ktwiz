@@ -3,6 +3,10 @@ import InputPassword from '@/components/common/input/input-password'
 import InputWithDelBtn from '@/components/common/input/input-with-del'
 import { login, signup } from './actions'
 
+export const metadata = {
+  title: '로그인',
+  description: ' 로그인 페이지 입니다.',
+}
 export default function LoginPage() {
   return (
     <>
