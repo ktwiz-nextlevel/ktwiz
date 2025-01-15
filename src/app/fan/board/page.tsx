@@ -6,7 +6,12 @@ import Pagination from '@/components/common/pagination'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 import { fetchFilteredPost, fetchPostsPages } from '@/services/post-service'
 import { fetchProfile } from '@/services/user-service'
-
+import { Metadata } from 'next'
+export const metadata: Metadata = {
+  title: '게시판',
+  description:
+    'kt wiz의 게시판 페이지입니다. 게시글 작성과 실시간 응원톡으로 kt wiz 구단을 응원해보세요! ',
+}
 export default async function FanBoardPage({
   searchParams,
 }: {
