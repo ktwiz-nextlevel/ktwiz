@@ -11,6 +11,7 @@ import { http } from '@/http'
 import { ApiResponse, Playerbatter } from './_lib/type'
 import { Player, Top3player } from '@/types'
 import { fetchRankings } from '@/services/table-action'
+
 export const metadata = {
   title: 'KT Wiz - 타자 순위 및 기록',
   description: 'KT Wiz의 타자순위, 타자 타율Top3 등을 확인하세요.',
