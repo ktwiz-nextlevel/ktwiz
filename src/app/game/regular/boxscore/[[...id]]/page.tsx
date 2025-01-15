@@ -11,6 +11,20 @@ import { Suspense } from 'react'
 import { BoxscorePageProps } from '../_lib/records.type'
 import { TABS } from '../_lib/constants'
 
+// export const metadata = {
+//   title: '박스스코어 - KT Wiz',
+//   description: 'KT Wiz 정규리그 경기 박스스코어 페이지입니다.',
+// }
+export async function generateMetadata({ params }: BoxscorePageProps) {
+  const { id } = await params
+  const gameDate = id ? id[0] : '20241008'
+  const gmkey = id ? id[1] : '33331008LGKT0'
+
+  return {
+    title: `박스스코어 - ${gameDate} 경기`,
+    description: `${gameDate} 경기에 대한 박스스코어 정보를 제공합니다.`,
+  }
+}
 async function BoxscorePage({ params }: BoxscorePageProps) {
   const { id } = await params
   const gameDate = id ? id[0] : '20241008'

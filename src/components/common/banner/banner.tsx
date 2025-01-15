@@ -52,7 +52,7 @@ export const BannerHeading = ({
   return (
     <div className={cn('flex flex-col items-center')}>
       <h3 className={cn('text-5xl text-white')}>{title}</h3>
-      <p className={cn('mt-2 text-sm')}>{subtitle}</p>
+      <p className={cn('mt-5 text-sm')}>{subtitle}</p>
     </div>
   )
 }

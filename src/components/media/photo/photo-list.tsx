@@ -35,7 +35,6 @@ export default function PhotoList({
   const loadMorePhotos = useCallback(async () => {
     if (isLoading || !hasMore) return
     setIsLoading(true)
-
     try {
       const apiPhotos = await getPhotoList(
         category,
@@ -77,10 +76,10 @@ export default function PhotoList({
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          loadMorePhotos()
+          loadMorePhotos() // 기준 요소가 화면에 진입하면 데이터 로드
         }
       },
-      { threshold: 0.5 },
+      { threshold: 0.5 }, // 요소가 절반 보이면 트리거
     )
 
     const currentObserverRef = observerRef.current
@@ -96,7 +95,6 @@ export default function PhotoList({
   }, [loadMorePhotos])
 
   useEffect(() => {
-    // if (typeof window === 'undefined') return;
     const handleScroll = () => {
       setShowScrollToTop(window.scrollY > 200) // 200px 이상 스크롤되면 보이기
     }
@@ -112,7 +110,9 @@ export default function PhotoList({
   }
 
   return (
-    <div className="py-10">
+    <div
+      className={`relative py-10 ${selectedPhotoIndex !== null ? 'h-screen overflow-hidden' : ''}`}
+    >
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {photoList.map((photo: Photo, index: number) => (
           <div

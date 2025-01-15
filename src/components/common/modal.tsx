@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 interface ModalProps {
   children: React.ReactNode
@@ -13,12 +13,20 @@ export default function Modal({ children, onClose }: ModalProps) {
     }
   }
 
+  // 모달이 열릴 때 body의 overflow를 hidden으로 설정
+  useEffect(() => {
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [])
+
   return (
     <div
-      className="absolute left-0 top-0 z-20 h-full w-full bg-[#00000080]"
+      className="fixed left-0 top-0 z-50 h-full w-full bg-[#00000080]"
       onClick={handleBgClick}
     >
-      <div className="absolute left-1/2 top-1/2 min-h-[400px] min-w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-[16px] bg-white p-[16px]">
+      <div className="absolute left-1/2 top-1/2 min-h-[400px] min-w-[350px] -translate-x-1/2 -translate-y-1/2 rounded-[16px] bg-white p-[16px]">
         <button
           className="absolute right-[16px] top-[16px] border-none p-1 hover:bg-gray-200"
           aria-label="Close"

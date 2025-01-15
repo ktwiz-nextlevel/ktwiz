@@ -117,6 +117,7 @@ function parsePlayerDescriptions(input: string): PlayerDescription[] {
     return { name: item.trim(), des: null } // 괄호가 없으면 des는 null
   })
 }
+//--------------------------
 
 // import Title from '@/components/common/title/title'
 // import { BoxScore, EtcGames } from '@/types'

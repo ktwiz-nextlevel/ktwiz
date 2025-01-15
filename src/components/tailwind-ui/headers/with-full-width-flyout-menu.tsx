@@ -66,7 +66,7 @@ export function WithFullWidthFlyoutMenu({ initialUser }: HeaderProps) {
       >
         <nav
           aria-label="Global"
-          className="items-between mx-auto flex justify-between p-4 lg:px-8"
+          className="items-between relative mx-auto flex justify-between p-4 lg:px-8"
         >
           {/* lg-로고 */}
           <div className="flex lg:flex-1">
@@ -99,45 +99,44 @@ export function WithFullWidthFlyoutMenu({ initialUser }: HeaderProps) {
             </button>
           </div>
           {/* lg-GNB */}
-          <PopoverGroup className="hidden lg:flex lg:gap-x-12">
+          <PopoverGroup className="absolute left-1/2 hidden -translate-x-1/2 lg:flex lg:gap-x-12">
             <Popover className="lg:flex lg:gap-x-4">
-              {MENU_DATA.map((menu, idx) => (
-                // GNB
+              {MENU_DATA.map((menu, idx, array) => (
+                // GNB{4 === idx ? 'items-end justify-end' : 'items-center justify-center'}
                 <PopoverButton
                   key={menu.gnb + idx}
-                  className="box-border flex w-[75px] items-center justify-center gap-x-1 border-red-200 bg-[--black-color-100] text-center text-base font-semibold text-white outline-none transition duration-300 ease-in-out hover:text-gray-900 focus:outline-none active:outline-none active:ring-0 group-hover:border-white group-hover:bg-white group-hover:text-gray-900"
+                  className={`box-border flex w-[80px] items-center justify-center gap-x-1 bg-[--black-color-100] text-center text-base font-semibold text-white outline-none transition duration-300 ease-in-out hover:text-gray-900 focus:outline-none active:outline-none active:ring-0 group-hover:border-white group-hover:bg-white group-hover:text-gray-900`}
                 >
                   {menu.gnb}
                 </PopoverButton>
               ))}
-              {isOpened && (
-                <PopoverPanel
-                  className={`absolute inset-x-0 top-0 -z-10 bg-white pt-14 shadow-lg ring-1 ring-gray-900/5 transition data-[closed]:-translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in ${isOpened ? 'data-[enter]:duration-200 data-[enter]:ease-out' : 'data-[leave]:ease-in'} `}
-                  transition
-                >
-                  <div className="relative mx-auto flex max-w-7xl justify-center gap-x-4 px-6 py-10 lg:px-8 xl:gap-x-4">
-                    {LNB_LIST?.map((menu, idx) => {
-                      return (
-                        <div
-                          key={idx + 'lnb'}
-                          className={`group relative ${getPaddingByIdx(idx)} w-[70px] text-sm/6`}
-                          // className={`group relative left-2 w-[75px] text-sm/6`}
-                        >
-                          {menu?.map((lnb, idx) => (
-                            <Link
-                              key={lnb.name + idx}
-                              href={lnb.href}
-                              className="hover:text-blackborder mb-3 block text-sm font-normal text-gray-900 hover:font-bold"
-                            >
-                              {lnb.name}
-                            </Link>
-                          ))}
-                        </div>
-                      )
-                    })}
-                  </div>
-                </PopoverPanel>
-              )}
+
+              <PopoverPanel
+                className={`${isOpened ? 'block' : 'hidden'} fixed left-1/2 top-[50px] -z-10 w-screen -translate-x-1/2 bg-white pt-14 shadow-lg ring-1 ring-gray-900/5 transition data-[closed]:-translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in ${isOpened ? 'data-[enter]:duration-200 data-[enter]:ease-out' : 'data-[leave]:ease-in'} `}
+                transition
+              >
+                <div className="relative mx-auto flex max-w-7xl justify-center gap-x-4 px-6 pb-10 lg:px-8 xl:gap-x-4">
+                  {LNB_LIST?.map((menu, idx) => {
+                    return (
+                      <div
+                        key={idx + 'lnb'}
+                        className={`group relative ${getPaddingByIdx(idx)} w-[80px] text-sm/6`}
+                        // className={`group relative left-2 w-[75px] text-sm/6`}
+                      >
+                        {menu?.map((lnb, idx) => (
+                          <Link
+                            key={lnb.name + idx}
+                            href={lnb.href}
+                            className="hover:text-blackborder mb-3 block text-sm font-normal text-gray-900 hover:font-bold"
+                          >
+                            {lnb.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )
+                  })}
+                </div>
+              </PopoverPanel>
             </Popover>
           </PopoverGroup>
           {/* login & signup*/}
