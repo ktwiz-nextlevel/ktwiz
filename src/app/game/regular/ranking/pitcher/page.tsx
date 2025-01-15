@@ -14,7 +14,8 @@ import { PitcherERA, TeamERAOverviewProps } from '../batter/_lib/type'
 import { Player, Top3player } from '@/types'
 export const metadata = {
   title: 'KT Wiz - 투수 순위 및 기록',
-  description: 'KT Wiz의 투수순위, 투수 평균자책점 등을 확인하세요.',
+  description:
+    'KT Wiz의 투수순위, 전체 투수순위, 투수 평균자책점 선수 Top3 , 투수 선수 승리 Top3등을 확인하세요.',
 }
 const createTeamERAOverview = (
   top5PitcherEras: PitcherData[],

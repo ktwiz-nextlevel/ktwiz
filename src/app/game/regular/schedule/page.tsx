@@ -1,7 +1,10 @@
 import GameCalendar from '@/components/schedule/game-calendar'
 import ScoreCardGroup from '@/components/schedule/score-card-group'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
-
+export const metadata = {
+  title: 'KT Wiz / 전체 경기일정 ',
+  description: '월별 kt wiz 경기 정보를 확인하세요.',
+}
 async function SchedulePage({ params }: { params: Promise<{ date: string }> }) {
   const { date } = await params
   const currentDate = date || '202410'

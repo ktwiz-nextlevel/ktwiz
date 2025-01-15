@@ -2,7 +2,10 @@ import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevro
 import WizparkSection from '@/components/wizpark/wizpark-section'
 import WizparkDescription from '@/components/wizpark/wizpark-description'
 import Image from 'next/image'
-
+export const metadata = {
+  title: 'KT Wiz park/ 구장 안내도',
+  description: '수원 케이티 위즈 파크 좌석 안내도입니다. ',
+}
 export default function Page() {
   return (
     <>

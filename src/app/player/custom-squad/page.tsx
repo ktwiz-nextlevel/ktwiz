@@ -18,7 +18,11 @@ import CustomSquadTable from '@/components/player/custom-squad/player-table'
 import { toPng, toJpeg } from 'html-to-image'
 
 import Title from '@/components/common/title/title'
-
+export const metadata = {
+  title: '커스텀 스쿼드',
+  description:
+    'kt wiz의 다음 스쿼드를 만들어 주세요! 드래그 앤 드랍 기능으로 쉽게 나만의 커스텀 스쿼드를 짤 수 있어요!',
+}
 interface PlayerCard {
   pcode: PlayerCode
   playerName: string

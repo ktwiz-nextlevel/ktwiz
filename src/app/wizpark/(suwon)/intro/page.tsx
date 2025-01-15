@@ -4,7 +4,11 @@ import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevro
 import WizparkSection from '@/components/wizpark/wizpark-section'
 import WizparkDescription from '@/components/wizpark/wizpark-description'
 import IframeBanner from '@/components/wizpark/iframe-banner'
-
+export const metadata = {
+  title: 'KT Wiz / 구장소개',
+  description:
+    '수원 구장을 소개합니다. 3D 구장 모델링을 통해 쉽고 재미있게 수원 구장 구조를 살펴보세요!',
+}
 export default function Page() {
   return (
     <>

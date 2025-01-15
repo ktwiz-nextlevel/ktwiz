@@ -25,7 +25,7 @@ import { http } from '@/http'
 export const metadata = {
   title: 'KT Wiz - 시즌 팀 순위 및 기록',
   description:
-    'KT Wiz의 시즌 팀 순위, 투수/타자 기록, 팀 간 승패표를 확인하세요.',
+    'KT Wiz의 시즌 팀 순위, 시즌 팀 투수 기록, 시즌 팀 타자 기록, 시즌 팀 간 승패표를 확인하세요.',
 }
 async function RankingPage() {
   let teamRankData = null

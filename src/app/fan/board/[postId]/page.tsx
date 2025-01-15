@@ -5,6 +5,25 @@ import { fetchCommentsPages, fetchPostById } from '@/services/post-service'
 import { fetchProfile } from '@/services/user-service'
 import { notFound } from 'next/navigation'
 
+export async function generateMetadata({
+  params,
+  searchParams,
+}: {
+  params: {
+    postId: number
+  }
+  searchParams: {
+    page?: number
+  }
+}) {
+  const { postId } = params
+  const currentPage = Number(searchParams?.page) || 1
+
+  return {
+    title: `게시판  ${postId} 세부 정보 `,
+    description: ` ${currentPage} 페이지에 해당하는 게시판 목록입니다. 게시글 별로 제목, 작성자,작성일, 조회수를 살펴볼 수 있어요!`,
+  }
+}
 export default async function BoardDetailPage({
   params,
   searchParams,

@@ -2,7 +2,20 @@ import EditPostForm from '@/components/board/edit-post-form'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 import { fetchPostById } from '@/services/post-service'
 import { notFound } from 'next/navigation'
+export async function generateMetadata({
+  params,
+}: {
+  params: {
+    postId: number
+  }
+}) {
+  const { postId } = params
 
+  return {
+    title: `게시판  ${postId} 수정 페이지 `,
+    description: ` ${postId} 에 해당하는 게시판 수정 페이지입니다. 게시글을 수정해보세요!`,
+  }
+}
 export default async function BoardEditPage({
   params,
 }: {

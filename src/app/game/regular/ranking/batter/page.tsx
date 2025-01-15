@@ -14,7 +14,8 @@ import { fetchRankings } from '@/services/table-action'
 
 export const metadata = {
   title: 'KT Wiz - 타자 순위 및 기록',
-  description: 'KT Wiz의 타자순위, 타자 타율Top3 등을 확인하세요.',
+  description:
+    'KT Wiz의 타자 순위, 전체 타자 순위, 타자 타율 Top3,타자 홈런 Top3 등을 확인하세요.',
 }
 async function RankBatterPage({
   searchParams,

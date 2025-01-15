@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: BoxscorePageProps) {
 
   return {
     title: `박스스코어 - ${gameDate} 경기`,
-    description: `${gameDate} 경기에 대한 박스스코어 정보를 제공합니다.`,
+    description: `${gameDate} 경기에 대한 박스스코어 정보를 제공합니다. 주오기록, 타자기록,투수기록,선발 투수 비교,해당 경기 라인업 정보를 살펴보세요`,
   }
 }
 async function BoxscorePage({ params }: BoxscorePageProps) {
