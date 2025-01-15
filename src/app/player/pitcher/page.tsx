@@ -22,7 +22,11 @@ import {
   getPitcherChart,
 } from '@/app/api/player/api'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
-
+export const metadata = {
+  title: '투수',
+  description:
+    '투수의 이름, 포지션, 생년월일, 체격, 시즌 기록 등을 살펴보세요!',
+}
 interface PlayerCard {
   pcode: PlayerCode
   playerName: string
