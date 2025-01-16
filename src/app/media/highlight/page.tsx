@@ -1,11 +1,12 @@
+import { LoadingSkeleton } from '@/components/board/loading-skeleton'
 import NoDataList from '@/components/media/common/no-data-list'
-import PopularVideoList from '@/components/media/video/popular-video-list'
+import PopularVideoWrapper from '@/components/media/video/popular-video-wrapper'
 import VideoList from '@/components/media/video/video-list'
 import VideoSearchBar from '@/components/media/video/video-search-bar'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 import { NUMBER_OF_VIDEOS_TO_FETCH } from '@/contants/media'
 import { getVideoList } from '@/services/media-action'
-import { getPopularVideoList } from '@/services/media-service'
+import { Suspense } from 'react'
 export async function generateMetadata({
   searchParams,
 }: {
@@ -28,10 +29,7 @@ export default async function HighlightPage({
   }
 }) {
   const query = searchParams?.query || ''
-  const [initialVideos, popularVideos] = await Promise.all([
-    getVideoList(0, NUMBER_OF_VIDEOS_TO_FETCH, query),
-    getPopularVideoList(),
-  ])
+  const initialVideos = await getVideoList(0, NUMBER_OF_VIDEOS_TO_FETCH, query)
 
   return (
     <div className="page px-10 pb-16">
@@ -40,7 +38,9 @@ export default async function HighlightPage({
       </div>
       <div className="mb-10 border-b border-[--main-red-color] py-5 pb-10">
         <p className="py-5 text-sm font-semibold">인기영상 TOP3</p>
-        <PopularVideoList videos={popularVideos} />
+        <Suspense fallback={<LoadingSkeleton />}>
+          <PopularVideoWrapper />
+        </Suspense>
       </div>
       <VideoSearchBar />
       {initialVideos.length > 0 ? (
