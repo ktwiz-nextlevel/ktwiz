@@ -1,12 +1,14 @@
 import BoardSearchBar from '@/components/board/board-search-bar'
 import LiveTalk from '@/components/board/live-talk'
+import { LoadingSkeleton } from '@/components/board/loading-skeleton'
 import { CreatePost } from '@/components/board/post-buttons'
-import PostCard from '@/components/board/post-card'
+import PostCardWrapper from '@/components/board/post-card-wrapper'
 import Pagination from '@/components/common/pagination'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
-import { fetchFilteredPost, fetchPostsPages } from '@/services/post-service'
+import { fetchPostsPages } from '@/services/post-service'
 import { fetchProfile } from '@/services/user-service'
 import { Metadata } from 'next'
+import { Suspense } from 'react'
 export const metadata: Metadata = {
   title: '게시판',
   description:
@@ -24,9 +26,8 @@ export default async function FanBoardPage({
   const query = searchParams?.query || ''
   const currentPage = Number(searchParams?.page) || 1
   const type = searchParams?.type || 'title'
-  const [totalPages, postData, userData] = await Promise.all([
+  const [totalPages, userData] = await Promise.all([
     fetchPostsPages(query),
-    fetchFilteredPost(query, currentPage, type),
     fetchProfile(),
   ])
 
@@ -40,7 +41,13 @@ export default async function FanBoardPage({
               <Breadcrumbs pages={['HOME', 'FAN', '팬 소통공간']} />
             </div>
           </div>
-          <PostCard posts={postData} />
+          <Suspense fallback={<LoadingSkeleton />}>
+            <PostCardWrapper
+              query={query}
+              currentPage={currentPage}
+              type={type}
+            />
+          </Suspense>
           <div className="flex items-center justify-between px-2 py-4">
             <div className="mx-auto">
               {totalPages && <Pagination totalPages={totalPages} />}
