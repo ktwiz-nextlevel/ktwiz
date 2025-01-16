@@ -1,70 +1,102 @@
-'use client'
+// 'use client'
+// import React, { useState, useEffect } from 'react'
 import Title from '@/components/common/title/title'
 import { BoxScore, EtcGames } from '@/types'
 import PlayerImage from '../_component/player-img'
+import { http } from '@/http'
 
-async function KeyRecords({ data }: { data?: BoxScore }) {
-  if (!data) {
-    return (
-      <section className="gray-red-400 w-full pt-3">
-        <Title text={`주요 기록 `} />
-        <div className="flex w-full flex-wrap">
-          주요기록 데이터조회를 실패했습니다.
-        </div>
-      </section>
-    )
-  }
+interface PlayerInfo {
+  name: string
+  des: string | null
+}
+interface PlayerDescription extends PlayerInfo {
+  playerImg: string
+}
 
-  const etcgames: EtcGames[] = data?.etcgames || []
+function splitPlayers(input: string): string[] {
+  const regex = /\([^)]*\)/g
+  const modifiedInput = input.replace(regex, (match) =>
+    match.replace(/\s/g, '|'),
+  )
+  return modifiedInput
+    .split(' ')
+    .map((item) => (item.includes('|') ? item.replace(/\|/g, ' ') : item))
+    .filter((item) => item.trim() !== '')
+}
 
-  const homeKey = data.schedule.current.homeKey
-  const visitKey = data.schedule.current.visitKey
-
-  const infoPromises = etcgames.map(async (game) => {
-    const parsedData = parsePlayerDescriptions(game.result)
-    const playerImgResponses = await Promise.all(
-      parsedData.map(async (player) => {
-        try {
-          const [imgResponseHome, imgResponseVisit] = await Promise.all([
-            fetch(
-              `${process.env.NEXT_PUBLIC_API_SERVER_URL}/player_img?team=${homeKey}&name=${player.name}`,
-            ),
-
-            fetch(
-              `${process.env.NEXT_PUBLIC_API_SERVER_URL}/player_img?team=${visitKey}&name=${player.name}`,
-            ),
-          ])
-
-          const imgDataHome = await imgResponseHome.json()
-          const imgDataVisit = await imgResponseVisit.json()
-
-          return {
-            ...player,
-            playerImg:
-              imgDataHome.url ||
-              imgDataVisit.url ||
-              '/images/players/player.png',
-          }
-        } catch {
-          return { ...player, playerImg: '/images/players/player.png' }
-        }
-      }),
-    )
-    return playerImgResponses
+function parsePlayerDescriptions(input: string): PlayerInfo[] {
+  const players = splitPlayers(input)
+  return players.map((item) => {
+    const nameDesRegex = /^([^\(]+)(\(([^)]+)\))?$/
+    const match = item.match(nameDesRegex)
+    if (match) {
+      return {
+        name: match[1].trim(),
+        des: match[3]?.trim() || null,
+      }
+    }
+    return { name: item.trim(), des: null }
   })
+}
 
-  const info = await Promise.all(infoPromises)
+const fetchPlayerImg = async (
+  player: PlayerInfo,
+  homeKey: string,
+  visitKey: string,
+): Promise<PlayerDescription> => {
+  try {
+    const [imgHome, imgVisit] = await Promise.allSettled([
+      http.get<{ url: string }>(`/player_img`, {
+        searchParams: { team: homeKey, name: player.name },
+      }),
+      http.get<{ url: string }>(`/player_img`, {
+        searchParams: { team: visitKey, name: player.name },
+      }),
+    ])
+
+    const imgResponseHome =
+      imgHome.status === 'fulfilled' ? imgHome.value.data : null
+    const imgResponseVisit =
+      imgVisit.status === 'fulfilled' ? imgVisit.value.data : null
+
+    return {
+      ...player,
+      playerImg:
+        imgResponseHome?.url ||
+        imgResponseVisit?.url ||
+        '/images/players/player.png',
+    }
+  } catch (error) {
+    console.error(`Error fetching image for player: ${player.name}`, error)
+    return {
+      ...player,
+      playerImg: '/images/players/player.png', // 기본 이미지 대체
+    }
+  }
+}
+
+const KeyRecords = ({
+  data,
+  info,
+}: {
+  info: PlayerDescription[][]
+  data?: BoxScore
+}) => {
+  if (!data) {
+    return <KeyRecordsError />
+  }
 
   return (
     <section className="gray-red-400 w-full pt-3">
-      <Title text={`주요 기록 `} />
+      <Title text={`주요 기록`} />
       <div className="flex w-full flex-wrap">
-        {etcgames.map((game, idx) => {
-          const playerInfo = info[idx] || []
-
+        {data!.etcgames.map((game, idx) => {
+          const playerInfo = info?.[idx] || []
           return (
             <div
-              className={`${idx % 2 === 0 ? 'pr-6' : 'border-l-2 pl-6'} w-full py-6 md:w-1/2`}
+              className={`${
+                idx % 2 === 0 ? 'pr-6' : 'border-l-2 pl-6'
+              } w-full py-6 md:w-1/2`}
               key={`${game.how}-${idx}`}
             >
               <h2 className="text-gray-600">
@@ -72,7 +104,7 @@ async function KeyRecords({ data }: { data?: BoxScore }) {
               </h2>
               <div className="mt-3 flex justify-start overflow-auto">
                 {playerInfo.map((player, idx) => (
-                  <PlayerImage key={`${player.name}-${idx}`} player={player} />
+                  <PlayerImage key={`${player?.name}-${idx}`} player={player} />
                 ))}
               </div>
             </div>
@@ -85,163 +117,9 @@ async function KeyRecords({ data }: { data?: BoxScore }) {
 
 export default KeyRecords
 
-interface PlayerDescription {
-  name: string
-  des: string | null
-}
-
-function splitPlayers(input: string): string[] {
-  const regex = /\([^)]*\)/g // 괄호 안의 내용 찾기
-  const modifiedInput = input.replace(regex, (match) =>
-    match.replace(/\s/g, '|'),
-  )
-  return modifiedInput
-    .split(' ')
-    .map((item) => (item.includes('|') ? item.replace(/\|/g, ' ') : item))
-    .filter((item) => item.trim() !== '') // 빈 문자열 제거
-}
-
-function parsePlayerDescriptions(input: string): PlayerDescription[] {
-  const players = splitPlayers(input)
-
-  return players.map((item) => {
-    const nameDesRegex = /^([^\(]+)(\(([^)]+)\))?$/ // 괄호 앞의 이름과 괄호 안의 내용 추출
-    const match = item.match(nameDesRegex)
-
-    if (match) {
-      return {
-        name: match[1].trim(),
-        des: match[3]?.trim() || null,
-      }
-    }
-    return { name: item.trim(), des: null } // 괄호가 없으면 des는 null
-  })
-}
-//--------------------------
-
-// import Title from '@/components/common/title/title'
-// import { BoxScore, EtcGames } from '@/types'
-// import PlayerImage from '../_component/player-img'
-// import { http } from '@/http'
-// // Ensure you have an HTTP utility module for consistent API requests
-
-// async function KeyRecords({ data }: { data?: BoxScore }) {
-//   if (!data) {
-//     return (
-//       <section className="gray-red-400 w-full pt-3">
-//         <Title text={`주요 기록 `} />
-//         <div className="flex w-full flex-wrap">
-//           주요기록 데이터조회를 실패했습니다.
-//         </div>
-//       </section>
-//     )
-//   }
-
-//   const etcgames: EtcGames[] = data?.etcgames || []
-//   const homeKey = data.schedule.current.homeKey
-//   const visitKey = data.schedule.current.visitKey
-
-//   const infoPromises = etcgames.map(async (game) => {
-//     const parsedData = parsePlayerDescriptions(game.result)
-//     const playerImgResponses = await Promise.all(
-//       parsedData.map(async (player) => {
-//         let imgResponseHome
-//         let imgResponseVisit
-
-//         try {
-//           const [imgHome, imgVisit] = await Promise.all([
-//             http.get<{ url: string }>(`/api/player_img`, {
-//               searchParams: { team: homeKey, name: player.name },
-//             }),
-//             http.get<{ url: string }>(`/api/player_img`, {
-//               searchParams: { team: visitKey, name: player.name },
-//             }),
-//           ])
-//           imgResponseHome = imgHome
-//           imgResponseVisit = imgVisit
-//           return {
-//             ...player,
-//             playerImg:
-//               imgResponseHome.data.url ||
-//               imgResponseVisit.data.url ||
-//               '/images/players/player.png',
-//           }
-//         } catch (e) {
-//           // console.log(imgResponseHome?.data.url)
-//           return {
-//             ...player,
-//             playerImg:
-//               imgResponseHome?.data.url ||
-//               imgResponseVisit?.data.url ||
-//               '/images/players/player.png',
-//           }
-//         }
-//       }),
-//     )
-//     return playerImgResponses
-//   })
-
-//   const info = await Promise.all(infoPromises)
-
-//   return (
-//     <section className="gray-red-400 w-full pt-3">
-//       <Title text={`주요 기록 `} />
-//       <div className="flex w-full flex-wrap">
-//         {etcgames.map((game, idx) => {
-//           const playerInfo = info[idx] || []
-
-//           return (
-//             <div
-//               className={`${idx % 2 === 0 ? 'pr-6' : 'border-l-2 pl-6'} w-full py-6 md:w-1/2`}
-//               key={`${game.how}-${idx}`}
-//             >
-//               <h2 className="text-gray-600">
-//                 {game.how} ({playerInfo.length})
-//               </h2>
-//               <div className="mt-3 flex justify-start overflow-auto">
-//                 {playerInfo.map((player, idx) => (
-//                   <PlayerImage key={`${player.name}-${idx}`} player={player} />
-//                 ))}
-//               </div>
-//             </div>
-//           )
-//         })}
-//       </div>
-//     </section>
-//   )
-// }
-
-// export default KeyRecords
-
-// interface PlayerDescription {
-//   name: string
-//   des: string | null
-// }
-
-// function splitPlayers(input: string): string[] {
-//   const regex = /\([^)]*\)/g
-//   const modifiedInput = input.replace(regex, (match) =>
-//     match.replace(/\s/g, '|'),
-//   )
-//   return modifiedInput
-//     .split(' ')
-//     .map((item) => (item.includes('|') ? item.replace(/\|/g, ' ') : item))
-//     .filter((item) => item.trim() !== '')
-// }
-
-// function parsePlayerDescriptions(input: string): PlayerDescription[] {
-//   const players = splitPlayers(input)
-
-//   return players.map((item) => {
-//     const nameDesRegex = /^([^\(]+)(\(([^)]+)\))?$/
-//     const match = item.match(nameDesRegex)
-
-//     if (match) {
-//       return {
-//         name: match[1].trim(),
-//         des: match[3]?.trim() || null,
-//       }
-//     }
-//     return { name: item.trim(), des: null }
-//   })
-// }
+const KeyRecordsError = ({ title = '주요기록 조회를 실패했습니다.' }) => (
+  <section className="gray-red-400 h-[300px] w-full pt-3">
+    <Title text={`주요 기록`} />
+    <div className="flex w-full flex-wrap pt-4">[ERROR] {title}</div>
+  </section>
+)

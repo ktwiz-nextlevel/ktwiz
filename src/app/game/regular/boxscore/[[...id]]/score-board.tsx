@@ -20,7 +20,7 @@ export async function ScoreBoard({ data }: { data?: BoxScore }) {
   const homeBoard: Scoreboard = scoreboard.filter(
     (score) => score.bhome === 1,
   )[0]
-  // console.log(data.schedule)
+
   return (
     <Board>
       <Board.li style="w-full flex justify-center">
