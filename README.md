@@ -1,5 +1,3 @@
-# KTWiz 웹페이지 개선 프로젝트
-
 **스나이퍼팩토리 X 유데미 X 웅진 프론트엔드 프로젝트 캠프**
 
 ---
@@ -33,63 +31,30 @@
 ---
 ## ⚙️ 기술 스택
 
-<table>
-    <thead>
-        <tr>
-            <th>분류</th>
-            <th>기술 스택</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>
-                <p>언어</p>
-            </td>
-            <td>
-                <img src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=ffffff">
-               
-            </td>
-        </tr>
-        <tr>
-            <td>
-                  <p>프레임워크</p>
-            </td>
-            <td>
-                  <img src="https://img.shields.io/badge/Next.js-000000?logo=Next.js&logoColor=white">
-              
-            </td>
-        </tr>
-                <tr>
-            <td>
-                <p>패키지 매니저</p>
-            </td>
-            <td>
-            pnpm 
-            </td>
-        </tr>
-                <tr>
-            <td>
-                <p>배포</p>
-            </td>
-            <td>
-               
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>협업</p>
-            </td>
-            <td>
-                <img src="https://img.shields.io/badge/Notion-000000?logo=Notion">
-                <img src="https://img.shields.io/badge/Figma-F24E1E?logo=Figma&logoColor=ffffff">
-                <img src="https://img.shields.io/badge/Slack-4A154B?logo=Slack&logoColor=ffffff">
-            </td>
-        </tr>
-    </tbody>
-</table>
+|분류|기술스택|
+|:---:|:---:|
+|언어|![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) |
+|프론트엔드|![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)|
+|CSS|![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)|
+|패키지 매니저|![PNPM](https://img.shields.io/badge/pnpm-%234a4a4a.svg?style=for-the-badge&logo=pnpm&logoColor=f69220)|
+|배포|![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white)|
+|협업|![Slack](https://img.shields.io/badge/Slack-4A154B?style=for-the-badge&logo=slack&logoColor=white)![Notion](https://img.shields.io/badge/Notion-%23000000.svg?style=for-the-badge&logo=notion&logoColor=white) ![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white) |
+|디자인| ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white) |
+|라이브러리|![Threejs](https://img.shields.io/badge/threejs-black?style=for-the-badge&logo=three.js&logoColor=white)|
+|DB|![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)|
 
 
 ## 🚀 주요 기능
+### 소셜 로그인
+> supabase auth를 사용해 구글 및 카카오 로그인 구현했습니다.
+![google login 2](https://github.com/user-attachments/assets/0e4c1985-99b3-49f1-b1f0-7ad0c4246717)
+
+
+### 경기 일정 페이지
+> 캘린더 ui를 통해 경기 일정을 달별로 한눈에 볼 수 있게 구현했습니다.
+![junggyu](https://github.com/user-attachments/assets/b3191c79-d94e-4bc9-945f-f9c8cbcdb7db)
+
+
 
 ### 박스스코어 페이지> 박스스코어 탭
 > 날짜별 경기 정보를 알 수 있습니다.
@@ -131,20 +96,62 @@
 
 
 ### Player페이지 > 선수 상세페이지 (투수)
+<img src="https://github.com/user-attachments/assets/7eada9d0-906b-452d-8873-90ca78cf6f9c" alt="커스텀스퀘드" width="800" />
+
+
  
 
 ### Player페이지 > 선수 상세페이지 (타자)
+<img src="https://github.com/user-attachments/assets/4e5008f8-2d06-415e-969f-27c0512a9260" alt="커스텀스퀘드" width="800" />
 
 
 
 ### Player페이지 > 커스텀 스쿼드 페이지 
 > 드래그 앤 드롭 기능을 이용하여 페이지를 재미있게 이용할 수 있습니다.
+<img src="https://github.com/user-attachments/assets/c5b1a077-be66-40fa-80f8-3f835e17e999" alt="커스텀스퀘드" width="800" />
 
 
-###  > 커스텀 스쿼드 페이지 
-### Player페이지 > 커스텀 스쿼드 페이지 
-### Player페이지 > 커스텀 스쿼드 페이지 
-### Player페이지 > 커스텀 스쿼드 페이지 
+
+
+### 팬 > 게시판 페이지 
+> 게시글을 제목 또는 내용별로 조회할 수 있으며, 모든 사용자들과 실시간으로 응원메시지를 주고 받을 수 있습니다.
+
+![게시판_실시간톡](https://github.com/user-attachments/assets/d0ff9701-0fb7-4f9c-8480-241746136ae0)
+
+> 게시글을 작성하고 수정하거나 삭제할 수 있습니다.
+
+![게시글_작성](https://github.com/user-attachments/assets/e4772b0b-89db-4c74-8673-c89b863e9732)
+
+> 특정 게시글에 댓글을 작성하고 수정하거나 삭제할 수 있습니다.
+
+![댓글_CRUD](https://github.com/user-attachments/assets/cbc7fb13-5651-4d9c-ae11-a7175d2633f8)
+
+### Media > Wiz 포토 페이지 
+> 스크롤을 내려 다양한 KTWiz의 사진들을 확인할 수 있고 검색어나 기간을 입력하여 사진을 조회할 수 있습니다.
+
+![포토_무한스크롤](https://github.com/user-attachments/assets/ee533f8d-3723-4db2-8841-a6a9814bebfc)
+
+> 이미지를 확대 및 축소할 수 있고 버튼 또는 드래그로 슬라이드해서 이동하거나 자동 슬라이드 기능을 사용할 수 있습니다.
+
+![이미지슬라이드](https://github.com/user-attachments/assets/72eaa4f4-4a25-4610-bb4e-8caa6d95c91b)
+
+### Media > 하이라이트 페이지 
+> 조회수가 높은 인기 영상을 확인할 수 있고 스크롤을 내려 추가적으로 다양한 영상들을 확인할 수 있으며 검색어를 통해 영상을 조회할 수 있습니다.
+
+
+
+### wiz park > Suwon kt wiz park 페이지
+> 기존에 세로로 길던 수원 구장 소개 컴포넌트를 한눈에 들어오도록 개선했습니다.
+> 좀 더 자세하게 경기장을 둘러볼 수 있도록 3D 컴포넌트를 추가하였습니다.
+
+![수원 kt wiz park](https://github.com/user-attachments/assets/c9473718-26cb-4285-bb5a-89dda2b2101a)
+
+### wiz park > 찾아오기 페이지
+> 기존에 이미지였던 지도를 실제 지도로 변경하였습니다.
+
+![지도 이미지](https://github.com/user-attachments/assets/756e7b4e-d4f3-4dc7-a493-36b7be0c4ecd)
+
+### 마이페이지 
 
 ## 🔎 트러블 슈팅
 
@@ -165,12 +172,10 @@
 2. 선수 증명 사진을 조회시 선수이름과 소속된 구단 키를 가지고 조회해야한다는 점, 
 3.  해당 주요사건 데이터 내부에는 관련 선수의 소속 구단명 데이터가 없다는 점
 
-<img width="360" alt="스크린샷 2025-01-16 오후 11 55 12" src="https://github.com/user-attachments/assets/71149393-45ed-404e-b542-d8152ea0aa92" />
-
-<br/>
 <img width="1667" alt="주요기록문제 상황" src="https://github.com/user-attachments/assets/0515e1e4-de3b-4537-8996-3a0e2c7aaef4" />
 
 
+<br/>
 
 <img width="805" alt="주요기록 스크린샷" src="https://github.com/user-attachments/assets/3813a3d4-57e1-4e8f-9731-f10ec5c4f92d" />
 
