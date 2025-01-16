@@ -22,12 +22,100 @@
 기존 KT Wiz 웹사이트를 분석하여 **사용자가 야구를 보다 재미있게** 즐길 수 있도록 디자인을 개선하고 기능을 추가한 프로젝트입니다.  
 
 ---
+## ⚙️ 기술 스택
+
+<table>
+    <thead>
+        <tr>
+            <th>분류</th>
+            <th>기술 스택</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <p>언어</p>
+            </td>
+            <td>
+                <img src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=ffffff">
+               
+            </td>
+        </tr>
+        <tr>
+            <td>
+                  <p>프레임워크</p>
+            </td>
+            <td>
+                  <img src="https://img.shields.io/badge/Next.js-000000?logo=Next.js&logoColor=white">
+              
+            </td>
+        </tr>
+                <tr>
+            <td>
+                <p>패키지 매니저</p>
+            </td>
+            <td>
+            pnpm 
+            </td>
+        </tr>
+                <tr>
+            <td>
+                <p>배포</p>
+            </td>
+            <td>
+               
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>협업</p>
+            </td>
+            <td>
+                <img src="https://img.shields.io/badge/Notion-000000?logo=Notion">
+                <img src="https://img.shields.io/badge/Figma-F24E1E?logo=Figma&logoColor=ffffff">
+                <img src="https://img.shields.io/badge/Slack-4A154B?logo=Slack&logoColor=ffffff">
+            </td>
+        </tr>
+    </tbody>
+</table>
 
 
+## 🚀 주요 기능
+
+### 박스스코어 페이지> 박스스코어 탭
+> 날짜별 경기 정보를 알 수 있습니다.
+> 해당 경기의 스코어 보드 점수,  주요 기록,  해당 경기의 각 구단 선수들의 기록을 알 수 있습니다.
+![박스스코어 시연](https://github.com/user-attachments/assets/5c90f041-18a7-49ac-8576-076e089fcbfb)
 
 
+### 박스스코어 페이지 > 관중 포인트 탭
+> 구단별 선발 투수 데이터를 비교해보고 구단별 라인업을 살펴보세요. 
+> rechart를 사용해 다격형 차트를 구현했고 탭 형식의 라인업 UI 를 개선했습니다.
+![관중포인트 시연](https://github.com/user-attachments/assets/85a10cbb-78f6-4425-91ea-c498a2b76faa)
 
 
+### 순위기록 페이지 > 팀 순위 탭
+>
+> 
+![팀순위 시연](https://github.com/user-attachments/assets/6a847a66-0f6a-4378-b07d-0f5830f5ba76)
+
+
+### 순위기록 페이지 > 투수 순위 탭
+>
+> 
+![투수순위 시연](https://github.com/user-attachments/assets/3d98d01d-ed69-41ae-b616-ff43797e4a79)
+
+
+### 순위기록 페이지 > 타자 순위 탭
+> 
+
+
+<img width="1680" alt="타자순위" src="https://github.com/user-attachments/assets/0b02dc5f-2493-4431-9524-934811b1a287" />
+
+
+## 트러블 슈팅 
+
+<img width="360" alt="스크린샷 2025-01-16 오후 11 55 12" src="https://github.com/user-attachments/assets/109a3d08-909d-45d2-a72b-78a38148b8f2" />
 
 
 
