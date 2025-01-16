@@ -82,7 +82,7 @@ async function BoxscorePage({ params }: { params: Promise<{ id: string[] }> }) {
     watchData = watchPointResponse.data.data
   } catch (error) {
     // 에러 처리
-    console.error(error)
+    // console.error(error)
     return <div>게임 정보를 불러오는 데 오류가 발생했습니다.</div>
   }
   let visit = value.map(
