@@ -116,6 +116,8 @@
 ## 트러블 슈팅 
 
 <img width="360" alt="스크린샷 2025-01-16 오후 11 55 12" src="https://github.com/user-attachments/assets/109a3d08-909d-45d2-a72b-78a38148b8f2" />
+<img width="360" alt="스크린샷 2025-01-16 오후 11 55 12" src="https://github.com/user-attachments/assets/71149393-45ed-404e-b542-d8152ea0aa92" />
+<img width="805" alt="주요기록 스크린샷" src="https://github.com/user-attachments/assets/3813a3d4-57e1-4e8f-9731-f10ec5c4f92d" />
 
 
 
