@@ -11,8 +11,6 @@ const nextConfig = {
       {
         protocol: 'http',
         hostname: '54.180.228.165',
-        port: '',
-        search: '',
       },
       {
         protocol: 'https',
@@ -39,6 +37,7 @@ const nextConfig = {
         search: '',
       },
     ],
+    // domains: ['54.180.228.165'],
   },
 }
 
