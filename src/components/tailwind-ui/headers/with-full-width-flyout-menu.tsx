@@ -18,7 +18,7 @@ import { MENU_DATA, LNB_LIST } from '@/contants'
 import LoginModal from '@/components/modal/login'
 import SignupModal from '@/components/modal/sign-up'
 import { ProfileDetail } from '@/types'
-import { signout } from '@/app/login/actions'
+import { signout } from '@/services/user-action'
 
 interface HeaderProps {
   initialUser?: ProfileDetail | null

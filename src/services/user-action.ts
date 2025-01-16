@@ -3,6 +3,19 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/utils/supabase/server'
 import { nicknameSchema } from '@/schemas/nicknameSchema'
+import { revalidatePath } from 'next/cache'
+
+export async function signout() {
+  const supabase = await createClient()
+  const { error } = await supabase.auth.signOut()
+
+  if (error) {
+    redirect('/error')
+  }
+
+  revalidatePath('/', 'layout')
+  redirect('/')
+}
 
 export async function updateNickname(formData: FormData) {
   const validateFields = nicknameSchema.safeParse({
