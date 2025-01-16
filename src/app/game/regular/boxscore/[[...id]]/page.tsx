@@ -50,28 +50,29 @@ const fetchPlayerImg = async (
 ): Promise<PlayerDescription> => {
   try {
     const [imgHome, imgVisit] = await Promise.allSettled([
-      http.get<{ url: string }>(`/player_img`, {
-        searchParams: { team: homeKey, name: player.name },
-      }),
-      http.get<{ url: string }>(`/player_img`, {
-        searchParams: { team: visitKey, name: player.name },
-      }),
+      fetch(
+        `${process.env.NEXT_PUBLIC_API_SERVER_URL}/player_img?team=${visitKey}&name=${player.name}`,
+      ),
+      fetch(
+        ` ${process.env.NEXT_PUBLIC_API_SERVER_URL}/player_img?team=${homeKey}&name=${player.name}`,
+      ),
     ])
 
     const imgResponseHome =
-      imgHome.status === 'fulfilled' ? imgHome.value.data : null
+      imgHome.status === 'fulfilled' ? await imgHome.value.json() : null
     const imgResponseVisit =
-      imgVisit.status === 'fulfilled' ? imgVisit.value.data : null
+      imgVisit.status === 'fulfilled' ? await imgVisit.value.json() : null
 
     return {
       ...player,
       playerImg:
-        imgResponseHome?.url ||
-        imgResponseVisit?.url ||
+        imgResponseHome.url ||
+        imgResponseVisit.url ||
         '/images/players/player.png',
     }
   } catch (error) {
     console.error(`Error fetching image for player: ${player.name}`, error)
+
     return {
       ...player,
       playerImg: '/images/players/player.png', // 기본 이미지 대체
@@ -126,6 +127,7 @@ async function BoxscorePage({ params }: BoxscorePageProps) {
     data = response.data
     keyRecords = await fetchData(data.data)
   } catch {
+    console.error('Error fetching boxscore data')
     return (
       <div>
         <BreadCrumb />
