@@ -5,9 +5,28 @@
 ---
 
 ## 프로젝트 기간
-2024년 12월 - 2025년 1월
+2024년 12월 - 2025년 1월 16일
 
 ---
+
+
+## 배포 주소
+
+- **KTWiz 개선 웹사이트**: [https://ktwiz.kimpuro.com/](https://ktwiz.kimpuro.com/)
+- **3D 경기장 뷰어**: [https://stadium.kimpuro.com/](https://stadium.kimpuro.com/)
+
+---
+
+## 프로젝트 개요
+
+기존 KT Wiz 웹사이트를 분석하여 **사용자가 야구를 보다 재미있게** 즐길 수 있도록 디자인을 개선하고 기능을 추가한 프로젝트입니다.  
+
+---
+
+
+
+
+
 
 
 
