@@ -21,6 +21,7 @@ type NicknameFormValues = z.infer<typeof nicknameSchema>
 
 export default function UserInfo({ userData }: UserInfoProps) {
   const [isEditing, setIsEditing] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const {
     register,
@@ -32,6 +33,7 @@ export default function UserInfo({ userData }: UserInfoProps) {
 
   const onUpdateSubmit = async (data: NicknameFormValues) => {
     try {
+      setIsLoading(true)
       const formData = new FormData()
       formData.append('nickname', data.nickname)
       const result = await updateNickname(formData)
@@ -39,6 +41,7 @@ export default function UserInfo({ userData }: UserInfoProps) {
         alert('닉네임 변경 중 문제가 발생했습니다.')
         return
       }
+      setIsLoading(false)
       alert('닉네임이 변경되었습니다.')
       setIsEditing(false)
     } catch (error) {
@@ -52,58 +55,69 @@ export default function UserInfo({ userData }: UserInfoProps) {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center space-x-10 border-b border-gray-200 pb-6">
-        <p className="text-sm font-semibold text-gray-800">이메일</p>
-        <p className="text-sm">{userData.email}</p>
-      </div>
+      {isLoading ? (
+        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black bg-opacity-50">
+          <div className="h-12 w-12 animate-spin rounded-full border-4 border-white border-t-transparent"></div>
+          <p className="mt-4 text-lg font-semibold text-white">
+            닉네임을 변경하고 있습니다
+          </p>
+        </div>
+      ) : (
+        <>
+          <div className="flex items-center space-x-10 border-b border-gray-200 pb-6">
+            <p className="text-sm font-semibold text-gray-800">이메일</p>
+            <p className="text-sm">{userData.email}</p>
+          </div>
 
-      <div className="flex items-center space-x-10 border-b border-gray-200 pb-6">
-        <p className="text-sm font-semibold text-gray-800">닉네임</p>
-        {isEditing ? (
-          <form
-            className="flex items-center space-x-3"
-            onSubmit={handleSubmit(onUpdateSubmit)}
-          >
-            <input
-              {...register('nickname')}
-              id="nickname"
-              className="rounded-md border border-gray-300 p-2 text-sm"
-              name="nickname"
-              type="text"
-              defaultValue={userData.nickname}
-              required
-            />
-            {updateErrors.nickname && (
-              <p className="mt-2 text-sm text-red-500">
-                {updateErrors.nickname.message}
-              </p>
+          <div className="flex items-center space-x-10 border-b border-gray-200 pb-6">
+            <p className="text-sm font-semibold text-gray-800">닉네임</p>
+            {isEditing ? (
+              <form
+                className="flex items-center space-x-3"
+                onSubmit={handleSubmit(onUpdateSubmit)}
+              >
+                <input
+                  {...register('nickname')}
+                  id="nickname"
+                  className="rounded-md border border-gray-300 p-2 text-sm"
+                  name="nickname"
+                  type="text"
+                  defaultValue={userData.nickname}
+                  required
+                />
+                {updateErrors.nickname && (
+                  <p className="mt-2 text-sm text-red-500">
+                    {updateErrors.nickname.message}
+                  </p>
+                )}
+                <button
+                  type="submit"
+                  className="rounded-md border bg-[--black-color-500] px-4 py-2 text-sm text-white hover:bg-gray-400"
+                >
+                  저장
+                </button>
+                <button
+                  type="button"
+                  className="rounded-md border bg-gray-300 px-4 py-2 text-sm text-gray-800 hover:bg-gray-400"
+                  onClick={toggleEditing}
+                >
+                  취소
+                </button>
+              </form>
+            ) : (
+              <>
+                <p className="text-sm">{userData.nickname}</p>
+                <button
+                  className="rounded-md border bg-[--black-color-500] px-4 py-2 text-sm text-white hover:bg-gray-400"
+                  onClick={toggleEditing}
+                >
+                  변경
+                </button>
+              </>
             )}
-            <button
-              type="submit"
-              className="rounded-md border bg-[--black-color-500] px-4 py-2 text-sm text-white hover:bg-gray-400"
-            >
-              저장
-            </button>
-            <button
-              type="button"
-              className="rounded-md border bg-gray-300 px-4 py-2 text-sm text-gray-800 hover:bg-gray-400"
-              onClick={toggleEditing}
-            >
-              취소
-            </button>
-          </form>
-        ) : (
-          <>
-            <p className="text-sm">{userData.nickname}</p>
-            <button
-              className="rounded-md border bg-[--black-color-500] px-4 py-2 text-sm text-white hover:bg-gray-400"
-              onClick={toggleEditing}
-            >
-              변경
-            </button>
-          </>
-        )}
-      </div>
+          </div>
+        </>
+      )}
     </div>
   )
 }
