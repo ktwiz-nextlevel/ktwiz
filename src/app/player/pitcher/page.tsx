@@ -73,8 +73,6 @@ export default function Pitcher() {
 
         const playerDetail = await getPitcherPlayerDetail(playerPcode)
 
-        console.log('playerDetail : ', playerDetail)
-
         setDetailData(playerDetail.data.gameplayer)
         setPlayerImg(playerDetail.data.gameplayer.playerPrvwImg1)
         setPlayerName(playerDetail.data.gameplayer.playerName)
@@ -106,7 +104,6 @@ export default function Pitcher() {
     const fetchPitcherChart = async () => {
       try {
         const data = (await getPlayerChart(playerName)) as ChartData2
-        console.log('fetchPitcherChart : ', data)
         setPitchingRatioChart(data.pitchingRatio)
         setPitchingValueChart(data.pitchingValue)
       } catch (error) {

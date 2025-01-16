@@ -15,7 +15,7 @@ import OverlayGuide from '@/components/player/overlay-guide'
 import PlayerList from '@/components/player/custom-squad/player-list'
 import Breadcrumbs from '@/components/tailwind-ui/breadcrumbs/simple-with-chevrons'
 import CustomSquadTable from '@/components/player/custom-squad/player-table'
-import { toPng, toJpeg } from 'html-to-image'
+import { toJpeg } from 'html-to-image'
 
 import Title from '@/components/common/title/title'
 export const metadata = {
