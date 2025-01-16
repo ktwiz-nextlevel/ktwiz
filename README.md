@@ -168,6 +168,9 @@
 <img width="360" alt="스크린샷 2025-01-16 오후 11 55 12" src="https://github.com/user-attachments/assets/71149393-45ed-404e-b542-d8152ea0aa92" />
 
 <br/>
+<img width="1667" alt="주요기록문제 상황" src="https://github.com/user-attachments/assets/0515e1e4-de3b-4537-8996-3a0e2c7aaef4" />
+
+
 
 <img width="805" alt="주요기록 스크린샷" src="https://github.com/user-attachments/assets/3813a3d4-57e1-4e8f-9731-f10ec5c4f92d" />
 
