@@ -6,10 +6,7 @@ import {
   Disclosure,
   DisclosureButton,
   DisclosurePanel,
-  Popover,
-  PopoverButton,
   PopoverGroup,
-  PopoverPanel,
 } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, UserIcon } from '@heroicons/react/20/solid'
@@ -26,7 +23,7 @@ interface HeaderProps {
 
 export function WithFullWidthFlyoutMenu({ initialUser }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [isOpened, setIsOpend] = useState(false)
+  const [isOpened, setIsOpened] = useState(false)
   const [isLoginPopupVisable, setIsLoginPopupVisable] = useState(false) // 로그인 팝업 토글
   const [isSignupPopupVisable, setIsSignupPopupVisable] = useState(false) // 회원가입 팝업 토글
 
@@ -40,10 +37,10 @@ export function WithFullWidthFlyoutMenu({ initialUser }: HeaderProps) {
   }
 
   function handleMouseOver() {
-    setIsOpend(true)
+    setIsOpened(true)
   }
   function handleMouseOut() {
-    setIsOpend(false)
+    setIsOpened(false)
   }
 
   const getPaddingByIdx = useCallback((idx: number) => {
@@ -100,44 +97,41 @@ export function WithFullWidthFlyoutMenu({ initialUser }: HeaderProps) {
           </div>
           {/* lg-GNB */}
           <PopoverGroup className="absolute left-1/2 hidden -translate-x-1/2 lg:flex lg:gap-x-12">
-            <Popover className="lg:flex lg:gap-x-4">
-              {MENU_DATA.map((menu, idx, array) => (
-                // GNB{4 === idx ? 'items-end justify-end' : 'items-center justify-center'}
-                <PopoverButton
-                  key={menu.gnb + idx}
-                  className={`box-border flex w-[80px] items-center justify-center gap-x-1 bg-[--black-color-100] text-center text-base font-semibold text-white outline-none transition duration-300 ease-in-out hover:text-gray-900 focus:outline-none active:outline-none active:ring-0 group-hover:border-white group-hover:bg-white group-hover:text-gray-900`}
-                >
-                  {menu.gnb}
-                </PopoverButton>
-              ))}
-
-              <PopoverPanel
-                className={`${isOpened ? 'block' : 'hidden'} fixed left-1/2 top-[50px] -z-10 w-screen -translate-x-1/2 bg-white pt-14 shadow-lg ring-1 ring-gray-900/5 transition data-[closed]:-translate-y-1 data-[closed]:opacity-0 data-[enter]:duration-200 data-[leave]:duration-150 data-[enter]:ease-out data-[leave]:ease-in ${isOpened ? 'data-[enter]:duration-200 data-[enter]:ease-out' : 'data-[leave]:ease-in'} `}
-                transition
+            {MENU_DATA.map((menu, idx) => (
+              <div
+                key={menu.gnb + idx}
+                className="relative flex w-[90px] justify-center"
+                onMouseEnter={handleMouseOver}
+                onMouseLeave={handleMouseOut}
               >
-                <div className="relative mx-auto flex max-w-7xl justify-center gap-x-4 px-6 pb-10 lg:px-8 xl:gap-x-4">
-                  {LNB_LIST?.map((menu, idx) => {
-                    return (
-                      <div
-                        key={idx + 'lnb'}
-                        className={`group relative ${getPaddingByIdx(idx)} w-[80px] text-sm/6`}
-                        // className={`group relative left-2 w-[75px] text-sm/6`}
-                      >
-                        {menu?.map((lnb, idx) => (
-                          <Link
-                            key={lnb.name + idx}
-                            href={lnb.href}
-                            className="hover:text-blackborder mb-3 block text-sm font-normal text-gray-900 hover:font-bold"
-                          >
-                            {lnb.name}
-                          </Link>
-                        ))}
-                      </div>
-                    )
-                  })}
-                </div>
-              </PopoverPanel>
-            </Popover>
+                <button className="box-border flex h-10 w-full items-center justify-start border-transparent bg-[--black-color-100] text-center text-base font-semibold text-white outline-none transition-all duration-300 ease-in-out focus:outline-none active:outline-none active:ring-0 group-hover:bg-white group-hover:text-gray-900">
+                  {menu.gnb}
+                </button>
+
+                {isOpened && (
+                  <div className="fixed left-1/2 top-[50px] -z-10 w-screen -translate-x-1/2 bg-white pt-6 shadow-lg ring-1 ring-gray-900/5 transition">
+                    <div className="relative mx-auto flex max-w-7xl justify-center gap-x-12 px-6 pb-10 lg:px-8">
+                      {LNB_LIST?.map((menu, idx) => (
+                        <div
+                          key={idx + 'lnb'}
+                          className={`flex w-[90px] flex-col items-start text-sm/6 ${getPaddingByIdx(idx)}`}
+                        >
+                          {menu?.map((lnb, idx) => (
+                            <Link
+                              key={lnb.name + idx}
+                              href={lnb.href}
+                              className="mb-3 block w-full text-left text-sm font-normal text-gray-900 transition-all hover:font-extrabold hover:text-black"
+                            >
+                              {lnb.name}
+                            </Link>
+                          ))}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))}
           </PopoverGroup>
           {/* login & signup*/}
           <div className="hidden space-x-4 lg:flex lg:flex-1 lg:items-center lg:justify-end">
