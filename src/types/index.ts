@@ -1,0 +1,6 @@
+export type * from './banner.type'
+export type * from './game.type'
+export type * from './header.type'
+export type * from './board.type'
+export type * from './ranking.type'
+export type * from './player.type'
