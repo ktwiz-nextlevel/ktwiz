@@ -190,72 +190,89 @@
 
 ```ts 
 
-  const etcgames: EtcGames[] = data?.etcgames || []
-
-  const homeKey = data.schedule.current.homeKey
-  const visitKey = data.schedule.current.visitKey
-
-  const infoPromises = etcgames.map(async (game) => {
-    const parsedData = parsePlayerDescriptions(game.result)
-    const playerImgResponses = await Promise.all(
-      parsedData.map(async (player) => {
-        try {
-          const [imgResponseHome, imgResponseVisit] = await Promise.all([
-            fetch(
-              `${process.env.NEXT_PUBLIC_API_SERVER_URL}/player_img?team=${homeKey}&name=${player.name}`,
-            ),
-
-            fetch(
-              `${process.env.NEXT_PUBLIC_API_SERVER_URL}/player_img?team=${visitKey}&name=${player.name}`,
-            ),
-          ])
-
-          const imgDataHome = await imgResponseHome.json()
-          const imgDataVisit = await imgResponseVisit.json()
-
-          return {
-            ...player,
-            playerImg:
-              imgDataHome.url ||
-              imgDataVisit.url ||
-              '/images/players/player.png',
-          }
-        } catch {
-          return { ...player, playerImg: '/images/players/player.png' }
-        }
-      }),
-    )
-    return playerImgResponses
-  })
-
-```
-
-```ts 
-function splitPlayers(input: string): string[] {
-  const regex = /\([^)]*\)/g // 괄호 안의 내용 찾기
+ function splitPlayers(input: string): string[] {
+  const regex = /\([^)]*\)/g
   const modifiedInput = input.replace(regex, (match) =>
     match.replace(/\s/g, '|'),
   )
   return modifiedInput
     .split(' ')
     .map((item) => (item.includes('|') ? item.replace(/\|/g, ' ') : item))
-    .filter((item) => item.trim() !== '') // 빈 문자열 제거
+    .filter((item) => item.trim() !== '')
 }
 
-function parsePlayerDescriptions(input: string): PlayerDescription[] {
+function parsePlayerDescriptions(input: string): PlayerInfo[] {
   const players = splitPlayers(input)
-
   return players.map((item) => {
-    const nameDesRegex = /^([^\(]+)(\(([^)]+)\))?$/ // 괄호 앞의 이름과 괄호 안의 내용 추출
+    const nameDesRegex = /^([^\(]+)(\(([^)]+)\))?$/
     const match = item.match(nameDesRegex)
-
     if (match) {
       return {
         name: match[1].trim(),
         des: match[3]?.trim() || null,
       }
     }
-    return { name: item.trim(), des: null } // 괄호가 없으면 des는 null
+    return { name: item.trim(), des: null }
   })
+}
+
+const fetchPlayerImg = async (
+  player: PlayerInfo,
+  homeKey: string,
+  visitKey: string,
+): Promise<PlayerDescription> => {
+  try {
+    const [imgHome, imgVisit] = await Promise.allSettled([
+      fetch(
+        `${process.env.NEXT_PUBLIC_API_SERVER_URL}/player_img?team=${visitKey}&name=${player.name}`,
+      ),
+      fetch(
+        ` ${process.env.NEXT_PUBLIC_API_SERVER_URL}/player_img?team=${homeKey}&name=${player.name}`,
+      ),
+    ])
+
+    const imgResponseHome =
+      imgHome.status === 'fulfilled' ? await imgHome.value.json() : null
+    const imgResponseVisit =
+      imgVisit.status === 'fulfilled' ? await imgVisit.value.json() : null
+
+    return {
+      ...player,
+      playerImg:
+        imgResponseHome.url ||
+        imgResponseVisit.url ||
+        '/images/players/player.png',
+    }
+  } catch (error) {
+    console.error(`Error fetching image for player: ${player.name}`, error)
+
+    return {
+      ...player,
+      playerImg: '/images/players/player.png', // 기본 이미지 대체
+    }
+  }
+}
+const fetchData = async (data: BoxScore) => {
+  try {
+    const etcgames: EtcGames[] = data.etcgames
+    const homeKey = data.schedule.current.homeKey
+    const visitKey = data.schedule.current.visitKey
+
+    const results = await Promise.all(
+      etcgames.map(async (game) => {
+        const parsedPlayerInfo = parsePlayerDescriptions(game.result)
+        const playersInfo = await Promise.all(
+          parsedPlayerInfo.map((player) =>
+            fetchPlayerImg(player, homeKey, visitKey),
+          ),
+        )
+        return playersInfo
+      }),
+    )
+    return results
+  } catch (err) {
+    console.error('Error fetching player images:', err)
+    return
+  }
 }
 ```
